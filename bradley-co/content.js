@@ -81,11 +81,11 @@ window.SITE_CONTENT = {
       { img: 'images/p-01.jpg', title: 'Meulière, Montreuil', meta: 'EXTENSION BOIS — 2025' },
       { img: 'images/p-02.jpg', title: 'Atelier, Paris 11e', meta: 'RÉHABILITATION — 2022' },
       { img: 'images/p-03.jpg', title: 'Duplex sur les toits', meta: 'SURÉLÉVATION — 2025' },
-      { img: 'images/p-04.jpg', title: 'Longère, Vexin', meta: 'RÉNOVATION LOURDE — 2023' },
-      { img: 'images/p-05.jpg', title: 'Pavillon 1930, Vincennes', meta: 'EXTENSION — 2023' },
-      { img: 'images/p-06.jpg', title: 'Imprimerie, Pantin', meta: 'CHANGEMENT D’USAGE — 2021' },
-      { img: 'images/p-07.jpg', title: 'Maison de ville, Saint-Maur', meta: 'SURÉLÉVATION — 2024' },
-      { img: 'images/p-08.jpg', title: 'Grange, Perche', meta: 'RÉHABILITATION — 2020' }
+      { img: 'images/p-04.jpg', title: 'Pavillon 1930, Vincennes', meta: 'EXTENSION BOIS — 2023' },
+      { img: 'images/p-05.jpg', title: 'Maison de ville, Saint-Maur', meta: 'SURÉLÉVATION — 2024' },
+      { img: 'images/p-06.jpg', title: 'Maison années 70, Sceaux', meta: 'RESTRUCTURATION — 2023' },
+      { img: 'images/p-07.jpg', title: 'Échoppe, Bagnolet', meta: 'EXTENSION BOIS — 2022' },
+      { img: 'images/p-08.jpg', title: 'Imprimerie, Pantin', meta: 'CHANGEMENT D’USAGE — 2021' }
     ]
   },
 
