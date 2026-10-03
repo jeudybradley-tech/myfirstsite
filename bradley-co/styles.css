@@ -885,3 +885,6 @@ body.static .footer-name .chi { transform: none; }
 }
 #grow2::before { background-image: url('images/process.jpg'); }
 #grow1 img, #grow2 img { object-fit: contain; z-index: 1; }
+
+/* ═══════════ ACCUEIL — sans le nuage de photos (choix client) ═══════════ */
+.floaters { display: none !important; }
