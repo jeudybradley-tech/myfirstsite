@@ -867,3 +867,9 @@ body.static .footer-name .chi { transform: none; }
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ═══════════ GALERIE — cartes posées droites (choix client) ═══════════
+   L'arrivée « désordonnée » (décalage + rotation posés en inline par
+   app.js) faisait sortir les photos du cadre et se chevaucher pendant le
+   défilement. On la neutralise : chaque photo reste droite, à sa place. */
+.coll-grid .card, .bento-grid .card { transform: none !important; }
