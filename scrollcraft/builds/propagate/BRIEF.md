@@ -16,6 +16,10 @@ not cover it; the client can overrule any of it.
 - `i_dont_want_a_ultra-sharp_20261003150644.mov`: 1920x1080, 24fps, 5.4s. The
   same tee design with an ice-blue print and white drop shadow, dark blue
   vignette, same back-to-front turn, softer render.
+- `Black_t-shirt_rotating_in_darkness_20261003173050.mov` (3 October, later):
+  1920x1080, 24fps, 5.2s. The client's new model of the blue tee, same framing
+  as the earlier blue clip, sharper render. It replaces that clip everywhere
+  (end of the exploded view, blue frames in the close).
 - The print reads **ITS** with no apostrophe. Kept exactly as printed wherever
   the slogan is quoted; flagged to the client.
 - Unknown and therefore **not stated anywhere on the page**: price, fabric,

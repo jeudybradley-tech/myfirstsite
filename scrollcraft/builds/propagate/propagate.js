@@ -519,7 +519,7 @@
     if (!section || !img || !stageEl) return;
     var figure = stageEl.closest('.viewer');
 
-    var SETS = { green: { pre: 'g', n: 31, name: 'green' }, blue: { pre: 'b', n: 33, name: 'blue' } };
+    var SETS = { green: { pre: 'g', n: 31, name: 'green' }, blue: { pre: 'b', n: 32, name: 'blue' } };
     var cache = { green: [], blue: [] };
     var print = 'blue', t = 0, shown = img.getAttribute('src');
 
