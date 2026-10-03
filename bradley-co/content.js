@@ -44,7 +44,7 @@ window.SITE_CONTENT = {
     line2a: 'mérite',
     line2b: 'mieux.',
     image: 'images/hero.jpg',                       // 3:2 — le moment émotionnel
-    imageAlt: 'Maison contemporaine en bois et crépi blanc, éclairée le soir',
+    imageAlt: 'Longue maison blanche au toit métallique sombre, entourée d’arbres',
     floaters: [                                     // 10 visuels du pasteboard (mix portrait/paysage)
       'images/fl-01.jpg',
       'images/fl-02.jpg',
