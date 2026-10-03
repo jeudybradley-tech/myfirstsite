@@ -5,6 +5,8 @@
    « injection » en bas de fichier est le moteur de remplissage :
    la copier TELLE QUELLE, ne réécrire que window.SITE_CONTENT.
 
+   Version adaptée au Québec (Montréal & Rive-Sud).
+
    Schéma narratif (rôle de conversion de chaque bloc) :
    1. ACCROCHE       — hook : promesse + identité en 3 secondes
    2. POSITIONNEMENT — positioning : ce que je fais, pour qui, où
@@ -21,11 +23,11 @@ window.SITE_CONTENT = {
 
   brand: {
     name: 'Bradley & Co',                       // wordmark (header, loader, footer géant)
-    title: 'Bradley & Co — Architecture, réhabilitation & extension, Paris',  // <title> SEO
-    description: 'Bradley & Co, atelier d’architecture à Paris : réhabilitation, extension et surélévation bas carbone, dans le respect du bâti existant.',  // meta description
-    kicker: 'BRADLEY & CO — ARCHITECTURE, PARIS',  // ligne mono au-dessus du titre hero
-    copyright: '© 2026 — PARIS, FRANCE',
-    signature: 'DESSINÉ À LA MAIN, BÂTI POUR DURER',  // clin d'œil bas de footer
+    title: 'Bradley & Co — Architecture, rénovation et agrandissement, Montréal',  // <title> SEO
+    description: 'Bradley & Co, atelier d’architecture à Montréal et sur la Rive-Sud : rénovation, agrandissement et ajout d’étage, dans le respect de la maison existante.',  // meta description
+    kicker: 'BRADLEY & CO — ARCHITECTURE, MONTRÉAL',  // ligne mono au-dessus du titre hero
+    copyright: '© 2026 — MONTRÉAL, QUÉBEC',
+    signature: 'DESSINÉ À LA MAIN, BÂTI POUR NOS HIVERS',  // clin d'œil bas de footer
     socials: [
       { label: 'INSTAGRAM ↗', url: 'https://www.instagram.com/' },
       { label: 'LINKEDIN ↗', url: 'https://www.linkedin.com/' }
@@ -42,7 +44,7 @@ window.SITE_CONTENT = {
     line2a: 'mérite',
     line2b: 'mieux.',
     image: 'images/hero.jpg',                       // 3:2 — le moment émotionnel
-    imageAlt: 'Extension contemporaine accolée à une maison ancienne',
+    imageAlt: 'Maison contemporaine en bois et crépi blanc, éclairée le soir',
     floaters: [                                     // 10 visuels du pasteboard (mix portrait/paysage)
       'images/fl-01.jpg',
       'images/fl-02.jpg',
@@ -59,13 +61,13 @@ window.SITE_CONTENT = {
 
   /* 2 · POSITIONNEMENT — ≤ 42 caractères (affiché nowrap, en blanc
      sur l'image plein écran) */
-  positioning: 'Réhabiliter, étendre, surélever — Paris.',
+  positioning: 'Rénover, agrandir, surélever — Montréal.',
 
   /* 3 · DÉMARCHE — [[…]] = ce qu'entoure l'ovale dessiné :
      2 à 3 MOTS MAXIMUM, JAMAIS une phrase entière (l'ovale est un tracé
      à la main : au-delà de 3 mots il s'étire et cesse d'être lisible). */
   manifesto: {
-    text: 'Démolir est rarement la bonne réponse. Nous partons de ce qui est là — les murs, la lumière, l’histoire — et nous ajoutons [[le strict nécessaire]] pour que le lieu vive une seconde fois.'
+    text: 'Démolir est rarement la bonne réponse. Du bungalow au triplex, nous partons de ce qui est là — la structure, la lumière, l’histoire — et nous ajoutons [[le strict nécessaire]] pour que la maison vive une seconde fois.'
   },
 
   /* 4 · PREUVE — layout: 'masonry' (8 photos de réalisations)
@@ -73,19 +75,19 @@ window.SITE_CONTENT = {
   proof: {
     layout: 'masonry',
     kicker: 'RÉALISATIONS CHOISIES',
-    title: 'Huit lieux, une seconde vie',
-    sub: 'Maisons, appartements et ateliers transformés sans être effacés.',
+    title: 'Huit maisons, une seconde vie',
+    sub: 'Bungalows, plex et maisons de ville de Montréal et de la Rive-Sud, transformés sans être effacés.',
     meta: 'HUIT PROJETS — 2019 → 2026',
     /* — layout 'masonry' : exactement 8 items — */
     projects: [
-      { img: 'images/p-01.jpg', title: 'Meulière, Montreuil', meta: 'EXTENSION BOIS — 2025' },
-      { img: 'images/p-02.jpg', title: 'Atelier, Paris 11e', meta: 'RÉHABILITATION — 2022' },
-      { img: 'images/p-03.jpg', title: 'Duplex sur les toits', meta: 'SURÉLÉVATION — 2025' },
-      { img: 'images/p-04.jpg', title: 'Villa pierre et bois', meta: 'EXTENSION — 2024' },
-      { img: 'images/p-05.jpg', title: 'Maison brique et verrière', meta: 'SURÉLÉVATION — 2024' },
-      { img: 'images/p-06.jpg', title: 'Longue maison blanche', meta: 'RESTRUCTURATION — 2023' },
-      { img: 'images/p-07.jpg', title: 'Volumes noir et bois', meta: 'EXTENSION BOIS — 2022' },
-      { img: 'images/p-08.jpg', title: 'Demeure à colonnes', meta: 'RÉHABILITATION — 2021' }
+      { img: 'images/p-01.jpg', title: 'Maison de pierre, Saint-Lambert', meta: 'RÉNOVATION COMPLÈTE — 2025' },
+      { img: 'images/p-02.jpg', title: 'Cottage, Boucherville', meta: 'TERRASSE COUVERTE — 2022' },
+      { img: 'images/p-03.jpg', title: 'Maison de ville, Brossard', meta: 'NOUVELLE FAÇADE — 2025' },
+      { img: 'images/p-04.jpg', title: 'Bungalow, Saint-Bruno', meta: 'AGRANDISSEMENT ARRIÈRE — 2023' },
+      { img: 'images/p-05.jpg', title: 'Shoebox, Rosemont', meta: 'AJOUT D’ÉTAGE — 2024' },
+      { img: 'images/p-06.jpg', title: 'Bungalow 1960, Longueuil', meta: 'TRANSFORMATION — 2023' },
+      { img: 'images/p-07.jpg', title: 'Maison 1950, Ahuntsic', meta: 'AGRANDISSEMENT BOIS — 2022' },
+      { img: 'images/p-08.jpg', title: 'Loft, Saint-Henri', meta: 'CONVERSION D’USINE — 2021' }
     ]
   },
 
@@ -94,8 +96,8 @@ window.SITE_CONTENT = {
     kicker: 'CE QUI GUIDE CHAQUE PROJET',
     words: [
       { word: 'Garder', hint: 'Chaque mur conservé, c’est du carbone qui n’est pas émis.' },
-      { word: 'Ouvrir', hint: 'Faire entrer la lumière là où on ne l’attendait plus.' },
-      { word: 'Durer', hint: 'Des matériaux sains, qui vieillissent bien.' }
+      { word: 'Ouvrir', hint: 'Faire entrer la lumière, même en plein mois de janvier.' },
+      { word: 'Durer', hint: 'Des matériaux sains, pensés pour nos hivers.' }
     ]
   },
 
@@ -110,9 +112,9 @@ window.SITE_CONTENT = {
     cta: 'Parlons-en →',                            // CTA final (ovale dessiné)
     image: 'images/process.jpg',                    // le zoom d'intro (le SEUL visuel de la scène)
     items: [
-      { name: 'Le relevé', meta: 'ÉTAPE — 01', desc: 'Nous mesurons, sondons et photographions l’existant. Un diagnostic précis, c’est un chantier sans mauvaise surprise.' },
-      { name: 'Le projet', meta: 'ÉTAPE — 02', desc: 'Plans, maquette et chiffrage : vous voyez votre future maison et son budget avant de vous engager.' },
-      { name: 'Le chantier', meta: 'ÉTAPE — 03', desc: 'Permis, choix des entreprises et suivi chaque semaine, jusqu’à la remise des clés.' }
+      { name: 'Le relevé', meta: 'ÉTAPE — 01', desc: 'Nous mesurons, inspectons et photographions l’existant. Un bon diagnostic, c’est un chantier sans mauvaise surprise.' },
+      { name: 'Le projet', meta: 'ÉTAPE — 02', desc: 'Plans, maquette 3D et estimation des coûts : vous voyez votre future maison et votre budget avant de vous engager.' },
+      { name: 'Le chantier', meta: 'ÉTAPE — 03', desc: 'Permis de la Ville, choix d’un entrepreneur licencié RBQ et suivi chaque semaine, jusqu’à la fin des travaux.' }
     ]
   },
 
@@ -126,27 +128,28 @@ window.SITE_CONTENT = {
               plausible pour le secteur — puis à faire valider.
      unit   : 4 caractères max (m², %, j, k€…).
      kicker : le contexte du projet, en CAPS.
-     Sans `figure`, la citation reprend toute la place (repli automatique). */
+     Sans `figure`, la citation reprend toute la place (repli automatique).
+     ⚠ EXEMPLE : à remplacer par un vrai avis client avant toute mise en ligne. */
   testimonial: {
-    kicker: 'SURÉLÉVATION, PARIS 18E',
-    figure: '+42',
-    unit: 'm²',
-    quote: 'On pensait devoir déménager pour avoir une chambre de plus. Ils ont trouvé la place au-dessus de nos têtes, sans rien enlever au charme de la maison.',
+    kicker: 'AJOUT D’ÉTAGE, ROSEMONT',
+    figure: '+450',
+    unit: 'pi²',
+    quote: 'On pensait devoir déménager en banlieue pour avoir une chambre de plus. Ils ont trouvé l’espace au-dessus de nos têtes, sans rien enlever au charme de la maison.',
     author: 'CLAIRE M. — PROPRIÉTAIRE'
   },
 
   /* 9 · OBJECTIONS — 3 freins + la chute (pill = mot entouré) */
   objections: {
-    items: ['Pas de démolition inutile.', 'Pas de budget qui dérape.', 'Pas de chantier fantôme.'],
+    items: ['Pas de démolition inutile.', 'Pas de budget qui dérape.', 'Pas d’entrepreneur fantôme.'],
     finale: 'Juste une maison',
     pill: 'réinventée.'
   },
 
   /* 10 · CONVERSION */
   contact: {
-    kicker: 'UNE MAISON À TRANSFORMER ?',
+    kicker: 'UNE MAISON À TRANSFORMER?',
     email: 'jeudybradley@gmail.com',
-    reassurance: 'RÉPONSE SOUS 48 H — PREMIER ÉCHANGE SANS ENGAGEMENT'
+    reassurance: 'RÉPONSE SOUS 48 H — PREMIÈRE RENCONTRE SANS ENGAGEMENT'
   },
 
   /* traînée sous la souris (finale) — 20 visuels, petits formats mixtes */
