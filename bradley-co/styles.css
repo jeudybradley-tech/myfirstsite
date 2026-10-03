@@ -878,9 +878,10 @@ body.static .footer-name .chi { transform: none; }
    L'image plein écran est en `contain` : la photo s'affiche en entier, quel
    que soit le format de l'écran. Les bandes libres sont remplies par la même
    photo, floutée et assombrie, pour garder l'effet plein écran. */
-#grow1::before {
+#grow1::before, #grow2::before {
   content: ''; position: absolute; inset: -40px; z-index: 0;
   background: url('images/hero.jpg') center/cover;
   filter: blur(28px) brightness(0.55);
 }
-#grow1 img { object-fit: contain; z-index: 1; }
+#grow2::before { background-image: url('images/process.jpg'); }
+#grow1 img, #grow2 img { object-fit: contain; z-index: 1; }
