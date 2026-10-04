@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arcline AI — AI Automation Agency</title>
+  <meta name="description" content="Arcline AI designs, builds and runs custom AI agents, chatbots and automations that save your team hours every week.">
+  <meta name="theme-color" content="#0b0d17">
+  <meta property="og:title" content="Arcline AI — AI Automation Agency">
+  <meta property="og:description" content="Custom AI agents, chatbots and automations that save your team hours every week.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300d4ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M8 23 L16 8 L24 23' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="container nav">
+      <a href="#top" class="logo" aria-label="Arcline AI home">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28"><path d="M8 23 L16 8 L24 23" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="logo-text">Arcline<span class="accent">AI</span></span>
+      </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-menu" id="nav-menu" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-primary btn-sm">Book a free call</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> AI automation agency</p>
+          <h1>We build AI that <span class="gradient-text">does the work</span> for you.</h1>
+          <p class="lead">
+            Custom AI agents, chatbots and automations that answer customers, qualify leads,
+            and handle the busywork — so your team can focus on what actually grows the business.
+          </p>
+          <div class="hero-ctas">
+            <a href="#contact" class="btn btn-primary">Get your free AI audit</a>
+            <a href="#services" class="btn btn-ghost">See what we build →</a>
+          </div>
+          <ul class="hero-points">
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3 3 7-7" /></svg>Live in weeks, not months</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3 3 7-7" /></svg>Built on your existing tools</li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 10.5l3 3 7-7" /></svg>You own everything we build</li>
+          </ul>
+        </div>
+
+        <!-- Animated "agent console" -->
+        <div class="console" role="img" aria-label="Animation of an AI agent completing business tasks automatically">
+          <div class="console-bar">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="console-title">arcline-agent · live</span>
+          </div>
+          <div class="console-body" id="console-body" aria-hidden="true"></div>
+          <div class="console-footer" aria-hidden="true">
+            <div><span class="stat-num" id="stat-tasks">0</span><span class="stat-label">tasks done</span></div>
+            <div><span class="stat-num" id="stat-hours">0.0</span><span class="stat-label">hours saved</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <p class="stack-label">We work with the tools you already use</p>
+        <ul class="stack-list">
+          <li>OpenAI</li><li>Anthropic</li><li>Zapier</li><li>Make</li><li>n8n</li>
+          <li>HubSpot</li><li>Shopify</li><li>Slack</li><li>Google Workspace</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Services</p>
+          <h2>Everything you need to put AI to work</h2>
+          <p class="section-sub">From a single chatbot to a fully automated operation — we design, build and maintain it end to end.</p>
+        </header>
+
+        <div class="cards-grid">
+          <article class="card reveal">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg>
+            </div>
+            <h3>AI chatbots &amp; assistants</h3>
+            <p>24/7 assistants trained on your docs, products and policies. They answer questions, book appointments and hand off to a human when needed.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15.5h5"/></svg>
+            </div>
+            <h3>Custom AI agents</h3>
+            <p>Agents that take real action: research leads, update your CRM, draft proposals, reconcile invoices and report back — on autopilot.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="18" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></svg>
+            </div>
+            <h3>Workflow automation</h3>
+            <p>We connect your apps and remove the copy-paste. Emails, forms, spreadsheets and approvals flow automatically, with AI handling the judgment calls.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18"/><path d="M6 16l4-5 3 3 5-7"/></svg>
+            </div>
+            <h3>Lead gen &amp; sales AI</h3>
+            <p>Instant lead response, AI-personalized outreach and automatic follow-ups that keep your pipeline full without adding headcount.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.4 7.2 17.9l.9-5.4L4.2 8.7l5.4-.8z"/></svg>
+            </div>
+            <h3>AI content engine</h3>
+            <p>On-brand blog posts, social content, product descriptions and emails — produced at scale with a human-in-the-loop review step.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <h3>AI strategy &amp; training</h3>
+            <p>Not sure where to start? We audit your operations, find the highest-ROI opportunities, and train your team to use AI safely and effectively.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section section-alt" id="process">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">How it works</p>
+          <h2>From idea to working AI in four steps</h2>
+          <p class="section-sub">A simple, transparent process. You'll see working results early and often.</p>
+        </header>
+
+        <ol class="steps">
+          <li class="step reveal">
+            <span class="step-num">01</span>
+            <h3>Discover</h3>
+            <p>A free call to map your workflows and find where AI can save the most time and money.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">02</span>
+            <h3>Design</h3>
+            <p>We scope a clear solution with fixed pricing, timelines and the results you can expect.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">03</span>
+            <h3>Build</h3>
+            <p>We build, test and integrate with your tools, sharing progress demos along the way.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num">04</span>
+            <h3>Launch &amp; scale</h3>
+            <p>We go live, train your team, monitor performance and keep improving every month.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ USE CASES ============ -->
+    <section class="section" id="use-cases">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Use cases</p>
+          <h2>What AI can do for your industry</h2>
+          <p class="section-sub">A few of the automations businesses ask us for most.</p>
+        </header>
+
+        <div class="tabs reveal">
+          <div class="tab-list" role="tablist" aria-label="Industries">
+            <button role="tab" id="tab-ecom" aria-controls="panel-ecom" aria-selected="true">E-commerce</button>
+            <button role="tab" id="tab-realestate" aria-controls="panel-realestate" aria-selected="false" tabindex="-1">Real estate</button>
+            <button role="tab" id="tab-services" aria-controls="panel-services" aria-selected="false" tabindex="-1">Local services</button>
+            <button role="tab" id="tab-pro" aria-controls="panel-pro" aria-selected="false" tabindex="-1">Professional firms</button>
+          </div>
+
+          <div class="tab-panel" role="tabpanel" id="panel-ecom" aria-labelledby="tab-ecom">
+            <ul class="usecase-list">
+              <li><strong>Support agent</strong> that answers "where's my order?", returns and sizing questions instantly.</li>
+              <li><strong>Product copy generator</strong> that writes SEO-ready descriptions for your whole catalog.</li>
+              <li><strong>Review analyzer</strong> that surfaces product issues and trends every week.</li>
+              <li><strong>Abandoned-cart follow-ups</strong> personalized to what each shopper was browsing.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="panel-realestate" aria-labelledby="tab-realestate" hidden>
+            <ul class="usecase-list">
+              <li><strong>Instant lead response</strong> by text and email, any hour of the day.</li>
+              <li><strong>Lead qualifier</strong> that asks budget, timeline and area, then books showings.</li>
+              <li><strong>Listing writer</strong> that turns property details into polished listings.</li>
+              <li><strong>CRM autopilot</strong> that logs every conversation and schedules follow-ups.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="panel-services" aria-labelledby="tab-services" hidden>
+            <ul class="usecase-list">
+              <li><strong>AI receptionist</strong> that answers calls and messages and books jobs.</li>
+              <li><strong>Quote assistant</strong> that gathers job details and drafts estimates.</li>
+              <li><strong>Review requests</strong> sent automatically after every completed job.</li>
+              <li><strong>Missed-call text-back</strong> so no lead slips through the cracks.</li>
+            </ul>
+          </div>
+          <div class="tab-panel" role="tabpanel" id="panel-pro" aria-labelledby="tab-pro" hidden>
+            <ul class="usecase-list">
+              <li><strong>Client intake agent</strong> that collects documents and answers FAQs.</li>
+              <li><strong>Document drafting</strong> of first-pass proposals, reports and summaries.</li>
+              <li><strong>Meeting assistant</strong> that writes notes, action items and follow-up emails.</li>
+              <li><strong>Internal knowledge bot</strong> so your team finds answers in seconds.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <!-- Edit these prices and features to match your offers. -->
+    <section class="section section-alt" id="pricing">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">Pricing</p>
+          <h2>Simple packages, real results</h2>
+          <p class="section-sub">Every project starts with a free discovery call. No long contracts.</p>
+        </header>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <h3>AI Audit</h3>
+            <p class="price"><span class="amount">$497</span><span class="per">one-time</span></p>
+            <p class="price-desc">Find out exactly where AI will pay off in your business.</p>
+            <ul class="feature-list">
+              <li>Workflow &amp; tools review</li>
+              <li>Top 5 automation opportunities</li>
+              <li>ROI estimates for each</li>
+              <li>Step-by-step roadmap</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-block" data-plan="AI Audit">Start with an audit</a>
+          </article>
+
+          <article class="price-card featured reveal">
+            <span class="badge">Most popular</span>
+            <h3>AI Build</h3>
+            <p class="price"><span class="amount">$2,500+</span><span class="per">per project</span></p>
+            <p class="price-desc">A custom chatbot, agent or automation, built and launched.</p>
+            <ul class="feature-list">
+              <li>Everything in AI Audit</li>
+              <li>Custom AI solution, fully built</li>
+              <li>Integration with your tools</li>
+              <li>Team training &amp; documentation</li>
+              <li>30 days of support</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary btn-block" data-plan="AI Build">Book a build</a>
+          </article>
+
+          <article class="price-card reveal">
+            <h3>AI Partner</h3>
+            <p class="price"><span class="amount">$1,500</span><span class="per">/ month</span></p>
+            <p class="price-desc">An ongoing AI team that keeps automating your business.</p>
+            <ul class="feature-list">
+              <li>New automations every month</li>
+              <li>Monitoring &amp; improvements</li>
+              <li>Priority support</li>
+              <li>Monthly results report</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-block" data-plan="AI Partner">Become a partner</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="container narrow">
+        <header class="section-head reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2>Questions, answered</h2>
+        </header>
+
+        <div class="faq-list reveal">
+          <details>
+            <summary>Do I need any technical knowledge?</summary>
+            <p>Not at all. We handle the technical side from start to finish and train your team on how to use what we build — in plain English.</p>
+          </details>
+          <details>
+            <summary>How long does a typical project take?</summary>
+            <p>Most chatbots and automations go live in 2–4 weeks. Larger multi-step agents usually take 4–8 weeks. You'll see a working demo early in the process.</p>
+          </details>
+          <details>
+            <summary>Will it work with the software we already use?</summary>
+            <p>Almost certainly. We integrate with CRMs, email, calendars, spreadsheets, e-commerce platforms, help desks and most tools that have an API.</p>
+          </details>
+          <details>
+            <summary>Is our data safe?</summary>
+            <p>Yes. We use business-grade AI providers that don't train on your data, follow least-privilege access, and can deploy inside your own accounts so you stay in control.</p>
+          </details>
+          <details>
+            <summary>What if the AI makes a mistake?</summary>
+            <p>We design every system with guardrails, testing and human review where it matters. Agents escalate to a person whenever they're unsure.</p>
+          </details>
+          <details>
+            <summary>Who owns what you build?</summary>
+            <p>You do. Everything we build lives in your accounts and is fully documented, so you're never locked in.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">Let's talk</p>
+          <h2>Get your free AI audit call</h2>
+          <p class="section-sub">Tell us a little about your business. We'll come back within one business day with ideas tailored to you.</p>
+          <ul class="contact-points">
+            <li>30-minute call, no pressure</li>
+            <li>Leave with at least 3 automation ideas</li>
+            <li>Clear pricing before any work starts</li>
+          </ul>
+        </div>
+
+        <!-- The form opens the visitor's email app addressed to CONTACT_EMAIL in script.js.
+             To receive submissions directly instead, point the form at a service like Formspree. -->
+        <form class="contact-form reveal" id="contact-form" novalidate>
+          <div class="field-row">
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" autocomplete="name" required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+          </div>
+          <label>
+            <span>Company</span>
+            <input type="text" name="company" autocomplete="organization">
+          </label>
+          <label>
+            <span>What are you interested in?</span>
+            <select name="interest">
+              <option>Not sure yet — help me find out</option>
+              <option>AI Audit</option>
+              <option>AI Build</option>
+              <option>AI Partner</option>
+            </select>
+          </label>
+          <label>
+            <span>What would you like to automate?</span>
+            <textarea name="message" rows="4" required placeholder="e.g. We spend hours every day answering the same customer emails…"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary btn-block">Send message</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#top" class="logo" aria-label="Arcline AI home">
+          <span class="logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="28" height="28"><path d="M8 23 L16 8 L24 23" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="logo-text">Arcline<span class="accent">AI</span></span>
+        </a>
+        <p class="footer-tag">AI agents and automations that do the work for you.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Arcline AI. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
