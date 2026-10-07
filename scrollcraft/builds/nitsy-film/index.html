@@ -81,6 +81,12 @@
   .actions { margin-top: 2rem; }
   .full { position: absolute; inset: 0; overflow: hidden; }
   .full img { width: 100%; height: 100%; max-width: none; object-fit: cover; transform-origin: 45% 40%; transform: scale(calc(1.02 + var(--sc-p, 0) * .1)); }
+  /* the mirror move: scale toward the right edge, where the reflection is */
+  .mirror img { position: absolute; top: 50%; left: 0; width: 175vw; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+    transform: translate(calc(-20% - var(--sc-p, 0) * 23%), -50%); }
+  .bokeh { position: absolute; inset: -20% 0; z-index: 2; pointer-events: none; }
+  .bokeh i { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s); border-radius: 50%; opacity: var(--o);
+    background: radial-gradient(circle, rgba(255, 222, 170, .9) 0%, rgba(255, 210, 150, .35) 40%, transparent 70%); filter: blur(6px); mix-blend-mode: screen; }
   .hero.clip-missing .sc-stage__poster { opacity: 1 !important; }
   /* 2 the comb: the consultation is combed away and the result shows through */
   .comb .shot--after { z-index: 2; --origin: 50% 40%; --from: 1.28; --push: -.28;
@@ -124,6 +130,10 @@
       background: linear-gradient(to top, var(--espresso) 0%, rgba(20, 12, 9, .9) 50%, transparent 100%); }
     .copy p { font-size: var(--sc-t-base); margin-top: 1rem; }
     .hero__title { font-size: 17vw; }
+    .mirror img { position: absolute; left: 0; top: 0; width: auto; height: 100%; aspect-ratio: 16 / 9;
+      transform: translateX(calc(-37% - var(--sc-p, 0) * 37%)); }
+    .bokeh i { width: calc(var(--s) * .6); height: calc(var(--s) * .6); }
+
     .comb .shot--after { --origin: 50% 85%; --from: 1.18; --push: -.18; }
     .comb .shot--after img { object-position: 50% 100%; }
     .contact__grid { grid-template-columns: 1fr; }
@@ -162,15 +172,27 @@
     </div>
   </section>
 
-  <!-- SHOT 2 · the room: a slow push into the salon -->
-  <section class="salon" data-sc-act="pin" data-sc-span="2" data-sc-drift="#17100C" aria-labelledby="salon-title">
+  <!-- SHOT 2 · the room: the camera drifts from the back of her head into the
+       mirror until her reflection fills the frame; gold lights pass in front -->
+  <section class="salon" data-sc-act="pin" data-sc-span="2.8" data-sc-drift="#17100C" aria-labelledby="salon-title">
     <div data-sc-stage class="stage">
-      <div class="full"><img src="assets/salon.webp" width="1600" height="900" alt="Une cliente de dos, longues boucles brunes, assise face au miroir d'un salon aux lumières douces."></div>
-      <div class="sc-scrim sc-scrim--trail" aria-hidden="true"></div>
-      <div class="sc-copy sc-copy--trail" data-sc-cue="0.08 1.3 0.2 0.1">
+      <div class="full mirror"><img src="assets/salon.webp" width="1920" height="1080" alt="Une cliente de dos, longues boucles brunes, face au miroir du salon où l'on voit son reflet."></div>
+      <div class="bokeh" aria-hidden="true">
+        <i data-sc-parallax="-2.2" style="--x:8%;--y:18%;--s:180px;--o:.28"></i>
+        <i data-sc-parallax="-3.4" style="--x:62%;--y:6%;--s:240px;--o:.22"></i>
+        <i data-sc-parallax="-1.6" style="--x:30%;--y:70%;--s:120px;--o:.3"></i>
+        <i data-sc-parallax="-4.2" style="--x:84%;--y:76%;--s:300px;--o:.18"></i>
+        <i data-sc-parallax="-2.8" style="--x:48%;--y:40%;--s:90px;--o:.26"></i>
+      </div>
+      <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+      <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.5 0.15 0.25">
         <p class="eyebrow">Au salon</p>
         <h2 id="salon-title" class="serif salon__title">Installe-toi. <em>Rien ne presse.</em></h2>
         <p class="hero__line">Ton rendez-vous, c'est ton moment : on prend le temps de bien faire, du shampoing au dernier coup de brosse.</p>
+      </div>
+      <div class="sc-copy sc-copy--lead" data-sc-cue="0.56 1.3 0.12 0.1">
+        <h2 class="serif salon__title">Et regarde-toi <em>changer.</em></h2>
+        <p class="hero__line">Le miroir te montre chaque étape. Tu vois le résultat arriver.</p>
       </div>
     </div>
   </section>

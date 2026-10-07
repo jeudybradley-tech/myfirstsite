@@ -53,3 +53,12 @@ screen, every cue clears 4.5:1.
 
 ## Update: Instagram (7 October 2026)
 Client Q&A: real services are pose de mèches / tissage, lissage, couleur / reflets, tresses; requests via Instagram (@salon_de_coiffure_nitsy); prices to show "à partir de" and an address are coming. The contact form is replaced by an Instagram DM call to action; "Rendez-vous" in the bar opens the profile. Prices still read "sur devis" until the client sends them.
+
+## Update: the salon scene (7 October 2026)
+Client: "je veux rendre cette partie plus intéressante". The salon still is no
+longer a slow push. The pinned act (2.8vh) now travels sideways across the
+full-resolution frame, from the back of the client's head to her reflection in
+the mirror, while a near plane of gold light halos drifts past on parallax. Two
+copy beats: "Installe-toi. Rien ne presse." then, once the reflection is in
+view, "Et regarde-toi changer." Desktop uses a 175vw-wide frame; phone uses a
+full-height frame and the same travel.
