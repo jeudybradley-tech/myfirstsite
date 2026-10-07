@@ -72,3 +72,17 @@ and smiles). The salon still is replaced by this clip as a second `scrub` act
 crop, gop 4) plus VP9 copies. The gold halo plane stays in front. Beats:
 "Installe-toi. Rien ne presse." from behind, "Puis retourne-toi. C'est toi."
 once she faces us. Shape now `scrub > scrub > pin > pin > flow`.
+
+## Update: logo and typewriter opening (7 October 2026)
+Client sent a logo reference ("NITSY FASHION" in a heavy geometric sans, pink
+outlined face with a halftone fill, stepped grey 3D extrusion, on black) and
+asked for it with a typewriter animation when the page opens. Built in CSS
+with Montserrat 900 (self-hosted copy plus Google Fonts): the face is the
+text with a pink stroke and a dot pattern clipped to the glyphs; the extrusion
+is a `::before` copy with stacked alternating black/grey text-shadows. On
+load a black screen types the name letter by letter with a pink caret, holds,
+then the logo flies into the bar while the black fades to the hero. Any
+wheel, touch, key or click skips it; reduced motion shows it whole and fades;
+a CSS failsafe hides the overlay after 6 s if the script never runs. At bar
+size the halftone turns to mush, so the bar logo has a solid pink face.
+Harness desktop and phone: no dead scroll, both clips move, all cues 4.5:1+.
