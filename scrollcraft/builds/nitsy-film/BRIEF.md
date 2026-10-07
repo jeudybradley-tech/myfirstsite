@@ -62,3 +62,13 @@ the mirror, while a near plane of gold light halos drifts past on parallax. Two
 copy beats: "Installe-toi. Rien ne presse." then, once the reflection is in
 view, "Et regarde-toi changer." Desktop uses a 175vw-wide frame; phone uses a
 full-height frame and the same travel.
+
+## Update: she turns around (7 October 2026)
+Client: "je veux la femme tournée de l'arrière vers l'avant" and sent
+`Woman_smiling_in_salon_chair_20261006214433_2.mov` (1920x1080, 24fps, 3.4s,
+AI-generated: the camera circles a client from behind until she faces the lens
+and smiles). The salon still is replaced by this clip as a second `scrub` act
+(3vh, dwell 0.2), encoded with `encode.sh` (desktop gop 8; phone a centred 9:16
+crop, gop 4) plus VP9 copies. The gold halo plane stays in front. Beats:
+"Installe-toi. Rien ne presse." from behind, "Puis retourne-toi. C'est toi."
+once she faces us. Shape now `scrub > scrub > pin > pin > flow`.
