@@ -89,3 +89,4 @@ Harness desktop and phone: no dead scroll, both clips move, all cues 4.5:1+.
 Follow-up: client asked for the opening logo to be pink like the bar logo, so
 both now use the solid pink face (the halftone is gone everywhere).
 Follow-up: "NITSY" is white and "FASHION" pink, in the opening and in the bar.
+Follow-up: body text switched from Geist to Inter at the client's request (self-hosted variable Inter plus Google Fonts); headings stay Instrument Serif, logo Montserrat.
