@@ -88,3 +88,4 @@ size the halftone turns to mush, so the bar logo has a solid pink face.
 Harness desktop and phone: no dead scroll, both clips move, all cues 4.5:1+.
 Follow-up: client asked for the opening logo to be pink like the bar logo, so
 both now use the solid pink face (the halftone is gone everywhere).
+Follow-up: "NITSY" is white and "FASHION" pink, in the opening and in the bar.

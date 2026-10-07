@@ -49,8 +49,8 @@
   .logo::before { content: attr(data-text); position: absolute; left: 0; top: 0; color: #000; -webkit-text-stroke: .02em #B5B5B5;
     text-shadow: .03em .03em 0 #000, .045em .045em 0 #A0A0A0, .07em .07em 0 #000, .085em .085em 0 #808080,
                  .11em .11em 0 #000, .125em .125em 0 #626262, .15em .15em 0 #000, .16em .16em 0 #454545; }
-  .logo__face { position: relative; color: transparent; -webkit-text-stroke: .025em var(--pink);
-    background-color: var(--pink); -webkit-background-clip: text; background-clip: text; }
+  .logo__face { position: relative; color: var(--pink); -webkit-text-stroke: .025em currentColor; }
+  .logo__face b { font-weight: inherit; color: #fff; }
 
   /* opening: the logo is typed on black, then flies into the bar */
   .intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #000;
@@ -164,7 +164,7 @@
 <body>
 <div class="sc-grain" aria-hidden="true"></div>
 <header class="bar">
-  <a class="bar__mark logo" href="#top" data-text="Nitsy Fashion" aria-label="Nitsy Fashion, retour en haut"><span class="logo__face">Nitsy Fashion</span></a>
+  <a class="bar__mark logo" href="#top" data-text="Nitsy Fashion" aria-label="Nitsy Fashion, retour en haut"><span class="logo__face"><b>Nitsy</b> Fashion</span></a>
   <a class="bar__cta" href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Rendez-vous</a>
 </header>
 
@@ -177,7 +177,11 @@
     var intro = document.getElementById('intro'), root = document.documentElement;
     var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     var logo = intro.querySelector('.logo'), face = logo.firstElementChild, txt = 'Nitsy Fashion', n = 0, out = false;
-    function set(k) { var t = txt.slice(0, k); logo.setAttribute('data-text', t); face.textContent = t; }
+    function set(k) {
+      var t = txt.slice(0, k), w = t.slice(0, 5);
+      logo.setAttribute('data-text', t);
+      face.innerHTML = '<b>' + w + '</b>' + t.slice(5);
+    }
     function done() {
       if (out) return; out = true; set(txt.length);
       var bar = document.querySelector('.bar__mark');
