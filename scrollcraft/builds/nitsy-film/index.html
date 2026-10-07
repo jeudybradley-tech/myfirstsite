@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..600&display=swap">
-<link rel="preload" as="image" href="assets/shot-1.webp">
+<link rel="preload" as="image" href="assets/hero-poster.webp" media="(min-width: 861px)">
 <link rel="stylesheet" href="scrollcraft.css">
 <style>
   /* Filmic one-shot: four photographs as four shots of one film, each pushed
@@ -72,6 +72,16 @@
   .hero .actions { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
   .hero .actions small { color: var(--sc-ink-soft); }
 
+  /* scrub hero + full-frame salon shot */
+  .hero__title { font-size: clamp(3.6rem, 8vw, 8rem); }
+  .hero__title em { display: block; padding-left: .5em; }
+  .hero__line { margin: 1.4rem 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 32ch; }
+  .sc-copy--trail .hero__line { margin-left: auto; }
+  .hero__beat, .salon__title { font-size: clamp(2.6rem, 5.4vw, 5.4rem); }
+  .actions { margin-top: 2rem; }
+  .full { position: absolute; inset: 0; overflow: hidden; }
+  .full img { width: 100%; height: 100%; max-width: none; object-fit: cover; transform-origin: 45% 40%; transform: scale(calc(1.02 + var(--sc-p, 0) * .1)); }
+  .hero.clip-missing .sc-stage__poster { opacity: 1 !important; }
   /* 2 the comb: the consultation is combed away and the result shows through */
   .comb .shot--after { z-index: 2; --origin: 50% 40%; --from: 1.28; --push: -.28;
     --comb: clamp(0, calc((var(--sc-p) - .28) / .34), 1); }
@@ -108,7 +118,7 @@
     .stage::after { content: ""; position: absolute; inset: auto 0 0 0; height: 66%; z-index: 3; pointer-events: none;
       background: linear-gradient(to top, var(--espresso) 0%, rgba(20, 12, 9, .9) 50%, transparent 100%); }
     .copy p { font-size: var(--sc-t-base); margin-top: 1rem; }
-    .hero h1 { font-size: 19vw; }
+    .hero__title { font-size: 17vw; }
     .comb .shot--after { --origin: 50% 85%; --from: 1.18; --push: -.18; }
     .comb .shot--after img { object-position: 50% 100%; }
     .contact__grid { grid-template-columns: 1fr; }
@@ -125,15 +135,37 @@
 </header>
 
 <main id="top">
-  <!-- SHOT 1 · the opening: hands at work, a slow push in -->
-  <section class="hero" data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#140C09" aria-labelledby="hero-title">
-    <div data-sc-stage class="stage">
-      <div class="shot" style="--ar: 736/1103; --origin: 50% 30%"><img src="assets/shot-1.webp" width="736" height="1103" alt="Une coiffeuse ajuste les longues ondulations d'une cliente, peigne à la main."></div>
-      <div class="copy" data-sc-cue="0 0.8 0 0.25">
+  <!-- SHOT 1 · the film opens: she turns toward the camera, it moves in, she smiles -->
+  <section class="hero" data-sc-act="scrub" data-sc-span="2.8" data-sc-dwell="0.25" data-sc-drift="#140C09" aria-labelledby="hero-title">
+    <div data-sc-stage>
+      <picture>
+        <source media="(max-width: 860px)" srcset="assets/hero-poster-m.webp">
+        <img class="sc-stage__poster" src="assets/hero-poster.webp" alt="">
+      </picture>
+      <video data-sc-scrub data-sc-src="assets/hero.mp4" data-sc-src-mobile="assets/hero-m.mp4"
+             data-webm="assets/hero.webm" data-webm-mobile="assets/hero-m.webm" muted playsinline aria-hidden="true"></video>
+      <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+      <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.6 0 0.25">
         <p class="eyebrow">Salon de coiffure · sur rendez-vous</p>
-        <h1 id="hero-title" class="serif">Nitsy <em>Fashion</em></h1>
-        <p>Mèches, lissage, reflets, coiffage. Une coiffure qui te ressemble, posée avec le temps qu'il faut.</p>
-        <div class="actions"><a class="btn" href="#contact">Prendre <span>rendez-vous</span></a><small>Réponse rapide, sans engagement.</small></div>
+        <h1 id="hero-title" class="serif hero__title">Nitsy <em>Fashion</em></h1>
+        <p class="hero__line">Mèches, lissage, reflets, coiffage. Une coiffure qui te ressemble, posée avec le temps qu'il faut.</p>
+        <div class="actions"><a class="btn" href="#contact">Prendre <span>rendez-vous</span></a></div>
+      </div>
+      <div class="sc-copy sc-copy--lead" data-sc-cue="0.68 1.3 0.12 0.1">
+        <h2 class="serif hero__beat">Le moment où tu <em>te reconnais.</em></h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOT 2 · the room: a slow push into the salon -->
+  <section class="salon" data-sc-act="pin" data-sc-span="2" data-sc-drift="#17100C" aria-labelledby="salon-title">
+    <div data-sc-stage class="stage">
+      <div class="full"><img src="assets/salon.webp" width="1600" height="900" alt="Une cliente de dos, longues boucles brunes, assise face au miroir d'un salon aux lumières douces."></div>
+      <div class="sc-scrim sc-scrim--trail" aria-hidden="true"></div>
+      <div class="sc-copy sc-copy--trail" data-sc-cue="0.08 1.3 0.2 0.1">
+        <p class="eyebrow">Au salon</p>
+        <h2 id="salon-title" class="serif salon__title">Installe-toi. <em>Rien ne presse.</em></h2>
+        <p class="hero__line">Ton rendez-vous, c'est ton moment : on prend le temps de bien faire, du shampoing au dernier coup de brosse.</p>
       </div>
     </div>
   </section>
@@ -197,7 +229,24 @@
 
 <script src="scrollcraft.js"></script>
 <script>
+  (function () {
+    var v = document.querySelector('.hero video[data-sc-scrub]'), probe = document.createElement('video');
+    if (v && !probe.canPlayType('video/mp4; codecs="avc1.640028"') && probe.canPlayType('video/webm; codecs="vp9"')) {
+      v.setAttribute('data-sc-src', v.getAttribute('data-webm'));
+      v.setAttribute('data-sc-src-mobile', v.getAttribute('data-webm-mobile'));
+    }
+  })();
   ScrollCraft.mount(document.body);
+  (function () {
+    // Keep the poster up if the clip never paints (codec, blocked blob URL).
+    var hero = document.querySelector('.hero'), v = hero && hero.querySelector('video'), ok = false, n = 0;
+    if (!v) return;
+    var iv = setInterval(function () {
+      if (v.readyState >= 2 && !v.error) ok = true;
+      hero.classList.toggle('clip-missing', hero.classList.contains('sc-has-clip') && !ok);
+      if (ok || ++n > 40) clearInterval(iv);
+    }, 400);
+  })();
   (function () {
     var form = document.getElementById('contact-form'), status = document.getElementById('f-status');
     form.addEventListener('submit', function (e) {
