@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nitsy Fashion · le film</title>
+<meta name="description" content="Nitsy Fashion, salon de coiffure : pose de mèches, lissage, reflets et coiffage, sur rendez-vous.">
+<meta name="theme-color" content="#140C09">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23140C09'/><text x='16' y='23' font-family='Georgia' font-style='italic' font-size='20' text-anchor='middle' fill='%23E7B4A3'>N</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..600&display=swap">
+<link rel="preload" as="image" href="assets/shot-1.webp">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* Filmic one-shot: four photographs as four shots of one film, each pushed
+     into slowly by the scroll. The client's own warm brown backdrop is the
+     page's ground; one blush accent; serif for every spoken line. */
+  @font-face { font-family: "Instrument Local"; src: url("assets/fonts/instrument-regular.woff2") format("woff2"); font-style: normal; font-display: swap; }
+  @font-face { font-family: "Instrument Local"; src: url("assets/fonts/instrument-italic.woff2") format("woff2"); font-style: italic; font-display: swap; }
+  @font-face { font-family: "Geist Local"; src: url("assets/fonts/geist-latin.woff2") format("woff2"); font-weight: 300 600; font-display: swap; }
+  :root {
+    color-scheme: dark;
+    --espresso: #140C09;
+    --cognac: #3A2116;
+    --blush: #E7B4A3;
+    --sc-canvas: var(--espresso);
+    --sc-surface: #20140F;
+    --sc-ink: #F6ECE4;
+    --sc-ink-soft: #C9B5A9;
+    --sc-accent: var(--blush);
+    --sc-accent-ink: #1C100B;
+    --sc-font-display: "Instrument Serif", "Instrument Local", Georgia, serif;
+    --sc-font-text: "Geist", "Geist Local", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  body { background: var(--sc-canvas); color: var(--sc-ink); font-weight: 350; }
+
+  .bar { position: fixed; z-index: 60; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center;
+    padding: calc(1.1rem + env(safe-area-inset-top, 0px)) var(--sc-gutter) 1.1rem; }
+  .bar a { color: var(--sc-ink); text-decoration: none; }
+  .bar__mark { font-family: var(--sc-font-display); font-size: 1.4rem; }
+  .bar__mark i { color: var(--blush); }
+  .bar__cta { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; border-bottom: 1px solid var(--blush); padding-bottom: .2rem; }
+
+  .serif { font-family: var(--sc-font-display); font-weight: 400; letter-spacing: -.015em; line-height: .95; margin: 0; }
+  .serif em { font-style: italic; color: var(--blush); }
+  .eyebrow { margin: 0 0 1.2rem; font-size: .72rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--blush); }
+  .btn { display: inline-flex; align-items: center; gap: .7rem; min-height: 3rem; padding: .9rem 1.7rem; border-radius: 999px; border: 0; cursor: pointer;
+    background: var(--blush); color: var(--sc-accent-ink); text-decoration: none; font: inherit; font-weight: 500;
+    transition: transform var(--sc-d-fast) var(--sc-ease-out), background-color var(--sc-d-fast) var(--sc-ease-out); }
+  .btn:hover { background: #F0C6B8; transform: translateY(-1px); }
+  .btn:active { transform: scale(.97); }
+  .btn span { font-family: var(--sc-font-display); font-style: italic; font-size: 1.2em; }
+
+  /* A shot: the photograph as a tall panel on the right, its edges melting
+     into the ground, pushed into by the act's progress. */
+  .stage { background: radial-gradient(70% 90% at 72% 50%, var(--cognac), var(--espresso) 70%); }
+  .shot { position: absolute; top: 0; bottom: 0; right: 4vw; height: 100%; aspect-ratio: var(--ar); max-width: 62vw;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24%, #000 90%, transparent 100%), linear-gradient(to bottom, #000 80%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-image: linear-gradient(to right, transparent 0, #000 24%, #000 90%, transparent 100%), linear-gradient(to bottom, #000 80%, transparent 100%);
+            mask-composite: intersect; overflow: hidden; }
+  .shot img { width: 100%; height: 100%; max-width: none; object-fit: cover; transform-origin: var(--origin, 50% 35%);
+    transform: scale(calc(var(--from, 1) + var(--sc-p, 0) * var(--push, .08))); will-change: transform; }
+
+  .copy { position: absolute; z-index: 5; left: var(--sc-gutter); top: 50%; translate: 0 -50%; width: min(32rem, 42vw); }
+  .copy p { margin: 1.6rem 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 32ch; }
+
+  /* 1 */
+  .hero h1 { font-size: clamp(4.2rem, 10vw, 10rem); }
+  .hero h1 em { display: block; padding-left: .6em; }
+  .hero .actions { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
+  .hero .actions small { color: var(--sc-ink-soft); }
+
+  /* 2 the comb: the consultation is combed away and the result shows through */
+  .comb .shot--after { z-index: 2; --origin: 50% 40%; --from: 1.28; --push: -.28;
+    --comb: clamp(0, calc((var(--sc-p) - .28) / .34), 1); }
+  .comb .shot--after img { -webkit-mask-image: repeating-linear-gradient(97deg, #000 0, #000 calc(var(--comb) * 18px), transparent calc(var(--comb) * 18px), transparent 18px);
+                                  mask-image: repeating-linear-gradient(97deg, #000 0, #000 calc(var(--comb) * 18px), transparent calc(var(--comb) * 18px), transparent 18px); }
+  .comb h2, .services h2 { font-size: clamp(2.8rem, 5.6vw, 5.6rem); }
+  .copy--late { top: auto; bottom: 14svh; translate: none; }
+
+  /* 3 services */
+  .services ul { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 0; max-width: 26rem; }
+  .services li { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid #4A3329; font-size: var(--sc-t-lg); }
+  .services li span { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); align-self: center; }
+
+  /* 4 contact */
+  .contact { min-height: 100svh; display: grid; grid-template-rows: 1fr auto; padding: var(--sc-section) var(--sc-gutter) 0; background: #1C120D; }
+  .contact__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); max-width: 68rem; }
+  .contact h2 { font-size: clamp(3rem, 6.5vw, 6rem); }
+  .contact__lede { margin: 1.4rem 0 0; color: var(--sc-ink-soft); line-height: 1.65; max-width: 34ch; }
+  form { display: grid; gap: 1.1rem; }
+  label { display: grid; gap: .45rem; font-size: .7rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--blush); }
+  input, select, textarea { font: inherit; font-size: 1rem; text-transform: none; letter-spacing: 0; font-weight: 350; color: var(--sc-ink); background: transparent; border: 0; border-bottom: 1px solid #5C4236; padding: .6rem 0; border-radius: 0; }
+  select option { color: #1C100B; }
+  textarea { min-height: 5rem; resize: vertical; }
+  input::placeholder, textarea::placeholder { color: #8F7A6E; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--blush); outline-offset: 4px; }
+  form .btn { justify-self: start; }
+  .status { margin: 0; min-height: 1.4em; font-size: var(--sc-t-sm); color: var(--blush); }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 4rem; padding-block: 1.4rem calc(1.4rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid #3A2A22; font-size: .78rem; color: var(--sc-ink-soft); }
+
+  @media (max-width: 860px) {
+    .shot { right: 0; left: 0; max-width: none; width: 100%; aspect-ratio: auto;
+      -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 92%); mask-image: linear-gradient(to bottom, #000 50%, transparent 92%); }
+    .copy { top: auto; bottom: calc(6svh + env(safe-area-inset-bottom, 0px)); translate: none; width: auto; right: var(--sc-gutter); }
+    .stage::after { content: ""; position: absolute; inset: auto 0 0 0; height: 66%; z-index: 3; pointer-events: none;
+      background: linear-gradient(to top, var(--espresso) 0%, rgba(20, 12, 9, .9) 50%, transparent 100%); }
+    .copy p { font-size: var(--sc-t-base); margin-top: 1rem; }
+    .hero h1 { font-size: 19vw; }
+    .comb .shot--after { --origin: 50% 85%; --from: 1.18; --push: -.18; }
+    .comb .shot--after img { object-position: 50% 100%; }
+    .contact__grid { grid-template-columns: 1fr; }
+    .bar__cta { font-size: .68rem; }
+  }
+</style>
+<noscript><style>[data-sc-cue],[data-sc-in],[data-sc-stagger]>*{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<div class="sc-grain" aria-hidden="true"></div>
+<header class="bar">
+  <a class="bar__mark" href="#top" aria-label="Nitsy Fashion, retour en haut">Nitsy <i>Fashion</i></a>
+  <a class="bar__cta" href="#contact">Rendez-vous</a>
+</header>
+
+<main id="top">
+  <!-- SHOT 1 · the opening: hands at work, a slow push in -->
+  <section class="hero" data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#140C09" aria-labelledby="hero-title">
+    <div data-sc-stage class="stage">
+      <div class="shot" style="--ar: 736/1103; --origin: 50% 30%"><img src="assets/shot-1.webp" width="736" height="1103" alt="Une coiffeuse ajuste les longues ondulations d'une cliente, peigne à la main."></div>
+      <div class="copy" data-sc-cue="0 0.8 0 0.25">
+        <p class="eyebrow">Salon de coiffure · sur rendez-vous</p>
+        <h1 id="hero-title" class="serif">Nitsy <em>Fashion</em></h1>
+        <p>Mèches, lissage, reflets, coiffage. Une coiffure qui te ressemble, posée avec le temps qu'il faut.</p>
+        <div class="actions"><a class="btn" href="#contact">Prendre <span>rendez-vous</span></a><small>Réponse rapide, sans engagement.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOTS 2 → 3 · the peak: the consultation is combed away into the result -->
+  <section class="comb" data-sc-act="pin" data-sc-span="3.6" data-sc-drift="#1A0F0B" aria-labelledby="comb-title">
+    <div data-sc-stage class="stage">
+      <div class="shot" style="--ar: 736/918; --origin: 50% 40%"><img src="assets/shot-2.webp" width="736" height="918" alt="Trois coiffeuses autour d'une cliente : l'une prend des notes, l'autre lisse les longueurs."></div>
+      <div class="shot shot--after" style="--ar: 736/918"><img src="assets/shot-3.webp" width="736" height="918" alt="La cliente de dos : longs cheveux lisses aux reflets clairs, entourée de l'équipe."></div>
+      <div class="copy" data-sc-cue="0 0.3 0 0.3">
+        <p class="eyebrow">Avant tout</p>
+        <h2 id="comb-title" class="serif">On commence par <em>t'écouter.</em></h2>
+        <p>Ce que tu aimes, ce que tu veux changer, ce que tes cheveux supportent. On note tout, puis on se lance.</p>
+      </div>
+      <div class="copy copy--late" data-sc-cue="0.66 1.3 0.12 0.1">
+        <h2 class="serif">Et le résultat <em>se voit de dos.</em></h2>
+        <p>Une ligne nette, des reflets posés à la main, du mouvement jusqu'aux pointes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOT 4 · the craft: the hair itself, and what the salon does with it -->
+  <section class="services" data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#0E0806" aria-labelledby="svc-title">
+    <div data-sc-stage class="stage" style="background: radial-gradient(60% 80% at 72% 45%, #2A170F, #0E0806 70%)">
+      <div class="shot" style="--ar: 736/981; --origin: 45% 40%; --push: .1"><img src="assets/shot-4.webp" width="736" height="981" alt="Une main présente deux mèches ondulées noires, prêtes à être posées."></div>
+      <div class="copy" data-sc-cue="0.05 1.3 0.2 0.1">
+        <p class="eyebrow">Au salon</p>
+        <h2 id="svc-title" class="serif">Des mèches <em>choisies avec soin.</em></h2>
+        <ul data-sc-in data-sc-stagger="90">
+          <li>Pose de mèches <span>sur devis</span></li>
+          <li>Lissage <span>sur devis</span></li>
+          <li>Reflets &amp; couleur <span>sur devis</span></li>
+          <li>Coiffage <span>sur devis</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT · the film ends where the visitor starts -->
+  <section id="contact" class="contact" data-sc-act="flow" data-sc-drift="#1C120D" aria-labelledby="contact-title">
+    <div class="contact__grid">
+      <div data-sc-in>
+        <p class="eyebrow">Rendez-vous</p>
+        <h2 id="contact-title" class="serif">À toi <em>la prochaine scène.</em></h2>
+        <p class="contact__lede">Dis-nous ce que tu as en tête. On te recontacte pour fixer le rendez-vous qui te convient.</p>
+      </div>
+      <form id="contact-form" novalidate>
+        <label for="f-name">Ton prénom<input id="f-name" name="name" autocomplete="given-name" required></label>
+        <label for="f-reach">Téléphone ou Instagram<input id="f-reach" name="reach" required></label>
+        <label for="f-service">Prestation
+          <select id="f-service" name="service"><option>Pose de mèches</option><option>Lissage</option><option>Reflets &amp; couleur</option><option>Coiffage</option><option>Je ne sais pas encore</option></select>
+        </label>
+        <label for="f-msg">Ton idée<textarea id="f-msg" name="message" placeholder="Ex. : des ondulations longues pour samedi"></textarea></label>
+        <button class="btn" type="submit">Envoyer ma <span>demande</span></button>
+        <p class="status" id="f-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <footer class="foot"><span>Nitsy Fashion · Salon de coiffure</span><span>© 2026 Nitsy Fashion</span></footer>
+  </section>
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>
+  ScrollCraft.mount(document.body);
+  (function () {
+    var form = document.getElementById('contact-form'), status = document.getElementById('f-status');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = form.elements['name'].value.trim(), reach = form.elements['reach'].value.trim();
+      if (!name) { status.textContent = 'Ajoute ton prénom.'; form.elements['name'].focus(); return; }
+      if (!reach) { status.textContent = 'Ajoute un téléphone ou un Instagram pour qu\'on te réponde.'; form.elements['reach'].focus(); return; }
+      status.textContent = 'Merci ' + name + ' ! Le formulaire n\'est pas encore relié à la boîte de réception du salon : ta demande (' + form.elements['service'].value + ') n\'a pas été envoyée.';
+    });
+  })();
+</script>
+</body>
+</html>
