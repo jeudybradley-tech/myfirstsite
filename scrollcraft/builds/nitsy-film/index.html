@@ -109,6 +109,11 @@
   input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--blush); outline-offset: 4px; }
   form .btn { justify-self: start; }
   .status { margin: 0; min-height: 1.4em; font-size: var(--sc-t-sm); color: var(--blush); }
+  .ig { display: grid; gap: 1.2rem; justify-items: start; align-content: start; }
+  .ig__how { margin: 0; color: var(--sc-ink-soft); line-height: 1.65; max-width: 38ch; }
+  .ig__handle { margin: 0; font-family: var(--sc-font-display); font-style: italic; font-size: 1.5rem; color: var(--blush); user-select: all; }
+  .ig__steps { margin: .6rem 0 0; padding-left: 1.2rem; color: var(--sc-ink-soft); line-height: 1.7; display: grid; gap: .3rem; }
+  .foot a { color: inherit; }
   .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 4rem; padding-block: 1.4rem calc(1.4rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid #3A2A22; font-size: .78rem; color: var(--sc-ink-soft); }
 
   @media (max-width: 860px) {
@@ -131,7 +136,7 @@
 <div class="sc-grain" aria-hidden="true"></div>
 <header class="bar">
   <a class="bar__mark" href="#top" aria-label="Nitsy Fashion, retour en haut">Nitsy <i>Fashion</i></a>
-  <a class="bar__cta" href="#contact">Rendez-vous</a>
+  <a class="bar__cta" href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Rendez-vous</a>
 </header>
 
 <main id="top">
@@ -198,7 +203,7 @@
           <li>Pose de mèches <span>sur devis</span></li>
           <li>Lissage <span>sur devis</span></li>
           <li>Reflets &amp; couleur <span>sur devis</span></li>
-          <li>Coiffage <span>sur devis</span></li>
+          <li>Tresses <span>sur devis</span></li>
         </ul>
       </div>
     </div>
@@ -210,20 +215,20 @@
       <div data-sc-in>
         <p class="eyebrow">Rendez-vous</p>
         <h2 id="contact-title" class="serif">À toi <em>la prochaine scène.</em></h2>
-        <p class="contact__lede">Dis-nous ce que tu as en tête. On te recontacte pour fixer le rendez-vous qui te convient.</p>
+        <p class="contact__lede">Les rendez-vous se prennent sur Instagram. On te répond pour fixer le créneau qui te convient.</p>
       </div>
-      <form id="contact-form" novalidate>
-        <label for="f-name">Ton prénom<input id="f-name" name="name" autocomplete="given-name" required></label>
-        <label for="f-reach">Téléphone ou Instagram<input id="f-reach" name="reach" required></label>
-        <label for="f-service">Prestation
-          <select id="f-service" name="service"><option>Pose de mèches</option><option>Lissage</option><option>Reflets &amp; couleur</option><option>Coiffage</option><option>Je ne sais pas encore</option></select>
-        </label>
-        <label for="f-msg">Ton idée<textarea id="f-msg" name="message" placeholder="Ex. : des ondulations longues pour samedi"></textarea></label>
-        <button class="btn" type="submit">Envoyer ma <span>demande</span></button>
-        <p class="status" id="f-status" role="status" aria-live="polite"></p>
-      </form>
+      <div class="ig" data-sc-in>
+        <p class="ig__how">Le plus simple : écris-nous en message privé sur Instagram, avec la prestation qui t'intéresse et tes disponibilités.</p>
+        <a class="btn ig__btn" href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Écrire sur <span>Instagram</span></a>
+        <p class="ig__handle">@salon_de_coiffure_nitsy</p>
+        <ol class="ig__steps">
+          <li>Pose de mèches, lissage, couleur ou tresses : dis-nous ce que tu veux.</li>
+          <li>Donne-nous tes jours et horaires possibles.</li>
+          <li>On te répond pour confirmer le rendez-vous.</li>
+        </ol>
+      </div>
     </div>
-    <footer class="foot"><span>Nitsy Fashion · Salon de coiffure</span><span>© 2026 Nitsy Fashion</span></footer>
+    <footer class="foot"><span>Nitsy Fashion · Salon de coiffure · <a href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Instagram</a></span><span>© 2026 Nitsy Fashion</span></footer>
   </section>
 </main>
 
@@ -246,16 +251,6 @@
       hero.classList.toggle('clip-missing', hero.classList.contains('sc-has-clip') && !ok);
       if (ok || ++n > 40) clearInterval(iv);
     }, 400);
-  })();
-  (function () {
-    var form = document.getElementById('contact-form'), status = document.getElementById('f-status');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = form.elements['name'].value.trim(), reach = form.elements['reach'].value.trim();
-      if (!name) { status.textContent = 'Ajoute ton prénom.'; form.elements['name'].focus(); return; }
-      if (!reach) { status.textContent = 'Ajoute un téléphone ou un Instagram pour qu\'on te réponde.'; form.elements['reach'].focus(); return; }
-      status.textContent = 'Merci ' + name + ' ! Le formulaire n\'est pas encore relié à la boîte de réception du salon : ta demande (' + form.elements['service'].value + ') n\'a pas été envoyée.';
-    });
   })();
 </script>
 </body>

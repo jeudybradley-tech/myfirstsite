@@ -50,3 +50,6 @@ push into the salon still. Phone gets a portrait crop of the clip; VP9 copies
 serve browsers without H.264. Shape now `scrub > pin > pin > pin > flow`,
 11.6vh. Harness desktop and phone: no dead scroll, clip moves whenever on
 screen, every cue clears 4.5:1.
+
+## Update: Instagram (7 October 2026)
+Client Q&A: real services are pose de mèches / tissage, lissage, couleur / reflets, tresses; requests via Instagram (@salon_de_coiffure_nitsy); prices to show "à partir de" and an address are coming. The contact form is replaced by an Instagram DM call to action; "Rendez-vous" in the bar opens the profile. Prices still read "sur devis" until the client sends them.
