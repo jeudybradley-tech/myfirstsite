@@ -5,6 +5,7 @@ Sites en scroll construits avec le skill scroll-craft (moteur `scrollcraft.js` /
 | Site | Fichier | Contenu |
 |---|---|---|
 | **PROPAGATE** | `scrollcraft/builds/propagate/index.html` | Le t-shirt PROPAGATE, construit à partir des deux vidéos fournies. Brief, plan et vérifications dans `BRIEF.md` à côté. |
+| **Nitsy Fashion** | `scrollcraft/builds/nitsy/index.html` | Salon de coiffure, style premium, tresse dessinée en code. Formulaire de contact à brancher. |
 | ALBA | `index.html` | Exemple inventé (canette de café protéiné). |
 | Maison Jeudy | `maison.html` | Exemple inventé (boutique d'objets). |
 
