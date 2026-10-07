@@ -86,3 +86,5 @@ wheel, touch, key or click skips it; reduced motion shows it whole and fades;
 a CSS failsafe hides the overlay after 6 s if the script never runs. At bar
 size the halftone turns to mush, so the bar logo has a solid pink face.
 Harness desktop and phone: no dead scroll, both clips move, all cues 4.5:1+.
+Follow-up: client asked for the opening logo to be pink like the bar logo, so
+both now use the solid pink face (the halftone is gone everywhere).

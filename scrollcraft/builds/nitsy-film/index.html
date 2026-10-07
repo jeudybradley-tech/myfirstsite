@@ -40,11 +40,9 @@
     padding: calc(1.1rem + env(safe-area-inset-top, 0px)) var(--sc-gutter) 1.1rem; }
   .bar a { color: var(--sc-ink); text-decoration: none; }
   .bar__mark { font-size: 1.3rem; }
-  /* at bar size the halftone turns to mush: solid pink face, shallower steps */
-  .bar__mark .logo__face { background-image: none; background-color: var(--pink); }
   .intro-on .bar__mark { opacity: 0; }
 
-  /* the logo: pink outlined face filled with a halftone, stepped grey extrusion
+  /* the logo: solid pink face, stepped grey extrusion
      behind it (the ::before layer carries the same text via data-text) */
   .logo { --pink: #F6B8DD; position: relative; display: inline-block; font-family: "Montserrat", "Montserrat Local", system-ui, sans-serif;
     font-weight: 900; text-transform: uppercase; letter-spacing: .02em; line-height: 1.1; white-space: nowrap; }
@@ -52,8 +50,7 @@
     text-shadow: .03em .03em 0 #000, .045em .045em 0 #A0A0A0, .07em .07em 0 #000, .085em .085em 0 #808080,
                  .11em .11em 0 #000, .125em .125em 0 #626262, .15em .15em 0 #000, .16em .16em 0 #454545; }
   .logo__face { position: relative; color: transparent; -webkit-text-stroke: .025em var(--pink);
-    background: radial-gradient(circle, var(--pink) 26%, transparent 32%) 0 0 / .065em .065em, #000;
-    -webkit-background-clip: text; background-clip: text; }
+    background-color: var(--pink); -webkit-background-clip: text; background-clip: text; }
 
   /* opening: the logo is typed on black, then flies into the bar */
   .intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #000;
