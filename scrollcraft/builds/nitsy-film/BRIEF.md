@@ -114,3 +114,4 @@ curls photo as a fifth card, "Boucles & définition" (04; Tresses moves to 05
 and keeps its drawing). Added to the services list further down too. Span
 4.8vh; rail overflow 1292px at 1440, 1762px at 390.
 Follow-up: copper curls photo placed on Tresses at the client's choice (replaces the code-drawn braid; the photo shows curls, not braids).
+Follow-up: client renamed that card "Boucles cuivrées" (text adapted); Tresses is no longer in the rail but stays in the services list below, where "Boucles cuivrées" was added.
