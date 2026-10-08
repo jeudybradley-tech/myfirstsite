@@ -107,6 +107,29 @@
   .bokeh i { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s); border-radius: 50%; opacity: var(--o);
     background: radial-gradient(circle, rgba(255, 222, 170, .9) 0%, rgba(255, 210, 150, .35) 40%, transparent 70%); filter: blur(6px); mix-blend-mode: screen; }
   .clip-missing .sc-stage__poster { opacity: 1 !important; }
+  /* services rail: the page holds and the services slide in from the right */
+  .svc-stage { display: flex; align-items: center; overflow: hidden; background: radial-gradient(80% 90% at 28% 40%, #2E1A12, var(--espresso) 70%); }
+  .svc-rail { align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); padding: 4.5rem var(--sc-gutter) 0; }
+  .svc-intro { flex: 0 0 auto; width: min(30rem, 34vw); }
+  .svc-intro h2 { font-size: clamp(2.8rem, 5.2vw, 5.2rem); }
+  .svc-intro p { margin: 1.4rem 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 28ch; }
+  .svc-hint { display: inline-flex; align-items: center; gap: .7rem; margin-top: 2.2rem; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--blush); }
+  .svc-hint i { width: 3rem; height: 1px; background: currentColor; }
+  .svc-card, .svc-end { --k: 1; flex: 0 0 auto; width: clamp(16rem, 22vw, 21rem); margin: 0;
+    opacity: calc(.55 + .45 * var(--k)); translate: 0 calc((1 - var(--k)) * 3rem); }
+  .svc-card__img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #2A1810; }
+  .svc-card__img img, .svc-card__img svg { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover;
+    transform: scale(1.08) translateX(calc((1 - var(--k)) * 3%)); }
+  .svc-card__img::after { content: ""; position: absolute; inset: 0 0 auto; height: 32%; background: linear-gradient(to bottom, rgba(10, 6, 4, .55), transparent); pointer-events: none; }
+  .svc-card__num { position: absolute; z-index: 1; top: .8rem; left: 1rem; font-family: var(--sc-font-display); font-style: italic; font-size: 1.5rem; color: #fff; text-shadow: 0 1px 10px rgba(0, 0, 0, .6); }
+  .svc-card h3, .svc-end h3 { margin: 1.1rem 0 0; font-family: var(--sc-font-display); font-weight: 400; font-size: clamp(1.8rem, 2.4vw, 2.3rem); line-height: 1; }
+  .svc-card h3 em, .svc-end h3 em { color: var(--blush); }
+  .svc-card p, .svc-end p { margin: .7rem 0 0; color: var(--sc-ink-soft); line-height: 1.55; }
+  .svc-card__price { display: flex; justify-content: space-between; align-items: baseline; margin-top: 1rem; padding-top: .8rem; border-top: 1px solid #4A3329; font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .svc-card__price b { font-weight: 500; color: var(--blush); }
+  .svc-end { display: grid; gap: 1.2rem; justify-items: start; align-content: center; }
+  .svc-end p { margin: 0; }
+  @media (prefers-reduced-motion: reduce) { .svc-card, .svc-end { opacity: 1; translate: none; } }
   /* 2 the comb: the consultation is combed away and the result shows through */
   .comb .shot--after { z-index: 2; --origin: 50% 40%; --from: 1.28; --push: -.28;
     --comb: clamp(0, calc((var(--sc-p) - .28) / .34), 1); }
@@ -156,6 +179,9 @@
     .contact__grid { grid-template-columns: 1fr; }
     .bar__cta { font-size: .68rem; }
     .bar__mark { font-size: 1rem; }
+    .svc-intro { width: 80vw; }
+    .svc-card, .svc-end { width: 72vw; }
+    .svc-intro p { font-size: var(--sc-t-base); }
     .intro__line { font-size: 9.4vw; }
   }
 </style>
@@ -224,6 +250,49 @@
       </div>
       <div class="sc-copy sc-copy--lead" data-sc-cue="0.68 1.3 0.12 0.1">
         <h2 class="serif hero__beat">Le moment où tu <em>te reconnais.</em></h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES RAIL · the page holds and the four services slide past, right to left -->
+  <section class="svc" data-sc-act="pan" data-sc-span="4.2" data-sc-drift="#1A0F0B" aria-labelledby="svc-rail-title">
+    <div data-sc-stage class="svc-stage">
+      <div class="svc-rail" data-sc-pan="0.04">
+        <div class="svc-intro">
+          <p class="eyebrow">Nos services</p>
+          <h2 id="svc-rail-title" class="serif">Ce qu'on fait <em>pour toi.</em></h2>
+          <p>Quatre prestations, faites au salon avec le temps qu'il faut.</p>
+          <p class="svc-hint" aria-hidden="true"><i></i>Fais défiler</p>
+        </div>
+      <article class="svc-card">
+        <div class="svc-card__img"><img src="assets/svc-meches.webp" width="736" height="920" loading="lazy" alt="Une femme aux très longs cheveux noirs ondulés, regard tourné vers la fenêtre."><span class="svc-card__num" aria-hidden="true">01</span></div>
+        <h3>Pose de <em>mèches</em></h3>
+        <p>Du volume et de la longueur, posés pour tenir et bouger naturellement.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+      <article class="svc-card">
+        <div class="svc-card__img"><img src="assets/svc-lissage.webp" width="420" height="525" loading="lazy" alt="Une coiffeuse passe le fer à lisser sur les longs cheveux d'une cliente."><span class="svc-card__num" aria-hidden="true">02</span></div>
+        <h3><em>Lissage</em></h3>
+        <p>Des longueurs lisses et brillantes, qui gardent leur mouvement.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+      <article class="svc-card">
+        <div class="svc-card__img"><img src="assets/svc-reflets.webp" width="736" height="920" loading="lazy" alt="Une femme aux cheveux longs dégradés, bruns avec des reflets caramel."><span class="svc-card__num" aria-hidden="true">03</span></div>
+        <h3>Reflets &amp; <em>couleur</em></h3>
+        <p>Une couleur choisie avec toi, des reflets posés à la main.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+      <article class="svc-card">
+        <div class="svc-card__img"><svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Dessin d'une tresse, en attendant la photo."><defs><linearGradient id="tbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2116"/><stop offset="1" stop-color="#140C09"/></linearGradient><linearGradient id="tst" x1="0" x2="1"><stop offset="0" stop-color="#140C09"/><stop offset=".55" stop-color="#5A3828"/><stop offset="1" stop-color="#140C09"/></linearGradient></defs><rect width="400" height="500" fill="url(#tbg)"/><g fill="url(#tst)" stroke="#E7B4A3" stroke-width="1.6"><ellipse cx="185" cy="70" rx="30" ry="40" transform="rotate(32 185 70)"/><ellipse cx="215" cy="104" rx="30" ry="40" transform="rotate(-32 215 104)"/><ellipse cx="185" cy="138" rx="30" ry="40" transform="rotate(32 185 138)"/><ellipse cx="215" cy="172" rx="30" ry="40" transform="rotate(-32 215 172)"/><ellipse cx="185" cy="206" rx="30" ry="40" transform="rotate(32 185 206)"/><ellipse cx="215" cy="240" rx="30" ry="40" transform="rotate(-32 215 240)"/><ellipse cx="185" cy="274" rx="30" ry="40" transform="rotate(32 185 274)"/><ellipse cx="215" cy="308" rx="30" ry="40" transform="rotate(-32 215 308)"/><ellipse cx="185" cy="342" rx="30" ry="40" transform="rotate(32 185 342)"/><ellipse cx="215" cy="376" rx="30" ry="40" transform="rotate(-32 215 376)"/><ellipse cx="185" cy="410" rx="30" ry="40" transform="rotate(32 185 410)"/></g><path d="M200 448 C 196 470, 206 482, 200 500" fill="none" stroke="#E7B4A3" stroke-width="1.6"/></svg><span class="svc-card__num" aria-hidden="true">04</span></div>
+        <h3><em>Tresses</em></h3>
+        <p>Des tresses nettes et régulières, de la plus simple à la plus travaillée.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+        <div class="svc-end">
+          <h3>Une envie <em>précise ?</em></h3>
+          <p>Envoie-nous une photo de ce qui te plaît sur Instagram : on te répond avec le prix et un créneau.</p>
+          <a class="btn" href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Écrire sur <span>Instagram</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -326,6 +395,31 @@
     });
   })();
   ScrollCraft.mount(document.body);
+  (function () {
+    // Services rail: each card settles as it comes in from the right edge, and
+    // keyboard focus on the closing button jumps to the end of the travel.
+    var act = document.querySelector('.svc'); if (!act) return;
+    var items = act.querySelectorAll('.svc-card, .svc-end'), stage = act.querySelector('[data-sc-stage]');
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches, tick = false;
+    function settle() {
+      tick = false; var w = innerWidth;
+      for (var i = 0; i < items.length; i++) {
+        var r = items[i].getBoundingClientRect();
+        var k = Math.max(0, Math.min(1, (w - r.left) / (r.width * 0.85)));
+        items[i].style.setProperty('--k', k.toFixed(3));
+      }
+    }
+    if (!still) {
+      addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(settle); } }, { passive: true });
+      addEventListener('resize', settle); settle();
+    }
+    act.addEventListener('focusin', function () {
+      if (still) return;
+      stage.scrollLeft = 0;
+      var top = act.getBoundingClientRect().top + scrollY;
+      scrollTo({ top: top + act.offsetHeight - innerHeight - 2, behavior: 'instant' });
+    });
+  })();
   document.querySelectorAll('[data-sc-act="scrub"]').forEach(function (hero) {
     // Keep the poster up if the clip never paints (codec, blocked blob URL).
     var v = hero.querySelector('video'), ok = false, n = 0;

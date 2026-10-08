@@ -90,3 +90,21 @@ Follow-up: client asked for the opening logo to be pink like the bar logo, so
 both now use the solid pink face (the halftone is gone everywhere).
 Follow-up: "NITSY" is white and "FASHION" pink, in the opening and in the bar.
 Follow-up: body text switched from Geist to Inter at the client's request (self-hosted variable Inter plus Google Fonts); headings stay Instrument Serif, logo Montserrat.
+
+## Update: services rail (8 October 2026)
+Client Q&A: show the services between the opening clip and the salon scene,
+as sliding cards (chosen over big words or one service per screen), each with
+a photo; keep the existing services list further down; prices to come (none
+given yet, so every card reads "sur devis"). New `pan` act (4.2vh, rail
+overflow 941px at 1440, 1462px at 390): an intro card, four service cards, a
+closing Instagram card. Cards settle in from the right edge (opacity floor
+0.55, small rise, page JS writing `--k` from each card's position; off under
+reduced motion, where the engine turns the stage into a sideways scroll
+region, checked reachable to the last card). Focus on the closing button jumps
+to the end of the travel.
+Photos: client sent three (Pinterest-style, not the salon's own): long black
+waves on Pose de mèches, caramel layers on Reflets & couleur; the curly one is
+not used (client's choice). Lissage still uses a crop of the supplied studio
+photo with a flat iron; Tresses has a code-drawn braid until a photo arrives.
+A pan card rail was listed as taken by `maison-jeudy`/`alba`; used here at the
+client's explicit request. Shape now `scrub > pan > scrub > pin > pin > flow`.
