@@ -113,3 +113,4 @@ caramel one moved to Lissage, replacing the studio crop) and asked for the
 curls photo as a fifth card, "Boucles & définition" (04; Tresses moves to 05
 and keeps its drawing). Added to the services list further down too. Span
 4.8vh; rail overflow 1292px at 1440, 1762px at 390.
+Follow-up: copper curls photo placed on Tresses at the client's choice (replaces the code-drawn braid; the photo shows curls, not braids).
