@@ -108,3 +108,8 @@ not used (client's choice). Lissage still uses a crop of the supplied studio
 photo with a flat iron; Tresses has a code-drawn braid until a photo arrives.
 A pan card rail was listed as taken by `maison-jeudy`/`alba`; used here at the
 client's explicit request. Shape now `scrub > pan > scrub > pin > pin > flow`.
+Follow-up: client sent a honey-highlights photo (now on Reflets & couleur; the
+caramel one moved to Lissage, replacing the studio crop) and asked for the
+curls photo as a fifth card, "Boucles & définition" (04; Tresses moves to 05
+and keeps its drawing). Added to the services list further down too. Span
+4.8vh; rail overflow 1292px at 1440, 1762px at 390.
