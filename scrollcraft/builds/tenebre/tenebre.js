@@ -140,6 +140,8 @@
     var dust = stage.querySelector('.hero__dust');
     var poster = stage.querySelector('.hero__poster');
     var name = stage.querySelector('.hero__name');
+    var scrim = stage.querySelector('.hero__scrim');
+    var lowLines = [].slice.call(stage.querySelectorAll('.hero__line--b'));
     var box = name.querySelector('.hero__letters');
     var letters = [].slice.call(box.children);
     var pctx = plate.getContext('2d', { alpha: false });
@@ -153,8 +155,8 @@
                56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100,
                103, 106, 109, 112, 115, 118, 121, 124, 127, 130, 133, 136, 139, 142, 145, 148,
                151, 153, 155, 157, 159, 161, 163, 165, 167, 170, 173, 176];
-    var N = SRC.length, FW = 1110, FH = 810;
-    var HX = 574, HY = 375, HR = 319;   // the watch head in the first frame, in file pixels
+    var N = SRC.length, FW = 1480, FH = 1080;
+    var HX = 765, HY = 500, HR = 425;   // the watch head in the first frame, in file pixels
     var STILL = 6, APART = 45;          // reduced motion: whole, apart, whole again
     var CANVAS = '#0b0a09';
 
@@ -212,7 +214,9 @@
     function layout() {
       var W = stage.clientWidth, H = stage.clientHeight;
       var phone = phoneMQ.matches || W / H < 0.8;
-      var dpr = Math.min(devicePixelRatio || 1, phone ? 2 : 1.5);
+      // Full density on phones (their screens are the densest and the watch is
+      // the point of the page); 2x is plenty on a desktop.
+      var dpr = Math.min(devicePixelRatio || 1, phone ? 3 : 2);
       [plate, dust].forEach(function (c) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); });
       L = { W: W, H: H, dpr: dpr, phone: phone, g: gutterPx(W) };
       if (phone) {
@@ -379,6 +383,12 @@
           dctx.beginPath(); dctx.arc(xx, yy, d.r, 0, Math.PI * 2); dctx.fill();
         }
       }
+      // The scrim only exists for the lines it protects, so the watch is never
+      // dimmed while nothing is written over it.
+      var need = 0;
+      for (var q = 0; q < lowLines.length; q++) need = Math.max(need, parseFloat(lowLines[q].style.opacity || '0'));
+      var so = need.toFixed(3);
+      if (scrim.style.opacity !== so) scrim.style.opacity = so;
       stage.setAttribute('data-sc-verify-state', Math.round(fi * 10) + ' ' + push.toFixed(3) + ' ' + lo + ' ' + T.toFixed(3));
       root.classList.toggle('is-docked', p > 0.4);
     }

@@ -157,7 +157,7 @@ for the moment the parts fly.
 
 | Act | Beat | Device | Span | Why this one |
 |---|---|---|---|---|
-| 1 The watch, then its parts | Arrival, peak | `scrub` as a canvas frame sequence (70 graded stills, crossfaded), pinned | 4.0vh | The client's own ask: the hero holds the watch and the scroll takes it apart and back |
+| 1 The watch, then its parts | Arrival, peak | `scrub` as a canvas frame sequence (70 graded stills at 1480x1080, crossfaded), pinned | 4.0vh | The client's own ask: the hero holds the watch and the scroll takes it apart and back |
 | 2 Crafted in darkness | Origin | `pin` + scroll-lit words (from `--sc-p`) | 1.8vh | "text reveals pinned to scroll position" |
 | 3 Closer | Proof | `flow` + `reveal` (three details wiped in) | flow, about one screen | Unpinned on purpose: the page breathes between two pinned acts |
 | 4 Every layer, in order | Substance | `pin` + bespoke canvas drawing + `count` | 3.2vh | The drawing can show what the footage cannot: every layer, named |
@@ -221,6 +221,16 @@ ticks and the dial steps aside as the form arrives; "Join the waitlist"
 glides to the end with the cursor in Name; validation and the honest "not
 connected" message work; nothing reaches the URL; tab order is skip link,
 wordmark, waitlist link, Name, Email, button, each with a visible gold ring.
+
+**After the client's note "je veux que l'image soit plus visible"** (with a
+phone screenshot): the grade was brightened (linen kept as readable dark
+fabric, gold lifted with a gentle contrast curve and light sharpening, the
+falloff to the page ground starting further out); the frames are now the full
+crop resolution, 1480x1080 (7.3 MB for 70, up from 3.9 MB); the phone canvas
+draws at the screen's full density (up to 3x); the lower-left scrim, which
+had been dimming the bottom of the watch on phones, now only appears with the
+lines it protects. Every check above was rerun on these files: 23 of 23, and
+desktop, phone and reduced-motion harness runs all clean.
 
 **Feel check, cold, one word per act:** wonder, stillness, closeness,
 understanding, resolve. Matches the curve. The hero is now clearly the

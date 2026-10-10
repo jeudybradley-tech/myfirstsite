@@ -173,7 +173,7 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 }
 .hero__scrim {
   position: absolute; left: 0; bottom: 0; width: min(60vw, 46rem); height: 46vh;
-  pointer-events: none;
+  pointer-events: none; opacity: 0;
   background: radial-gradient(120% 100% at 0% 100%,
     color-mix(in oklab, var(--sc-canvas) 82%, transparent) 0%,
     color-mix(in oklab, var(--sc-canvas) 40%, transparent) 48%,
