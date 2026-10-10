@@ -156,7 +156,7 @@
                103, 106, 109, 112, 115, 118, 121, 124, 127, 130, 133, 136, 139, 142, 145, 148,
                151, 153, 155, 157, 159, 161, 163, 165, 167, 170, 173, 176];
     var N = SRC.length, FW = 1480, FH = 1080;
-    var HX = 765, HY = 500, HR = 425;   // the watch head in the first frame, in file pixels
+    var HX = 755, HY = 414, HR = 421;   // the watch head in the first frame, in file pixels
     var STILL = 6, APART = 45;          // reduced motion: whole, apart, whole again
     var CANVAS = '#0b0a09';
 
