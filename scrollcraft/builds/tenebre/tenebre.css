@@ -487,3 +487,12 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   .close__submit { justify-self: stretch; padding-block: 1.05rem; }
   .foot { gap: var(--sc-2) var(--sc-4); }
 }
+
+/* opened with #debug only */
+.tn-debug {
+  position: fixed; left: 8px; top: 8px; z-index: 9999; margin: 0;
+  padding: 8px 10px; border-radius: 4px;
+  font: 12px/1.45 ui-monospace, Menlo, Consolas, monospace;
+  background: rgba(0, 0, 0, 0.82); color: #eee7da; pointer-events: none; white-space: pre;
+}
+

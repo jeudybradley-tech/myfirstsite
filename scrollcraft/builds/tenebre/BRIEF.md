@@ -192,9 +192,11 @@ a form. One scrub. No family twice in a row. Not in the 13.6 to 13.8vh band.
 | Near atmosphere | Canvas dust, drawn at one pixel per CSS pixel | Fastest, plus pointer drift | Over everything, never over the copy column; the clip brings its own gold dust behind it |
 | Copy | Three lines | Cues | Lower left over a corner scrim (a band on phones) |
 
-Reduced motion: no Lenis, no frame scrubbing. The hero dissolves between
-three stills (whole, apart, whole) as the reader scrolls; the drawing is
-shown resolved; the ring is full.
+Reduced motion: no Lenis, no push, no dust, no letters gathering or
+drifting. The frames still follow the scroll: they move only when the reader
+does, and they are the page's content (the client's own ask, and on a
+computer with "reduce motion" switched on the earlier three-still dissolve
+read as a frozen watch). The drawing is shown resolved; the ring is full.
 
 ## Fingerprint gate
 
@@ -221,7 +223,8 @@ Served from this folder at `http://localhost:4600`, Chromium from Playwright.
 - **Desktop 1440x900:** no dead scroll; every cue clears 4.5:1 at its worst
   frame. No console errors.
 - **Phone 390x844:** same.
-- **Reduced motion:** same; the hero dissolves whole, apart, whole.
+- **Reduced motion:** same; the hero scrubs the frames with the scroll, with
+  no smoothing, push, dust or letter motion.
 
 Page-local checks (`interact.mjs`, 23 of 23 passed): the name gathers on
 arrival; Lenis is on and one wheel notch glides through 34 positions; at
@@ -266,6 +269,14 @@ phone viewport under five conditions (normal, decode refused, downloads
 answered with a web page, downloads blocked, downloads that never finish):
 the watch comes apart in all five, with the same pictures as the fast path.
 Before the fix it stayed whole when downloads never finished.
+
+**After "la montre reste figée" on a computer browser.** The most likely
+cause on a desktop: the system's "reduce motion" setting (Windows animation
+effects off, macOS Reduce motion), under which the hero only dissolved
+between three stills. The frames now follow the scroll in that mode too.
+Opening the page with `#debug` at the end of its link shows a small panel
+(loading path, frames in, reduced motion, scroll position, hero progress,
+clip frame) for a screenshot if the watch still does not move somewhere.
 
 **Feel check, cold, one word per act:** wonder, stillness, closeness,
 understanding, resolve. The watch now opens the page at its largest, alone

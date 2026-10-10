@@ -160,7 +160,6 @@
                186, 196, 208, 222, 239];
     var N = SRC.length, FW = 1560, FH = 1280;
     var HX = 776, HY = 660, HR = 420;   // the case in the first frame, in file pixels
-    var STILL = 0, APART = 40;          // reduced motion: whole, apart, whole again
     var CANVAS = '#0b0a09';
 
     // Loading, built for a phone on a train. The first frame is the poster
@@ -180,13 +179,21 @@
     var mode = typeof createImageBitmap === 'function' && typeof fetch === 'function' &&
       typeof Blob === 'function' ? 'bitmap' : 'image';
     var proved = false;
-    var WIN = reduce ? N : 6, decoding = 0, want = 0, heading = 1;
+    var WIN = 6, decoding = 0, want = 0, heading = 1;
     var L = null, lastKey = '', live = false, queued = false;
     var intro = { start: 0, done: reduce, armed: false };
     var motes = [];
+    // Opened with #debug, a small panel says what the hero sees, so a reader
+    // whose watch does not move can send a screenshot of it.
+    var dbg = null, dbgTick = 0;
+    if (location.hash === '#debug') {
+      dbg = document.createElement('pre');
+      dbg.className = 'tn-debug';
+      document.body.appendChild(dbg);
+    }
 
     function url(i) { return 'assets/frames/w' + String(i).padStart(2, '0') + '.webp'; }
-    function keep(i) { return i === 0 || (reduce && (i === STILL || i === APART || i === N - 1)); }
+    function keep(i) { return i === 0; }
 
     function viaImage(i) {
       return new Promise(function (done) {
@@ -262,8 +269,7 @@
       if (queued) return;
       queued = true;
       var order = [];
-      if (reduce) order = [APART, N - 1];
-      else [8, 4, 2, 1].forEach(function (step) {
+      [8, 4, 2, 1].forEach(function (step) {
         for (var i = 0; i < N; i += step) if (i && order.indexOf(i) < 0) order.push(i);
       });
       var next = 0;
@@ -426,13 +432,6 @@
       var sl = slot(fi);
       return drawPair(sl.a, sl.b, sl.f, push);
     }
-    // Under reduced motion the same story is told by dissolving between three
-    // stills (whole, apart, whole again) instead of running the frames.
-    function reducedPair(p) {
-      if (p < 0.35) return { a: STILL, b: APART, f: smooth((p - 0.3) / 0.05) };
-      if (p < 0.6) return { a: APART, b: N - 1, f: smooth((p - 0.53) / 0.05) };
-      return { a: N - 1, b: N - 1, f: 0 };
-    }
     function drawPair(ka, kb, f, push) {
       var ia = nearest(ka); if (!ia) return false;
       var ib = f > 0.02 && bmp[kb] ? bmp[kb] : null;
@@ -453,16 +452,20 @@
       var rect = stage.getBoundingClientRect();
       if (rect.bottom <= 0 || rect.top >= L.H) return;
       var p = heroAct.p;
-      var rp = reduce ? reducedPair(p) : null;
-      var fi = reduce ? lerp(SRC[rp.a], SRC[rp.b], rp.f) : clipFrame(p);
+      // The frames follow the scroll under reduced motion too: they only move
+      // when the reader does, and they are the page's content (the client's
+      // ask is to watch it come apart). Reduced motion drops what moves on
+      // its own instead: the smooth-scroll easing, this push, the dust, the
+      // letters gathering and drifting.
+      var fi = clipFrame(p);
       var push = reduce ? 1 : 1 + 0.04 * smooth(p);
       var light = 1 - 0.9 * smooth((p - 0.9) / 0.1);
 
-      var k0 = reduce ? rp.a : slot(fi).a;
+      var k0 = slot(fi).a;
       if (k0 !== want) { heading = k0 > want ? 1 : -1; want = k0; pump(); }
       var key = fi.toFixed(2) + '|' + push.toFixed(4);
       if (key !== lastKey && live) {
-        if (reduce ? drawPair(rp.a, rp.b, rp.f, push) : draw(fi, push)) lastKey = key;
+        if (draw(fi, push)) lastKey = key;
       }
       var lo = light.toFixed(3);
       if (plate.style.opacity !== lo) plate.style.opacity = lo;
@@ -508,6 +511,14 @@
       var so = need.toFixed(3);
       if (scrim.style.opacity !== so) scrim.style.opacity = so;
       stage.setAttribute('data-sc-verify-state', Math.round(fi * 10) + ' ' + push.toFixed(3) + ' ' + lo + ' ' + T.toFixed(3));
+      if (dbg && ++dbgTick % 10 === 0) {
+        var nf = 0, nb = 0;
+        for (var z = 0; z < N; z++) { if (files[z]) nf++; if (bmp[z]) nb++; }
+        dbg.textContent = 'loading ' + mode + (proved ? ' (proved)' : '') + ', files ' + nf + '/' + N + ', drawable ' + nb +
+          '\nreduced motion ' + reduce + ', smooth scroll ' + !!lenis +
+          '\nscrollY ' + Math.round(scrollY) + ', page ' + document.documentElement.scrollHeight + ', view ' + innerWidth + 'x' + innerHeight +
+          '\nhero p ' + p.toFixed(3) + ', clip frame ' + fi.toFixed(1) + ', drawn ' + (lastKey ? 'yes' : 'no');
+      }
       root.classList.toggle('is-docked', p > 0.3);
     }
 
