@@ -25,7 +25,7 @@ python3 -m http.server 8000
 
 - **Liste d'attente :** coller l'adresse qui recevra les inscriptions dans `WAITLIST_ENDPOINT`, en haut de `scrollcraft/builds/tenebre/tenebre.js` (requête POST en JSON `{ name, email }`). Tant que c'est vide, le formulaire dit « The waitlist is not connected yet, so nothing was sent. » et n'envoie rien.
 - **Nom :** « TÉNÈBRE » est un nom provisoire choisi pour le site. Il apparaît dans `index.html` (titre, `<h1>` lettre par lettre, logo du coin, pied de page).
-- **Vidéo :** le site est fait entièrement à partir de `Watch_disassembles_and_reassembles_1080p_20261010114536.mp4` (images fixes étalonnées dans `assets/frames/`, détails et photo du dessin dans `assets/`). Les caractéristiques affichées (42 mm, titane grade 5) sont les vôtres ; la montre de la vidéo est dorée sur bracelet cuir, à vérifier avant publication.
+- **Vidéo :** le site est fait entièrement à partir de `Watch_disassembles_and_reassembles_1080p_20261010143027.mp4`, la version sur fond noir (73 images fixes dans `assets/frames/`, détails et photo du dessin dans `assets/`). Seule la première image est chargée avec la page ; les autres suivent ensuite, une sur huit d'abord, et ne sont décodées que près de l'endroit où l'on se trouve dans la page. Les caractéristiques affichées (42 mm, titane grade 5) sont les vôtres ; la montre de la vidéo est dorée sur bracelet cuir, à vérifier avant publication.
 
 ## PROPAGATE : à compléter
 

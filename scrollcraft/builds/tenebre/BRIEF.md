@@ -33,32 +33,47 @@ Follow-ups, in order (French):
    in the hero, and as you scroll it comes apart).
 5. "finalement lorsque la monte àa fini de montrer les pièces il se remettre à
    normale" (once it has shown its parts, it goes back to normal).
+6. "je veux que limage soit plus visible" (I want the image more visible), with
+   a phone screenshot; then a background-free 4K render of the same watch on
+   white, `Untitled_design.mp4`.
+7. A third clip, `Watch_disassembles_and_reassembles_1080p_20261010143027.mp4`,
+   "voici la nouveau video meilleur version" (here is the new video, the
+   better version). The page is now built from it alone.
+8. "fait moi une page de luxe et performant" (make me a luxury page, and a
+   fast one).
 
 ## History
 
 The first version was built from a different clip: a steel Rolex Datejust on
 a black cushion, logo readable, light moving round a still camera. That
-version is superseded. Every image from it has been removed from the build;
-the page is now made entirely from the second clip. This also removes the
-third-party trademark problem the first version had.
+version is superseded, and with it the third-party trademark problem it had.
+The second version used the same skeleton watch on pale linen, graded down
+to a dark "one lamp" look; a background-free 4K render on white was tried
+next and keyed onto the page. Both are superseded by the third clip, shot on
+black, which needs no key and no regrade. Every image in the build now comes
+from it.
 
 ## Evidence
 
-- `Watch_disassembles_and_reassembles_1080p_20261010114536.mp4`: 1920x1080,
-  24 fps, 10 s, 240 frames. A gold-tone skeleton watch with Roman numerals,
-  ruby jewels and a brown leather strap, on pale linen and light wood.
-  - Frames 0 to 54: the whole watch, the camera turning slightly around it.
-  - 54 to 100: the crystal lifts and tilts away, a wheel and screws fly out,
-    gold dust.
-  - 100 to 150: the parts drift, held in the air.
-  - 150 to 168: everything returns; the crystal closes.
-  - 168 to 240: the whole watch again, front on.
-- The set is high-key (linen around 0.82 brightness). The page is off-black.
-  **Authored grade, "one lamp":** no cutout (a saturation key punched holes in
-  the see-through dial and kept the linen folds). Instead the pale linen is
-  pulled down by how unsaturated it is, bright speculars are kept, and a soft
-  falloff around the watch takes every edge to the page ground `#0b0a09`. The
-  watch reads as gold on dark linen under a single lamp.
+- `Watch_disassembles_and_reassembles_1080p_20261010143027.mp4`: 1920x1080,
+  24 fps, 10 s, 240 frames, one continuous shot with no cuts. A gold-tone
+  skeleton watch with Roman numerals, ruby jewels and a brown leather strap,
+  lit from the front on pure black (the backdrop measures 2 to 4 levels out
+  of 255).
+  - Frames 0 to 44: the whole watch, front on, the camera drawing slowly
+    closer. The case is 420 px in radius, centred at (946, 460); its strap
+    leaves the top of the frame.
+  - 44 to 90: the crystal clouds over, lifts and tilts away; a wheel, the
+    balance and screws fly out.
+  - 90 to 138: the parts drift, held in the air, in a fall of gold dust.
+  - 138 to 180: everything returns; the crystal closes.
+  - 180 to 240: the whole watch again, front on, the dust settling.
+- **Authored grade:** none needed. The backdrop is mapped exactly onto the
+  page ground `#0b0a09` (anything under 4 levels becomes the ground, anything
+  over 14 is untouched, a smooth knee between), so the footage has no edge to
+  find. The source crops the strap and, mid-lift, the crystal at its top
+  edge; each file gets 200 rows above it in which the strap carries on and
+  fades into the dark, and the source's top rows ease into that tone.
 - The dial carries a small engraved word that is not legible as any known
   brand.
 - **Not stated anywhere and therefore not on the page:** a brand name, a
@@ -88,8 +103,8 @@ third-party trademark problem the first version had.
 5. **What no other site does.** Seeded by the same moment; see the signature.
 6. **Range.** Premium-minimal, asked for by name.
 7. **One world or distinct scenes.** Distinct scenes, as the spec lists them.
-8. **Assets.** The second clip only. No logo, no brand kit. No kie.ai key in
-   this session; nothing is generated. The drawing is code.
+8. **Assets.** The third clip only. No logo, no brand kit. Nothing is
+   generated. The drawing is code.
 
 Other decisions, all **Authored**:
 
@@ -130,7 +145,7 @@ every part floating, then puts itself back together."
 ## The feeling curve
 
 ```
-1  Hush, then wonder   the whole watch under one lamp; the scroll lifts the crystal, the parts fly and hang, then return   <- PEAK
+1  Hush, then wonder   the whole watch alone in the dark; the scroll lifts the crystal, the parts fly and hang, then return   <- PEAK
 2  Stillness           the light goes out; two sentences light up word by word as you read them
 3  Closeness           three details at a scale a shop window does not allow
 4  Understanding       a photograph turns into a drawing and separates into named layers, the specs on their parts
@@ -147,8 +162,8 @@ for the moment the parts fly.
 
 ## Authored silence
 
-- The first 6% of the hero is the whole watch held still while the name
-  gathers. The beat before the drop.
+- The first 4% of the hero is the whole watch held still while the name
+  gathers, then a slow push in until 14%. The beat before the drop.
 - The last 10% of the hero: the light goes out over the reassembled watch.
   It is the darkness the story act opens into.
 - The first 8% of act 4 is the photograph held still before the scan.
@@ -157,7 +172,7 @@ for the moment the parts fly.
 
 | Act | Beat | Device | Span | Why this one |
 |---|---|---|---|---|
-| 1 The watch, then its parts | Arrival, peak | `scrub` as a canvas frame sequence (70 graded stills at 1480x1080, crossfaded), pinned | 4.0vh | The client's own ask: the hero holds the watch and the scroll takes it apart and back |
+| 1 The watch, then its parts | Arrival, peak | `scrub` as a canvas frame sequence (73 stills at 1560x1280, crossfaded, decoded near the reader only), pinned | 4.0vh | The client's own ask: the hero holds the watch and the scroll takes it apart and back |
 | 2 Crafted in darkness | Origin | `pin` + scroll-lit words (from `--sc-p`) | 1.8vh | "text reveals pinned to scroll position" |
 | 3 Closer | Proof | `flow` + `reveal` (three details wiped in) | flow, about one screen | Unpinned on purpose: the page breathes between two pinned acts |
 | 4 Every layer, in order | Substance | `pin` + bespoke canvas drawing + `count` | 3.2vh | The drawing can show what the footage cannot: every layer, named |
@@ -171,10 +186,10 @@ a form. One scrub. No family twice in a row. Not in the 13.6 to 13.8vh band.
 
 | Plane | Asset | Movement | Rule |
 |---|---|---|---|
-| Ground | The page ground, painted on the canvas | Holds | Every frame falls away to it, so the footage has no visible edge |
-| Subject | The graded frame sequence | The clip's own camera move and the parts flying toward the lens, plus a 4% push | The parts are the depth: they cross in front of the watch |
-| Typography | Real `<h1>` | Gathers on arrival, tightens with scroll, drifts up, slight pointer parallax | Left of the watch on desktop, above it on phones; fades before the parts fly |
-| Near atmosphere | Canvas dust | Fastest, plus pointer drift | Over everything, never over the copy column |
+| Ground | The page ground, painted on the canvas | Holds | The footage's black is the ground itself, so it has no visible edge |
+| Subject | The frame sequence | The clip's own camera move and the parts flying toward the lens, plus a 4% push | Case radius 36% of the viewport height on desktop (the strap leaves the top and bottom of the screen), 38% of the width on phones, the most the flying parts allow |
+| Typography | Real `<h1>` | Gathers on arrival, tightens with scroll, drifts up, slight pointer parallax | Left of the watch on desktop, above it on phones; gone before the parts fly (30% of the act) |
+| Near atmosphere | Canvas dust, drawn at one pixel per CSS pixel | Fastest, plus pointer drift | Over everything, never over the copy column; the clip brings its own gold dust behind it |
 | Copy | Three lines | Cues | Lower left over a corner scrim (a band on phones) |
 
 Reduced motion: no Lenis, no frame scrubbing. The hero dissolves between
@@ -197,7 +212,7 @@ Against each row in `scrollcraft/FINGERPRINTS.md`:
 
 Passes (needs 4 of 6 against every row).
 
-## Verification (rebuilt page, 10 October 2026)
+## Verification (third clip, 10 October 2026)
 
 Served from this folder at `http://localhost:4600`, Chromium from Playwright.
 
@@ -206,39 +221,49 @@ Served from this folder at `http://localhost:4600`, Chromium from Playwright.
 - **Desktop 1440x900:** no dead scroll; every cue clears 4.5:1 at its worst
   frame. No console errors.
 - **Phone 390x844:** same.
-- **Reduced motion:** same. The first reduced run showed only the whole
-  watch in the hero; it now dissolves whole, apart, whole.
+- **Reduced motion:** same; the hero dissolves whole, apart, whole.
 
 Page-local checks (`interact.mjs`, 23 of 23 passed): the name gathers on
-arrival; Lenis is on and one wheel notch glides through 32 positions; at
-hero progress 0.02, 0.42, 0.60 and 0.84 the canvas shows clip frames 0, 86,
-127 and 173 (whole, apart, drifting, back together) and paints four different
-pictures; the name tightens (499 px to 416 px); the wordmark docks after the
-hero; story words light 0, 8, 17 of 17; the three details wipe in with
-scroll; the drawing runs photo, scan, tilt, spread and the counter lands on
-217; the movement ticks while scroll holds still; the ring lights 0, 41, 88
-ticks and the dial steps aside as the form arrives; "Join the waitlist"
-glides to the end with the cursor in Name; validation and the honest "not
-connected" message work; nothing reaches the URL; tab order is skip link,
-wordmark, waitlist link, Name, Email, button, each with a visible gold ring.
+arrival; Lenis is on and one wheel notch glides through 34 positions; at
+hero progress 0.02, 0.42, 0.60 and 0.84 the canvas shows clip frames 0, 119,
+161 and 232 (whole, apart, coming back, whole) and paints four different
+pictures; the name tightens (396 px to 330 px); the wordmark docks after the
+hero; the story words light with scroll; the three details wipe in; the
+drawing runs photo, scan, tilt, spread and the counter lands on 217; the
+movement ticks while scroll holds still; the ring lights 0, 41, 88 ticks and
+the dial steps aside as the form arrives; "Join the waitlist" glides to the
+end with the cursor in Name; validation and the honest "not connected"
+message work; nothing reaches the URL; tab order is skip link, wordmark,
+waitlist link, Name, Email, button, each with a visible gold ring.
 
-**After the client's note "je veux que l'image soit plus visible"** (with a
-phone screenshot): the grade was brightened (linen kept as readable dark
-fabric, gold lifted with a gentle contrast curve and light sharpening, the
-falloff to the page ground starting further out); the frames are now the full
-crop resolution, 1480x1080 (7.3 MB for 70, up from 3.9 MB); the phone canvas
-draws at the screen's full density (up to 3x); the lower-left scrim, which
-had been dimming the bottom of the watch on phones, now only appears with the
-lines it protects. Every check above was rerun on these files: 23 of 23, and
-desktop, phone and reduced-motion harness runs all clean.
+**Performance, after "de luxe et performant".** The frames no longer load
+with the page: the poster is frame 0 and is all the hero needs to open; the
+other 72 files (4.6 MB) follow once the page has loaded, every eighth first,
+then every fourth, then the rest, so the whole gesture works early and only
+gets smoother. Frames are decoded off the main thread and only near where
+the reader is (six ahead, three behind), then released: the full set decoded
+would be over 500 MB. Details and the anatomy photo load lazily; the dust
+canvas draws at 1x. Measured against the previous build (same harness,
+headless Chromium, software rendering, so absolute desktop numbers are
+pessimistic):
+
+| | Before | After |
+|---|---|---|
+| Phone on slow 4G (1.6 Mbps, 150 ms): bytes before the load event | 5.5 MB | 0.5 MB |
+| Same: load event | 29.9 s | 3.1 s |
+| Same: watch on screen | 6.1 s | 2.8 s |
+| Same: every eighth frame in (the gesture works end to end) | | 6.9 s |
+| Phone, four fast passes through the hero: frame time p95 | 67.8 ms | 36.1 ms |
+| Same: main-thread tasks over 50 ms | 45 | 0 |
+| Desktop 2x, same passes: tasks over 50 ms | 326 | 175 |
 
 **Feel check, cold, one word per act:** wonder, stillness, closeness,
-understanding, resolve. Matches the curve. The hero is now clearly the
-biggest change on the sheet and the longest span, so the peak and the
-signature are the same moment.
+understanding, resolve. The watch now opens the page at its largest, alone
+in the dark, so the peak and the signature are the same moment and the
+loudest image on the sheet.
 
-**Not verified:** a real phone (decode speed of 70 stills on a slow
-connection, touch inertia; Lenis leaves touch scrolling native), Safari and
-Firefox, and any real waitlist endpoint (none exists). A known cosmetic
-overlap: as act 4 slides in, its heading passes under the fixed wordmark in
-the bottom-left corner for a fraction of a screen.
+**Not verified:** a real phone and a real GPU (the numbers above are
+headless), Safari and Firefox (both support the bitmap path; older browsers
+fall back to plain images), and any real waitlist endpoint (none exists). A
+known cosmetic overlap: as act 4 slides in, its heading passes under the
+fixed wordmark in the bottom-left corner for a fraction of a screen.

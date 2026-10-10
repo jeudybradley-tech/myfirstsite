@@ -147,55 +147,124 @@
     var pctx = plate.getContext('2d', { alpha: false });
     var dctx = dust.getContext('2d');
 
-    // Graded stills from the supplied clip (10 s, 24 fps). SRC is the clip
-    // frame each file holds: every third frame while the watch only turns,
+    // Stills from the supplied clip (10 s, 24 fps, on black). SRC is the clip
+    // frame each file holds: every sixth while the watch only draws closer,
     // every second while the crystal lifts and the parts fly, every third
-    // while they drift, every second again while they come back together.
-    var SRC = [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54,
-               56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100,
-               103, 106, 109, 112, 115, 118, 121, 124, 127, 130, 133, 136, 139, 142, 145, 148,
-               151, 153, 155, 157, 159, 161, 163, 165, 167, 170, 173, 176];
-    var N = SRC.length, FW = 1480, FH = 1080;
-    var HX = 755, HY = 414, HR = 421;   // the watch head in the first frame, in file pixels
-    var STILL = 6, APART = 45;          // reduced motion: whole, apart, whole again
+    // while they drift, every second again while they come back together,
+    // then a few as it rests. Each file carries 200 rows of strap fading up
+    // into the dark above the source frame.
+    var SRC = [0, 6, 12, 18, 24, 30, 36, 44,
+               46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90,
+               93, 96, 99, 102, 105, 108, 111, 114, 117, 120, 123, 126, 129, 132, 135, 138,
+               140, 142, 144, 146, 148, 150, 152, 154, 156, 158, 160, 162, 164, 166, 168, 170, 172, 174, 176, 178, 180,
+               186, 196, 208, 222, 239];
+    var N = SRC.length, FW = 1560, FH = 1280;
+    var HX = 776, HY = 660, HR = 420;   // the case in the first frame, in file pixels
+    var STILL = 0, APART = 40;          // reduced motion: whole, apart, whole again
     var CANVAS = '#0b0a09';
 
-    var frames = new Array(N), ready = new Array(N);
-    var L = null, lastKey = '', live = false;
+    // Loading, built for a phone on a train. The first frame is the poster
+    // the page already shows. The rest arrive as small compressed files,
+    // coarse to fine (every eighth, then every fourth...), so the whole
+    // gesture works early and only gets smoother. A decoded frame is 8 MB and
+    // the whole set decoded would be over half a gigabyte, so frames are only
+    // decoded near where the reader is, off the main thread, and let go
+    // once the reader has moved on.
+    var files = new Array(N);   // Blob, or a loaded Image where fetch is refused
+    var bmp = new Array(N);     // something drawImage can draw at once
+    var pending = new Array(N);
+    var canBitmap = typeof createImageBitmap === 'function' && typeof Blob === 'function';
+    var WIN = reduce ? N : 6, decoding = 0, want = 0, heading = 1;
+    var L = null, lastKey = '', live = false, queued = false;
     var intro = { start: 0, done: reduce, armed: false };
     var motes = [];
 
-    function load(i) {
+    function url(i) { return 'assets/frames/w' + String(i).padStart(2, '0') + '.webp'; }
+    function keep(i) { return i === 0 || (reduce && (i === STILL || i === APART || i === N - 1)); }
+
+    function viaImage(i) {
       var img = new Image();
       img.decoding = 'async';
-      img.src = 'assets/frames/w' + String(i).padStart(2, '0') + '.webp';
-      frames[i] = img;
-      var mark = function () { ready[i] = true; lastKey = ''; maybeStart(); };
-      img.onload = function () { (img.decode ? img.decode() : Promise.resolve()).then(mark, mark); };
+      img.onload = function () { files[i] = img; bmp[i] = img; lastKey = ''; if (i === 0) start(); };
+      img.src = url(i);
     }
-    if (reduce) { load(STILL); load(APART); load(N - 1); }
-    else { load(0); for (var i = 1; i < N; i++) load(i); }
+    function fetchFrame(i) {
+      if (!canBitmap || typeof fetch !== 'function') { viaImage(i); return Promise.resolve(); }
+      return fetch(url(i)).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.blob();
+      }).then(function (b) { files[i] = b; pump(); }, function () { viaImage(i); });
+    }
+    function decode(i) {
+      if (i < 0 || i >= N || bmp[i] || pending[i] || !files[i] || !(files[i] instanceof Blob)) return;
+      pending[i] = true; decoding++;
+      createImageBitmap(files[i]).then(function (b) {
+        pending[i] = false; decoding--;
+        if (!keep(i) && Math.abs(i - want) > WIN + 3) b.close();
+        else { bmp[i] = b; lastKey = ''; }
+        pump();
+      }, function () { pending[i] = false; decoding--; viaImage(i); });
+    }
+    // Decode outward from where the reader is, further ahead than behind,
+    // two at a time; release what is well behind.
+    function pump() {
+      if (!canBitmap) return;
+      for (var d = 0; d <= WIN && decoding < 2; d++) {
+        decode(want + d * heading);
+        if (d && d <= WIN / 2) decode(want - d * heading);
+      }
+      for (var i = 0; i < N; i++) {
+        if (bmp[i] && bmp[i].close && !keep(i) && Math.abs(i - want) > WIN + 3) { bmp[i].close(); bmp[i] = null; }
+      }
+    }
+    function queue() {
+      if (queued) return;
+      queued = true;
+      var order = [];
+      if (reduce) order = [APART, N - 1];
+      else [8, 4, 2, 1].forEach(function (step) {
+        for (var i = 0; i < N; i += step) if (i && order.indexOf(i) < 0) order.push(i);
+      });
+      var next = 0;
+      var run = function () { if (next < order.length) fetchFrame(order[next++]).then(run); };
+      for (var c = 0; c < 4; c++) run();
+    }
 
-    function maybeStart() {
-      var first = reduce ? STILL : 0;
-      if (!ready[first] || live) return;
+    // Frame 0 is the poster itself: already on screen, already decoded.
+    function posterReady() {
+      files[0] = poster; bmp[0] = poster; lastKey = '';
+      start();
+    }
+    function start() {
+      if (live) return;
       live = true;
       stage.classList.add('is-live');
       if (!intro.done && !intro.armed) { intro.armed = true; intro.start = performance.now() + 120; }
+      // the rest waits until the page itself has finished arriving
+      if (document.readyState === 'complete') queue();
+      else addEventListener('load', queue, { once: true });
+      setTimeout(queue, 4000);
+    }
+    if (poster.complete && poster.naturalWidth) posterReady();
+    else {
+      poster.addEventListener('load', posterReady, { once: true });
+      poster.addEventListener('error', function () { viaImage(0); }, { once: true });
     }
     // If the footage is slow, never hold the name hostage to it.
     setTimeout(function () { if (!live) intro.done = true; }, 2600);
 
-    // Scroll to clip time. A short still landing, the watch turns, it comes
-    // apart (the widest stretch, so the reader can hold it there), the parts
-    // drift, they come back together, it rests whole, and the light goes out.
+    // Scroll to clip time. A short still landing, the watch draws closer, the
+    // crystal lifts and the parts fly, they drift (the widest stretch, so the
+    // reader can hold them there), they come back together, it rests whole,
+    // and the light goes out.
     function clipFrame(p) {
-      if (p < 0.06) return 0;
-      if (p < 0.24) return lerp(0, 54, (p - 0.06) / 0.18);
-      if (p < 0.5) return lerp(54, 100, (p - 0.24) / 0.26);
-      if (p < 0.68) return lerp(100, 148, (p - 0.5) / 0.18);
-      if (p < 0.86) return lerp(148, 176, (p - 0.68) / 0.18);
-      return 176;
+      if (p < 0.04) return 0;
+      if (p < 0.14) return lerp(0, 44, (p - 0.04) / 0.1);
+      if (p < 0.3) return lerp(44, 90, (p - 0.14) / 0.16);
+      if (p < 0.5) return lerp(90, 138, (p - 0.3) / 0.2);
+      if (p < 0.68) return lerp(138, 180, (p - 0.5) / 0.18);
+      if (p < 0.86) return lerp(180, 239, (p - 0.68) / 0.18);
+      return 239;
     }
     function slot(s) {
       var k = 0;
@@ -203,10 +272,10 @@
       return { a: k, b: k + 1, f: clamp01((s - SRC[k]) / (SRC[k + 1] - SRC[k])) };
     }
     function nearest(i) {
-      if (ready[i]) return frames[i];
+      if (bmp[i]) return bmp[i];
       for (var d = 1; d < N; d++) {
-        if (i - d >= 0 && ready[i - d]) return frames[i - d];
-        if (i + d < N && ready[i + d]) return frames[i + d];
+        if (i - d >= 0 && bmp[i - d]) return bmp[i - d];
+        if (i + d < N && bmp[i + d]) return bmp[i + d];
       }
       return null;
     }
@@ -217,14 +286,19 @@
       // Full density on phones (their screens are the densest and the watch is
       // the point of the page); 2x is plenty on a desktop.
       var dpr = Math.min(devicePixelRatio || 1, phone ? 3 : 2);
-      [plate, dust].forEach(function (c) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); });
+      plate.width = Math.round(W * dpr); plate.height = Math.round(H * dpr);
+      // The dust is soft points of light, redrawn every frame: one canvas
+      // pixel per CSS pixel is all it needs, a quarter of the work at 2x.
+      dust.width = Math.round(W); dust.height = Math.round(H);
       L = { W: W, H: H, dpr: dpr, phone: phone, g: gutterPx(W) };
+      // The case is as large as the parts allow: when they fly, the furthest
+      // screw travels 1.35 case radii to the left of the centre.
       if (phone) {
-        L.R = Math.min(W * 0.4, H * 0.22);
-        L.hx = W * 0.5; L.hy = H * 0.55;
+        L.R = Math.min(W * 0.38, H * 0.2);
+        L.hx = W * 0.5; L.hy = H * 0.52;
       } else {
-        L.R = clamp(H * 0.29, 150, 330);
-        L.hx = W * (W / H > 1.9 ? 0.62 : 0.64); L.hy = H * 0.52;
+        L.R = clamp(Math.min(H * 0.36, W * 0.25), 160, 400);
+        L.hx = W * (W / H > 1.9 ? 0.6 : 0.62); L.hy = H * 0.5;
       }
       L.s0 = L.R / HR;
       layoutName();
@@ -242,7 +316,7 @@
       var size;
       if (!L.phone) {
         L.T0 = 0.2; L.T1 = 0.06;
-        var room = L.hx - L.R - L.g - 32;
+        var room = L.hx - L.R - L.g - 56;
         size = Math.min(clamp(W * 0.078, 48, 150), room / ((sum100 + 6 * L.T0 * 100) / 100));
         L.nameLeft = L.g;
         L.nameTop = L.hy - size * 0.62;
@@ -292,10 +366,10 @@
       }
     }
 
-    // The frames already fall away to the page ground at their edges; this
+    // The strap already fades into the dark at the top of each file; this
     // makes sure no edge of the file is ever visible, whatever the viewport.
     function feather(ctx, r) {
-      var g, fw = r.w * 0.16, fh = r.h * 0.14;
+      var g, fw = r.w * 0.08, fh = r.h * 0.08;
       var edge = function (x0, y0, x1, y1, fx, fy, fwid, fhei) {
         g = ctx.createLinearGradient(x0, y0, x1, y1);
         g.addColorStop(0, 'rgba(11,10,9,1)'); g.addColorStop(1, 'rgba(11,10,9,0)');
@@ -315,12 +389,13 @@
     // stills (whole, apart, whole again) instead of running the frames.
     function reducedPair(p) {
       if (p < 0.35) return { a: STILL, b: APART, f: smooth((p - 0.3) / 0.05) };
-      if (p < 0.7) return { a: APART, b: N - 1, f: smooth((p - 0.65) / 0.05) };
+      if (p < 0.6) return { a: APART, b: N - 1, f: smooth((p - 0.53) / 0.05) };
       return { a: N - 1, b: N - 1, f: 0 };
     }
     function drawPair(ka, kb, f, push) {
       var ia = nearest(ka); if (!ia) return false;
-      var ib = f > 0.02 && ready[kb] ? frames[kb] : null;
+      var ib = f > 0.02 && bmp[kb] ? bmp[kb] : null;
+      if (ia !== bmp[ka]) ib = null;
       var sl = { f: f };
       var r = rectFor(push);
       pctx.setTransform(L.dpr, 0, 0, L.dpr, 0, 0);
@@ -342,6 +417,8 @@
       var push = reduce ? 1 : 1 + 0.04 * smooth(p);
       var light = 1 - 0.9 * smooth((p - 0.9) / 0.1);
 
+      var k0 = reduce ? rp.a : slot(fi).a;
+      if (k0 !== want) { heading = k0 > want ? 1 : -1; want = k0; pump(); }
       var key = fi.toFixed(2) + '|' + push.toFixed(4);
       if (key !== lastKey && live) {
         if (reduce ? drawPair(rp.a, rp.b, rp.f, push) : draw(fi, push)) lastKey = key;
@@ -369,7 +446,7 @@
       box.style.transform = 'translate3d(' + (centerShift - ptr.x * 7).toFixed(2) + 'px,' + (by - ptr.y * 4).toFixed(2) + 'px,0)';
 
       // near atmosphere: dust in the lamp light, faster than everything behind it
-      dctx.setTransform(L.dpr, 0, 0, L.dpr, 0, 0);
+      dctx.setTransform(1, 0, 0, 1, 0, 0);
       dctx.clearRect(0, 0, L.W, L.H);
       if (!reduce && light > 0.05) {
         var ts = now / 1000;
@@ -390,7 +467,7 @@
       var so = need.toFixed(3);
       if (scrim.style.opacity !== so) scrim.style.opacity = so;
       stage.setAttribute('data-sc-verify-state', Math.round(fi * 10) + ' ' + push.toFixed(3) + ' ' + lo + ' ' + T.toFixed(3));
-      root.classList.toggle('is-docked', p > 0.4);
+      root.classList.toggle('is-docked', p > 0.3);
     }
 
     return { layout: layout, render: render };
