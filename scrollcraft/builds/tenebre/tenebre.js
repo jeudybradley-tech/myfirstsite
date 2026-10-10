@@ -1,7 +1,8 @@
 /* TÉNÈBRE page script.
-   Everything bespoke lives here: Lenis, the hero frame sequence with the name
-   passing behind the watch, the scroll-lit words, the drawing that comes out of
-   the photograph and apart, the ring of 88, and the waitlist form. The engine
+   Everything bespoke lives here: Lenis, the hero frame sequence in which the
+   reader's scroll takes the watch apart, the scroll-lit words, the drawing
+   that comes out of the photograph and apart, the ring of 88, and the
+   waitlist form. The engine
    (scrollcraft.js) is untouched; this reads its act progress and nothing else. */
 (function () {
   'use strict';
@@ -24,25 +25,6 @@
   var easeInOut = function (x) { x = clamp01(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
   var lerp = function (a, b, t) { return a + (b - a) * t; };
   var gutterPx = function (W) { return clamp(W * 0.05, 20, 88); };
-
-  // ---- clip 2: pick a codec this browser decodes, before the engine reads it
-  (function () {
-    var v = document.querySelector('.macro video');
-    if (!v) return;
-    var h264 = v.canPlayType('video/mp4; codecs="avc1.640028"');
-    var vp9 = v.canPlayType('video/webm; codecs="vp9"');
-    if (!h264 && vp9) {
-      v.setAttribute('data-sc-src', v.getAttribute('data-webm'));
-      v.setAttribute('data-sc-src-mobile', v.getAttribute('data-webm-mobile'));
-    }
-  })();
-
-  // Under reduced motion the clip is never fetched, so its poster is the
-  // picture: use the frame with the crown and the date in it, not the first.
-  if (reduce) {
-    var mp = document.querySelector('.macro .sc-stage__poster');
-    if (mp) mp.src = 'assets/macro-poster.webp';
-  }
 
   // ---- story: one span per word, lit from the act's --sc-p in CSS ----------
   (function () {
@@ -149,30 +131,34 @@
   }
 
   // =========================================================================
-  // HERO: canvas frame sequence, name between the plate and the watch
+  // HERO: the whole watch on arrival, taken apart by the reader's scroll
   // =========================================================================
   var hero = (function () {
     var stage = document.querySelector('.hero__stage');
     if (!stage || !heroAct) return { layout: function () {}, render: function () {} };
     var plate = stage.querySelector('.hero__plate');
-    var watch = stage.querySelector('.hero__watch');
     var dust = stage.querySelector('.hero__dust');
     var poster = stage.querySelector('.hero__poster');
     var name = stage.querySelector('.hero__name');
     var box = name.querySelector('.hero__letters');
     var letters = [].slice.call(box.children);
     var pctx = plate.getContext('2d', { alpha: false });
-    var wctx = watch.getContext('2d');
     var dctx = dust.getContext('2d');
 
-    // Source geometry, in footage pixels. The camera never moves, so the head
-    // sits at the same place in every frame and one matte fits all of them.
-    var N = 87, SW = 720, SH = 1280, HX = 367.5, HY = 651.5, HR = 165.5;
-    var MATTE = { x: 199, y: 402, w: 360, h: 601 };
-    var STILL = 43;            // the best-lit frame, used under reduced motion
+    // Graded stills from the supplied clip (10 s, 24 fps). SRC is the clip
+    // frame each file holds: every third frame while the watch only turns,
+    // every second while the crystal lifts and the parts fly, every third
+    // while they drift, every second again while they come back together.
+    var SRC = [0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54,
+               56, 58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98, 100,
+               103, 106, 109, 112, 115, 118, 121, 124, 127, 130, 133, 136, 139, 142, 145, 148,
+               151, 153, 155, 157, 159, 161, 163, 165, 167, 170, 173, 176];
+    var N = SRC.length, FW = 1110, FH = 810;
+    var HX = 574, HY = 375, HR = 319;   // the watch head in the first frame, in file pixels
+    var STILL = 6, APART = 45;          // reduced motion: whole, apart, whole again
     var CANVAS = '#0b0a09';
 
-    var frames = new Array(N), ready = new Array(N), matte = new Image(), matteReady = false;
+    var frames = new Array(N), ready = new Array(N);
     var L = null, lastKey = '', live = false;
     var intro = { start: 0, done: reduce, armed: false };
     var motes = [];
@@ -180,19 +166,17 @@
     function load(i) {
       var img = new Image();
       img.decoding = 'async';
-      img.src = 'assets/frames/h' + String(i).padStart(2, '0') + '.webp';
+      img.src = 'assets/frames/w' + String(i).padStart(2, '0') + '.webp';
       frames[i] = img;
       var mark = function () { ready[i] = true; lastKey = ''; maybeStart(); };
       img.onload = function () { (img.decode ? img.decode() : Promise.resolve()).then(mark, mark); };
     }
-    matte.onload = function () { matteReady = true; lastKey = ''; maybeStart(); };
-    matte.src = 'assets/watch-matte.png';
-    if (reduce) { load(STILL); }
-    else { load(0); load(STILL); for (var i = 1; i < N; i++) if (i !== STILL) load(i); }
+    if (reduce) { load(STILL); load(APART); load(N - 1); }
+    else { load(0); for (var i = 1; i < N; i++) load(i); }
 
     function maybeStart() {
       var first = reduce ? STILL : 0;
-      if (!ready[first] || !matteReady || live) return;
+      if (!ready[first] || live) return;
       live = true;
       stage.classList.add('is-live');
       if (!intro.done && !intro.armed) { intro.armed = true; intro.start = performance.now() + 120; }
@@ -200,6 +184,22 @@
     // If the footage is slow, never hold the name hostage to it.
     setTimeout(function () { if (!live) intro.done = true; }, 2600);
 
+    // Scroll to clip time. A short still landing, the watch turns, it comes
+    // apart (the widest stretch, so the reader can hold it there), the parts
+    // drift, they come back together, it rests whole, and the light goes out.
+    function clipFrame(p) {
+      if (p < 0.06) return 0;
+      if (p < 0.24) return lerp(0, 54, (p - 0.06) / 0.18);
+      if (p < 0.5) return lerp(54, 100, (p - 0.24) / 0.26);
+      if (p < 0.68) return lerp(100, 148, (p - 0.5) / 0.18);
+      if (p < 0.86) return lerp(148, 176, (p - 0.68) / 0.18);
+      return 176;
+    }
+    function slot(s) {
+      var k = 0;
+      while (k < N - 2 && SRC[k + 1] <= s) k++;
+      return { a: k, b: k + 1, f: clamp01((s - SRC[k]) / (SRC[k + 1] - SRC[k])) };
+    }
     function nearest(i) {
       if (ready[i]) return frames[i];
       for (var d = 1; d < N; d++) {
@@ -213,16 +213,16 @@
       var W = stage.clientWidth, H = stage.clientHeight;
       var phone = phoneMQ.matches || W / H < 0.8;
       var dpr = Math.min(devicePixelRatio || 1, phone ? 2 : 1.5);
-      [plate, watch, dust].forEach(function (c) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); });
+      [plate, dust].forEach(function (c) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); });
       L = { W: W, H: H, dpr: dpr, phone: phone, g: gutterPx(W) };
       if (phone) {
-        var s0 = Math.max(W / SW, H / SH) * 1.04;
-        var hy = H * 0.56, top = clamp(hy - HY * s0, H - SH * s0, 0);
-        L.s0 = s0; L.hx = W / 2 + (HX - SW / 2) * s0; L.hy = top + HY * s0;
+        L.R = Math.min(W * 0.4, H * 0.22);
+        L.hx = W * 0.5; L.hy = H * 0.55;
       } else {
-        var R = clamp(H * 0.215, 110, 250);
-        L.s0 = R / HR; L.hx = W * (W / H > 1.9 ? 0.62 : 0.64); L.hy = H * 0.5;
+        L.R = clamp(H * 0.29, 150, 330);
+        L.hx = W * (W / H > 1.9 ? 0.62 : 0.64); L.hy = H * 0.52;
       }
+      L.s0 = L.R / HR;
       layoutName();
       positionPoster();
       seedMotes();
@@ -237,41 +237,38 @@
       var sum100 = w100.reduce(function (a, b) { return a + b; }, 0);
       var size;
       if (!L.phone) {
-        L.T0 = 0.2; L.T1 = 0.05;
-        var headLeft = L.hx - HR * L.s0, tuck = 0.42;
-        var unit = (sum100 + 6 * L.T0 * 100 - tuck * w100[6]) / 100;
-        size = Math.min(clamp(W * 0.078, 48, 150), (headLeft - L.g) / unit);
-        L.k = size / 100;
-        L.nameLeft = headLeft + tuck * w100[6] * L.k - (sum100 * L.k + 6 * L.T0 * size);
+        L.T0 = 0.2; L.T1 = 0.06;
+        var room = L.hx - L.R - L.g - 32;
+        size = Math.min(clamp(W * 0.078, 48, 150), room / ((sum100 + 6 * L.T0 * 100) / 100));
+        L.nameLeft = L.g;
         L.nameTop = L.hy - size * 0.62;
       } else {
         L.T0 = 0.24; L.T1 = 0.1;
         size = Math.min(W * 0.125, 64);
-        L.k = size / 100;
         L.nameLeft = 0;
-        L.nameTop = H * 0.12;
+        L.nameTop = H * 0.11;
       }
       L.size = size;
+      L.k = size / 100;
       L.w = w100.map(function (w) { return w * L.k; });
       L.sum = sum100 * L.k;
-      L.x0 = []; var acc = 0;
-      for (var i = 0; i < L.w.length; i++) { L.x0.push(acc); acc += L.w[i]; }
       name.style.setProperty('--name-size', size + 'px');
       name.style.left = L.nameLeft + 'px';
       name.style.top = L.nameTop + 'px';
       root.classList.add('tn-ready');
-      // the small line sits under the name, on the name's own left edge
       var lineY = L.nameTop + size * 1.12 + 14;
       stage.style.setProperty('--line-a-x', (L.phone ? W / 2 : L.nameLeft + size * 0.04) + 'px');
       stage.style.setProperty('--line-a-y', lineY + 'px');
     }
 
+    function rectFor(push) {
+      var s = L.s0 * push;
+      return { x: L.hx - HX * s, y: L.hy - HY * s, w: FW * s, h: FH * s };
+    }
     function positionPoster() {
-      var s = L.s0;
-      poster.style.left = (L.hx - HX * s) + 'px';
-      poster.style.top = (L.hy - HY * s) + 'px';
-      poster.style.width = (SW * s) + 'px';
-      poster.style.height = (SH * s) + 'px';
+      var r = rectFor(1);
+      poster.style.left = r.x + 'px'; poster.style.top = r.y + 'px';
+      poster.style.width = r.w + 'px'; poster.style.height = r.h + 'px';
       poster.style.objectFit = 'fill';
     }
 
@@ -285,52 +282,49 @@
         motes.push({
           x: L.hx + (rnd() - 0.5) * (L.phone ? L.W * 1.1 : L.W * 0.62),
           y: rnd() * L.H,
-          z: z, r: (0.5 + rnd() * 1.1) * z, a: 0.18 + rnd() * 0.42,
+          z: z, r: (0.5 + rnd() * 1.1) * z, a: 0.16 + rnd() * 0.36,
           v: 6 + rnd() * 10, ph: rnd() * Math.PI * 2
         });
       }
     }
 
-    function feather(ctx, x, y, w, h) {
-      var g;
-      var fw = w * 0.26;
-      g = ctx.createLinearGradient(x, 0, x + fw, 0);
-      g.addColorStop(0, 'rgba(11,10,9,1)'); g.addColorStop(1, 'rgba(11,10,9,0)');
-      ctx.fillStyle = g; ctx.fillRect(x - 1, y, fw + 1, h);
-      g = ctx.createLinearGradient(x + w, 0, x + w - fw, 0);
-      g.addColorStop(0, 'rgba(11,10,9,1)'); g.addColorStop(1, 'rgba(11,10,9,0)');
-      ctx.fillStyle = g; ctx.fillRect(x + w - fw, y, fw + 1, h);
-      var fh = h * 0.12;
-      g = ctx.createLinearGradient(0, y + h, 0, y + h - fh);
-      g.addColorStop(0, 'rgba(11,10,9,1)'); g.addColorStop(1, 'rgba(11,10,9,0)');
-      ctx.fillStyle = g; ctx.fillRect(x, y + h - fh, w, fh + 1);
+    // The frames already fall away to the page ground at their edges; this
+    // makes sure no edge of the file is ever visible, whatever the viewport.
+    function feather(ctx, r) {
+      var g, fw = r.w * 0.16, fh = r.h * 0.14;
+      var edge = function (x0, y0, x1, y1, fx, fy, fwid, fhei) {
+        g = ctx.createLinearGradient(x0, y0, x1, y1);
+        g.addColorStop(0, 'rgba(11,10,9,1)'); g.addColorStop(1, 'rgba(11,10,9,0)');
+        ctx.fillStyle = g; ctx.fillRect(fx, fy, fwid, fhei);
+      };
+      edge(r.x, 0, r.x + fw, 0, r.x - 1, r.y - 1, fw + 1, r.h + 2);
+      edge(r.x + r.w, 0, r.x + r.w - fw, 0, r.x + r.w - fw, r.y - 1, fw + 1, r.h + 2);
+      edge(0, r.y, 0, r.y + fh, r.x - 1, r.y - 1, r.w + 2, fh + 1);
+      edge(0, r.y + r.h, 0, r.y + r.h - fh, r.x - 1, r.y + r.h - fh, r.w + 2, fh + 1);
     }
 
-    function drawFrames(fi, push) {
-      var A = Math.floor(fi), f = fi - A, B = Math.min(A + 1, N - 1);
-      var ia = nearest(A); if (!ia) return false;
-      var ib = f > 0.02 && ready[B] ? frames[B] : null;
-      var s = L.s0 * push, x = L.hx - HX * s, y = L.hy - HY * s, w = SW * s, h = SH * s;
-
+    function draw(fi, push) {
+      var sl = slot(fi);
+      return drawPair(sl.a, sl.b, sl.f, push);
+    }
+    // Under reduced motion the same story is told by dissolving between three
+    // stills (whole, apart, whole again) instead of running the frames.
+    function reducedPair(p) {
+      if (p < 0.35) return { a: STILL, b: APART, f: smooth((p - 0.3) / 0.05) };
+      if (p < 0.7) return { a: APART, b: N - 1, f: smooth((p - 0.65) / 0.05) };
+      return { a: N - 1, b: N - 1, f: 0 };
+    }
+    function drawPair(ka, kb, f, push) {
+      var ia = nearest(ka); if (!ia) return false;
+      var ib = f > 0.02 && ready[kb] ? frames[kb] : null;
+      var sl = { f: f };
+      var r = rectFor(push);
       pctx.setTransform(L.dpr, 0, 0, L.dpr, 0, 0);
       pctx.globalAlpha = 1;
       pctx.fillStyle = CANVAS; pctx.fillRect(0, 0, L.W, L.H);
-      pctx.drawImage(ia, x, y, w, h);
-      if (ib) { pctx.globalAlpha = f; pctx.drawImage(ib, x, y, w, h); pctx.globalAlpha = 1; }
-      if (!L.phone) feather(pctx, x, y, w, h);
-
-      wctx.setTransform(L.dpr, 0, 0, L.dpr, 0, 0);
-      wctx.clearRect(0, 0, L.W, L.H);
-      if (!L.phone && matteReady) {
-        var mx = x + MATTE.x * s, my = y + MATTE.y * s, mw = MATTE.w * s, mh = MATTE.h * s;
-        wctx.globalCompositeOperation = 'source-over';
-        wctx.globalAlpha = 1;
-        wctx.drawImage(ia, MATTE.x, MATTE.y, MATTE.w, MATTE.h, mx, my, mw, mh);
-        if (ib) { wctx.globalAlpha = f; wctx.drawImage(ib, MATTE.x, MATTE.y, MATTE.w, MATTE.h, mx, my, mw, mh); wctx.globalAlpha = 1; }
-        wctx.globalCompositeOperation = 'destination-in';
-        wctx.drawImage(matte, mx, my, mw, mh);
-        wctx.globalCompositeOperation = 'source-over';
-      }
+      pctx.drawImage(ia, r.x, r.y, r.w, r.h);
+      if (ib) { pctx.globalAlpha = sl.f; pctx.drawImage(ib, r.x, r.y, r.w, r.h); pctx.globalAlpha = 1; }
+      feather(pctx, r);
       return true;
     }
 
@@ -339,60 +333,54 @@
       var rect = stage.getBoundingClientRect();
       if (rect.bottom <= 0 || rect.top >= L.H) return;
       var p = heroAct.p;
-      var fi = reduce ? STILL : clamp(p / 0.86, 0, 1) * (N - 1);
-      var push = reduce ? 1 : 1 + 0.065 * smooth(p);
-      var light = 1 - 0.92 * smooth((p - 0.8) / 0.2);
+      var rp = reduce ? reducedPair(p) : null;
+      var fi = reduce ? lerp(SRC[rp.a], SRC[rp.b], rp.f) : clipFrame(p);
+      var push = reduce ? 1 : 1 + 0.04 * smooth(p);
+      var light = 1 - 0.9 * smooth((p - 0.9) / 0.1);
 
       var key = fi.toFixed(2) + '|' + push.toFixed(4);
-      if (key !== lastKey && live) { if (drawFrames(fi, push)) lastKey = key; }
+      if (key !== lastKey && live) {
+        if (reduce ? drawPair(rp.a, rp.b, rp.f, push) : draw(fi, push)) lastKey = key;
+      }
       var lo = light.toFixed(3);
-      if (plate.style.opacity !== lo) { plate.style.opacity = lo; watch.style.opacity = lo; }
+      if (plate.style.opacity !== lo) plate.style.opacity = lo;
 
-      // pointer drift, eased
       ptr.x += (ptr.tx - ptr.x) * 0.06; ptr.y += (ptr.ty - ptr.y) * 0.06;
 
-      // the name: out from behind the watch on arrival, then it tracks in
-      var T = reduce ? L.T0 : lerp(L.T0, L.T1, smooth(p / 0.72));
-      var t = intro.done ? 1 : 0;
-      var centerShift = 0;
-      if (L.phone) centerShift = (L.W - (L.sum + 6 * T * L.size)) / 2;
+      // the name tracks in on arrival, then tightens before the watch opens
+      var T = reduce ? L.T0 : lerp(L.T0, L.T1, smooth(p / 0.24));
+      var centerShift = L.phone ? (L.W - (L.sum + 6 * T * L.size)) / 2 : 0;
       for (var i = 0; i < letters.length; i++) {
         var dx = i * T * L.size, op = 1;
         if (!intro.done) {
-          var e = intro.armed ? easeOut((now - intro.start - (6 - i) * 75) / 1250) : 0;
-          if (!L.phone) {
-            var slot = L.nameLeft + L.x0[i] + i * L.T0 * L.size + L.w[i] / 2;
-            dx += (1 - e) * (L.hx - slot);
-          } else {
-            dx += (1 - e) * (i - 3) * 0.55 * L.size;
-            op = e;
-          }
+          var e = intro.armed ? easeOut((now - intro.start - Math.abs(i - 3) * 70) / 1150) : 0;
+          dx += (1 - e) * (i - 3) * 0.55 * L.size;
+          op = e;
         }
         letters[i].style.transform = 'translate3d(' + dx.toFixed(2) + 'px,0,0)';
         letters[i].style.opacity = op < 1 ? op.toFixed(3) : '';
       }
-      if (!intro.done && intro.armed && now - intro.start > 1250 + 6 * 75 + 40) intro.done = true;
+      if (!intro.done && intro.armed && now - intro.start > 1150 + 3 * 70 + 40) intro.done = true;
       var by = reduce ? 0 : -p * L.H * 0.06;
       box.style.transform = 'translate3d(' + (centerShift - ptr.x * 7).toFixed(2) + 'px,' + (by - ptr.y * 4).toFixed(2) + 'px,0)';
 
-      // near atmosphere: dust in the light, faster than everything behind it
+      // near atmosphere: dust in the lamp light, faster than everything behind it
       dctx.setTransform(L.dpr, 0, 0, L.dpr, 0, 0);
       dctx.clearRect(0, 0, L.W, L.H);
       if (!reduce && light > 0.05) {
-        var lit = 0.3 + 0.7 * Math.pow(Math.sin(Math.PI * clamp(fi / (N - 1), 0, 1)), 0.8);
         var ts = now / 1000;
         for (var m = 0; m < motes.length; m++) {
           var d = motes[m];
           var yy = d.y - ts * d.v * d.z - p * L.H * 0.55 * d.z;
           yy = ((yy % (L.H + 40)) + L.H + 40) % (L.H + 40) - 20;
           var xx = d.x + Math.sin(ts * 0.3 + d.ph) * 6 * d.z - ptr.x * 20 * d.z;
-          var a = d.a * lit * light * (0.6 + 0.4 * Math.sin(ts * 0.8 + d.ph));
+          var a = d.a * light * (0.6 + 0.4 * Math.sin(ts * 0.8 + d.ph));
           dctx.fillStyle = 'rgba(255,238,206,' + a.toFixed(3) + ')';
           dctx.beginPath(); dctx.arc(xx, yy, d.r, 0, Math.PI * 2); dctx.fill();
         }
       }
       stage.setAttribute('data-sc-verify-state', Math.round(fi * 10) + ' ' + push.toFixed(3) + ' ' + lo + ' ' + T.toFixed(3));
-      root.classList.toggle('is-docked', p > 0.84);
+      root.classList.toggle('is-docked', p > 0.4);
     }
 
     return { layout: layout, render: render };
@@ -418,10 +406,10 @@
 
     // Seven layers, top (nearest the eye) to bottom. r and th in units of R.
     var LAYERS = [
-      { name: 'crystal', r: 0.81, th: 0.03 },
-      { name: 'bezel', r: 0.995, rin: 0.8, th: 0.07 },
+      { name: 'crystal', r: 0.9, th: 0.03 },
+      { name: 'bezel', r: 0.995, rin: 0.9, th: 0.06 },
       { name: 'hands', r: 0.7, th: 0 },
-      { name: 'dial', r: 0.8, th: 0.025 },
+      { name: 'dial', r: 0.9, th: 0.025 },
       { name: 'movement', r: 0.88, th: 0.12 },
       { name: 'case', r: 1.0, th: 0.2 },
       { name: 'caseback', r: 0.93, th: 0.05 }
@@ -444,7 +432,8 @@
         G.cx = W * 0.5; G.cxf = W * 0.5; G.cy = H * 0.53;
         G.Dk = 0.56;
       }
-      var size = 380 * (G.Rf / 165.5);
+      // head.webp is 600px square with the case radius at 258px
+      var size = 600 * (G.Rf / 258.4);
       G.photo = size;
       photo.style.setProperty('--photo-size', size + 'px');
       photo.style.setProperty('--photo-x', (G.cxf - size / 2) + 'px');
@@ -530,47 +519,52 @@
     }
     function drawCase(oy, L) {
       var h = L.th * G.R * G.st;
-      // lugs and the first link of the bracelet, under the case drum
-      var blocks = [
-        [[-0.64, -0.72], [0.64, -0.72], [0.62, -1.24], [-0.62, -1.24]],
-        [[-0.64, 0.72], [0.64, 0.72], [0.62, 1.24], [-0.62, 1.24]],
-        [[-0.53, -1.24], [0.53, -1.24], [0.53, -1.6], [-0.53, -1.6]],
-        [[-0.53, 1.24], [0.53, 1.24], [0.53, 1.6], [-0.53, 1.6]]
+      // slim wire lugs and the start of the leather strap, under the case drum
+      var strap = [
+        [[-0.5, -0.86], [0.5, -0.86], [0.47, -1.62], [-0.47, -1.62]],
+        [[-0.5, 0.86], [0.5, 0.86], [0.47, 1.62], [-0.47, 1.62]]
       ];
-      // The lugs and the first link match the photograph in the front view,
-      // then step aside as the watch tips back, so the exploded drawing reads
-      // as a clean stack rather than a tangle of flaps.
-      var lugA = 1 - smooth((G.tiltT - 0.2) / 0.5);
-      if (lugA > 0.01) {
-      ctx.save();
-      ctx.globalAlpha = lugA;
-      for (var b = 0; b < blocks.length; b++) {
-        if (h > 0.6) { poly(blocks[b], oy + h); stroke(0.3, 0.8); }
-        poly(blocks[b], oy); ctx.fillStyle = FILL; ctx.fill(); stroke(0.85);
-      }
-      ctx.beginPath();
-      [-1, 1].forEach(function (sgn) {
-        [1.36, 1.48].forEach(function (yy) {
-          var a = P(-0.53, sgn * yy, oy), c = P(0.53, sgn * yy, oy);
-          ctx.moveTo(a[0], a[1]); ctx.lineTo(c[0], c[1]);
-        });
-        [-0.18, 0.18].forEach(function (xx) {
-          var a = P(xx, sgn * 1.24, oy), c = P(xx, sgn * 1.6, oy);
-          ctx.moveTo(a[0], a[1]); ctx.lineTo(c[0], c[1]);
+      var lugs = [];
+      [-1, 1].forEach(function (sx) {
+        [-1, 1].forEach(function (sy) {
+          lugs.push([[sx * 0.55, sy * 0.8], [sx * 0.66, sy * 0.8], [sx * 0.65, sy * 1.2], [sx * 0.57, sy * 1.2]]);
         });
       });
-      stroke(0.45, 0.8);
-      ctx.restore();
+      // The lugs and strap match the photograph in the front view, then step
+      // aside as the watch tips back, so the exploded drawing reads as a clean
+      // stack rather than a tangle of flaps.
+      var lugA = 1 - smooth((G.tiltT - 0.2) / 0.5);
+      if (lugA > 0.01) {
+        ctx.save();
+        ctx.globalAlpha = lugA;
+        strap.forEach(function (b) { poly(b, oy); ctx.fillStyle = FILL; ctx.fill(); stroke(0.6, 0.9); });
+        // stitching along the strap
+        ctx.save();
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        [-1, 1].forEach(function (sy) {
+          [-0.42, 0.42].forEach(function (xx) {
+            var a1 = P(xx, sy * 0.9, oy), a2 = P(xx * 0.95, sy * 1.6, oy);
+            ctx.moveTo(a1[0], a1[1]); ctx.lineTo(a2[0], a2[1]);
+          });
+        });
+        stroke(0.4, 0.7);
+        ctx.restore();
+        lugs.forEach(function (b) {
+          if (h > 0.6) { poly(b, oy + h); stroke(0.3, 0.8); }
+          poly(b, oy); ctx.fillStyle = FILL; ctx.fill(); stroke(0.85);
+        });
+        ctx.restore();
       }
-      // crown
-      var crown = [[0.98, -0.12], [1.13, -0.12], [1.13, 0.12], [0.98, 0.12]];
+      // crown, fluted, at three
+      var crown = [[0.98, -0.1], [1.16, -0.1], [1.16, 0.1], [0.98, 0.1]];
       if (h > 0.6) { poly(crown, oy + h * 0.5); stroke(0.3, 0.8); }
       poly(crown, oy); ctx.fillStyle = FILL; ctx.fill(); stroke(0.9);
       ctx.beginPath();
-      for (var g = -2; g <= 2; g++) { var a1 = P(1.06, g * 0.045, oy), a2 = P(1.13, g * 0.045, oy); ctx.moveTo(a1[0], a1[1]); ctx.lineTo(a2[0], a2[1]); }
+      for (var g = -2; g <= 2; g++) { var a1 = P(1.04, g * 0.038, oy), a2 = P(1.16, g * 0.038, oy); ctx.moveTo(a1[0], a1[1]); ctx.lineTo(a2[0], a2[1]); }
       stroke(0.5, 0.7);
       cylinder(oy, L.r, L.th);
-      ctx.beginPath(); ell(G.cx, G.cy + oy, 0.87); stroke(0.45, 0.8);
+      ctx.beginPath(); ell(G.cx, G.cy + oy, 0.92); stroke(0.45, 0.8);
     }
     function drawMovement(oy, L, gearA, balA) {
       cylinder(oy, L.r, L.th);
@@ -613,20 +607,31 @@
       }
       stroke(0.4, 0.6);
     }
+    // A skeleton dial: a chapter ring of Roman numerals around an open,
+    // engraved plate. Numerals stay upright to the watch, as on the photograph.
+    var ROMAN = ['XII', 'I', 'II', 'III', 'IIII', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
     function drawDial(oy, L) {
-      cylinder(oy, L.r, L.th);
-      ctx.beginPath();
-      for (var i = 0; i < 60; i++) radial(i / 60 * Math.PI * 2, i % 5 ? 0.755 : 0.735, 0.78, oy);
-      stroke(0.5, 0.7);
-      // indices, a date window at three
+      cylinder(oy, L.r, L.th, 0.69);
+      ctx.beginPath(); ell(G.cx, G.cy + oy, 0.86); stroke(0.45, 0.7);
+      ctx.beginPath(); ell(G.cx, G.cy + oy, 0.72); stroke(0.6, 0.8);
+      var fs = Math.max(8, 0.085 * G.R);
+      ctx.fillStyle = 'rgba(' + GOLD + ',0.92)';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '500 ' + fs.toFixed(1) + 'px "Bodoni Moda", Georgia, serif';
       for (var h = 0; h < 12; h++) {
-        if (h === 3) continue;
-        var a = h / 12 * Math.PI * 2, cx = Math.sin(a) * 0.65, cy = -Math.cos(a) * 0.65, s = h === 0 ? 0.05 : 0.036;
-        poly([[cx - s, cy - s], [cx + s, cy - s], [cx + s, cy + s], [cx - s, cy + s]], oy);
-        stroke(0.9, 0.9);
+        var an = h / 12 * Math.PI * 2, q = P(Math.sin(an) * 0.79, -Math.cos(an) * 0.79, oy);
+        ctx.save();
+        ctx.translate(q[0], q[1]);
+        ctx.scale(1, G.k);
+        ctx.rotate(G.rho);
+        ctx.fillText(ROMAN[h], 0, 0);
+        ctx.restore();
       }
-      poly([[0.47, -0.075], [0.65, -0.075], [0.65, 0.075], [0.47, 0.075]], oy);
-      stroke(0.9, 0.9);
+      // the openings in the engraved plate, as seen through the skeleton
+      [[-0.32, -0.12, 0.16], [0.28, 0.24, 0.15], [0.12, -0.38, 0.12], [-0.18, 0.4, 0.11], [0.36, -0.2, 0.09]].forEach(function (o) {
+        var c = P(o[0], o[1], oy);
+        ctx.beginPath(); ctx.ellipse(c[0], c[1], o[2] * G.R, o[2] * G.R * G.k, 0, 0, Math.PI * 2); stroke(0.42, 0.8);
+      });
     }
     function hand(oy, deg, len, tail, w, a) {
       var r = deg * Math.PI / 180, sx = Math.sin(r), sy = -Math.cos(r), nx = -sy, ny = sx;
@@ -636,18 +641,20 @@
       ctx.fillStyle = FILL; ctx.fill(); stroke(a, 1);
     }
     function drawHands(oy, secDeg) {
-      hand(oy, 105, 0.45, 0.08, 0.034, 0.95);
-      hand(oy, 283, 0.7, 0.1, 0.024, 0.95);
+      hand(oy, 308, 0.45, 0.08, 0.032, 0.95);
+      hand(oy, 53, 0.68, 0.1, 0.022, 0.95);
       hand(oy, secDeg, 0.75, 0.2, 0.008, 0.8);
       var c = P(0, 0, oy);
       ctx.beginPath(); ctx.ellipse(c[0], c[1], 0.04 * G.R, 0.04 * G.R * G.k, 0, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(' + GOLD + ',0.9)'; ctx.fill();
     }
     function drawBezel(oy, L) {
+      // a thin polished bezel: no flutes, two catch-lights
       cylinder(oy, L.r, L.th, L.rin);
-      ctx.beginPath();
-      for (var i = 0; i < 72; i++) radial(i / 72 * Math.PI * 2, 0.82, 0.98, oy);
-      stroke(0.42, 0.8);
+      ctx.beginPath(); ell(G.cx, G.cy + oy, 0.95); stroke(0.35, 0.7);
+      var x = G.cx, y = G.cy + oy, R = 0.95 * G.R;
+      ctx.beginPath(); ctx.ellipse(x, y, R, R * G.k, 0, Math.PI * 1.1, Math.PI * 1.35); stroke(0.85, 1.4);
+      ctx.beginPath(); ctx.ellipse(x, y, R, R * G.k, 0, Math.PI * 0.1, Math.PI * 0.28); stroke(0.6, 1.2);
     }
     function drawCrystal(oy, L) {
       var x = G.cx, y = G.cy + oy, R = L.r * G.R, h = L.th * G.R * G.st;
@@ -728,7 +735,7 @@
       // spec callouts on the right, tied to the parts they describe
       var specX = G.cx + (G.phone ? 1.22 : 1.5) * G.R + 14;
       var caseOy = 2 * D, mvOy = 1 * D;
-      var aCase = P(1.13, 0, caseOy); aCase[1] += 0.2 * G.R * G.st * 0.5;
+      var aCase = P(1.16, 0, caseOy); aCase[1] += 0.2 * G.R * G.st * 0.5;
       var aBar = P(0.34, -0.24, mvOy);
       placeSpec(specCase, aCase, specX, 1);
       placeSpec(specBarrel, aBar, specX, -1);

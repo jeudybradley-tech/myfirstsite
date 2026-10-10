@@ -127,12 +127,11 @@ body { background: var(--sc-canvas); font-size: var(--sc-t-base); letter-spacing
   transition: opacity 420ms var(--sc-ease-out);
 }
 .hero__stage.is-live .hero__poster { opacity: 0; }
-.hero__plate, .hero__watch, .hero__dust {
+.hero__plate, .hero__dust {
   position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
 }
 .hero__plate { z-index: 1; }
 .hero__name  { z-index: 2; }
-.hero__watch { z-index: 3; }
 .hero__dust  { z-index: 4; pointer-events: none; }
 .hero__scrim { z-index: 5; }
 .hero__line  { z-index: 6; }
@@ -216,21 +215,13 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 @media (prefers-reduced-motion: reduce) { .story__text .w { opacity: 1; } }
 
 /* ------------------------------------------------------------- macro -- */
-.macro__stage { background: var(--sc-canvas); }
-.macro__frame {
-  position: absolute; top: 0; right: 0; bottom: 0;
-  width: min(54vw, 860px);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 34%), linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent 0%, #000 34%), linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
-  mask-composite: intersect;
-}
-.macro__frame :is(img, video) { max-width: none; object-position: 50% 50%; }
-.macro__copy {
-  position: absolute; z-index: var(--sc-z-copy);
-  left: var(--sc-gutter); top: 50%;
-  translate: 0 -50%;
-  width: min(30rem, 40vw);
+/* Ordinary flow between two pinned acts. Three details of the watch, each
+   wiped in by the engine's reveal as the section passes. */
+.macro { padding-block: clamp(3rem, 9vh, 6rem) var(--sc-section); }
+.macro__inner {
+  width: 100%; max-width: var(--sc-maxw); margin-inline: auto; padding-inline: var(--sc-gutter);
+  display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr);
+  gap: clamp(2rem, 6vw, 6rem); align-items: center;
 }
 .macro__title {
   font-family: var(--sc-font-display);
@@ -239,9 +230,27 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   font-size: var(--sc-t-4xl);
   line-height: 1;
   letter-spacing: -0.02em;
-  margin: 0 0 var(--sc-5);
+  margin: 0;
 }
 .macro__text { margin: 0; color: var(--sc-ink-soft); max-width: 26ch; font-size: var(--sc-t-lg); line-height: 1.5; }
+.macro__grid {
+  display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  grid-template-rows: auto auto; gap: var(--sc-5);
+}
+.macro__fig { margin: 0; display: grid; gap: var(--sc-3); min-width: 0; }
+.macro__fig--tall { grid-row: span 2; align-content: start; }
+.macro__fig img {
+  width: 100%; height: auto; max-width: 100%;
+  aspect-ratio: 1 / 1; object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--sc-e2);
+}
+.macro__fig--tall img { aspect-ratio: 510 / 690; }
+.macro__fig figcaption {
+  font-size: var(--sc-t-xs); font-weight: 500;
+  letter-spacing: var(--label-track); text-transform: uppercase;
+  color: var(--sc-ink-soft);
+}
 
 /* ----------------------------------------------------------- explode -- */
 .explode__stage { background: #090807; }
@@ -440,7 +449,7 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 /* ------------------------------------------------------------ phones -- */
 @media (max-width: 760px) {
   .hero__line--a { text-align: center; left: 50%; translate: -50% 0; width: max-content; max-width: 86vw; }
-  .hero__line--b { left: 50%; translate: -50% 0; text-align: center; bottom: clamp(5rem, 13svh, 7rem); width: max-content; }
+  .hero__line--b { left: 50%; translate: -50% 0; text-align: center; bottom: clamp(5rem, 13svh, 7rem); width: min(86vw, 22rem); max-width: none; }
   .hero__scrim {
     width: 100%; height: 42svh;
     background: linear-gradient(to top,
@@ -451,13 +460,11 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   .story__stage { justify-items: start; }
   .story__block { margin-right: 0; }
 
-  .macro__frame {
-    left: 0; width: 100%; bottom: auto; height: 70svh;
-    -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
-  }
-  .macro__copy { top: auto; bottom: clamp(5rem, 12svh, 7rem); translate: none; width: auto; right: var(--sc-gutter); }
-  .macro__title { font-size: var(--sc-t-3xl); margin-bottom: var(--sc-3); }
+  .macro__inner { grid-template-columns: 1fr; gap: var(--sc-6); }
+  .macro__title { font-size: var(--sc-t-3xl); }
+  .macro__grid { grid-template-columns: 1fr 1fr; gap: var(--sc-4); }
+  .macro__fig--tall { grid-column: 1 / -1; grid-row: auto; }
+  .macro__fig--tall img { aspect-ratio: 4 / 3; object-position: 50% 40%; }
 
   .explode__head { top: clamp(1.5rem, 6svh, 3rem); }
   .explode__title { font-size: var(--sc-t-2xl); margin-bottom: var(--sc-2); }
