@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nitsy Fashion · le film</title>
+<meta name="description" content="Nitsy Fashion, salon de coiffure : pose de mèches, lissage, reflets et coiffage, sur rendez-vous.">
+<meta name="theme-color" content="#140C09">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23140C09'/><text x='16' y='23' font-family='Georgia' font-style='italic' font-size='20' text-anchor='middle' fill='%23E7B4A3'>N</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..600&family=Montserrat:wght@900&display=swap">
+<link rel="preload" as="image" href="assets/hero-poster.webp" media="(min-width: 861px)">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* Filmic one-shot: four photographs as four shots of one film, each pushed
+     into slowly by the scroll. The client's own warm brown backdrop is the
+     page's ground; one blush accent; serif for every spoken line. */
+  @font-face { font-family: "Instrument Local"; src: url("assets/fonts/instrument-regular.woff2") format("woff2"); font-style: normal; font-display: swap; }
+  @font-face { font-family: "Instrument Local"; src: url("assets/fonts/instrument-italic.woff2") format("woff2"); font-style: italic; font-display: swap; }
+  @font-face { font-family: "Montserrat Local"; src: url("assets/fonts/montserrat-900.woff2") format("woff2"); font-weight: 900; font-display: swap; }
+  @font-face { font-family: "Inter Local"; src: url("assets/fonts/inter-latin.woff2") format("woff2"); font-weight: 300 600; font-display: swap; }
+  :root {
+    color-scheme: dark;
+    --espresso: #140C09;
+    --cognac: #3A2116;
+    --blush: #E7B4A3;
+    --sc-canvas: var(--espresso);
+    --sc-surface: #20140F;
+    --sc-ink: #F6ECE4;
+    --sc-ink-soft: #C9B5A9;
+    --sc-accent: var(--blush);
+    --sc-accent-ink: #1C100B;
+    --sc-font-display: "Instrument Serif", "Instrument Local", Georgia, serif;
+    --sc-font-text: "Inter", "Inter Local", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  body { background: var(--sc-canvas); color: var(--sc-ink); font-weight: 350; }
+
+  .bar { position: fixed; z-index: 60; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center;
+    padding: calc(1.1rem + env(safe-area-inset-top, 0px)) var(--sc-gutter) 1.1rem; }
+  .bar a { color: var(--sc-ink); text-decoration: none; }
+  .bar__mark { font-size: 1.3rem; }
+  .intro-on .bar__mark { opacity: 0; }
+
+  /* the logo: solid pink face, stepped grey extrusion
+     behind it (the ::before layer carries the same text via data-text) */
+  .logo { --pink: #F6B8DD; position: relative; display: inline-block; font-family: "Montserrat", "Montserrat Local", system-ui, sans-serif;
+    font-weight: 900; text-transform: uppercase; letter-spacing: .02em; line-height: 1.1; white-space: nowrap; }
+  .logo::before { content: attr(data-text); position: absolute; left: 0; top: 0; color: #000; -webkit-text-stroke: .02em #B5B5B5;
+    text-shadow: .03em .03em 0 #000, .045em .045em 0 #A0A0A0, .07em .07em 0 #000, .085em .085em 0 #808080,
+                 .11em .11em 0 #000, .125em .125em 0 #626262, .15em .15em 0 #000, .16em .16em 0 #454545; }
+  .logo__face { position: relative; color: var(--pink); -webkit-text-stroke: .025em currentColor; }
+  .logo__face b { font-weight: inherit; color: #fff; }
+
+  /* opening: the logo is typed on black, then flies into the bar */
+  .intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: #000;
+    transition: background-color .9s cubic-bezier(.7, 0, .2, 1); animation: intro-failsafe 0s 6s forwards; }
+  .intro[hidden] { display: none; }
+  .intro--out { background-color: transparent; pointer-events: none; }
+  .intro__line { display: flex; align-items: center; font-size: clamp(2rem, 5.6vw, 5.4rem); }
+  .intro__caret { width: .06em; height: 1em; margin-left: .12em; background: #F6B8DD; animation: caret 1s steps(1) infinite; }
+  .intro--out .intro__caret { visibility: hidden; }
+  @keyframes caret { 50% { opacity: 0; } }
+  @keyframes intro-failsafe { to { visibility: hidden; } }
+  .bar__cta { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; border-bottom: 1px solid var(--blush); padding-bottom: .2rem; }
+
+  .serif { font-family: var(--sc-font-display); font-weight: 400; letter-spacing: -.015em; line-height: .95; margin: 0; }
+  .serif em { font-style: italic; color: var(--blush); }
+  .eyebrow { margin: 0 0 1.2rem; font-size: .72rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--blush); }
+  .btn { display: inline-flex; align-items: center; gap: .7rem; min-height: 3rem; padding: .9rem 1.7rem; border-radius: 999px; border: 0; cursor: pointer;
+    background: var(--blush); color: var(--sc-accent-ink); text-decoration: none; font: inherit; font-weight: 500;
+    transition: transform var(--sc-d-fast) var(--sc-ease-out), background-color var(--sc-d-fast) var(--sc-ease-out); }
+  .btn:hover { background: #F0C6B8; transform: translateY(-1px); }
+  .btn:active { transform: scale(.97); }
+  .btn span { font-family: var(--sc-font-display); font-style: italic; font-size: 1.2em; }
+
+  /* A shot: the photograph as a tall panel on the right, its edges melting
+     into the ground, pushed into by the act's progress. */
+  .stage { background: radial-gradient(70% 90% at 72% 50%, var(--cognac), var(--espresso) 70%); }
+  .shot { position: absolute; top: 0; bottom: 0; right: 4vw; height: 100%; aspect-ratio: var(--ar); max-width: 62vw;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24%, #000 90%, transparent 100%), linear-gradient(to bottom, #000 80%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-image: linear-gradient(to right, transparent 0, #000 24%, #000 90%, transparent 100%), linear-gradient(to bottom, #000 80%, transparent 100%);
+            mask-composite: intersect; overflow: hidden; }
+  .shot img { width: 100%; height: 100%; max-width: none; object-fit: cover; transform-origin: var(--origin, 50% 35%);
+    transform: scale(calc(var(--from, 1) + var(--sc-p, 0) * var(--push, .08))); will-change: transform; }
+
+  .copy { position: absolute; z-index: 5; left: var(--sc-gutter); top: 50%; translate: 0 -50%; width: min(32rem, 42vw); }
+  .copy p { margin: 1.6rem 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 32ch; }
+
+  /* 1 */
+  .hero h1 { font-size: clamp(4.2rem, 10vw, 10rem); }
+  .hero h1 em { display: block; padding-left: .6em; }
+  .hero .actions { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
+  .hero .actions small { color: var(--sc-ink-soft); }
+
+  /* scrub hero + full-frame salon shot */
+  .hero__title { font-size: clamp(3.6rem, 8vw, 8rem); }
+  .hero__title em { display: block; padding-left: .5em; }
+  .hero__line { margin: 1.4rem 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 32ch; }
+  .sc-copy--trail .hero__line { margin-left: auto; }
+  .hero__beat, .salon__title { font-size: clamp(2.6rem, 5.4vw, 5.4rem); }
+  .actions { margin-top: 2rem; }
+  .full { position: absolute; inset: 0; overflow: hidden; }
+  .full img { width: 100%; height: 100%; max-width: none; object-fit: cover; transform-origin: 45% 40%; transform: scale(calc(1.02 + var(--sc-p, 0) * .1)); }
+  .bokeh { position: absolute; inset: -20% 0; z-index: 2; pointer-events: none; }
+  .bokeh i { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s); border-radius: 50%; opacity: var(--o);
+    background: radial-gradient(circle, rgba(255, 222, 170, .9) 0%, rgba(255, 210, 150, .35) 40%, transparent 70%); filter: blur(6px); mix-blend-mode: screen; }
+  .clip-missing .sc-stage__poster { opacity: 1 !important; }
+  /* services rail: the page holds and the services slide in from the right */
+  .svc-stage { display: flex; align-items: center; overflow: hidden; background: radial-gradient(80% 90% at 28% 40%, #2E1A12, var(--espresso) 70%); }
+  .svc-rail { align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); padding: 4.5rem var(--sc-gutter) 0; }
+  .svc-intro { flex: 0 0 auto; width: min(30rem, 34vw); }
+  .svc-intro h2 { font-size: clamp(2.8rem, 5.2vw, 5.2rem); }
+  .svc-intro p { margin: 1.4rem 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 28ch; }
+  .svc-hint { display: inline-flex; align-items: center; gap: .7rem; margin-top: 2.2rem; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--blush); }
+  .svc-hint i { width: 3rem; height: 1px; background: currentColor; }
+  .svc-card, .svc-end { --k: 1; flex: 0 0 auto; width: clamp(16rem, 22vw, 21rem); margin: 0;
+    opacity: calc(.55 + .45 * var(--k)); translate: 0 calc((1 - var(--k)) * 3rem); }
+  .svc-card__img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: #2A1810; }
+  .svc-card__img img, .svc-card__img svg { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover;
+    transform: scale(1.08) translateX(calc((1 - var(--k)) * 3%)); }
+  .svc-card__img::after { content: ""; position: absolute; inset: 0 0 auto; height: 32%; background: linear-gradient(to bottom, rgba(10, 6, 4, .55), transparent); pointer-events: none; }
+  .svc-card__num { position: absolute; z-index: 1; top: .8rem; left: 1rem; font-family: var(--sc-font-display); font-style: italic; font-size: 1.5rem; color: #fff; text-shadow: 0 1px 10px rgba(0, 0, 0, .6); }
+  .svc-card h3, .svc-end h3 { margin: 1.1rem 0 0; font-family: var(--sc-font-display); font-weight: 400; font-size: clamp(1.8rem, 2.4vw, 2.3rem); line-height: 1; }
+  .svc-card h3 em, .svc-end h3 em { color: var(--blush); }
+  .svc-card p, .svc-end p { margin: .7rem 0 0; color: var(--sc-ink-soft); line-height: 1.55; }
+  .svc-card__price { display: flex; justify-content: space-between; align-items: baseline; margin-top: 1rem; padding-top: .8rem; border-top: 1px solid #4A3329; font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .svc-card__price b { font-weight: 500; color: var(--blush); }
+  .svc-end { display: grid; gap: 1.2rem; justify-items: start; align-content: center; }
+  .svc-end p { margin: 0; }
+  @media (prefers-reduced-motion: reduce) { .svc-card, .svc-end { opacity: 1; translate: none; } }
+  /* 2 the comb: the consultation is combed away and the result shows through */
+  .comb .shot--after { z-index: 2; --origin: 50% 40%; --from: 1.28; --push: -.28;
+    --comb: clamp(0, calc((var(--sc-p) - .28) / .34), 1); }
+  .comb .shot--after img { -webkit-mask-image: repeating-linear-gradient(97deg, #000 0, #000 calc(var(--comb) * 18px), transparent calc(var(--comb) * 18px), transparent 18px);
+                                  mask-image: repeating-linear-gradient(97deg, #000 0, #000 calc(var(--comb) * 18px), transparent calc(var(--comb) * 18px), transparent 18px); }
+  .comb h2, .services h2 { font-size: clamp(2.8rem, 5.6vw, 5.6rem); }
+  .copy--late { top: auto; bottom: 14svh; translate: none; }
+
+  /* 3 services */
+  .services ul { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 0; max-width: 26rem; }
+  .services li { display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid #4A3329; font-size: var(--sc-t-lg); }
+  .services li span { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); align-self: center; }
+
+  /* 4 contact */
+  .contact { min-height: 100svh; display: grid; grid-template-rows: 1fr auto; padding: var(--sc-section) var(--sc-gutter) 0; background: #1C120D; }
+  .contact__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); max-width: 68rem; }
+  .contact h2 { font-size: clamp(3rem, 6.5vw, 6rem); }
+  .contact__lede { margin: 1.4rem 0 0; color: var(--sc-ink-soft); line-height: 1.65; max-width: 34ch; }
+  form { display: grid; gap: 1.1rem; }
+  label { display: grid; gap: .45rem; font-size: .7rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--blush); }
+  input, select, textarea { font: inherit; font-size: 1rem; text-transform: none; letter-spacing: 0; font-weight: 350; color: var(--sc-ink); background: transparent; border: 0; border-bottom: 1px solid #5C4236; padding: .6rem 0; border-radius: 0; }
+  select option { color: #1C100B; }
+  textarea { min-height: 5rem; resize: vertical; }
+  input::placeholder, textarea::placeholder { color: #8F7A6E; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--blush); outline-offset: 4px; }
+  form .btn { justify-self: start; }
+  .status { margin: 0; min-height: 1.4em; font-size: var(--sc-t-sm); color: var(--blush); }
+  .ig { display: grid; gap: 1.2rem; justify-items: start; align-content: start; }
+  .ig__how { margin: 0; color: var(--sc-ink-soft); line-height: 1.65; max-width: 38ch; }
+  .ig__handle { margin: 0; font-family: var(--sc-font-display); font-style: italic; font-size: 1.5rem; color: var(--blush); user-select: all; }
+  .ig__steps { margin: .6rem 0 0; padding-left: 1.2rem; color: var(--sc-ink-soft); line-height: 1.7; display: grid; gap: .3rem; }
+  .foot a { color: inherit; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 4rem; padding-block: 1.4rem calc(1.4rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid #3A2A22; font-size: .78rem; color: var(--sc-ink-soft); }
+
+  @media (max-width: 860px) {
+    .shot { right: 0; left: 0; max-width: none; width: 100%; aspect-ratio: auto;
+      -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 92%); mask-image: linear-gradient(to bottom, #000 50%, transparent 92%); }
+    .copy { top: auto; bottom: calc(6svh + env(safe-area-inset-bottom, 0px)); translate: none; width: auto; right: var(--sc-gutter); }
+    .stage::after { content: ""; position: absolute; inset: auto 0 0 0; height: 66%; z-index: 3; pointer-events: none;
+      background: linear-gradient(to top, var(--espresso) 0%, rgba(20, 12, 9, .9) 50%, transparent 100%); }
+    .copy p { font-size: var(--sc-t-base); margin-top: 1rem; }
+    .hero__title { font-size: 17vw; }
+    .bokeh i { width: calc(var(--s) * .6); height: calc(var(--s) * .6); }
+
+    .comb .shot--after { --origin: 50% 85%; --from: 1.18; --push: -.18; }
+    .comb .shot--after img { object-position: 50% 100%; }
+    .contact__grid { grid-template-columns: 1fr; }
+    .bar__cta { font-size: .68rem; }
+    .bar__mark { font-size: 1rem; }
+    .svc-intro { width: 80vw; }
+    .svc-card, .svc-end { width: 72vw; }
+    .svc-intro p { font-size: var(--sc-t-base); }
+    .intro__line { font-size: 9.4vw; }
+  }
+</style>
+<noscript><style>[data-sc-cue],[data-sc-in],[data-sc-stagger]>*{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<div class="sc-grain" aria-hidden="true"></div>
+<header class="bar">
+  <a class="bar__mark logo" href="#top" data-text="Nitsy Fashion" aria-label="Nitsy Fashion, retour en haut"><span class="logo__face"><b>Nitsy</b> Fashion</span></a>
+  <a class="bar__cta" href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Rendez-vous</a>
+</header>
+
+<div id="intro" class="intro" aria-hidden="true" hidden>
+  <div class="intro__line"><span class="logo" data-text=""><span class="logo__face"></span></span><i class="intro__caret"></i></div>
+</div>
+<script>
+  (function () {
+    // Type the logo letter by letter, then fly it into the bar mark.
+    var intro = document.getElementById('intro'), root = document.documentElement;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var logo = intro.querySelector('.logo'), face = logo.firstElementChild, txt = 'Nitsy Fashion', n = 0, out = false;
+    function set(k) {
+      var t = txt.slice(0, k), w = t.slice(0, 5);
+      logo.setAttribute('data-text', t);
+      face.innerHTML = '<b>' + w + '</b>' + t.slice(5);
+    }
+    function done() {
+      if (out) return; out = true; set(txt.length);
+      var bar = document.querySelector('.bar__mark');
+      if (bar && !reduce) {
+        var a = logo.getBoundingClientRect(), b = bar.getBoundingClientRect();
+        logo.style.transformOrigin = '0 0';
+        logo.style.transition = 'transform .9s cubic-bezier(.7, 0, .2, 1)';
+        logo.style.transform = 'translate(' + (b.left - a.left) + 'px,' + (b.top - a.top) + 'px) scale(' + (b.width / a.width) + ')';
+      }
+      intro.classList.add('intro--out');
+      setTimeout(function () { intro.remove(); root.classList.remove('intro-on'); }, reduce ? 250 : 950);
+    }
+    intro.hidden = false; root.classList.add('intro-on');
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { addEventListener(e, done, { once: true, passive: true }); });
+    if (reduce) { set(txt.length); setTimeout(done, 700); return; }
+    (function tick() {
+      set(n);
+      if (n++ < txt.length) setTimeout(tick, n === 1 ? 450 : txt[n - 2] === ' ' ? 220 : 90 + Math.random() * 70);
+      else setTimeout(done, 900);
+    })();
+  })();
+</script>
+
+<main id="top">
+  <!-- SHOT 1 · the film opens: she turns toward the camera, it moves in, she smiles -->
+  <section class="hero" data-sc-act="scrub" data-sc-span="2.8" data-sc-dwell="0.25" data-sc-drift="#140C09" aria-labelledby="hero-title">
+    <div data-sc-stage>
+      <picture>
+        <source media="(max-width: 860px)" srcset="assets/hero-poster-m.webp">
+        <img class="sc-stage__poster" src="assets/hero-poster.webp" alt="">
+      </picture>
+      <video data-sc-scrub data-sc-src="assets/hero.mp4" data-sc-src-mobile="assets/hero-m.mp4"
+             data-webm="assets/hero.webm" data-webm-mobile="assets/hero-m.webm" muted playsinline aria-hidden="true"></video>
+      <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+      <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.6 0 0.25">
+        <p class="eyebrow">Salon de coiffure · sur rendez-vous</p>
+        <h1 id="hero-title" class="serif hero__title">Nitsy <em>Fashion</em></h1>
+        <p class="hero__line">Mèches, lissage, reflets, coiffage. Une coiffure qui te ressemble, posée avec le temps qu'il faut.</p>
+        <div class="actions"><a class="btn" href="#contact">Prendre <span>rendez-vous</span></a></div>
+      </div>
+      <div class="sc-copy sc-copy--lead" data-sc-cue="0.68 1.3 0.12 0.1">
+        <h2 class="serif hero__beat">Le moment où tu <em>te reconnais.</em></h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES RAIL · the page holds and the four services slide past, right to left -->
+  <section class="svc" data-sc-act="pan" data-sc-span="4.8" data-sc-drift="#1A0F0B" aria-labelledby="svc-rail-title">
+    <div data-sc-stage class="svc-stage">
+      <div class="svc-rail" data-sc-pan="0.04">
+        <div class="svc-intro">
+          <p class="eyebrow">Nos services</p>
+          <h2 id="svc-rail-title" class="serif">Ce qu'on fait <em>pour toi.</em></h2>
+          <p>Cinq prestations, faites au salon avec le temps qu'il faut.</p>
+          <p class="svc-hint" aria-hidden="true"><i></i>Fais défiler</p>
+        </div>
+      <article class="svc-card">
+        <div class="svc-card__img"><img src="assets/svc-meches.webp" width="736" height="920" loading="lazy" alt="Une femme aux très longs cheveux noirs ondulés, regard tourné vers la fenêtre."><span class="svc-card__num" aria-hidden="true">01</span></div>
+        <h3>Pose de <em>mèches</em></h3>
+        <p>Du volume et de la longueur, posés pour tenir et bouger naturellement.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+      <article class="svc-card">
+        <div class="svc-card__img"><img src="assets/svc-lissage.webp" width="736" height="920" loading="lazy" alt="Une femme aux cheveux longs, lisses et dégradés, bruns aux reflets caramel."><span class="svc-card__num" aria-hidden="true">02</span></div>
+        <h3><em>Lissage</em></h3>
+        <p>Des longueurs lisses et brillantes, qui gardent leur mouvement.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+      <article class="svc-card">
+        <div class="svc-card__img"><img src="assets/svc-reflets.webp" width="736" height="920" loading="lazy" alt="Une femme aux cheveux longs et volumineux, bruns avec des mèches couleur miel."><span class="svc-card__num" aria-hidden="true">03</span></div>
+        <h3>Reflets &amp; <em>couleur</em></h3>
+        <p>Une couleur choisie avec toi, des reflets posés à la main.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+      <article class="svc-card">
+        <div class="svc-card__img"><img src="assets/svc-boucles.webp" width="734" height="918" loading="lazy" alt="Une femme aux grosses boucles naturelles, noires et volumineuses."><span class="svc-card__num" aria-hidden="true">04</span></div>
+        <h3>Boucles &amp; <em>définition</em></h3>
+        <p>Des boucles bien dessinées, pleines de volume et de rebond.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+      <article class="svc-card">
+        <div class="svc-card__img"><img src="assets/svc-cuivre.webp" width="736" height="920" loading="lazy" alt="Une femme aux longues boucles cuivrées, la joue posée sur la main."><span class="svc-card__num" aria-hidden="true">05</span></div>
+        <h3>Boucles <em>cuivrées</em></h3>
+        <p>Des boucles aux reflets cuivrés, une couleur chaude qui réveille le visage.</p>
+        <p class="svc-card__price">Prix <b>sur devis</b></p>
+      </article>
+        <div class="svc-end">
+          <h3>Une envie <em>précise ?</em></h3>
+          <p>Envoie-nous une photo de ce qui te plaît sur Instagram : on te répond avec le prix et un créneau.</p>
+          <a class="btn" href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Écrire sur <span>Instagram</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOT 2 · the room: seen from behind, she turns in her chair as the
+       camera circles her, and ends facing you, smiling; gold lights pass in front -->
+  <section class="salon" data-sc-act="scrub" data-sc-span="3" data-sc-dwell="0.2" data-sc-drift="#17100C" aria-labelledby="salon-title">
+    <div data-sc-stage>
+      <picture>
+        <source media="(max-width: 860px)" srcset="assets/turn-poster-m.webp">
+        <img class="sc-stage__poster" src="assets/turn-poster.webp" alt="Une cliente de dos dans le salon, longues boucles brunes, qui se retourne vers nous en souriant.">
+      </picture>
+      <video data-sc-scrub data-sc-src="assets/turn.mp4" data-sc-src-mobile="assets/turn-m.mp4"
+             data-webm="assets/turn.webm" data-webm-mobile="assets/turn-m.webm" muted playsinline aria-hidden="true"></video>
+      <div class="bokeh" aria-hidden="true">
+        <i data-sc-parallax="-2.2" style="--x:8%;--y:18%;--s:180px;--o:.28"></i>
+        <i data-sc-parallax="-3.4" style="--x:62%;--y:6%;--s:240px;--o:.22"></i>
+        <i data-sc-parallax="-1.6" style="--x:30%;--y:70%;--s:120px;--o:.3"></i>
+        <i data-sc-parallax="-4.2" style="--x:84%;--y:76%;--s:300px;--o:.18"></i>
+        <i data-sc-parallax="-2.8" style="--x:48%;--y:40%;--s:90px;--o:.26"></i>
+      </div>
+      <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+      <div class="sc-copy sc-copy--lead" data-sc-cue="0 0.42 0.12 0.2">
+        <p class="eyebrow">Au salon</p>
+        <h2 id="salon-title" class="serif salon__title">Installe-toi. <em>Rien ne presse.</em></h2>
+        <p class="hero__line">Ton rendez-vous, c'est ton moment : on prend le temps de bien faire, du shampoing au dernier coup de brosse.</p>
+      </div>
+      <div class="sc-copy sc-copy--lead" data-sc-cue="0.6 1.3 0.12 0.1">
+        <h2 class="serif salon__title">Puis retourne-toi. <em>C'est toi.</em></h2>
+        <p class="hero__line">Les boucles, la brillance, le sourire : le résultat, tu le découvres d'un coup.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOTS 2 → 3 · the peak: the consultation is combed away into the result -->
+  <section class="comb" data-sc-act="pin" data-sc-span="3.6" data-sc-drift="#1A0F0B" aria-labelledby="comb-title">
+    <div data-sc-stage class="stage">
+      <div class="shot" style="--ar: 736/918; --origin: 50% 40%"><img src="assets/shot-2.webp" width="736" height="918" alt="Trois coiffeuses autour d'une cliente : l'une prend des notes, l'autre lisse les longueurs."></div>
+      <div class="shot shot--after" style="--ar: 736/918"><img src="assets/shot-3.webp" width="736" height="918" alt="La cliente de dos : longs cheveux lisses aux reflets clairs, entourée de l'équipe."></div>
+      <div class="copy" data-sc-cue="0 0.3 0 0.3">
+        <p class="eyebrow">Avant tout</p>
+        <h2 id="comb-title" class="serif">On commence par <em>t'écouter.</em></h2>
+        <p>Ce que tu aimes, ce que tu veux changer, ce que tes cheveux supportent. On note tout, puis on se lance.</p>
+      </div>
+      <div class="copy copy--late" data-sc-cue="0.66 1.3 0.12 0.1">
+        <h2 class="serif">Et le résultat <em>se voit de dos.</em></h2>
+        <p>Une ligne nette, des reflets posés à la main, du mouvement jusqu'aux pointes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOT 4 · the craft: the hair itself, and what the salon does with it -->
+  <section class="services" data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#0E0806" aria-labelledby="svc-title">
+    <div data-sc-stage class="stage" style="background: radial-gradient(60% 80% at 72% 45%, #2A170F, #0E0806 70%)">
+      <div class="shot" style="--ar: 736/981; --origin: 45% 40%; --push: .1"><img src="assets/shot-4.webp" width="736" height="981" alt="Une main présente deux mèches ondulées noires, prêtes à être posées."></div>
+      <div class="copy" data-sc-cue="0.05 1.3 0.2 0.1">
+        <p class="eyebrow">Au salon</p>
+        <h2 id="svc-title" class="serif">Des mèches <em>choisies avec soin.</em></h2>
+        <ul data-sc-in data-sc-stagger="90">
+          <li>Pose de mèches <span>sur devis</span></li>
+          <li>Lissage <span>sur devis</span></li>
+          <li>Reflets &amp; couleur <span>sur devis</span></li>
+          <li>Boucles &amp; définition <span>sur devis</span></li>
+          <li>Boucles cuivrées <span>sur devis</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT · the film ends where the visitor starts -->
+  <section id="contact" class="contact" data-sc-act="flow" data-sc-drift="#1C120D" aria-labelledby="contact-title">
+    <div class="contact__grid">
+      <div data-sc-in>
+        <p class="eyebrow">Rendez-vous</p>
+        <h2 id="contact-title" class="serif">À toi <em>la prochaine scène.</em></h2>
+        <p class="contact__lede">Les rendez-vous se prennent sur Instagram. On te répond pour fixer le créneau qui te convient.</p>
+      </div>
+      <div class="ig" data-sc-in>
+        <p class="ig__how">Le plus simple : écris-nous en message privé sur Instagram, avec la prestation qui t'intéresse et tes disponibilités.</p>
+        <a class="btn ig__btn" href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Écrire sur <span>Instagram</span></a>
+        <p class="ig__handle">@salon_de_coiffure_nitsy</p>
+        <ol class="ig__steps">
+          <li>Pose de mèches, lissage, couleur ou boucles : dis-nous ce que tu veux.</li>
+          <li>Donne-nous tes jours et horaires possibles.</li>
+          <li>On te répond pour confirmer le rendez-vous.</li>
+        </ol>
+      </div>
+    </div>
+    <footer class="foot"><span>Nitsy Fashion · Salon de coiffure · <a href="https://www.instagram.com/salon_de_coiffure_nitsy/" target="_blank" rel="noopener">Instagram</a></span><span>© 2026 Nitsy Fashion</span></footer>
+  </section>
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>
+  (function () {
+    var probe = document.createElement('video');
+    if (probe.canPlayType('video/mp4; codecs="avc1.640028"') || !probe.canPlayType('video/webm; codecs="vp9"')) return;
+    document.querySelectorAll('video[data-sc-scrub][data-webm]').forEach(function (v) {
+      v.setAttribute('data-sc-src', v.getAttribute('data-webm'));
+      v.setAttribute('data-sc-src-mobile', v.getAttribute('data-webm-mobile'));
+    });
+  })();
+  ScrollCraft.mount(document.body);
+  (function () {
+    // Services rail: each card settles as it comes in from the right edge, and
+    // keyboard focus on the closing button jumps to the end of the travel.
+    var act = document.querySelector('.svc'); if (!act) return;
+    var items = act.querySelectorAll('.svc-card, .svc-end'), stage = act.querySelector('[data-sc-stage]');
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches, tick = false;
+    function settle() {
+      tick = false; var w = innerWidth;
+      for (var i = 0; i < items.length; i++) {
+        var r = items[i].getBoundingClientRect();
+        var k = Math.max(0, Math.min(1, (w - r.left) / (r.width * 0.85)));
+        items[i].style.setProperty('--k', k.toFixed(3));
+      }
+    }
+    if (!still) {
+      addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(settle); } }, { passive: true });
+      addEventListener('resize', settle); settle();
+    }
+    act.addEventListener('focusin', function () {
+      if (still) return;
+      stage.scrollLeft = 0;
+      var top = act.getBoundingClientRect().top + scrollY;
+      scrollTo({ top: top + act.offsetHeight - innerHeight - 2, behavior: 'instant' });
+    });
+  })();
+  document.querySelectorAll('[data-sc-act="scrub"]').forEach(function (hero) {
+    // Keep the poster up if the clip never paints (codec, blocked blob URL).
+    var v = hero.querySelector('video'), ok = false, n = 0;
+    if (!v) return;
+    var iv = setInterval(function () {
+      if (v.readyState >= 2 && !v.error) ok = true;
+      hero.classList.toggle('clip-missing', hero.classList.contains('sc-has-clip') && !ok);
+      if (ok || ++n > 40) clearInterval(iv);
+    }, 400);
+  });
+</script>
+</body>
+</html>

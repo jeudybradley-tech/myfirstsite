@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TÉNÈBRE · Edition of 88</title>
+<meta name="description" content="A gold skeleton watch that comes apart as you scroll. 42 mm grade-5 titanium, 72-hour reserve, 217 components. Edition of 88. Private waitlist.">
+<meta name="theme-color" content="#0b0a09">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b0a09'/><circle cx='16' cy='16' r='8.5' fill='none' stroke='%23c9a66b' stroke-width='1.6'/></svg>">
+<link rel="preload" href="assets/fonts/bodoni-moda-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/frames/w00.webp" as="image" fetchpriority="high">
+<link rel="stylesheet" href="scrollcraft.css">
+<link rel="stylesheet" href="tenebre.css">
+</head>
+<body>
+
+<a class="skip" href="#waitlist">Skip to the waitlist</a>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<!-- Chrome lives in the bottom corners. The wordmark only appears once the
+     hero's own name has gone, so the page never shows the name twice. -->
+<nav class="chrome" aria-label="Site">
+  <a class="chrome__mark" href="#top" aria-label="Ténèbre, back to the top">TÉNÈBRE</a>
+  <a class="chrome__cta" href="#waitlist">Join the waitlist</a>
+</nav>
+
+<main>
+
+  <!-- 1 · THE WATCH, THEN ITS PARTS. Canvas frame sequence from the supplied
+       clip, pinned: the page opens on the whole watch, and the reader's scroll
+       lifts the crystal, lets the parts go, and brings them back. -->
+  <section class="hero" id="top" data-sc-act="pin" data-sc-span="4" data-sc-drift="#0b0a09">
+    <div data-sc-stage class="hero__stage">
+      <img class="hero__poster" src="assets/frames/w00.webp" alt="" width="1560" height="1280" fetchpriority="high">
+      <canvas class="hero__plate" role="img" aria-label="A gold skeleton watch alone in the dark. As the page scrolls, its crystal lifts, its wheels and screws drift apart in a fall of gold dust, then everything returns to its place."></canvas>
+      <h1 class="hero__name" data-sc-cue="0 0.3 0 0.3" data-sc-rise="0">
+        <span class="sr-only">Ténèbre</span>
+        <span class="hero__letters" aria-hidden="true"><span>T</span><span>É</span><span>N</span><span>È</span><span>B</span><span>R</span><span>E</span></span>
+      </h1>
+      <canvas class="hero__dust" aria-hidden="true"></canvas>
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <p class="hero__line hero__line--a" data-sc-cue="0 0.24 0 0.3">A watch, finished in the dark.</p>
+      <p class="hero__line hero__line--b" data-sc-cue="0.3 0.52 0.2 0.2">Two hundred and seventeen parts, held by nothing.</p>
+      <p class="hero__line hero__line--b hero__line--c" data-sc-cue="0.56 0.9 0.2 0.16">Then each one, back in its place.</p>
+    </div>
+  </section>
+
+  <!-- 2 · STILLNESS. The light is out. Words light up exactly as far as the
+       reader has scrolled. -->
+  <section class="story" data-sc-act="pin" data-sc-span="1.8" data-sc-drift="#080706">
+    <div data-sc-stage class="story__stage">
+      <div class="story__block">
+        <h2 class="story__title" data-sc-cue="0 1 0 0.16">Crafted in darkness.</h2>
+        <p class="story__text" data-sc-cue="0 1 0 0.16" data-lit>Most of what makes it work, you will never see. It was finished as if you would.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · CLOSENESS. Three details of the same watch, closer than a shop
+       window allows. Ordinary flow between two pinned acts, so the page
+       breathes before the drawing. -->
+  <section class="macro" data-sc-act="flow" data-sc-drift="#0a0908">
+    <div class="macro__inner">
+      <div class="macro__copy sc-stack" data-sc-in data-sc-stagger="70">
+        <h2 class="macro__title">Closer.</h2>
+        <p class="macro__text">Every edge was cut for the moment the light arrives.</p>
+      </div>
+      <div class="macro__grid">
+        <figure class="macro__fig macro__fig--tall" data-sc-reveal="up" data-sc-reveal-at="0.1 0.4">
+          <img loading="lazy" decoding="async" src="assets/detail-numerals.webp" width="510" height="690" alt="Roman numerals IX, X and XI on the chapter ring, the skeleton dial behind them">
+          <figcaption>Chapter ring</figcaption>
+        </figure>
+        <figure class="macro__fig" data-sc-reveal="left" data-sc-reveal-at="0.18 0.48">
+          <img loading="lazy" decoding="async" src="assets/detail-jewels.webp" width="540" height="540" alt="Ruby jewels set into the engraved gold bridge">
+          <figcaption>Jewels</figcaption>
+        </figure>
+        <figure class="macro__fig" data-sc-reveal="down" data-sc-reveal-at="0.26 0.56">
+          <img loading="lazy" decoding="async" src="assets/detail-crown.webp" width="450" height="450" alt="The fluted crown at three o'clock and the polished case flank">
+          <figcaption>Crown</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · UNDERSTANDING. The whole watch again, photographed front on, is
+       scanned into a drawing that tips back and separates into its seven
+       layers, each named, the specs on the parts they describe. -->
+  <section class="explode" id="anatomy" data-sc-act="pin" data-sc-span="3.2" data-sc-drift="#090807">
+    <div data-sc-stage class="explode__stage" data-sc-verify-state="">
+      <canvas class="explode__canvas" aria-hidden="true"></canvas>
+      <div class="explode__photo" aria-hidden="true"><img src="assets/head.webp" alt="" width="600" height="600" loading="lazy" decoding="async"></div>
+      <div class="explode__scan" aria-hidden="true"></div>
+
+      <div class="explode__head" data-sc-cue="0 0.34 0 0.3">
+        <h2 class="explode__title">Every layer, in order.</h2>
+        <p class="explode__sub">Seven layers. Every one of them finished.</p>
+      </div>
+
+      <ol class="explode__parts" aria-label="The layers, from the crystal down">
+        <li data-part="0">Crystal</li>
+        <li data-part="1">Bezel</li>
+        <li data-part="2">Hands</li>
+        <li data-part="3">Dial</li>
+        <li data-part="4">Movement</li>
+        <li data-part="5">Case</li>
+        <li data-part="6">Caseback</li>
+      </ol>
+
+      <div class="spec" data-anchor="case">
+        <div class="spec__in" data-sc-cue="0.6 1 0.12 0.04">
+          <p class="spec__num">42&#8202;mm</p>
+          <p class="spec__label">Grade-5 titanium</p>
+        </div>
+      </div>
+      <div class="spec" data-anchor="barrel">
+        <div class="spec__in" data-sc-cue="0.68 1 0.12 0.04">
+          <p class="spec__num">72&#8202;h</p>
+          <p class="spec__label">Power reserve</p>
+        </div>
+      </div>
+      <div class="spec spec--count" data-anchor="count">
+        <div class="spec__in" data-sc-cue="0.44 1 0.08 0.04">
+          <p class="spec__num"><span data-sc-count="0 217" data-sc-count-at="0.46 0.86">0</span></p>
+          <p class="spec__label">Components</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · GRAVITY, then BELONGING. One held stage to the end of the page:
+       the ring of 88 fills under the reader's hand, the edition and the price
+       land inside it, then the dial steps aside and the waitlist takes its
+       place. The last act, so its cues hold. -->
+  <section class="finale" id="waitlist" data-sc-act="pin" data-sc-span="2.4" data-sc-drift="#0b0a09">
+    <div data-sc-stage class="finale__stage">
+      <div class="finale__dial">
+        <svg class="edition__ring" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+        <div class="edition__copy">
+          <h2 class="edition__title" data-sc-cue="0.16">Edition of 88.</h2>
+          <p class="edition__price" data-sc-cue="0.3">$48,000</p>
+        </div>
+      </div>
+      <div class="finale__ask" data-sc-cue="0.56" data-sc-rise="0.6">
+        <h2 class="close__title">Private waitlist.</h2>
+        <p class="close__text">Leave a name. We will write when it is time.</p>
+        <form class="close__form" id="waitlist-form" method="post" action="#waitlist" novalidate>
+          <div class="field">
+            <label for="wl-name">Name</label>
+            <input id="wl-name" name="name" type="text" autocomplete="name" required maxlength="120">
+          </div>
+          <div class="field">
+            <label for="wl-email">Email</label>
+            <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200">
+          </div>
+          <button class="close__submit" type="submit">Join the waitlist</button>
+          <p class="close__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <footer class="foot" data-sc-cue="0.62" data-sc-rise="0">
+        <span class="foot__mark">TÉNÈBRE</span>
+        <span>Edition of 88</span>
+        <span>&copy; 2026</span>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/vendor/lenis-1.3.26.min.js"></script>
+<script src="scrollcraft.js"></script>
+<script src="tenebre.js"></script>
+</body>
+</html>
