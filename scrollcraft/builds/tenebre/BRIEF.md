@@ -257,6 +257,16 @@ pessimistic):
 | Same: main-thread tasks over 50 ms | 45 | 0 |
 | Desktop 2x, same passes: tasks over 50 ms | 326 | 175 |
 
+**After "la montre ne bouge pas" (the watch does not move).** The fast path
+had one way to fail silently: a frame download that never finishes left the
+hero on its first frame for good. The loader now proves the path on the
+first file and drops to plain images for good at the first refused, stalled
+(15 s) or non-image download, or failed or slow (8 s) decode. Checked on a
+phone viewport under five conditions (normal, decode refused, downloads
+answered with a web page, downloads blocked, downloads that never finish):
+the watch comes apart in all five, with the same pictures as the fast path.
+Before the fix it stayed whole when downloads never finished.
+
 **Feel check, cold, one word per act:** wonder, stillness, closeness,
 understanding, resolve. The watch now opens the page at its largest, alone
 in the dark, so the peak and the signature are the same moment and the

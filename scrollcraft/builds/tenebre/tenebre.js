@@ -164,16 +164,22 @@
     var CANVAS = '#0b0a09';
 
     // Loading, built for a phone on a train. The first frame is the poster
-    // the page already shows. The rest arrive as small compressed files,
+    // the page already shows. The rest arrive after the page has loaded,
     // coarse to fine (every eighth, then every fourth...), so the whole
-    // gesture works early and only gets smoother. A decoded frame is 8 MB and
-    // the whole set decoded would be over half a gigabyte, so frames are only
-    // decoded near where the reader is, off the main thread, and let go
-    // once the reader has moved on.
-    var files = new Array(N);   // Blob, or a loaded Image where fetch is refused
+    // gesture works early and only gets smoother.
+    // Two ways in. 'bitmap': each frame is fetched as a small file and only
+    // decoded near where the reader is, off the main thread, then let go (a
+    // decoded frame is 8 MB, the whole set over half a gigabyte). 'image':
+    // plain images, left to the browser. The page starts with 'bitmap' where
+    // the browser offers it and drops to 'image' for good at the first sign
+    // of trouble (a refused or stalled download, a file that is not an
+    // image, a decode that fails), so the watch always moves.
+    var files = new Array(N);   // Blob in 'bitmap' mode, a loaded Image in 'image' mode
     var bmp = new Array(N);     // something drawImage can draw at once
     var pending = new Array(N);
-    var canBitmap = typeof createImageBitmap === 'function' && typeof Blob === 'function';
+    var mode = typeof createImageBitmap === 'function' && typeof fetch === 'function' &&
+      typeof Blob === 'function' ? 'bitmap' : 'image';
+    var proved = false;
     var WIN = reduce ? N : 6, decoding = 0, want = 0, heading = 1;
     var L = null, lastKey = '', live = false, queued = false;
     var intro = { start: 0, done: reduce, armed: false };
@@ -183,32 +189,67 @@
     function keep(i) { return i === 0 || (reduce && (i === STILL || i === APART || i === N - 1)); }
 
     function viaImage(i) {
-      var img = new Image();
-      img.decoding = 'async';
-      img.onload = function () { files[i] = img; bmp[i] = img; lastKey = ''; if (i === 0) start(); };
-      img.src = url(i);
+      return new Promise(function (done) {
+        if (bmp[i] && !bmp[i].close) { done(); return; }
+        var img = new Image();
+        img.decoding = 'async';
+        img.onload = function () {
+          files[i] = img;
+          if (bmp[i] && bmp[i].close) bmp[i].close();
+          bmp[i] = img; lastKey = '';
+          if (i === 0) start();
+          done();
+        };
+        img.onerror = function () { done(); };
+        img.src = url(i);
+      });
+    }
+    function fallBack() {
+      if (mode === 'image') return;
+      mode = 'image';
+      // whatever already arrived as a file comes again as an image, from cache
+      for (var i = 1; i < N; i++) if (files[i] instanceof Blob) viaImage(i);
     }
     function fetchFrame(i) {
-      if (!canBitmap || typeof fetch !== 'function') { viaImage(i); return Promise.resolve(); }
-      return fetch(url(i)).then(function (r) {
-        if (!r.ok) throw new Error(r.status);
+      if (mode !== 'bitmap') return viaImage(i);
+      var ctl = typeof AbortController === 'function' ? new AbortController() : null;
+      var stall = setTimeout(function () { if (ctl) ctl.abort(); fallBack(); }, 15000);
+      return fetch(url(i), ctl ? { signal: ctl.signal } : {}).then(function (r) {
+        var type = r.headers.get('content-type') || '';
+        if (!r.ok || type.indexOf('image/') !== 0) throw new Error('not a frame');
         return r.blob();
-      }).then(function (b) { files[i] = b; pump(); }, function () { viaImage(i); });
+      }).then(function (b) {
+        clearTimeout(stall);
+        if (mode !== 'bitmap') return viaImage(i);
+        files[i] = b;
+        if (proved) { pump(); return; }
+        // the first file proves the path end to end: decode it once, now,
+        // and give up on the path if that fails or takes too long
+        return new Promise(function (ok) {
+          var slow = setTimeout(function () { fallBack(); ok(viaImage(i)); }, 8000);
+          createImageBitmap(b).then(function (t) {
+            clearTimeout(slow);
+            if (t.close) t.close();
+            if (mode === 'bitmap') { proved = true; pump(); }
+            ok();
+          }, function () { clearTimeout(slow); fallBack(); ok(viaImage(i)); });
+        });
+      }, function () { clearTimeout(stall); fallBack(); return viaImage(i); });
     }
     function decode(i) {
-      if (i < 0 || i >= N || bmp[i] || pending[i] || !files[i] || !(files[i] instanceof Blob)) return;
+      if (i < 0 || i >= N || bmp[i] || pending[i] || !(files[i] instanceof Blob)) return;
       pending[i] = true; decoding++;
       createImageBitmap(files[i]).then(function (b) {
         pending[i] = false; decoding--;
-        if (!keep(i) && Math.abs(i - want) > WIN + 3) b.close();
+        if (mode !== 'bitmap' || (!keep(i) && Math.abs(i - want) > WIN + 3)) { if (b.close) b.close(); }
         else { bmp[i] = b; lastKey = ''; }
         pump();
-      }, function () { pending[i] = false; decoding--; viaImage(i); });
+      }, function () { pending[i] = false; decoding--; fallBack(); viaImage(i); });
     }
     // Decode outward from where the reader is, further ahead than behind,
     // two at a time; release what is well behind.
     function pump() {
-      if (!canBitmap) return;
+      if (mode !== 'bitmap') return;
       for (var d = 0; d <= WIN && decoding < 2; d++) {
         decode(want + d * heading);
         if (d && d <= WIN / 2) decode(want - d * heading);
