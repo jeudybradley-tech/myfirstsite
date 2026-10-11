@@ -156,10 +156,10 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 .hero__line { position: absolute; margin: 0; }
 .hero__line--a {
   left: var(--line-a-x, var(--sc-gutter)); top: var(--line-a-y, 60%);
-  font-size: var(--sc-t-sm);
   letter-spacing: 0.06em;
   color: var(--sc-ink-soft);
-  max-width: 28ch;
+  font-size: min(var(--sc-t-sm), var(--line-a-fs, 1rem));
+  max-width: min(28ch, var(--line-a-max, 28ch));
 }
 .hero__line--b {
   left: var(--sc-gutter); bottom: clamp(4.5rem, 14vh, 9rem);
@@ -446,17 +446,24 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 }
 .foot__mark { font-family: var(--sc-font-display); letter-spacing: 0.3em; color: var(--sc-ink); margin-right: auto; }
 
+/* The hero stacks (name above the watch) whenever its screen is taller than
+   wide, whatever the width; the script sets the class. A short, wide screen,
+   a gallery thumbnail included, keeps the side-by-side composition. */
+.hero__stage.is-stacked .hero__line--a { text-align: center; left: 50%; translate: -50% 0; width: max-content; max-width: 86vw; }
+.hero__stage.is-stacked .hero__line--b { left: 50%; translate: -50% 0; text-align: center; bottom: clamp(5rem, 13svh, 7rem); width: min(86vw, 22rem); max-width: none; }
+.hero__stage.is-stacked .hero__scrim {
+  width: 100%; height: 42svh;
+  background: linear-gradient(to top,
+    color-mix(in oklab, var(--sc-canvas) 86%, transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 52%, transparent) 40%,
+    transparent 100%);
+}
+
+/* A gallery thumbnail (under 340 px tall) shows the watch and the name only. */
+.tn-tiny .chrome { display: none; }
+
 /* ------------------------------------------------------------ phones -- */
 @media (max-width: 760px) {
-  .hero__line--a { text-align: center; left: 50%; translate: -50% 0; width: max-content; max-width: 86vw; }
-  .hero__line--b { left: 50%; translate: -50% 0; text-align: center; bottom: clamp(5rem, 13svh, 7rem); width: min(86vw, 22rem); max-width: none; }
-  .hero__scrim {
-    width: 100%; height: 42svh;
-    background: linear-gradient(to top,
-      color-mix(in oklab, var(--sc-canvas) 86%, transparent) 0%,
-      color-mix(in oklab, var(--sc-canvas) 52%, transparent) 40%,
-      transparent 100%);
-  }
   .story__stage { justify-items: start; }
   .story__block { margin-right: 0; }
 

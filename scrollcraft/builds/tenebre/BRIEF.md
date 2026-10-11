@@ -278,6 +278,17 @@ Opening the page with `#debug` at the end of its link shows a small panel
 (loading path, frames in, reduced motion, scroll position, hero progress,
 clip frame) for a screenshot if the watch still does not move somewhere.
 
+**After "dans la section artifacts ça bug" (thumbnail broken, page opens
+badly).** The hero chose its phone composition by width alone (760 px and
+under), so a short, wide frame (a gallery thumbnail, a side panel) put the
+name and the first line across the watch. The hero now stacks only when its
+screen is taller than wide; otherwise it keeps the side-by-side composition
+down to 320x200: the case radius has no floor, the gap to the name scales,
+the first line takes the width left of the watch and a size in proportion to
+the name, the strap is kept clear of the corner link, and below 340 px of
+height (thumbnails only) the corner links are left out. Checked at ten sizes
+from 320x200 to 1280x800 and in portrait: nothing overlaps.
+
 **Feel check, cold, one word per act:** wonder, stillness, closeness,
 understanding, resolve. The watch now opens the page at its largest, alone
 in the dark, so the peak and the signature are the same moment and the

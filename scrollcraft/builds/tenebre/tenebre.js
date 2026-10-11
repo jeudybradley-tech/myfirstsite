@@ -329,7 +329,10 @@
 
     function layout() {
       var W = stage.clientWidth, H = stage.clientHeight;
-      var phone = phoneMQ.matches || W / H < 0.8;
+      // Stacked (name above the watch) whenever the screen is taller than it
+      // is wide; side by side otherwise, down to a gallery thumbnail.
+      var phone = W / H < 1;
+      stage.classList.toggle('is-stacked', phone);
       // Full density on phones (their screens are the densest and the watch is
       // the point of the page); 2x is plenty on a desktop.
       var dpr = Math.min(devicePixelRatio || 1, phone ? 3 : 2);
@@ -341,11 +344,22 @@
       // The case is as large as the parts allow: when they fly, the furthest
       // screw travels 1.35 case radii to the left of the centre.
       if (phone) {
-        L.R = Math.min(W * 0.38, H * 0.2);
+        root.classList.remove('tn-tiny');
+        L.R = Math.min(W * 0.38, H * 0.26);
         L.hx = W * 0.5; L.hy = H * 0.52;
       } else {
-        L.R = clamp(Math.min(H * 0.36, W * 0.25), 160, 400);
+        L.R = Math.min(H * 0.36, W * 0.25, 400);
         L.hx = W * (W / H > 1.9 ? 0.6 : 0.62); L.hy = H * 0.5;
+        // The strap runs off the bottom of the screen, 0.62 case radii either
+        // side of the centre: keep it clear of the corner link. Below 340 px
+        // of height (a gallery thumbnail, not a reader) the corner links go.
+        var tiny = H < 340;
+        root.classList.toggle('tn-tiny', tiny);
+        var cta = document.querySelector('.chrome__cta');
+        if (cta && !tiny) {
+          var cl = cta.getBoundingClientRect().left;
+          if (cl > 0) L.hx = Math.min(L.hx, cl - L.R * 0.62 - 8);
+        }
       }
       L.s0 = L.R / HR;
       layoutName();
@@ -363,7 +377,7 @@
       var size;
       if (!L.phone) {
         L.T0 = 0.2; L.T1 = 0.06;
-        var room = L.hx - L.R - L.g - 56;
+        var room = L.hx - L.R - L.g - clamp(W * 0.04, 16, 56);
         size = Math.min(clamp(W * 0.078, 48, 150), room / ((sum100 + 6 * L.T0 * 100) / 100));
         L.nameLeft = L.g;
         L.nameTop = L.hy - size * 0.62;
@@ -384,6 +398,10 @@
       var lineY = L.nameTop + size * 1.12 + 14;
       stage.style.setProperty('--line-a-x', (L.phone ? W / 2 : L.nameLeft + size * 0.04) + 'px');
       stage.style.setProperty('--line-a-y', lineY + 'px');
+      stage.style.setProperty('--line-a-max', (L.phone ? W * 0.86 : Math.max(L.hx - L.R - L.g - 16, 120)) + 'px');
+      // under the name, a size in proportion to it, never above the text size
+      if (L.phone) stage.style.removeProperty('--line-a-fs');
+      else stage.style.setProperty('--line-a-fs', clamp(size * 0.24, 10, 15) + 'px');
     }
 
     function rectFor(push) {
