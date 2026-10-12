@@ -63,84 +63,6 @@
     }
   })();
 
-  // ---- the collection: a drawing stands in for each photograph -------------
-  // Same hand as the engineering drawing later on: case, bezel, twelve
-  // indices, a glimpse of wheels through the dial, hands at ten past ten.
-  // Each kind carries its own metal, dial and leather.
-  (function () {
-    var NS = 'http://www.w3.org/2000/svg';
-    var KINDS = {
-      steel:  { tone: '#cfd4d8', dial: '#16233b', strap: '#8a5631' },
-      rose:   { tone: '#d9a38c', dial: '#e6e0d6', strap: '#3b2318', moon: true },
-      bronze: { tone: '#a9854c', dial: '#1e2530', strap: '#161616', tachy: true },
-      gold:   { tone: '#c9a66b', dial: '#0f0f10', strap: '#151515' }
-    };
-    [].forEach.call(document.querySelectorAll('.piece__art'), function (host, n) {
-      var k = KINDS[host.getAttribute('data-kind')];
-      if (!k) return;
-      var svg = document.createElementNS(NS, 'svg');
-      svg.setAttribute('viewBox', '-100 -125 200 250');
-      svg.setAttribute('aria-hidden', 'true');
-      var add = function (tag, at, parent) {
-        var el = document.createElementNS(NS, tag);
-        for (var a in at) el.setAttribute(a, at[a]);
-        (parent || svg).appendChild(el);
-        return el;
-      };
-      var line = function (x1, y1, x2, y2, w, c, o) {
-        add('line', { x1: x1.toFixed(2), y1: y1.toFixed(2), x2: x2.toFixed(2), y2: y2.toFixed(2),
-          stroke: c, 'stroke-width': w, 'stroke-linecap': 'round', opacity: o == null ? 1 : o });
-      };
-      // the leather fades into the dark of the card, as in the film
-      var defs = add('defs', {});
-      [['t', 0, 1], ['b', 1, 0]].forEach(function (g) {
-        var lg = add('linearGradient', { id: 'pc' + n + g[0], x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
-        add('stop', { offset: 0, 'stop-color': k.strap, 'stop-opacity': g[1] }, lg);
-        add('stop', { offset: 1, 'stop-color': k.strap, 'stop-opacity': g[2] }, lg);
-      });
-      add('rect', { x: -32, y: -124, width: 64, height: 66, fill: 'url(#pc' + n + 't)' });
-      add('rect', { x: -32, y: 58, width: 64, height: 66, fill: 'url(#pc' + n + 'b)' });
-      [-1, 1].forEach(function (sy) {
-        [-1, 1].forEach(function (sx) {
-          add('rect', { x: sx * 33 - 4, y: sy > 0 ? 56 : -70, width: 8, height: 14, rx: 2, fill: k.tone });
-        });
-      });
-      add('rect', { x: 70, y: -7, width: 8, height: 14, rx: 2, fill: k.tone });
-      add('circle', { r: 70, fill: k.dial, stroke: k.tone, 'stroke-width': k.tachy ? 10 : 5 });
-      if (k.tachy) for (var t = 0; t < 60; t++) {
-        var ta = t / 60 * Math.PI * 2;
-        line(Math.sin(ta) * 66.5, -Math.cos(ta) * 66.5, Math.sin(ta) * (t % 5 ? 70 : 73), -Math.cos(ta) * (t % 5 ? 70 : 73), 0.9, k.dial);
-      }
-      add('circle', { r: 62, fill: 'none', stroke: k.tone, 'stroke-width': 0.8, opacity: 0.5 });
-      for (var i = 0; i < 12; i++) {
-        var a = i / 12 * Math.PI * 2, r0 = i % 3 ? 52 : 49;
-        line(Math.sin(a) * r0, -Math.cos(a) * r0, Math.sin(a) * 58, -Math.cos(a) * 58, i % 3 ? 1.4 : 2.6, k.tone);
-      }
-      // the skeleton: wheels seen through the dial
-      [[-20, 12, 15, 6], [22, -12, 10, 5], [14, 27, 7, 0]].forEach(function (w) {
-        add('circle', { cx: w[0], cy: w[1], r: w[2], fill: 'none', stroke: k.tone, 'stroke-width': 0.9, opacity: 0.6 });
-        for (var s = 0; s < w[3]; s++) {
-          var sa = s / w[3] * Math.PI * 2;
-          line(w[0], w[1], w[0] + Math.sin(sa) * w[2], w[1] - Math.cos(sa) * w[2], 0.7, k.tone, 0.45);
-        }
-      });
-      if (k.moon) {
-        add('circle', { cx: 0, cy: 30, r: 13, fill: '#1b2b4d', stroke: k.tone, 'stroke-width': 0.9 });
-        add('circle', { cx: -2, cy: 29, r: 5.5, fill: '#e9d9a6' });
-        add('circle', { cx: 0.6, cy: 27.4, r: 5, fill: '#1b2b4d' });
-      }
-      // hands drawn pointing up, each in its own group, turned by the script:
-      // they start at ten past ten and move as the reader scrolls
-      var hour = add('g', { transform: 'rotate(-38)' });
-      add('line', { x1: 0, y1: 4, x2: 0, y2: -34, stroke: k.tone, 'stroke-width': 3, 'stroke-linecap': 'round' }, hour);
-      var min = add('g', { transform: 'rotate(66)' });
-      add('line', { x1: 0, y1: 6, x2: 0, y2: -43, stroke: k.tone, 'stroke-width': 1.9, 'stroke-linecap': 'round' }, min);
-      add('circle', { r: 3, fill: k.tone });
-      host.appendChild(svg);
-      host.__pc = { svg: svg, hour: hour, min: min };
-    });
-  })();
-
   var sc = ScrollCraft.mount(document.body);
   function actOf(sel) {
     var el = document.querySelector(sel);
@@ -1024,15 +946,13 @@
   // =========================================================================
   // THE COLLECTION: the watches move with the scroll
   // =========================================================================
-  // The cards rise at different speeds, column by column; each drawing turns
-  // a little and leans in as it crosses the middle of the screen; the hands
-  // sweep, two turns of the minute hand over the section. Reduced motion
-  // keeps only the hands, which move only when the reader scrolls.
+  // The cards rise at different speeds, column by column, and each photograph
+  // drifts inside its frame, slower than its card: two depths. Reduced motion
+  // leaves them still.
   var collection = (function () {
     var sec = document.querySelector('.coll');
-    if (!sec) return { layout: function () {}, render: function () {} };
+    if (!sec || reduce) return { layout: function () {}, render: function () {} };
     var cards = [].slice.call(sec.querySelectorAll('.piece'));
-    var arts = cards.map(function (c) { var a = c.querySelector('.piece__art'); return a && a.__pc; });
     var photos = cards.map(function (c) { return c.querySelector('.piece__photo'); });
     var cols = 4, amp = 120, last = -1;
     var SPEED = { 1: [0.8], 2: [0.55, 1.1], 4: [0.5, 1.05, 0.7, 1.25] };
@@ -1049,20 +969,8 @@
       if (Math.abs(t - last) < 0.0004) return;
       last = t;
       for (var i = 0; i < cards.length; i++) {
-        var a = arts[i];
-        if (a) {
-          a.hour.setAttribute('transform', 'rotate(' + (-38 + t * 60 + i * 9).toFixed(2) + ')');
-          a.min.setAttribute('transform', 'rotate(' + (66 + t * 720 + i * 40).toFixed(2) + ')');
-        }
-        if (reduce) continue;
-        var sp = SPEED[cols][i % cols];
-        cards[i].style.transform = 'translate3d(0,' + ((0.5 - t) * amp * sp).toFixed(2) + 'px,0)';
-        // a photograph drifts inside its frame, slower than the card: depth
+        cards[i].style.transform = 'translate3d(0,' + ((0.5 - t) * amp * SPEED[cols][i % cols]).toFixed(2) + 'px,0)';
         if (photos[i]) photos[i].style.transform = 'translate3d(0,' + ((t - 0.5) * 9).toFixed(2) + '%,0) scale(1.14)';
-        if (a) {
-          var bump = Math.sin(Math.PI * clamp01((t - 0.1) / 0.8));
-          a.svg.style.transform = 'rotate(' + ((t - 0.5) * 14 * (i % 2 ? -1 : 1)).toFixed(2) + 'deg) scale(' + (0.94 + 0.08 * bump).toFixed(4) + ')';
-        }
       }
     }
     return { layout: layout, render: render };

@@ -51,7 +51,13 @@ Follow-ups, in order (French):
     only, no purchase; a Collection section before the price and the
     waitlist; example names and prices, marked. Then "i want when we scroll
     down the images moves", and "je veux les vrai image que je t'ai fourni
-    dans le site" (the real photos on the site): waiting for the files.
+    dans le site" (the real photos on the site). The four photographs are
+    now the cards' images, cropped to 4:5 with a soft edge falloff into the
+    dark. **They show other brands' watches and logos (Charlie, Bipfol,
+    Rotary) and belong to their photographers:** fine on this private page
+    to judge the layout, to be replaced by the client's own photographs, or
+    used with permission, before the site is public. The bronze one carried
+    a small sparkle mark in its corner; the crop leaves it out.
 
 ## History
 
@@ -190,7 +196,7 @@ for the moment the parts fly.
 | 2 Crafted in darkness | Origin | `pin` + scroll-lit words (from `--sc-p`) | 1.6vh | "text reveals pinned to scroll position" |
 | 3 Closer | Proof | `flow` + `reveal` (three details wiped in) | flow, about one screen | Unpinned on purpose: the page breathes between two pinned acts |
 | 4 Every layer, in order | Substance | `pin` + bespoke canvas drawing + `count` | 3.2vh | The drawing can show what the footage cannot: every layer, named |
-| 5 The collection | Choice | `flow` + `reveal` (four cards wiped in); the cards rise at per-column speeds, each drawing turns and leans in, the hands sweep with the scroll | flow, about one and a half screens | The client's ask: four more watches shown, no purchase, the one action stays the waitlist |
+| 5 The collection | Choice | `flow` + `reveal` (four cards wiped in); the cards rise at per-column speeds and each photograph drifts inside its frame, slower than its card | flow, about one and a half screens | The client's ask: four more watches shown, no purchase, the one action stays the waitlist |
 | 6 Edition of 88, then the waitlist | Scarcity, commitment | `reveal` ring from `--sc-p`; the dial steps aside and the form takes the frame | 2.4vh, last act, cues hold | The page stops once and stays stopped |
 
 Six acts, 13.4 viewport-heights measured by the harness (13.5 on a phone).

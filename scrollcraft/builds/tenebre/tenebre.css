@@ -328,9 +328,8 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 .spec--count .spec__num { font-size: var(--sc-t-4xl); }
 
 /* -------------------------------------------------------- collection -- */
-/* Four more watches, shown only. Each card is a small lit stage, like the
-   hero; a drawing stands in for the photograph until the real ones arrive,
-   and an "Example" tag says so. */
+/* Four more watches, shown only. Each card frames one photograph; an
+   "Example" tag marks the names and prices as placeholders. */
 .coll { padding-block: clamp(3rem, 9vh, 6rem) var(--sc-section); }
 .coll__inner {
   width: 100%; max-width: var(--sc-maxw); margin-inline: auto; padding-inline: var(--sc-gutter);
@@ -360,7 +359,6 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   box-shadow: var(--sc-e2);
   display: grid; place-items: center; overflow: hidden;
 }
-.piece__art { width: 82%; }
 /* A photograph fills the card, a little larger than it, so the script can
    slide it inside the frame without ever showing an edge. */
 .piece__photo {
@@ -368,7 +366,6 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   object-fit: cover; transform: scale(1.14); will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) { .piece__photo { transform: none; } }
-.piece__art svg { display: block; width: 100%; height: auto; transform-origin: 50% 50%; }
 .piece__tag {
   position: absolute; left: var(--sc-3); top: var(--sc-3); z-index: 1;
   padding: 0.2rem 0.55rem; border-radius: 999px;
