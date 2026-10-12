@@ -46,6 +46,12 @@ Follow-ups, in order (French):
    described as in the video, **18k yellow gold** on a leather strap (the
    client's choice of wording); 42 mm, 72 h, 217 components, edition of 88
    and $48,000 stay.
+10. Four photographs of other brands' skeleton watches, "how can i install
+    those pictures as selling products". Asked: they are inspiration; show
+    only, no purchase; a Collection section before the price and the
+    waitlist; example names and prices, marked. Then "i want when we scroll
+    down the images moves", and "je veux les vrai image que je t'ai fourni
+    dans le site" (the real photos on the site): waiting for the files.
 
 ## History
 
@@ -156,7 +162,8 @@ every part floating, then puts itself back together."
 2  Stillness           the light goes out; two sentences light up word by word as you read them
 3  Closeness           three details at a scale a shop window does not allow
 4  Understanding       a photograph turns into a drawing and separates into named layers, the specs on their parts
-5  Gravity, resolve    eighty-eight marks fill a ring; the price; then the form takes the same frame
+5  Choice             four more watches, rising at their own pace as the page passes
+6  Gravity, resolve    eighty-eight marks fill a ring; the price; then the form takes the same frame
 ```
 
 ## The peak
@@ -180,14 +187,17 @@ for the moment the parts fly.
 | Act | Beat | Device | Span | Why this one |
 |---|---|---|---|---|
 | 1 The watch, then its parts | Arrival, peak | `scrub` as a canvas frame sequence (73 stills at 1560x1280, crossfaded, decoded near the reader only), pinned | 4.0vh | The client's own ask: the hero holds the watch and the scroll takes it apart and back |
-| 2 Crafted in darkness | Origin | `pin` + scroll-lit words (from `--sc-p`) | 1.8vh | "text reveals pinned to scroll position" |
+| 2 Crafted in darkness | Origin | `pin` + scroll-lit words (from `--sc-p`) | 1.6vh | "text reveals pinned to scroll position" |
 | 3 Closer | Proof | `flow` + `reveal` (three details wiped in) | flow, about one screen | Unpinned on purpose: the page breathes between two pinned acts |
 | 4 Every layer, in order | Substance | `pin` + bespoke canvas drawing + `count` | 3.2vh | The drawing can show what the footage cannot: every layer, named |
-| 5 Edition of 88, then the waitlist | Scarcity, commitment | `reveal` ring from `--sc-p`; the dial steps aside and the form takes the frame | 2.4vh, last act, cues hold | The page stops once and stays stopped |
+| 5 The collection | Choice | `flow` + `reveal` (four cards wiped in); the cards rise at per-column speeds, each drawing turns and leans in, the hands sweep with the scroll | flow, about one and a half screens | The client's ask: four more watches shown, no purchase, the one action stays the waitlist |
+| 6 Edition of 88, then the waitlist | Scarcity, commitment | `reveal` ring from `--sc-p`; the dial steps aside and the form takes the frame | 2.4vh, last act, cues hold | The page stops once and stays stopped |
 
-Five acts, 12.4 viewport-heights measured by the harness. Families: scrub,
-pin with lit words, flow with reveals, bespoke drawing with count, reveal with
-a form. One scrub. No family twice in a row. Not in the 13.6 to 13.8vh band.
+Six acts, 13.4 viewport-heights measured by the harness (13.5 on a phone).
+Families: scrub, pin with lit words, flow with reveals, bespoke drawing with
+count, flow with scroll-driven cards, reveal with a form. One scrub. No
+family twice in a row. Not in the 13.6 to 13.8vh band: adding the collection
+first measured 13.6, so the story act went from 1.8 to 1.6vh.
 
 ## Layer contract, hero
 
@@ -214,7 +224,7 @@ Against each row in `scrollcraft/FINGERPRINTS.md`:
 | Grammar | same (filmic) | same | differs (turntable) | differs (poster) | same (filmic) |
 | Nav | differs: no bar, corner chrome at the bottom, the wordmark docks after the hero name has gone, no progress line | differs | differs (scene index) | differs (wordmark only) | differs (top bar + CTA) |
 | Hero device | differs: canvas sequence of real footage in which scroll takes the product apart and back together | differs | differs (video scrub, turning shirt) | differs (type only) | differs (masked photo panel) |
-| Act shape | differs: `scrub(sequence) > pin(lit words) > flow(reveals) > pin(drawing) > pin(ring, then form)`, 5 acts, 12.4vh | differs | differs | differs (`pin > flow > pin > flow > flow`, 8vh) | differs (6 acts, pan rail, 17vh) |
+| Act shape | differs: `scrub(sequence) > pin(lit words) > flow(reveals) > pin(drawing) > flow(collection) > pin(ring, then form)`, 6 acts, 13.4vh | differs | differs | differs (`pin > flow > pin > flow > flow`, 8vh) | differs (6 acts, pan rail, 17vh) |
 | Close | differs: last pinned stage, ring of 88 then the form in the same frame | differs | differs (configurator) | differs (in-flow form) | differs (in-flow form) |
 | Signature | differs | differs | differs (shatter on canvas vs real footage coming apart and back) | differs (braid) | differs (comb reveal) |
 | **Total** | **5 of 6** | **5 of 6** | **6 of 6** | **6 of 6** | **5 of 6** |

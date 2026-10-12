@@ -327,6 +327,76 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 }
 .spec--count .spec__num { font-size: var(--sc-t-4xl); }
 
+/* -------------------------------------------------------- collection -- */
+/* Four more watches, shown only. Each card is a small lit stage, like the
+   hero; a drawing stands in for the photograph until the real ones arrive,
+   and an "Example" tag says so. */
+.coll { padding-block: clamp(3rem, 9vh, 6rem) var(--sc-section); }
+.coll__inner {
+  width: 100%; max-width: var(--sc-maxw); margin-inline: auto; padding-inline: var(--sc-gutter);
+  display: grid; gap: clamp(2rem, 5vw, 4rem);
+}
+.coll__title {
+  font-family: var(--sc-font-display);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: var(--sc-t-4xl);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+.coll__text { margin: 0; color: var(--sc-ink-soft); max-width: 30ch; font-size: var(--sc-t-lg); line-height: 1.5; }
+.coll__grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2rem);
+}
+.piece { display: grid; align-content: start; min-width: 0; will-change: transform; }
+.piece__fig {
+  position: relative; aspect-ratio: 4 / 5; max-width: 100%;
+  border-radius: var(--radius);
+  background: radial-gradient(70% 58% at 50% 46%, #1c1915 0%, #110f0d 55%, var(--sc-canvas) 100%);
+  box-shadow: var(--sc-e2);
+  display: grid; place-items: center; overflow: hidden;
+}
+.piece__art { width: 82%; }
+.piece__art svg { display: block; width: 100%; height: auto; transform-origin: 50% 50%; }
+.piece__tag {
+  position: absolute; left: var(--sc-3); top: var(--sc-3);
+  padding: 0.2rem 0.55rem; border-radius: 999px;
+  border: 1px solid var(--sc-hairline-strong);
+  font-size: var(--sc-t-xs); font-weight: 500;
+  letter-spacing: var(--label-track); text-transform: uppercase;
+  color: var(--sc-ink-soft);
+}
+.piece__name {
+  font-family: var(--sc-font-display); font-optical-sizing: auto; font-weight: 400;
+  font-size: var(--sc-t-xl); line-height: 1.1; letter-spacing: -0.01em;
+  margin: var(--sc-4) 0 0;
+}
+.piece__desc { margin: var(--sc-1) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); line-height: 1.45; }
+.piece__price {
+  margin: var(--sc-2) 0 0; color: var(--sc-ink);
+  font-size: var(--sc-t-sm); letter-spacing: 0.06em; font-variant-numeric: tabular-nums;
+}
+.coll__foot {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: var(--sc-3) var(--sc-6);
+  border-top: 1px solid var(--sc-hairline); padding-top: var(--sc-5);
+}
+.coll__note { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-xs); letter-spacing: 0.04em; }
+.coll__cta {
+  color: var(--sc-ink); text-decoration: none;
+  font-size: var(--sc-t-xs); font-weight: 500;
+  letter-spacing: var(--label-track); text-transform: uppercase;
+  padding-bottom: 0.3rem;
+  background: linear-gradient(var(--sc-accent), var(--sc-accent)) 0 100% / 100% 1px no-repeat;
+}
+@media (hover: hover) and (pointer: fine) { .coll__cta:hover { color: var(--sc-accent); } }
+@media (max-width: 1000px) { .coll__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 359px) { .coll__grid { grid-template-columns: minmax(0, 1fr); } }
+
 /* ------------------------------------------------------------ finale -- */
 /* One held stage to the end of the page. --sc-p is the act's progress: the
    ring fills over the first ~40%, then the dial steps aside (--e, a smoothstep
