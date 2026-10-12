@@ -1,4 +1,4 @@
-# TÉNÈBRE: brief
+# TIMELESS: brief
 
 Written from the client's own spec and follow-ups, 10 October 2026.
 Quotations are verbatim. Anything marked **Authored** was decided by the
@@ -41,6 +41,11 @@ Follow-ups, in order (French):
    better version). The page is now built from it alone.
 8. "fait moi une page de luxe et performant" (make me a luxury page, and a
    fast one).
+9. Questions and answers, 12 October 2026: the brand is **Timeless**; the copy
+   stays in English; the waitlist stays unconnected for now; the case is
+   described as in the video, **18k yellow gold** on a leather strap (the
+   client's choice of wording); 42 mm, 72 h, 217 components, edition of 88
+   and $48,000 stay.
 
 ## History
 
@@ -76,13 +81,14 @@ from it.
   fades into the dark, and the source's top rows ease into that tone.
 - The dial carries a small engraved word that is not legible as any known
   brand.
-- **Not stated anywhere and therefore not on the page:** a brand name, a
-  model name, the movement type, water resistance, a launch date, delivery,
-  payment. The specs on the page are exactly the client's: 42 mm, grade-5
-  titanium, 72 h reserve, 217 components, edition of 88, $48,000.
-- **Mismatch to note:** the footage shows a gold-tone watch on leather; the
-  specs say grade-5 titanium. That is the client's claim to check, not
-  something the page can resolve.
+- **Not stated anywhere and therefore not on the page:** a model name, the
+  movement type, water resistance, a launch date, delivery, payment. The
+  specs on the page are exactly the client's: 42 mm, 18k yellow gold, 72 h
+  reserve, 217 components, edition of 88, $48,000.
+- **Resolved mismatch:** the spec first said grade-5 titanium while the
+  footage shows a gold watch on leather. Asked, the client chose to match the
+  video and to call the case 18k yellow gold. That is the client's claim; the
+  page cannot verify the metal.
 
 ## The eight topics
 
@@ -108,8 +114,9 @@ from it.
 
 Other decisions, all **Authored**:
 
-- **Name: TÉNÈBRE** (French, "darkness"), from "Crafted in Darkness". One word
-  to change in `index.html` if the brand has a real name.
+- **Name: TIMELESS**, the client's (it replaced the placeholder TÉNÈBRE).
+  Set in capitals, letter by letter, in `index.html`; the script handles any
+  number of letters. The build folder keeps its working name, `tenebre/`.
 - **Language:** English, as the spec's copy is English.
 - **The one action:** "Join the waitlist", the same label in the chrome and
   on the form button.
@@ -288,6 +295,12 @@ the first line takes the width left of the watch and a size in proportion to
 the name, the strap is kept clear of the corner link, and below 340 px of
 height (thumbnails only) the corner links are left out. Checked at ten sizes
 from 320x200 to 1280x800 and in portrait: nothing overlaps.
+
+**After the questions of 12 October.** Renamed TIMELESS (eight letters; the
+name animation now works from the letter count), the case spec reads "18k
+yellow gold". Stacked screens keep the strap, as it comes out of the dark,
+below the first line. Harness clean on desktop, phone and reduced motion;
+23 of 23; the five loading failure modes still move the watch.
 
 **Feel check, cold, one word per act:** wonder, stillness, closeness,
 understanding, resolve. The watch now opens the page at its largest, alone

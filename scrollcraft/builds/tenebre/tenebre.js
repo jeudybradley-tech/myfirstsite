@@ -1,4 +1,4 @@
-/* TÉNÈBRE page script.
+/* TIMELESS page script.
    Everything bespoke lives here: Lenis, the hero frame sequence in which the
    reader's scroll takes the watch apart, the scroll-lit words, the drawing
    that comes out of the photograph and apart, the ring of 88, and the
@@ -144,6 +144,7 @@
     var lowLines = [].slice.call(stage.querySelectorAll('.hero__line--b'));
     var box = name.querySelector('.hero__letters');
     var letters = [].slice.call(box.children);
+    var GAPS = letters.length - 1, MID = GAPS / 2;   // spaces between the letters, the middle letter
     var pctx = plate.getContext('2d', { alpha: false });
     var dctx = dust.getContext('2d');
 
@@ -363,6 +364,15 @@
       }
       L.s0 = L.R / HR;
       layoutName();
+      if (phone) {
+        // Stacked: the strap, as it comes out of the dark (about 1.3 case
+        // radii above the centre), starts below the first line, and the case
+        // ends above the lower lines.
+        var top = L.nameTop + L.size * 1.12 + 40, k = (HY - 110) / HR;
+        L.R = Math.min(L.R, (H * 0.82 - top) / (k + 1));
+        L.hy = Math.max(L.hy, top + k * L.R);
+        L.s0 = L.R / HR;
+      }
       positionPoster();
       seedMotes();
       lastKey = '';
@@ -378,12 +388,12 @@
       if (!L.phone) {
         L.T0 = 0.2; L.T1 = 0.06;
         var room = L.hx - L.R - L.g - clamp(W * 0.04, 16, 56);
-        size = Math.min(clamp(W * 0.078, 48, 150), room / ((sum100 + 6 * L.T0 * 100) / 100));
+        size = Math.min(clamp(W * 0.078, 48, 150), room / ((sum100 + GAPS * L.T0 * 100) / 100));
         L.nameLeft = L.g;
         L.nameTop = L.hy - size * 0.62;
       } else {
         L.T0 = 0.24; L.T1 = 0.1;
-        size = Math.min(W * 0.125, 64);
+        size = Math.min(W * 0.125, 64, W * 0.88 / ((sum100 + GAPS * L.T0 * 100) / 100));
         L.nameLeft = 0;
         L.nameTop = H * 0.11;
       }
@@ -492,18 +502,18 @@
 
       // the name tracks in on arrival, then tightens before the watch opens
       var T = reduce ? L.T0 : lerp(L.T0, L.T1, smooth(p / 0.24));
-      var centerShift = L.phone ? (L.W - (L.sum + 6 * T * L.size)) / 2 : 0;
+      var centerShift = L.phone ? (L.W - (L.sum + GAPS * T * L.size)) / 2 : 0;
       for (var i = 0; i < letters.length; i++) {
         var dx = i * T * L.size, op = 1;
         if (!intro.done) {
-          var e = intro.armed ? easeOut((now - intro.start - Math.abs(i - 3) * 70) / 1150) : 0;
-          dx += (1 - e) * (i - 3) * 0.55 * L.size;
+          var e = intro.armed ? easeOut((now - intro.start - Math.abs(i - MID) * 70) / 1150) : 0;
+          dx += (1 - e) * (i - MID) * 0.55 * L.size;
           op = e;
         }
         letters[i].style.transform = 'translate3d(' + dx.toFixed(2) + 'px,0,0)';
         letters[i].style.opacity = op < 1 ? op.toFixed(3) : '';
       }
-      if (!intro.done && intro.armed && now - intro.start > 1150 + 3 * 70 + 40) intro.done = true;
+      if (!intro.done && intro.armed && now - intro.start > 1150 + MID * 70 + 40) intro.done = true;
       var by = reduce ? 0 : -p * L.H * 0.06;
       box.style.transform = 'translate3d(' + (centerShift - ptr.x * 7).toFixed(2) + 'px,' + (by - ptr.y * 4).toFixed(2) + 'px,0)';
 
