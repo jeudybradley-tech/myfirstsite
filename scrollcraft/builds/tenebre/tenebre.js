@@ -1032,7 +1032,8 @@
     var sec = document.querySelector('.coll');
     if (!sec) return { layout: function () {}, render: function () {} };
     var cards = [].slice.call(sec.querySelectorAll('.piece'));
-    var arts = cards.map(function (c) { return c.querySelector('.piece__art').__pc; });
+    var arts = cards.map(function (c) { var a = c.querySelector('.piece__art'); return a && a.__pc; });
+    var photos = cards.map(function (c) { return c.querySelector('.piece__photo'); });
     var cols = 4, amp = 120, last = -1;
     var SPEED = { 1: [0.8], 2: [0.55, 1.1], 4: [0.5, 1.05, 0.7, 1.25] };
     function layout() {
@@ -1056,6 +1057,8 @@
         if (reduce) continue;
         var sp = SPEED[cols][i % cols];
         cards[i].style.transform = 'translate3d(0,' + ((0.5 - t) * amp * sp).toFixed(2) + 'px,0)';
+        // a photograph drifts inside its frame, slower than the card: depth
+        if (photos[i]) photos[i].style.transform = 'translate3d(0,' + ((t - 0.5) * 9).toFixed(2) + '%,0) scale(1.14)';
         if (a) {
           var bump = Math.sin(Math.PI * clamp01((t - 0.1) / 0.8));
           a.svg.style.transform = 'rotate(' + ((t - 0.5) * 14 * (i % 2 ? -1 : 1)).toFixed(2) + 'deg) scale(' + (0.94 + 0.08 * bump).toFixed(4) + ')';

@@ -361,11 +361,19 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   display: grid; place-items: center; overflow: hidden;
 }
 .piece__art { width: 82%; }
+/* A photograph fills the card, a little larger than it, so the script can
+   slide it inside the frame without ever showing an edge. */
+.piece__photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+  object-fit: cover; transform: scale(1.14); will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) { .piece__photo { transform: none; } }
 .piece__art svg { display: block; width: 100%; height: auto; transform-origin: 50% 50%; }
 .piece__tag {
-  position: absolute; left: var(--sc-3); top: var(--sc-3);
+  position: absolute; left: var(--sc-3); top: var(--sc-3); z-index: 1;
   padding: 0.2rem 0.55rem; border-radius: 999px;
   border: 1px solid var(--sc-hairline-strong);
+  background: color-mix(in oklab, var(--sc-canvas) 62%, transparent);
   font-size: var(--sc-t-xs); font-weight: 500;
   letter-spacing: var(--label-track); text-transform: uppercase;
   color: var(--sc-ink-soft);
