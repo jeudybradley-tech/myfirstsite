@@ -586,12 +586,12 @@
     var parts = [].slice.call(stage.querySelectorAll('.layers__parts li')).map(function (li) {
       return { el: li, on: +li.getAttribute('data-on'), off: +li.getAttribute('data-off'), lit: false };
     });
-    // Stills from the supplied clip (8 s, 24 fps, its blue-grey sweep taken
-    // down to the page's dark): every third frame, and the last.
+    // Stills from the supplied clip (8 s, 24 fps, 1280x720 on black, cut to
+    // 880 around the watch): every third frame, and the last.
     var SRC = [];
     for (var f = 0; f < 190; f += 3) SRC.push(f);
     SRC.push(191);
-    var N = SRC.length, FW = 1320, FH = 1080;
+    var N = SRC.length, FW = 880, FH = 720;
     var L = null, lastKey = '', live = false;
     var seq = Frames({
       n: N,
@@ -616,9 +616,9 @@
     // lift one by one (the widest stretch), they hold, they settle back.
     function clipFrame(p) {
       if (p < 0.06) return 0;
-      if (p < 0.45) return lerp(0, 108, (p - 0.06) / 0.39);
-      if (p < 0.6) return lerp(108, 132, (p - 0.45) / 0.15);
-      if (p < 0.92) return lerp(132, 191, (p - 0.6) / 0.32);
+      if (p < 0.42) return lerp(0, 90, (p - 0.06) / 0.36);
+      if (p < 0.6) return lerp(90, 138, (p - 0.42) / 0.18);
+      if (p < 0.92) return lerp(138, 191, (p - 0.6) / 0.32);
       return 191;
     }
     function slot(t) {

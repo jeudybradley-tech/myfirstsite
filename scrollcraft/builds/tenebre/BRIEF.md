@@ -65,6 +65,13 @@ Follow-ups, in order (French):
     settle back, while the camera lowers. Asked: a new section; the sweep
     taken down to the dark; **another model**, not the edition; the gold
     drawing removed. Then "je veux style scroll": the scroll drives it.
+12. "remplace la video à ça": the same scene, re-rendered by the client on
+    black (1280x720, 192 frames, blue steel hands). It replaces the fourth
+    clip: no sweep to take down any more, only the backdrop mapped onto the
+    page ground and a cut of 880 around the watch (65 stills, 1.7 MB). The
+    layers now lift at clip frames 36 (crystal), 58 (dial), 74 (movement)
+    and 84 (the case alone), hold to 138 and are home by 176. Then "je veux
+    que ça soit visible": published at once, the layer names one size up.
 
 ## History
 

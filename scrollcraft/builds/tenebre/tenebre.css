@@ -298,9 +298,9 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 .layers__parts li {
   counter-increment: layer;
   display: flex; align-items: baseline; gap: var(--sc-3);
-  font-size: var(--sc-t-xs); font-weight: 500;
+  font-size: var(--sc-t-sm); font-weight: 500;
   letter-spacing: var(--label-track); text-transform: uppercase;
-  color: var(--sc-ink-soft); opacity: 0.38;
+  color: var(--sc-ink-soft); opacity: 0.55;
   transition: opacity 360ms var(--sc-ease-out), color 360ms var(--sc-ease-out);
 }
 .layers__parts li::after {
