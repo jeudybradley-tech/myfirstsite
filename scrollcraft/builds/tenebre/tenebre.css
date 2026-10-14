@@ -520,12 +520,26 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 .hero__stage.is-stacked .hero__line--a { text-align: center; left: 50%; translate: -50% 0; width: max-content; max-width: 86vw; }
 .hero__stage.is-stacked .hero__line--b { left: 50%; translate: -50% 0; text-align: center; bottom: clamp(5rem, 13svh, 7rem); width: min(86vw, 22rem); max-width: none; }
 .hero__stage.is-stacked .hero__scrim {
-  width: 100%; height: 42svh;
+  width: 100%; height: 44svh;
   background: linear-gradient(to top,
-    color-mix(in oklab, var(--sc-canvas) 86%, transparent) 0%,
-    color-mix(in oklab, var(--sc-canvas) 52%, transparent) 40%,
+    color-mix(in oklab, var(--sc-canvas) 94%, transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 88%, transparent) 30%,
+    color-mix(in oklab, var(--sc-canvas) 55%, transparent) 62%,
     transparent 100%);
 }
+
+/* The second watch on any screen taller than wide: the words above and below
+   the watch, never across it; the script sets the class and sizes the watch
+   to the gap. */
+.layers__stage.is-stacked .layers__head { top: clamp(1.5rem, 6svh, 3rem); right: var(--sc-gutter); max-width: none; text-align: center; }
+.layers__stage.is-stacked .layers__title { font-size: var(--sc-t-2xl); margin-bottom: var(--sc-2); }
+.layers__stage.is-stacked .layers__text { margin-inline: auto; }
+.layers__stage.is-stacked .layers__parts {
+  top: auto; bottom: calc(max(1.35rem, env(safe-area-inset-bottom)) + 2.6rem);
+  left: var(--sc-gutter); right: var(--sc-gutter);
+  grid-auto-flow: column; justify-content: center; justify-items: center; gap: var(--sc-4);
+}
+.layers__stage.is-stacked .layers__parts li::after { display: none; }
 
 /* A gallery thumbnail (under 340 px tall) shows the watch and the name only. */
 .tn-tiny .chrome { display: none; }
@@ -541,15 +555,6 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   .macro__fig--tall { grid-column: 1 / -1; grid-row: auto; }
   .macro__fig--tall img { aspect-ratio: 4 / 3; object-position: 50% 40%; }
 
-  .layers__head { top: clamp(1.5rem, 6svh, 3rem); right: var(--sc-gutter); max-width: none; text-align: center; }
-  .layers__title { font-size: var(--sc-t-2xl); margin-bottom: var(--sc-2); }
-  .layers__text { margin-inline: auto; }
-  .layers__parts {
-    top: auto; bottom: calc(max(1.35rem, env(safe-area-inset-bottom)) + 2.6rem);
-    left: var(--sc-gutter); right: var(--sc-gutter);
-    grid-auto-flow: column; justify-content: center; justify-items: center; gap: var(--sc-4);
-  }
-  .layers__parts li::after { display: none; }
 
 
   .finale__dial {

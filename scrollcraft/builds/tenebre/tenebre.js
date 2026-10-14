@@ -582,6 +582,8 @@
     var stage = document.querySelector('.layers__stage');
     if (!stage || !layersAct) return { layout: function () {}, render: function () {} };
     var plate = stage.querySelector('.layers__plate');
+    var head = stage.querySelector('.layers__head');
+    var list = stage.querySelector('.layers__parts');
     var ctx = plate.getContext('2d', { alpha: false });
     var parts = [].slice.call(stage.querySelectorAll('.layers__parts li')).map(function (li) {
       return { el: li, on: +li.getAttribute('data-on'), off: +li.getAttribute('data-off'), lit: false };
@@ -630,13 +632,29 @@
     function layout() {
       var W = stage.clientWidth, H = stage.clientHeight;
       var stacked = W / H < 1;
+      stage.classList.toggle('is-stacked', stacked);
       var dpr = Math.min(devicePixelRatio || 1, stacked ? 2.5 : 2);
       plate.width = Math.round(W * dpr); plate.height = Math.round(H * dpr);
-      // the wrist runs across the screen; the stack of layers stands right
-      // of centre on a wide screen, centred on a tall one
-      var sc = stacked ? Math.max(W * 1.9 / FW, H * 0.7 / FH) : Math.max(H / FH, W * 0.62 / FW);
-      var cx = stacked ? W * 0.5 : W * 0.6, cy = stacked ? H * 0.55 : H * 0.5;
-      L = { W: W, H: H, dpr: dpr, x: cx - FW * sc / 2, y: cy - FH * sc / 2, w: FW * sc, h: FH * sc };
+      // The wrist runs across the screen. On a wide screen the stack of
+      // layers stands right of centre, the frame as tall as the screen. On a
+      // tall one the words sit above and below it, so the frame is sized to
+      // the gap between them: the crystal at its highest (row 31 of the clip)
+      // stops under the heading, the case (row 700) above the layer names,
+      // whatever the phone's height.
+      var sc, x, y;
+      if (stacked) {
+        var top = head.offsetTop + head.offsetHeight + 12;
+        var bottom = list.offsetTop - 10;
+        sc = (bottom - top) / (700 - 31);
+        if (!(sc > 0.2)) sc = Math.max(W * 1.9 / FW, H * 0.7 / FH);
+        sc = Math.min(sc, W * 0.92 / 330);          // the stack is about 330 wide
+        x = W / 2 - FW * sc / 2;
+        y = (sc > 0.2 && bottom > top) ? top - 31 * sc : H * 0.55 - FH * sc / 2;
+      } else {
+        sc = Math.max(H / FH, W * 0.62 / FW);
+        x = W * 0.6 - FW * sc / 2; y = H * 0.5 - FH * sc / 2;
+      }
+      L = { W: W, H: H, dpr: dpr, x: x, y: y, w: FW * sc, h: FH * sc };
       lastKey = '';
     }
 

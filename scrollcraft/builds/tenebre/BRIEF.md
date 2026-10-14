@@ -72,6 +72,14 @@ Follow-ups, in order (French):
     layers now lift at clip frames 36 (crystal), 58 (dial), 74 (movement)
     and 84 (the case alone), hold to 138 and are home by 176. Then "je veux
     que ça soit visible": published at once, the layer names one size up.
+13. A phone screenshot, "les écritures ne sont pas visible": on a short
+    phone (376x650) the second watch was sized for a taller screen, so its
+    crystal ran under the heading. On any screen taller than wide the
+    section now stacks by class (words above, layer names below, tablets
+    included), and the watch is sized to the gap between them: the crystal
+    at its highest stops under the heading, the case above the names. The
+    hero's lower lines got a darker band behind them on stacked screens;
+    harness clean at 376x650, 360x640 and 390x844.
 
 ## History
 
