@@ -252,34 +252,24 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   color: var(--sc-ink-soft);
 }
 
-/* ----------------------------------------------------------- explode -- */
-.explode__stage { background: #090807; }
-.explode__canvas { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; z-index: 1; }
-.explode__photo {
-  position: absolute; left: 0; top: 0; z-index: 2;
-  width: var(--photo-size, 360px); height: var(--photo-size, 360px);
-  transform: translate3d(var(--photo-x, 0px), var(--photo-y, 0px), 0);
-  clip-path: inset(var(--scan-cut, 0%) 0 0 0);
-  -webkit-mask-image: radial-gradient(closest-side, #000 86%, transparent 100%);
-  mask-image: radial-gradient(closest-side, #000 86%, transparent 100%);
-  pointer-events: none;
+/* ------------------------------------------------------------ layers -- */
+/* A second watch, on a wrist, taken apart by the scroll. The name sits top
+   left, in the dark above the arm; the four layers are listed top right,
+   each lit while it is off the case. */
+.layers__stage { background: var(--sc-canvas); }
+.layers__poster {
+  position: absolute; left: 50%; top: 50%; height: 100%; width: auto; max-width: none;
+  translate: -50% -50%; z-index: 0;
+  transition: opacity 420ms var(--sc-ease-out);
 }
-.explode__photo img { width: 100%; height: 100%; max-width: none; }
-.explode__scan {
-  position: absolute; left: 0; top: 0; z-index: 3;
-  height: 1px;
-  width: var(--scan-w, 400px);
-  transform: translate3d(var(--scan-x, 0px), var(--scan-y, 0px), 0);
-  background: linear-gradient(to right, transparent, var(--gold-line) 18%, var(--gold-line) 82%, transparent);
-  opacity: var(--scan-o, 0);
-  pointer-events: none;
-}
-.explode__head {
+.layers__stage.is-live .layers__poster { opacity: 0; }
+.layers__plate { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; z-index: 1; }
+.layers__head {
   position: absolute; z-index: var(--sc-z-copy);
   left: var(--sc-gutter); top: clamp(2.5rem, 9vh, 6rem);
-  max-width: 24rem;
+  max-width: 36rem;
 }
-.explode__title {
+.layers__title {
   font-family: var(--sc-font-display);
   font-optical-sizing: auto;
   font-weight: 400;
@@ -287,45 +277,48 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   line-height: 1;
   letter-spacing: -0.018em;
   margin: 0 0 var(--sc-4);
+  text-wrap: balance;
 }
-.explode__sub { margin: 0; color: var(--sc-ink-soft); }
-
-.explode__parts { list-style: none; margin: 0; padding: 0; }
-.explode__parts li {
-  position: absolute; left: 0; top: 0; z-index: 4;
-  font-family: var(--sc-font-text);
-  font-size: var(--sc-t-xs);
-  font-weight: 500;
-  letter-spacing: var(--label-track);
-  text-transform: uppercase;
+.layers__tag {
+  display: inline-block; margin-bottom: var(--sc-4);
+  padding: 0.2rem 0.55rem; border-radius: 999px;
+  border: 1px solid var(--sc-hairline-strong);
+  font-family: var(--sc-font-text); font-size: var(--sc-t-xs); font-weight: 500;
+  letter-spacing: var(--label-track); text-transform: uppercase;
   color: var(--sc-ink-soft);
-  white-space: nowrap;
-  line-height: 1;
-  opacity: 0;
-  will-change: transform, opacity;
 }
-.spec { position: absolute; left: 0; top: 0; z-index: var(--sc-z-copy); will-change: transform; }
-.spec__num {
-  font-family: var(--sc-font-display);
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-size: var(--sc-t-2xl);
-  line-height: 1;
-  letter-spacing: -0.01em;
+.layers__text { margin: 0; color: var(--sc-ink-soft); max-width: 26ch; }
+.layers__parts {
+  position: absolute; z-index: var(--sc-z-copy);
+  right: var(--sc-gutter); top: clamp(2.5rem, 9vh, 6rem);
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: var(--sc-3); justify-items: end;
+  counter-reset: layer;
+}
+.layers__parts li {
+  counter-increment: layer;
+  display: flex; align-items: baseline; gap: var(--sc-3);
+  font-size: var(--sc-t-xs); font-weight: 500;
+  letter-spacing: var(--label-track); text-transform: uppercase;
+  color: var(--sc-ink-soft); opacity: 0.38;
+  transition: opacity 360ms var(--sc-ease-out), color 360ms var(--sc-ease-out);
+}
+.layers__parts li::after {
+  content: ""; width: 1.6rem; height: 1px; background: currentColor; align-self: center;
+  transform: scaleX(0.35); transform-origin: 100% 50%;
+  transition: transform 360ms var(--sc-ease-out);
+}
+.layers__parts li.is-lit { opacity: 1; color: var(--sc-accent); }
+.layers__parts li.is-lit::after { transform: scaleX(1); }
+
+/* The edition's own numbers, under its price. */
+.edition__specs {
+  margin: var(--sc-3) 0 0;
+  font-size: var(--sc-t-xs); line-height: 1.7;
+  letter-spacing: var(--label-track); text-transform: uppercase;
+  color: var(--sc-ink);
   font-variant-numeric: lining-nums tabular-nums;
-  margin: 0 0 0.45rem;
 }
-.spec__label {
-  font-family: var(--sc-font-text);
-  font-size: var(--sc-t-xs);
-  font-weight: 500;
-  letter-spacing: var(--label-track);
-  text-transform: uppercase;
-  color: var(--sc-accent);
-  margin: 0;
-  white-space: nowrap;
-}
-.spec--count .spec__num { font-size: var(--sc-t-4xl); }
 
 /* -------------------------------------------------------- collection -- */
 /* Four more watches, shown only. Each card frames one photograph; an
@@ -548,12 +541,15 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   .macro__fig--tall { grid-column: 1 / -1; grid-row: auto; }
   .macro__fig--tall img { aspect-ratio: 4 / 3; object-position: 50% 40%; }
 
-  .explode__head { top: clamp(1.5rem, 6svh, 3rem); }
-  .explode__title { font-size: var(--sc-t-2xl); margin-bottom: var(--sc-2); }
-  .explode__parts { display: none; }
-  .spec__num { font-size: var(--sc-t-xl); margin-bottom: 0.3rem; }
-  .spec--count .spec__num { font-size: var(--sc-t-3xl); }
-  .spec__label { white-space: normal; max-width: 11ch; }
+  .layers__head { top: clamp(1.5rem, 6svh, 3rem); right: var(--sc-gutter); max-width: none; text-align: center; }
+  .layers__title { font-size: var(--sc-t-2xl); margin-bottom: var(--sc-2); }
+  .layers__text { margin-inline: auto; }
+  .layers__parts {
+    top: auto; bottom: calc(max(1.35rem, env(safe-area-inset-bottom)) + 2.6rem);
+    left: var(--sc-gutter); right: var(--sc-gutter);
+    grid-auto-flow: column; justify-content: center; justify-items: center; gap: var(--sc-4);
+  }
+  .layers__parts li::after { display: none; }
 
 
   .finale__dial {

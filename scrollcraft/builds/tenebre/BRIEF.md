@@ -58,6 +58,13 @@ Follow-ups, in order (French):
     to judge the layout, to be replaced by the client's own photographs, or
     used with permission, before the site is public. The bronze one carried
     a small sparkle mark in its corner; the crop leaves it out.
+11. A fourth clip, `Watch_components_lifting_and_rea__20261014111844.mp4`
+    (8 s, 24 fps, 192 frames): a gold watch with a cream dial and Roman
+    numerals on a wrist, against a blue-grey studio sweep; the crystal, the
+    dial and the movement lift off the case one above the other, hold, and
+    settle back, while the camera lowers. Asked: a new section; the sweep
+    taken down to the dark; **another model**, not the edition; the gold
+    drawing removed. Then "je veux style scroll": the scroll drives it.
 
 ## History
 
@@ -152,9 +159,11 @@ Then the light goes out. Coded in the page as a canvas frame sequence with
 its own scroll-to-clip map (a still landing, a wide stretch for the parts
 flying, a drift, a return), not a kit device.
 
-The engineering drawing later on (the photograph scanned into a gold drawing
-that separates into seven labelled layers) is the client's second choice,
-"Vidéo puis dessin", and it is where the specs live.
+A second watch later on (act 4) comes apart the same way, in layers, from
+the client's fourth clip: the scroll lifts its crystal, dial and movement off
+the case and names each one while it is off. It replaced the code-drawn
+exploded view, at the client's request; the edition's specs moved under its
+price.
 
 ## The tell-someone sentence
 
@@ -167,7 +176,7 @@ every part floating, then puts itself back together."
 1  Hush, then wonder   the whole watch alone in the dark; the scroll lifts the crystal, the parts fly and hang, then return   <- PEAK
 2  Stillness           the light goes out; two sentences light up word by word as you read them
 3  Closeness           three details at a scale a shop window does not allow
-4  Understanding       a photograph turns into a drawing and separates into named layers, the specs on their parts
+4  Understanding       a second watch, on a wrist, lifts apart in layers, each named while it is off the case
 5  Choice             four more watches, rising at their own pace as the page passes
 6  Gravity, resolve    eighty-eight marks fill a ring; the price; then the form takes the same frame
 ```
@@ -195,13 +204,14 @@ for the moment the parts fly.
 | 1 The watch, then its parts | Arrival, peak | `scrub` as a canvas frame sequence (73 stills at 1560x1280, crossfaded, decoded near the reader only), pinned | 4.0vh | The client's own ask: the hero holds the watch and the scroll takes it apart and back |
 | 2 Crafted in darkness | Origin | `pin` + scroll-lit words (from `--sc-p`) | 1.6vh | "text reveals pinned to scroll position" |
 | 3 Closer | Proof | `flow` + `reveal` (three details wiped in) | flow, about one screen | Unpinned on purpose: the page breathes between two pinned acts |
-| 4 Every layer, in order | Substance | `pin` + bespoke canvas drawing + `count` | 3.2vh | The drawing can show what the footage cannot: every layer, named |
+| 4 The Regent, in layers | Substance | `scrub` as a second canvas frame sequence (65 stills at 1320x1080, the studio sweep taken down to the dark, loaded only as the reader approaches), pinned; the four layers listed and lit while off the case | 3.0vh | The client's fourth clip and choice: another watch, taken apart by the scroll |
 | 5 The collection | Choice | `flow` + `reveal` (four cards wiped in); the cards rise at per-column speeds and each photograph drifts inside its frame, slower than its card | flow, about one and a half screens | The client's ask: four more watches shown, no purchase, the one action stays the waitlist |
 | 6 Edition of 88, then the waitlist | Scarcity, commitment | `reveal` ring from `--sc-p`; the dial steps aside and the form takes the frame | 2.4vh, last act, cues hold | The page stops once and stays stopped |
 
-Six acts, 13.4 viewport-heights measured by the harness (13.5 on a phone).
-Families: scrub, pin with lit words, flow with reveals, bespoke drawing with
-count, flow with scroll-driven cards, reveal with a form. One scrub. No
+Six acts, 13.2 viewport-heights measured by the harness (13.3 on a phone).
+Families: scrub, pin with lit words, flow with reveals, a second scrub (the
+layers), flow with scroll-driven cards, reveal with a form. Two scrubs, never
+adjacent. No
 family twice in a row. Not in the 13.6 to 13.8vh band: adding the collection
 first measured 13.6, so the story act went from 1.8 to 1.6vh.
 
@@ -219,7 +229,8 @@ Reduced motion: no Lenis, no push, no dust, no letters gathering or
 drifting. The frames still follow the scroll: they move only when the reader
 does, and they are the page's content (the client's own ask, and on a
 computer with "reduce motion" switched on the earlier three-still dissolve
-read as a frozen watch). The drawing is shown resolved; the ring is full.
+read as a frozen watch). The second watch's layers follow the scroll the
+same way; the ring is full.
 
 ## Fingerprint gate
 
@@ -230,7 +241,7 @@ Against each row in `scrollcraft/FINGERPRINTS.md`:
 | Grammar | same (filmic) | same | differs (turntable) | differs (poster) | same (filmic) |
 | Nav | differs: no bar, corner chrome at the bottom, the wordmark docks after the hero name has gone, no progress line | differs | differs (scene index) | differs (wordmark only) | differs (top bar + CTA) |
 | Hero device | differs: canvas sequence of real footage in which scroll takes the product apart and back together | differs | differs (video scrub, turning shirt) | differs (type only) | differs (masked photo panel) |
-| Act shape | differs: `scrub(sequence) > pin(lit words) > flow(reveals) > pin(drawing) > flow(collection) > pin(ring, then form)`, 6 acts, 13.4vh | differs | differs | differs (`pin > flow > pin > flow > flow`, 8vh) | differs (6 acts, pan rail, 17vh) |
+| Act shape | differs: `scrub(sequence) > pin(lit words) > flow(reveals) > scrub(layers) > flow(collection) > pin(ring, then form)`, 6 acts, 13.2vh | differs | differs | differs (`pin > flow > pin > flow > flow`, 8vh) | differs (6 acts, pan rail, 17vh) |
 | Close | differs: last pinned stage, ring of 88 then the form in the same frame | differs | differs (configurator) | differs (in-flow form) | differs (in-flow form) |
 | Signature | differs | differs | differs (shatter on canvas vs real footage coming apart and back) | differs (braid) | differs (comb reveal) |
 | **Total** | **5 of 6** | **5 of 6** | **6 of 6** | **6 of 6** | **5 of 6** |
@@ -255,8 +266,9 @@ hero progress 0.02, 0.42, 0.60 and 0.84 the canvas shows clip frames 0, 119,
 161 and 232 (whole, apart, coming back, whole) and paints four different
 pictures; the name tightens (396 px to 330 px); the wordmark docks after the
 hero; the story words light with scroll; the three details wipe in; the
-drawing runs photo, scan, tilt, spread and the counter lands on 217; the
-movement ticks while scroll holds still; the ring lights 0, 41, 88 ticks and
+second watch shows clip frames 0, 66, 116, 169 and 191 at its progress 0.02,
+0.3, 0.5, 0.8 and 0.98 and names Crystal, Dial, Movement, Case while each is
+off the case; the edition's specs sit under its price; the ring lights 0, 41, 88 ticks and
 the dial steps aside as the form arrives; "Join the waitlist" glides to the
 end with the cursor in Name; validation and the honest "not connected"
 message work; nothing reaches the URL; tab order is skip link, wordmark,
@@ -317,6 +329,18 @@ name animation now works from the letter count), the case spec reads "18k
 yellow gold". Stacked screens keep the strap, as it comes out of the dark,
 below the first line. Harness clean on desktop, phone and reduced motion;
 23 of 23; the five loading failure modes still move the watch.
+
+**After the fourth clip (14 October).** The code-drawn exploded view is gone;
+act 4 is the second watch in layers. Its clip's blue-grey sweep is taken
+down to the page's dark by estimating the sweep behind every pixel and
+subtracting it (edges and glass keep no blue cast; a thin sharpening halo
+along the arm is cleared; the alpha is smoothed so the source's compression
+blocks do not show through the glass). The frame loader the hero uses is now
+shared: the second sequence decodes near the reader the same way and loads
+only when the reader is a screen and a half away. Specs moved under the
+price. Harness clean on desktop, phone and reduced motion (the specs line
+was first 3.8:1 on a phone over the ring, now in the full ink colour); 23 of
+23; the hero's five loading failure modes still move the watch.
 
 **Feel check, cold, one word per act:** wonder, stillness, closeness,
 understanding, resolve. The watch now opens the page at its largest, alone
