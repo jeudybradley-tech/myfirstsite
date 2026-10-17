@@ -80,6 +80,17 @@ Follow-ups, in order (French):
     at its highest stops under the heading, the case above the names. The
     hero's lower lines got a darker band behind them on stacked screens;
     harness clean at 376x650, 360x640 and 390x844.
+14. "pourquoi ça boug" / "la page saute", in the hero and in the second
+    watch, on a phone: the two frame sequences skipping when the frames the
+    scroll asks for are not decoded yet. Phones now get a lighter hero set
+    (`assets/frames-s/`, 1040 wide, 2.8 MB, under half the memory, twice as
+    fast to decode); both canvases draw at 2x at most; more frames stay
+    decoded ahead (10 for the hero on a phone, 24 for the small layer
+    frames); every 8th hero frame and every 4th layer frame stay decoded for
+    good, so a fast flick always finds a frame close by; and a frame loaded
+    the plain-image way is decoded before it is first drawn. Phone, four
+    fast passes through the hero: frame time p50 22.7 to 16.7 ms, p95 34.1
+    to 18.1 ms, max 45 to 27 ms, no long tasks.
 
 ## History
 

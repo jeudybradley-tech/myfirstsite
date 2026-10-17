@@ -143,8 +143,11 @@
   // 'bitmap' where the browser offers it and drops to 'image' for good at the
   // first sign of trouble (a refused or stalled download, a file that is not
   // an image, a decode that fails), so the watch always moves.
+  // o.win: how many frames ahead stay decoded (half as many behind); o.keyEvery:
+  // every n-th frame stays decoded for good once it arrives, so a fast flick
+  // always has a frame close by to show instead of jumping across the clip.
   function Frames(o) {
-    var N = o.n, WIN = 6;
+    var N = o.n, WIN = o.win || 6, KEY = o.keyEvery || 0;
     var files = new Array(N);   // Blob in 'bitmap' mode, a loaded Image in 'image' mode
     var bmp = new Array(N);     // something drawImage can draw at once
     var pending = new Array(N);
@@ -152,7 +155,7 @@
       typeof Blob === 'function' ? 'bitmap' : 'image';
     var proved = false, decoding = 0, want = 0, heading = 1, queued = false;
     var changed = o.changed || function () {};
-    function keep(i) { return i === 0; }
+    function keep(i) { return i === 0 || (KEY > 0 && i % KEY === 0); }
 
     function viaImage(i) {
       return new Promise(function (done) {
@@ -160,11 +163,15 @@
         var img = new Image();
         img.decoding = 'async';
         img.onload = function () {
-          files[i] = img;
-          if (bmp[i] && bmp[i].close) bmp[i].close();
-          bmp[i] = img; changed();
-          if (i === 0 && o.first) o.first();
-          done();
+          // decoded before it is drawn, so drawing it never stalls a scroll
+          var mark = function () {
+            files[i] = img;
+            if (bmp[i] && bmp[i].close) bmp[i].close();
+            bmp[i] = img; changed();
+            if (i === 0 && o.first) o.first();
+            done();
+          };
+          if (img.decode) img.decode().then(mark, mark); else mark();
         };
         img.onerror = function () { done(); };
         img.src = o.url(i);
@@ -188,7 +195,7 @@
         clearTimeout(stall);
         if (mode !== 'bitmap') return viaImage(i);
         files[i] = b;
-        if (proved) { pump(); return; }
+        if (proved) { if (keep(i)) decode(i, true); pump(); return; }
         // the first file proves the path end to end: decode it once, now,
         // and give up on the path if that fails or takes too long
         return new Promise(function (ok) {
@@ -202,8 +209,9 @@
         });
       }, function () { clearTimeout(stall); fallBack(); return viaImage(i); });
     }
-    function decode(i) {
+    function decode(i, force) {
       if (i < 0 || i >= N || bmp[i] || pending[i] || !(files[i] instanceof Blob)) return;
+      if (!force && decoding >= 2) return;
       pending[i] = true; decoding++;
       createImageBitmap(files[i]).then(function (b) {
         pending[i] = false; decoding--;
@@ -220,6 +228,8 @@
         decode(want + d * heading);
         if (d && d <= WIN / 2) decode(want - d * heading);
       }
+      // the keyframes that arrived before the path was proved
+      for (var q = 0; KEY && q < N && decoding < 3; q += KEY) decode(q, true);
       for (var i = 0; i < N; i++) {
         if (bmp[i] && bmp[i].close && !keep(i) && Math.abs(i - want) > WIN + 3) { bmp[i].close(); bmp[i] = null; }
       }
@@ -293,9 +303,15 @@
     var CANVAS = '#0b0a09';
 
     var L = null, lastKey = '', live = false;
+    // Phones get a lighter set (1040 wide instead of 1560): about half the
+    // bytes, under half the memory, and each frame decodes twice as fast,
+    // which is what keeps a quick flick smooth on a phone.
+    var small = phoneMQ.matches || (innerWidth < innerHeight && innerWidth < 900);
     var seq = Frames({
       n: N,
-      url: function (i) { return 'assets/frames/w' + String(i).padStart(2, '0') + '.webp'; },
+      win: small ? 10 : 8,
+      keyEvery: 8,
+      url: function (i) { return 'assets/' + (small ? 'frames-s' : 'frames') + '/w' + String(i).padStart(2, '0') + '.webp'; },
       changed: function () { lastKey = ''; },
       first: function () { start(); }
     });
@@ -358,9 +374,9 @@
       // is wide; side by side otherwise, down to a gallery thumbnail.
       var phone = W / H < 1;
       stage.classList.toggle('is-stacked', phone);
-      // Full density on phones (their screens are the densest and the watch is
-      // the point of the page); 2x is plenty on a desktop.
-      var dpr = Math.min(devicePixelRatio || 1, phone ? 3 : 2);
+      // Twice the CSS pixels at most: past that a phone paints a third more for
+      // a difference the eye does not see, and a scroll can stutter.
+      var dpr = Math.min(devicePixelRatio || 1, 2);
       plate.width = Math.round(W * dpr); plate.height = Math.round(H * dpr);
       // The dust is soft points of light, redrawn every frame: one canvas
       // pixel per CSS pixel is all it needs, a quarter of the work at 2x.
@@ -597,6 +613,8 @@
     var L = null, lastKey = '', live = false;
     var seq = Frames({
       n: N,
+      win: 24,             // these frames are small (2.5 MB decoded): keep many ready
+      keyEvery: 4,
       url: function (i) { return 'assets/layers/l' + String(i).padStart(2, '0') + '.webp'; },
       changed: function () {
         lastKey = '';
@@ -633,7 +651,7 @@
       var W = stage.clientWidth, H = stage.clientHeight;
       var stacked = W / H < 1;
       stage.classList.toggle('is-stacked', stacked);
-      var dpr = Math.min(devicePixelRatio || 1, stacked ? 2.5 : 2);
+      var dpr = Math.min(devicePixelRatio || 1, 2);
       plate.width = Math.round(W * dpr); plate.height = Math.round(H * dpr);
       // The wrist runs across the screen. On a wide screen the stack of
       // layers stands right of centre, the frame as tall as the screen. On a
