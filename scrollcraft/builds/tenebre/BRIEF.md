@@ -217,6 +217,26 @@ Follow-ups, in order (French):
     of the screen, all by 46-50%, on desktop and 390x844. All lit under
     reduced motion. Harness clean on desktop, 390x844, 376x650 and reduced
     motion; 23 of 23; order page 18 of 18.
+24. An image (TIMELESS in glowing serif capitals over "Trancends eras without
+    losing value" in italic, on black), "je veux que le logo « timeless »
+    soit comme ça avec une animation de Block ... lorsqu'on ouvre la page",
+    then "not the logo on the home page" and "when someone click the page
+    before going on the home page the animation come first". Built as an
+    opening screen, not a change to the hero: on a first visit the page
+    opens on black, a light block sweeps in from the left over TIMELESS
+    (Cormorant Garamond upright, now shipped too, weight 500, with a soft
+    glow) and out to the right, leaving the name; then the same for
+    "Transcends eras without losing value" in the italic (spelling
+    corrected); it holds, and at 3.5 s fades into the page, where the
+    hero's letters only now gather. A scroll, click, touch or key ends it at
+    once. Shown once per visit (sessionStorage), never with a section in the
+    address (the order page's way back) or under reduced motion; a tiny
+    script right after <body> decides before first paint, and lets the page
+    go after 7 s if the page script never arrives. Decorative
+    (aria-hidden): the hero's <h1> still carries the name. Interaction
+    checks now 24 (the opening shows first, then gives way; the letters
+    gather after it). Harness clean on desktop, 390x844, 376x650 and
+    reduced motion; order page 18 of 18.
 
 ## History
 

@@ -86,6 +86,32 @@
     window.__lenis = lenis;
   }
 
+  // ---- the opening ----------------------------------------------------------
+  // On a first visit the markup has put the name on black (html.tn-open). It
+  // holds while its two blocks sweep, then fades; a scroll, click or key ends
+  // it at once. What waits for it (the hero's letters) asks with then().
+  var opening = (function () {
+    var waiting = [], done = !root.classList.contains('tn-open');
+    function finish() {
+      if (done) return;
+      done = true;
+      try { sessionStorage.setItem('tn-opened', '1'); } catch (e) {}
+      root.classList.add('tn-opened');
+      if (lenis) lenis.start();
+      waiting.splice(0).forEach(function (f) { f(); });
+      setTimeout(function () { root.classList.remove('tn-open', 'tn-opened'); }, 950);
+    }
+    if (!done) {
+      if (lenis) lenis.stop();
+      setTimeout(finish, 3500);
+      ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (t) {
+        addEventListener(t, finish, { once: true, passive: true });
+      });
+      addEventListener('scroll', function () { if (scrollY > 2) finish(); }, { passive: true });
+    }
+    return { then: function (f) { if (done) f(); else waiting.push(f); } };
+  })();
+
   // Anchors glide through the page instead of jumping, and the waitlist link
   // lands with the cursor in the first field.
   document.addEventListener('click', function (e) {
@@ -356,7 +382,9 @@
       if (live) return;
       live = true;
       stage.classList.add('is-live');
-      if (!intro.done && !intro.armed) { intro.armed = true; intro.start = performance.now() + 120; }
+      if (!intro.done && !intro.armed) {
+        opening.then(function () { intro.armed = true; intro.start = performance.now() + 120; });
+      }
       // the rest waits until the page itself has finished arriving
       if (document.readyState === 'complete') seq.start();
       else addEventListener('load', seq.start, { once: true });

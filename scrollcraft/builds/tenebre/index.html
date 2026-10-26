@@ -9,11 +9,31 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b0a09'/><circle cx='16' cy='16' r='8.5' fill='none' stroke='%23c9a66b' stroke-width='1.6'/></svg>">
 <link rel="preload" href="assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/cormorant-garamond-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/frames/w00.webp" as="image" fetchpriority="high">
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="tenebre.css">
 </head>
 <body>
+
+<!-- The opening: on a first visit, the name and its line are uncovered by a
+     sweeping block on black, then the page appears. Shown once per visit,
+     never with a section in the address or under reduced motion; a scroll,
+     a click or a key skips it. Decorative: the hero's <h1> carries the name. -->
+<div class="opening" aria-hidden="true">
+  <p class="opening__name"><span>TIMELESS</span></p>
+  <p class="opening__line"><span>Transcends eras without losing value</span></p>
+</div>
+<script>
+  (function () {
+    var r = document.documentElement, seen = null;
+    try { seen = sessionStorage.getItem('tn-opened'); } catch (e) {}
+    if (seen || location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    r.classList.add('tn-open');
+    // never hold the page if the page script does not arrive
+    setTimeout(function () { r.classList.remove('tn-open'); }, 7000);
+  })();
+</script>
 
 <a class="skip" href="#waitlist">Skip to the waitlist</a>
 <div class="sc-grain" aria-hidden="true"></div>
