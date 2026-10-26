@@ -255,7 +255,10 @@ Follow-ups, in order (French):
     line's block sweeps from 2.6 s over 1.9 s and its glow follows; it holds
     to 6.4 s, then fades over 1.8 s into the page. A scroll, click or key
     still ends it at once; the page script's fallback now lets go at 12 s.
-    Filmed at ten moments. Harness clean; 24 of 24; order page 18 of 18.
+    Filmed at ten moments. With the longer fade, a click in its first 1.8 s
+    landed on the fading screen (the order test caught it: back from the
+    order page came home 300 px off); the screen now lets clicks through as
+    soon as it starts to fade. Harness clean; 24 of 24; order page 18 of 18.
 
 ## History
 

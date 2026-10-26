@@ -106,7 +106,7 @@ html.tn-open .opening {
   transition: opacity 1.8s cubic-bezier(0.45, 0, 0.2, 1), visibility 1.8s;
 }
 html.tn-open:not(.tn-opened) { overflow: hidden; }
-html.tn-open.tn-opened .opening { opacity: 0; visibility: hidden; }
+html.tn-open.tn-opened .opening { opacity: 0; visibility: hidden; pointer-events: none; }
 .opening p { margin: 0; }
 .opening span { position: relative; display: inline-block; color: #f6f1e8; }
 .opening__name {
