@@ -108,10 +108,10 @@
     </div>
   </section>
 
-  <!-- 5 · CHOICE. Four more watches, shown, not sold: no basket, the one
-       action stays the waitlist. The photographs are the client's picks;
-       every name and price is an example and says so. Ordinary flow, so the
-       page breathes before the last act. -->
+  <!-- 5 · CHOICE. Four more watches. Each card's "Order" link chooses that
+       piece in the order section below and glides there. The photographs
+       are the client's picks; every name and price is an example and says
+       so. Ordinary flow, so the page breathes before the last act. -->
   <section class="coll" id="collection" data-sc-act="flow" data-sc-drift="#0a0908">
     <div class="coll__inner">
       <div class="coll__head sc-stack" data-sc-in data-sc-stagger="70">
@@ -119,7 +119,7 @@
         <p class="coll__text">Four more, finished the same way.</p>
       </div>
       <ul class="coll__grid" role="list">
-        <li class="piece" data-sc-reveal="up" data-sc-reveal-at="0.04 0.32">
+        <li class="piece" data-piece="meridian" data-sc-reveal="up" data-sc-reveal-at="0.04 0.32">
           <div class="piece__fig">
             <img class="piece__photo" src="assets/collection/meridian.webp" width="588" height="736" loading="lazy" decoding="async" alt="A steel skeleton watch with a blue dial on a tan leather strap, worn under the cuff of a suede jacket">
             <span class="piece__tag">Example</span>
@@ -127,8 +127,9 @@
           <h3 class="piece__name">Meridian</h3>
           <p class="piece__desc">Steel, blue dial, tan leather</p>
           <p class="piece__price">$4,800</p>
+          <a class="piece__order" href="#order" data-piece="meridian" aria-label="Order Meridian">Order</a>
         </li>
-        <li class="piece" data-sc-reveal="up" data-sc-reveal-at="0.08 0.36">
+        <li class="piece" data-piece="nocturne" data-sc-reveal="up" data-sc-reveal-at="0.08 0.36">
           <div class="piece__fig">
             <img class="piece__photo" src="assets/collection/nocturne.webp" width="581" height="726" loading="lazy" decoding="async" alt="A rose gold skeleton watch with a moon phase and an open balance wheel on a brown leather strap, worn under a white shirt cuff">
             <span class="piece__tag">Example</span>
@@ -136,8 +137,9 @@
           <h3 class="piece__name">Nocturne</h3>
           <p class="piece__desc">Rose gold, moon phase, brown leather</p>
           <p class="piece__price">$6,900</p>
+          <a class="piece__order" href="#order" data-piece="nocturne" aria-label="Order Nocturne">Order</a>
         </li>
-        <li class="piece" data-sc-reveal="up" data-sc-reveal-at="0.12 0.4">
+        <li class="piece" data-piece="atelier" data-sc-reveal="up" data-sc-reveal-at="0.12 0.4">
           <div class="piece__fig">
             <img class="piece__photo" src="assets/collection/atelier.webp" width="736" height="920" loading="lazy" decoding="async" alt="An aged bronze skeleton watch with a tachymeter bezel on a riveted black leather strap, on a wooden desk">
             <span class="piece__tag">Example</span>
@@ -145,8 +147,9 @@
           <h3 class="piece__name">Atelier</h3>
           <p class="piece__desc">Aged bronze, tachymeter, black leather</p>
           <p class="piece__price">$3,600</p>
+          <a class="piece__order" href="#order" data-piece="atelier" aria-label="Order Atelier">Order</a>
         </li>
-        <li class="piece" data-sc-reveal="up" data-sc-reveal-at="0.16 0.44">
+        <li class="piece" data-piece="sovereign" data-sc-reveal="up" data-sc-reveal-at="0.16 0.44">
           <div class="piece__fig">
             <img class="piece__photo" src="assets/collection/sovereign.webp" width="589" height="736" loading="lazy" decoding="async" alt="A yellow gold skeleton watch with a black dial and gold baton hands on a black leather strap, worn under a dark knit sleeve">
             <span class="piece__tag">Example</span>
@@ -154,11 +157,74 @@
           <h3 class="piece__name">Sovereign</h3>
           <p class="piece__desc">Yellow gold, black dial, black leather</p>
           <p class="piece__price">$5,400</p>
+          <a class="piece__order" href="#order" data-piece="sovereign" aria-label="Order Sovereign">Order</a>
         </li>
       </ul>
       <div class="coll__foot">
         <p class="coll__note">Examples. Names and prices to be replaced.</p>
         <a class="coll__cta" href="#waitlist">Join the waitlist</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5b · ORDER. The piece chosen in the collection, and a request for it:
+       no payment is taken on the page; the house writes back to settle the
+       price, payment and delivery. Ordinary flow. -->
+  <section class="order" id="order" data-sc-act="flow" data-sc-drift="#0a0908">
+    <div class="order__inner">
+      <figure class="order__view">
+        <div class="order__fig">
+          <img class="order__photo" src="assets/collection/meridian.webp" width="588" height="736" loading="lazy" decoding="async" alt="A steel skeleton watch with a blue dial on a tan leather strap, worn under the cuff of a suede jacket">
+          <span class="piece__tag">Example</span>
+        </div>
+        <figcaption class="order__cap">
+          <span class="order__name">Meridian</span>
+          <span class="order__desc">Steel, blue dial, tan leather</span>
+          <span class="order__price">$4,800</span>
+        </figcaption>
+      </figure>
+      <div class="order__ask">
+        <h2 class="order__title">Order.</h2>
+        <p class="order__text">Choose a piece and leave your details. We will write to confirm the price, payment and delivery. Nothing is charged here.</p>
+        <form class="order__form" id="order-form" method="post" action="#order" novalidate>
+          <fieldset class="picks">
+            <legend>Piece</legend>
+            <label class="pick">
+              <input type="radio" name="piece" value="meridian" checked required>
+              <span class="pick__name">Meridian</span>
+              <span class="pick__price">$4,800</span>
+            </label>
+            <label class="pick">
+              <input type="radio" name="piece" value="nocturne" required>
+              <span class="pick__name">Nocturne</span>
+              <span class="pick__price">$6,900</span>
+            </label>
+            <label class="pick">
+              <input type="radio" name="piece" value="atelier" required>
+              <span class="pick__name">Atelier</span>
+              <span class="pick__price">$3,600</span>
+            </label>
+            <label class="pick">
+              <input type="radio" name="piece" value="sovereign" required>
+              <span class="pick__name">Sovereign</span>
+              <span class="pick__price">$5,400</span>
+            </label>
+          </fieldset>
+          <div class="field">
+            <label for="or-name">Name</label>
+            <input id="or-name" name="name" type="text" autocomplete="name" required maxlength="120">
+          </div>
+          <div class="field">
+            <label for="or-email">Email</label>
+            <input id="or-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200">
+          </div>
+          <div class="field">
+            <label for="or-note">Note <span class="field__opt">(optional)</span></label>
+            <textarea id="or-note" name="note" rows="2" maxlength="600"></textarea>
+          </div>
+          <button class="close__submit" type="submit">Request this piece</button>
+          <p class="close__status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>

@@ -117,6 +117,23 @@ Follow-ups, in order (French):
     390x844 and reduced motion; 23 of 23. **These show other watches (the
     dial carries a maker's name) and their source and rights are unknown:**
     to be cleared or replaced before the site is public.
+17. "in the section the collection i want you to link to each item a section
+    to order". Each card now has an "Order" link under its price. It chooses
+    that piece in a new Order section, placed straight after the collection
+    (an ordinary flow act, so the page has seven), and glides there with the
+    cursor in Name. The section shows the chosen piece (photo, name, words,
+    price, read from its card, so a card is the one place to change them)
+    beside a request: the four pieces as choices, name, email, an optional
+    note, "Request this piece". No payment is taken on the page: the text
+    says the house writes back to confirm price, payment and delivery. Like
+    the waitlist, it is not connected: `ORDER_ENDPOINT` at the top of
+    tenebre.js takes a URL for a JSON POST of { piece, name, email, note };
+    while it is empty the form says "Ordering is not connected yet, so
+    nothing was sent." Checked on desktop and 390x844: every link chooses
+    its piece and lands on the form; choosing another piece in the form
+    swaps the picture; an empty or bad entry is refused; no console errors.
+    Harness clean on desktop, 390x844, 376x650 and reduced motion; 23 of 23
+    (the waitlist checks now scoped to the waitlist form).
 
 ## History
 

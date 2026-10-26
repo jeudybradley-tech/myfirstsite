@@ -2,7 +2,7 @@
    Everything bespoke lives here: Lenis, the two frame sequences in which the
    reader's scroll takes a watch apart (the hero, and the second watch in
    layers), the scroll-lit words, the collection rising with the scroll, the
-   ring of 88, and the waitlist form. The engine
+   ring of 88, the order request and the waitlist form. The engine
    (scrollcraft.js) is untouched; this reads its act progress and nothing else. */
 (function () {
   'use strict';
@@ -11,6 +11,9 @@
   // A URL that accepts a JSON POST of { name, email }. While it is empty the
   // form says plainly that nothing was sent.
   var WAITLIST_ENDPOINT = '';
+  // A URL that accepts a JSON POST of { piece, name, email, note } for an
+  // order request. While it is empty the order form says nothing was sent.
+  var ORDER_ENDPOINT = '';
   // ------------------------------------------------------------------------
 
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -81,8 +84,10 @@
     window.__lenis = lenis;
   }
 
-  // Anchors glide through the page instead of jumping, and the waitlist link
-  // lands with the cursor in the first field.
+  // Anchors glide through the page instead of jumping. The waitlist link
+  // lands with the cursor in the first field; a card's "Order" link chooses
+  // its piece first and lands in the order form's first field.
+  var orderPick = null;
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]');
     if (!a) return;
@@ -90,11 +95,11 @@
     var target = id === '#top' ? document.body : document.querySelector(id);
     if (!target) return;
     e.preventDefault();
+    if (a.dataset.piece && orderPick) orderPick(a.dataset.piece);
     var done = function () {
-      if (id === '#waitlist') {
-        var f = document.getElementById('wl-name');
-        if (f) f.focus({ preventScroll: true });
-      }
+      var f = id === '#waitlist' ? document.getElementById('wl-name')
+        : id === '#order' ? document.getElementById('or-name') : null;
+      if (f) f.focus({ preventScroll: true });
       try { history.replaceState(null, '', id === '#top' ? location.pathname : id); } catch (err) {}
     };
     // The waitlist lives at the end of a pinned act, so its place on the
@@ -787,6 +792,88 @@
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+
+  // =========================================================================
+  // the order request
+  // =========================================================================
+  (function () {
+    var form = document.getElementById('order-form');
+    if (!form) return;
+    var photo = document.querySelector('.order__photo');
+    var nameOut = document.querySelector('.order__name');
+    var descOut = document.querySelector('.order__desc');
+    var priceOut = document.querySelector('.order__price');
+    var radios = [].slice.call(form.querySelectorAll('input[name="piece"]'));
+    var nameIn = form.querySelector('#or-name'), mailIn = form.querySelector('#or-email');
+    var noteIn = form.querySelector('#or-note');
+    var btn = form.querySelector('button'), status = form.querySelector('.close__status');
+    var swap = 0;
+
+    // The card in the collection is the one source for the piece's photo,
+    // words and price; the order section shows whichever piece is chosen.
+    var show = function (id) {
+      var card = document.querySelector('.piece[data-piece="' + id + '"]');
+      if (!card) return;
+      var img = card.querySelector('.piece__photo');
+      nameOut.textContent = card.querySelector('.piece__name').textContent;
+      descOut.textContent = card.querySelector('.piece__desc').textContent;
+      priceOut.textContent = card.querySelector('.piece__price').textContent;
+      if (photo.getAttribute('src') === img.getAttribute('src')) return;
+      var mine = ++swap;
+      var put = function () {
+        if (mine !== swap) return;
+        photo.src = img.getAttribute('src');
+        photo.width = img.width; photo.height = img.height;
+        photo.alt = img.alt;
+        photo.classList.remove('is-swapping');
+      };
+      if (reduce) { put(); return; }
+      photo.classList.add('is-swapping');
+      setTimeout(put, 200);
+    };
+    radios.forEach(function (r) {
+      r.addEventListener('change', function () { if (r.checked) { show(r.value); say(''); } });
+    });
+    orderPick = function (id) {
+      radios.forEach(function (r) { r.checked = r.value === id; });
+      show(id);
+      say('');
+    };
+
+    var say = function (msg, kind) {
+      status.textContent = msg;
+      status.classList.toggle('is-error', kind === 'error');
+      status.classList.toggle('is-ok', kind === 'ok');
+    };
+    [nameIn, mailIn].forEach(function (el) {
+      el.addEventListener('input', function () { el.removeAttribute('aria-invalid'); });
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var pick = radios.filter(function (r) { return r.checked; })[0];
+      var name = nameIn.value.trim(), mail = mailIn.value.trim(), note = noteIn.value.trim();
+      var okMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail);
+      if (!pick) { say('Please choose a piece.', 'error'); radios[0].focus(); return; }
+      if (!name) { nameIn.setAttribute('aria-invalid', 'true'); say('Please leave a name.', 'error'); nameIn.focus(); return; }
+      if (!okMail) { mailIn.setAttribute('aria-invalid', 'true'); say('That email address does not look complete.', 'error'); mailIn.focus(); return; }
+      if (!ORDER_ENDPOINT) {
+        say('Ordering is not connected yet, so nothing was sent.', 'error');
+        return;
+      }
+      btn.disabled = true; say('Sending.');
+      fetch(ORDER_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ piece: pick.value, name: name, email: mail, note: note })
+      }).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        nameIn.value = ''; mailIn.value = ''; noteIn.value = '';
+        say('Thank you. We will write about your ' + nameOut.textContent + ' shortly.', 'ok');
+      }).catch(function () {
+        say('That did not go through. Please try again in a moment.', 'error');
+      }).then(function () { btn.disabled = false; });
+    });
+  })();
 
   // =========================================================================
   // the waitlist
