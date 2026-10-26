@@ -93,7 +93,7 @@ body { background: var(--sc-canvas); font-size: var(--sc-t-base); font-weight: 3
 }
 
 /* ----------------------------------------------------------- opening -- */
-/* First visit only (see the script after <body>): the name in the serif's
+/* Each time the page opens (see the script after <body>): the name in the serif's
    upright capitals with a soft glow, then its line in the italic, each
    uncovered by a block that sweeps in from the left and out to the right. */
 .opening { display: none; }

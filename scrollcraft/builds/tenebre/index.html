@@ -16,19 +16,20 @@
 </head>
 <body>
 
-<!-- The opening: on a first visit, the name and its line are uncovered by a
-     sweeping block on black, then the page appears. Shown once per visit,
-     never with a section in the address or under reduced motion; a scroll,
-     a click or a key skips it. Decorative: the hero's <h1> carries the name. -->
+<!-- The opening: each time the page is opened, the name and its line are
+     uncovered by a sweeping block on black, then the page appears. Not on
+     the way back from the order page, nor when the address names one of the
+     page's sections; a scroll, a click or a key skips it. Decorative: the hero's
+     <h1> carries the name. -->
 <div class="opening" aria-hidden="true">
   <p class="opening__name"><span>TIMELESS</span></p>
   <p class="opening__line"><span>Transcends eras without losing value</span></p>
 </div>
 <script>
   (function () {
-    var r = document.documentElement, seen = null;
-    try { seen = sessionStorage.getItem('tn-opened'); } catch (e) {}
-    if (seen || location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var r = document.documentElement, back = null;
+    try { back = sessionStorage.getItem('tn-skip-opening'); sessionStorage.removeItem('tn-skip-opening'); } catch (e) {}
+    if (back || /^#(top|layers|collection|waitlist|debug)$/.test(location.hash)) return;
     r.classList.add('tn-open');
     // never hold the page if the page script does not arrive
     setTimeout(function () { r.classList.remove('tn-open'); }, 7000);

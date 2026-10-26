@@ -80,6 +80,8 @@
   // back past the pieces they opened here, so the home page returns to where
   // they were; otherwise follow the link.
   $('.op-back').addEventListener('click', function (e) {
+    // the home page's opening is for arriving, not for coming back
+    try { sessionStorage.setItem('tn-skip-opening', '1'); } catch (err) {}
     var ref = document.referrer;
     if (ref && ref.indexOf(location.origin) === 0 && !/order\.html/.test(ref) && history.length > hops + 1) {
       e.preventDefault();

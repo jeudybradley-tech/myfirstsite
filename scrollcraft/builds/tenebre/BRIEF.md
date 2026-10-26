@@ -237,6 +237,17 @@ Follow-ups, in order (French):
     checks now 24 (the opening shows first, then gives way; the letters
     gather after it). Harness clean on desktop, 390x844, 376x650 and
     reduced motion; order page 18 of 18.
+25. "it doent work": the opening was skipped in three cases, measured: under
+    reduced motion (this client's phone has it on, see follow-up on the
+    frozen watch), with anything after # in the address, and on every load
+    after the first in a visit. It now plays each time the page is opened,
+    reduced motion included (a flat wipe and a fade, nothing that zooms or
+    travels in depth). It is skipped only on the way back from the order
+    page ("← The collection" leaves a one-time mark in sessionStorage) and
+    when the address names one of the page's own sections. Checked: normal,
+    reduced motion, unknown hash, second load all show it and clear it by
+    4.8 s; back from the order page and #collection do not. Harness clean;
+    24 of 24; order page 18 of 18.
 
 ## History
 

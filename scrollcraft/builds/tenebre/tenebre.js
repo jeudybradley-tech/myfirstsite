@@ -87,15 +87,14 @@
   }
 
   // ---- the opening ----------------------------------------------------------
-  // On a first visit the markup has put the name on black (html.tn-open). It
-  // holds while its two blocks sweep, then fades; a scroll, click or key ends
-  // it at once. What waits for it (the hero's letters) asks with then().
+  // When the page opens the markup has put the name on black (html.tn-open).
+  // It holds while its two blocks sweep, then fades; a scroll, click or key
+  // ends it at once. What waits for it (the hero's letters) asks with then().
   var opening = (function () {
     var waiting = [], done = !root.classList.contains('tn-open');
     function finish() {
       if (done) return;
       done = true;
-      try { sessionStorage.setItem('tn-opened', '1'); } catch (e) {}
       root.classList.add('tn-opened');
       if (lenis) lenis.start();
       waiting.splice(0).forEach(function (f) { f(); });
