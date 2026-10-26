@@ -1,0 +1,106 @@
+/* TIMELESS order page. Tokens, type, fields and the gold button come from
+   tenebre.css; this lays out one piece and its order form. */
+.op-body { min-height: 100svh; display: flex; flex-direction: column; }
+
+.op-top {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--sc-4);
+  width: 100%; max-width: var(--sc-maxw); margin-inline: auto;
+  padding: clamp(1.25rem, 4vh, 2.5rem) var(--sc-gutter) 0;
+}
+.op-back, .op-mark { color: var(--sc-ink); text-decoration: none; }
+.op-back {
+  font-size: var(--sc-t-xs); font-weight: 500;
+  letter-spacing: var(--label-track); text-transform: uppercase;
+  padding: 0.6rem 0 0.3rem;
+  background: linear-gradient(var(--sc-accent), var(--sc-accent)) 0 100% / 100% 1px no-repeat;
+  transition: color var(--sc-d-fast) var(--sc-ease-out);
+}
+.op-mark { font-family: var(--sc-font-display); font-size: var(--sc-t-sm); letter-spacing: 0.3em; }
+@media (hover: hover) and (pointer: fine) { .op-back:hover, .op-mark:hover { color: var(--sc-accent); } }
+
+.op {
+  width: 100%; max-width: var(--sc-maxw); margin-inline: auto;
+  padding: clamp(1.5rem, 6vh, 4rem) var(--sc-gutter) var(--sc-section);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  gap: clamp(2rem, 6vw, 6rem); align-items: start;
+}
+.op__fig {
+  position: sticky; top: clamp(1.5rem, 6vh, 4rem); margin: 0;
+  aspect-ratio: 4 / 5; max-height: calc(100svh - 3rem);
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--sc-e2);
+  background: radial-gradient(70% 58% at 50% 46%, #1c1915 0%, #110f0d 55%, var(--sc-canvas) 100%);
+}
+.op__photo { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.op__photo.is-in { animation: op-in 0.7s var(--sc-ease-out) both; }
+@keyframes op-in { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
+
+.op__body { display: grid; align-content: start; min-width: 0; padding-top: clamp(0rem, 4vh, 3rem); }
+.op__kicker {
+  margin: 0 0 var(--sc-4);
+  font-size: var(--sc-t-xs); font-weight: 500;
+  letter-spacing: var(--label-track); text-transform: uppercase; color: var(--sc-ink-soft);
+}
+.op__name {
+  font-family: var(--sc-font-display); font-optical-sizing: auto; font-weight: 400;
+  font-size: var(--sc-t-4xl); line-height: 1; letter-spacing: -0.02em; margin: 0;
+}
+.op__desc { margin: var(--sc-4) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-lg); line-height: 1.45; }
+.op__price { margin: var(--sc-3) 0 0; font-size: var(--sc-t-xl); letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.op__note { margin: var(--sc-2) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-xs); letter-spacing: 0.04em; }
+
+.op__form {
+  display: grid; gap: var(--sc-6);
+  margin-top: clamp(2rem, 6vh, 3.5rem); padding-top: clamp(1.5rem, 4vh, 2.5rem);
+  border-top: 1px solid var(--sc-hairline);
+}
+.op__formtitle {
+  font-family: var(--sc-font-display); font-weight: 400;
+  font-size: var(--sc-t-2xl); line-height: 1.1; margin: 0;
+}
+.field__opt { text-transform: none; letter-spacing: 0.02em; font-weight: 400; }
+.field textarea {
+  font: inherit; font-size: var(--sc-t-base); color: var(--sc-ink); background: transparent; resize: vertical;
+  border: 0; border-bottom: 1px solid color-mix(in oklab, var(--sc-ink) 34%, transparent); border-radius: 0;
+  padding: 0.6rem 0; min-height: 3.2rem;
+}
+.field textarea:focus { outline: none; border-bottom-color: var(--sc-accent); }
+.field textarea:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 4px; border-radius: var(--radius); }
+.op__fine { margin: calc(var(--sc-3) * -1) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); line-height: 1.5; max-width: 40ch; }
+
+.op-more {
+  width: 100%; max-width: var(--sc-maxw); margin-inline: auto;
+  padding: 0 var(--sc-gutter) var(--sc-section);
+}
+.op-more__title {
+  font-family: var(--sc-font-display); font-weight: 400;
+  font-size: var(--sc-t-2xl); margin: 0 0 var(--sc-5);
+  padding-top: var(--sc-5); border-top: 1px solid var(--sc-hairline);
+}
+.op-more__list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.4vw, 2rem);
+}
+.op-more__item { display: grid; gap: var(--sc-1); color: inherit; text-decoration: none; border-radius: var(--radius); }
+.op-more__item:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 6px; }
+.op-more__fig {
+  position: relative; display: block; aspect-ratio: 4 / 5; margin-bottom: var(--sc-2);
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--sc-e2); background: #110f0d;
+}
+.op-more__fig img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; transition: transform 0.6s var(--sc-ease-out); }
+.op-more__name { font-family: var(--sc-font-display); font-size: var(--sc-t-xl); line-height: 1.1; }
+.op-more__price { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+@media (hover: hover) and (pointer: fine) { .op-more__item:hover img { transform: scale(1.04); } .op-more__item:hover .op-more__name { color: var(--sc-accent); } }
+
+.op-foot { position: static; margin-top: auto; padding-top: var(--sc-5); }
+
+@media (max-width: 760px), (max-aspect-ratio: 1 / 1) {
+  .op { grid-template-columns: minmax(0, 1fr); gap: var(--sc-6); padding-top: var(--sc-5); }
+  .op__fig { position: relative; top: auto; max-height: 62svh; aspect-ratio: auto; height: min(62svh, 125vw); }
+  .op__body { padding-top: 0; }
+  .op__name { font-size: var(--sc-t-3xl); }
+  .op__form { gap: var(--sc-4); }
+  .op__form .close__submit { justify-self: stretch; padding-block: 1.05rem; }
+  .op-more__list { gap: var(--sc-3); }
+  .op-more__name { font-size: var(--sc-t-base); }
+}
+@media (prefers-reduced-motion: reduce) { .op__photo.is-in { animation: none; } .op-more__fig img { transition: none; } }
