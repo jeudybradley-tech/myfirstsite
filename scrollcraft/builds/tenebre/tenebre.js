@@ -98,11 +98,11 @@
       root.classList.add('tn-opened');
       if (lenis) lenis.start();
       waiting.splice(0).forEach(function (f) { f(); });
-      setTimeout(function () { root.classList.remove('tn-open', 'tn-opened'); }, 950);
+      setTimeout(function () { root.classList.remove('tn-open', 'tn-opened'); }, 1850);
     }
     if (!done) {
       if (lenis) lenis.stop();
-      setTimeout(finish, 3500);
+      setTimeout(finish, 6400);
       ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (t) {
         addEventListener(t, finish, { once: true, passive: true });
       });

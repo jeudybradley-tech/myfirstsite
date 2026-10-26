@@ -248,6 +248,14 @@ Follow-ups, in order (French):
     reduced motion, unknown hash, second load all show it and clear it by
     4.8 s; back from the order page and #collection do not. Harness clean;
     24 of 24; order page 18 of 18.
+26. "je ne veux pas que l'animation apparait rapide je veux que ça prend son
+    temps comme un site professionel": the opening slowed down. 0.8 s of
+    black; the name's block sweeps over 2.2 s (out at 1.9 s), its glow then
+    gathers over 2 s while the letters settle from 0.09em to 0.035em; the
+    line's block sweeps from 2.6 s over 1.9 s and its glow follows; it holds
+    to 6.4 s, then fades over 1.8 s into the page. A scroll, click or key
+    still ends it at once; the page script's fallback now lets go at 12 s.
+    Filmed at ten moments. Harness clean; 24 of 24; order page 18 of 18.
 
 ## History
 
