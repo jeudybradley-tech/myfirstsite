@@ -170,6 +170,17 @@ Follow-ups, in order (French):
     clean on desktop, 390x844, 376x650, 768x1024 and reduced motion; 23 of
     23; order page 18 of 18. **Source and rights of the photograph unknown:**
     to be cleared or replaced before the site is public.
+20. A screenshot of "Custom made", "je veux le style de cette écriture soit
+    pareille comme l'image précédent ... les écritures du paragraphe se font
+    souligner un par un": the line under the title is now set like act 2's
+    read (Cormorant Garamond italic, same size) and its words light one by
+    one as the reader scrolls. Its act is ordinary flow and stacks on a
+    phone, so the words follow the paragraph's own place on screen rather
+    than the act's progress: none lit as its first line passes 88% of the
+    screen, all of them by 46%, the same on desktop and 390x844 (measured:
+    0, 4, 10, 16, 21, 23 of 23 at 87, 80, 70, 60, 50, 40%). All lit under
+    reduced motion. Harness clean on desktop, 390x844, 376x650 and reduced
+    motion; 23 of 23; order page 18 of 18.
 
 ## History
 

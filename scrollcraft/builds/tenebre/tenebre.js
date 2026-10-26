@@ -26,10 +26,9 @@
   var lerp = function (a, b, t) { return a + (b - a) * t; };
   var gutterPx = function (W) { return clamp(W * 0.05, 20, 88); };
 
-  // ---- story: one span per word, lit from the act's --sc-p in CSS ----------
-  (function () {
-    var p = document.querySelector('[data-lit]');
-    if (!p) return;
+  // ---- scroll-lit words (act 2 and "Custom made"): one span per word, lit
+  // from the act's --sc-p in CSS -------------------------------------------
+  [].forEach.call(document.querySelectorAll('[data-lit]'), function (p) {
     var words = p.textContent.trim().split(/\s+/);
     p.textContent = '';
     p.style.setProperty('--n', words.length);
@@ -41,7 +40,7 @@
       p.appendChild(s);
       if (i < words.length - 1) p.appendChild(document.createTextNode(' '));
     });
-  })();
+  });
 
   // ---- the ring of 88 ------------------------------------------------------
   (function () {
@@ -773,6 +772,26 @@
   })();
 
   // =========================================================================
+  // "Custom made": its words light by the paragraph's own place on screen, so
+  // they read the same beside the photograph or under it on a phone
+  // =========================================================================
+  var benchWords = (function () {
+    var p = document.querySelector('.bench__text');
+    if (!p) return { render: function () {} };
+    var last = -1;
+    function render() {
+      var r = p.getBoundingClientRect(), vh = innerHeight;
+      if (r.bottom < -80 || r.top > vh + 80) return;
+      // 0 as the first line comes up past 88% of the screen, 1 by 46%
+      var t = clamp01((vh * 0.88 - r.top) / (vh * 0.42));
+      if (Math.abs(t - last) < 0.002) return;
+      last = t;
+      p.style.setProperty('--lp', t.toFixed(3));
+    }
+    return { render: render };
+  })();
+
+  // =========================================================================
   // chrome state, layout, the loop
   // =========================================================================
   function chrome() {
@@ -799,6 +818,7 @@
     hero.render(now);
     layers.render();
     collection.render();
+    benchWords.render();
     chrome();
     requestAnimationFrame(frame);
   }
