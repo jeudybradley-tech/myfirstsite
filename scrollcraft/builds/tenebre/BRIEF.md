@@ -153,6 +153,23 @@ Follow-ups, in order (French):
     are OFL (licences in assets/fonts/). Harness clean on desktop, 390x844,
     376x650, 360x640, 768x1024 and reduced motion; 23 of 23; the order page
     18 of 18.
+19. A photograph (`12.jpg`: a watchmaker, loupe in his eye, at an open
+    movement on a white cushion), "add this picture between those section"
+    (first between Up close and The Regent), then "je veux que la photo soit
+    large des coter", then "finaly put it in this section" (between
+    Crafted in darkness and Up close), "i dont want the bluring i want you
+    put a text", "the text « custom made» on the side of the picture" and
+    "write short texte under the title". Settled as a flow act of its own
+    (the page has seven): the photograph, cut 4:5 and graded a little down
+    toward the page with a soft edge, on the left; beside it "CUSTOM /
+    *MADE*" and one line, "Each piece is made to order, at one bench, by one
+    pair of hands, and fitted to the wrist that will wear it."; stacked on a
+    phone or any upright screen. The photograph rises with the scroll and
+    slowly draws back in its frame (still under reduced motion). A wide
+    version with blurred sides was made on the way and dropped. Harness
+    clean on desktop, 390x844, 376x650, 768x1024 and reduced motion; 23 of
+    23; order page 18 of 18. **Source and rights of the photograph unknown:**
+    to be cleared or replaced before the site is public.
 
 ## History
 

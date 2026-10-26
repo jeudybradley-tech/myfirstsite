@@ -75,7 +75,7 @@ body { background: var(--sc-canvas); font-size: var(--sc-t-base); font-weight: 3
 
 /* Every title: thin capitals; its <em class="t-it"> drops to a line of its
    own in the italic serif, a touch larger so its capitals stand as tall. */
-.story__title, .macro__title, .layers__title, .coll__title,
+.story__title, .macro__title, .bench__title, .layers__title, .coll__title,
 .edition__title, .close__title {
   font-weight: 200 !important; text-transform: uppercase;
   letter-spacing: -0.01em !important; line-height: 0.98 !important;
@@ -279,6 +279,37 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   letter-spacing: var(--label-track); text-transform: uppercase;
   color: var(--sc-ink-soft);
 }
+
+/* ------------------------------------------------------------- bench -- */
+/* A photograph and its title between the words in the dark and the
+   details: the photograph on the left, "Custom made" beside it. */
+.bench { padding-block: clamp(3rem, 9vh, 6rem) 0; }
+.bench__inner {
+  width: 100%; max-width: var(--sc-maxw); margin-inline: auto; padding-inline: var(--sc-gutter);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 7vw, 7rem); align-items: center;
+}
+.bench__fig {
+  position: relative; margin: 0; overflow: hidden; justify-self: end;
+  width: min(100%, calc(min(84svh, 52rem) * 0.8)); aspect-ratio: 4 / 5;
+  border-radius: var(--radius); box-shadow: var(--sc-e2); background: #110f0d;
+}
+.bench__photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover;
+  transform: scale(calc(1.12 - var(--sc-p, 0) * 0.12)); transform-origin: 40% 62%;
+  will-change: transform;
+}
+.bench__copy { max-width: 28rem; }
+.bench__title {
+  font-family: var(--sc-font-display); font-size: clamp(3rem, 1.6rem + 5vw, 6.5rem); margin: 0;
+}
+.bench__text { margin: var(--sc-5) 0 0; color: var(--sc-ink-soft); max-width: 30ch; font-size: var(--sc-t-lg); line-height: 1.5; }
+@media (max-width: 760px), (max-aspect-ratio: 1 / 1) {
+  .bench__inner { grid-template-columns: minmax(0, 1fr); gap: var(--sc-6); }
+  .bench__fig { justify-self: center; width: min(100%, 40rem, calc(min(70svh, 52rem) * 0.8)); }
+  .bench__title { font-size: var(--sc-t-3xl); }
+}
+@media (prefers-reduced-motion: reduce) { .bench__photo { transform: none; } }
 
 /* ------------------------------------------------------------ layers -- */
 /* A second watch, on a wrist, taken apart by the scroll. The name sits top
