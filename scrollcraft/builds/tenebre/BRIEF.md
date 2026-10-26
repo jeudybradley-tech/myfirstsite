@@ -209,6 +209,14 @@ Follow-ups, in order (French):
     breaks into two balanced lines. Lit word by word on request, then
     "finally dont light up the words": it stays plain. Harness clean on
     desktop, 390x844 and reduced motion; 23 of 23.
+23. A screenshot of "Up close", "i want this section to lighting up while
+    scrolling": its line, "Every edge was cut for the moment the light
+    arrives.", is now set in the italic like the other lit lines and its
+    words light one by one by the paragraph's own place on screen (the same
+    rule as "Custom made", now one routine for both): none as it passes 88%
+    of the screen, all by 46-50%, on desktop and 390x844. All lit under
+    reduced motion. Harness clean on desktop, 390x844, 376x650 and reduced
+    motion; 23 of 23; order page 18 of 18.
 
 ## History
 

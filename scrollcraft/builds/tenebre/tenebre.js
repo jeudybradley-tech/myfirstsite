@@ -26,7 +26,7 @@
   var lerp = function (a, b, t) { return a + (b - a) * t; };
   var gutterPx = function (W) { return clamp(W * 0.05, 20, 88); };
 
-  // ---- scroll-lit words (act 2, "Custom made", "Innovation"): one span per
+  // ---- scroll-lit words (act 2, "Up close", "Custom made", "Innovation"): one span per
   // word, lit from a progress in CSS; a <br> in the line is kept ------------
   [].forEach.call(document.querySelectorAll('[data-lit]'), function (p) {
     var parts = [].map.call(p.childNodes, function (n) {
@@ -783,21 +783,24 @@
   })();
 
   // =========================================================================
-  // "Custom made": its words light by the paragraph's own place on screen, so
-  // they read the same beside the photograph or under it on a phone
+  // "Up close" and "Custom made": their words light by each paragraph's own
+  // place on screen, so they read the same beside a photograph or under it
+  // on a phone
   // =========================================================================
-  var benchWords = (function () {
-    var p = document.querySelector('.bench__text');
-    if (!p) return { render: function () {} };
-    var last = -1;
+  var flowWords = (function () {
+    var els = [].slice.call(document.querySelectorAll('.macro__text, .bench__text'));
+    var last = els.map(function () { return -1; });
     function render() {
-      var r = p.getBoundingClientRect(), vh = innerHeight;
-      if (r.bottom < -80 || r.top > vh + 80) return;
-      // 0 as the first line comes up past 88% of the screen, 1 by 46%
-      var t = clamp01((vh * 0.88 - r.top) / (vh * 0.42));
-      if (Math.abs(t - last) < 0.002) return;
-      last = t;
-      p.style.setProperty('--lp', t.toFixed(3));
+      var vh = innerHeight;
+      for (var k = 0; k < els.length; k++) {
+        var r = els[k].getBoundingClientRect();
+        if (r.bottom < -80 || r.top > vh + 80) continue;
+        // 0 as the first line comes up past 88% of the screen, 1 by 46%
+        var t = clamp01((vh * 0.88 - r.top) / (vh * 0.42));
+        if (Math.abs(t - last[k]) < 0.002) continue;
+        last[k] = t;
+        els[k].style.setProperty('--lp', t.toFixed(3));
+      }
     }
     return { render: render };
   })();
@@ -829,7 +832,7 @@
     hero.render(now);
     layers.render();
     collection.render();
-    benchWords.render();
+    flowWords.render();
     chrome();
     requestAnimationFrame(frame);
   }

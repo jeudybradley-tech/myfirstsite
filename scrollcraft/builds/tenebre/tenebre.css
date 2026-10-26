@@ -261,7 +261,18 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   letter-spacing: -0.02em;
   margin: 0;
 }
-.macro__text { margin: 0; color: var(--sc-ink-soft); max-width: 26ch; font-size: var(--sc-t-lg); line-height: 1.5; }
+/* Its line reads like act 2's: the italic, its words lit one by one by the
+   paragraph's own progress up the screen (--lp, written by the page). */
+.macro__text {
+  margin: var(--sc-2) 0 0; max-width: 20ch;
+  font-family: var(--font-italic); font-style: italic; font-weight: 400;
+  font-size: clamp(1.45rem, 1.1rem + 1.2vw, 2.2rem); line-height: 1.25; letter-spacing: -0.004em;
+  text-wrap: pretty;
+}
+.macro__text .w {
+  opacity: clamp(0.16, calc(var(--lp, 0) * (var(--n, 10) + 1) - var(--i, 0)), 1);
+}
+@media (prefers-reduced-motion: reduce) { .macro__text .w { opacity: 1; } }
 .macro__grid {
   display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
   grid-template-rows: auto auto; gap: var(--sc-5);
