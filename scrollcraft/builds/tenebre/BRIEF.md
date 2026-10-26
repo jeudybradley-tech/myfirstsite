@@ -202,6 +202,13 @@ Follow-ups, in order (French):
     flies beside "and" inside the line's box (the harness grades the
     brightest patch of the whole box, with the veil hidden along with the
     line); on screen the words read clearly.
+22. "transcend eras without losing its value ... where or what should i put
+    this text": proposed as the hero's line under the name, worded "A watch
+    that transcends eras without losing its value." The client agreed ("put
+    it under timeless"); it replaces "A watch, finished in the dark." and
+    breaks into two balanced lines. Lit word by word on request, then
+    "finally dont light up the words": it stays plain. Harness clean on
+    desktop, 390x844 and reduced motion; 23 of 23.
 
 ## History
 

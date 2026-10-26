@@ -169,6 +169,7 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   color: var(--sc-ink-soft);
   font-size: min(var(--sc-t-sm), var(--line-a-fs, 1rem));
   max-width: min(28ch, var(--line-a-max, 28ch));
+  text-wrap: balance;
 }
 .hero__line--b {
   left: var(--sc-gutter); bottom: clamp(4.5rem, 14vh, 9rem);
