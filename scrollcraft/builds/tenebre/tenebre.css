@@ -186,7 +186,28 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   display: grid; align-items: center; justify-items: end;
   padding-inline: var(--sc-gutter);
 }
-.story__block { width: min(36rem, 100%); margin-right: clamp(0rem, 6vw, 7rem); }
+.story__block { position: relative; z-index: 1; width: min(36rem, 100%); margin-right: clamp(0rem, 6vw, 7rem); }
+/* The watchmaker fills the left of the screen and falls into the dark before
+   the words begin: the photograph ends 5rem past the left edge of the words,
+   so on a narrower screen it narrows instead of running under them. As the
+   act runs, the photograph slowly draws back. */
+.story__photo {
+  position: absolute; left: 0; top: 0; bottom: 0; z-index: 0; margin: 0;
+  width: min(60%, 56rem, 100% - var(--sc-gutter) - 36rem - clamp(0rem, 6vw, 7rem) + 5rem);
+  overflow: hidden;
+}
+.story__photo img {
+  width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 54%;
+  transform: scale(calc(1.12 - var(--sc-p, 0) * 0.1)); transform-origin: 48% 56%;
+  will-change: transform;
+}
+.story__photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(8, 7, 6, 0) 38%, rgba(8, 7, 6, 0.72) 74%, #080706 100%),
+    linear-gradient(180deg, #080706 0%, rgba(8, 7, 6, 0) 14%, rgba(8, 7, 6, 0) 84%, #080706 100%);
+}
+@media (prefers-reduced-motion: reduce) { .story__photo img { transform: none; } }
 .story__title {
   font-family: var(--sc-font-display);
   font-optical-sizing: auto;
@@ -544,11 +565,20 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 /* A gallery thumbnail (under 340 px tall) shows the watch and the name only. */
 .tn-tiny .chrome { display: none; }
 
+/* On a phone or any upright screen the photograph takes the top of the
+   screen and the words sit below it, on the dark it falls into. */
+@media (max-width: 760px), (max-aspect-ratio: 1 / 1) {
+  .story__stage { justify-items: start; align-items: end; padding-bottom: calc(max(1.35rem, env(safe-area-inset-bottom)) + 4.5rem); }
+  .story__block { margin-right: 0; }
+  .story__photo { width: 100%; bottom: auto; height: 64svh; }
+  .story__photo img { object-position: 50% 46%; }
+  .story__photo::after {
+    background: linear-gradient(180deg, #080706 0%, rgba(8, 7, 6, 0) 12%, rgba(8, 7, 6, 0) 52%, rgba(8, 7, 6, 0.8) 82%, #080706 100%);
+  }
+}
+
 /* ------------------------------------------------------------ phones -- */
 @media (max-width: 760px) {
-  .story__stage { justify-items: start; }
-  .story__block { margin-right: 0; }
-
   .macro__inner { grid-template-columns: 1fr; gap: var(--sc-6); }
   .macro__title { font-size: var(--sc-t-3xl); }
   .macro__grid { grid-template-columns: 1fr 1fr; gap: var(--sc-4); }

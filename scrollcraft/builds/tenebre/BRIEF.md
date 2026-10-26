@@ -91,6 +91,21 @@ Follow-ups, in order (French):
     the plain-image way is decoded before it is first drawn. Phone, four
     fast passes through the hero: frame time p50 22.7 to 16.7 ms, p95 34.1
     to 18.1 ms, max 45 to 27 ms, no long tasks.
+15. A photograph, `7.jpg`, "put this image in the background in the
+    section of crafted in darkness, make sure the written be visible": a
+    watchmaker, loupe in one eye, holding a skeleton movement between two
+    fingers, black and white with only the gold wheel and the purple jewels
+    in colour. It is graded onto the page ground (greys warmed to the page's
+    ink, blacks to #080706; 736x1104, 24 KB) and sits behind act 2. On a
+    wide screen it fills the left of the screen and falls into the dark 5rem
+    past the left edge of the words, so it narrows rather than run under
+    them (1024x700 checked); on a phone or any upright screen it takes the
+    top 64% and the words sit below it on the dark. As the act runs, the
+    photograph slowly draws back (scale 1.12 to 1.02; still under reduced
+    motion). Harness: the heading and the lit words clear 13.5:1 at their
+    worst frame on desktop, 390x844, 376x650, 768x1024 and reduced motion;
+    23 of 23. **The photograph's source and rights are unknown:** fine on
+    this private page, to be cleared or replaced before the site is public.
 
 ## History
 
