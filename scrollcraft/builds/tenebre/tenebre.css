@@ -349,15 +349,17 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   margin: 0 0 var(--sc-4);
   text-wrap: balance;
 }
-.layers__tag {
-  display: inline-block; margin-bottom: var(--sc-4);
-  padding: 0.2rem 0.55rem; border-radius: 999px;
-  border: 1px solid var(--sc-hairline-strong);
-  font-family: var(--sc-font-text); font-size: var(--sc-t-xs); font-weight: 500;
-  letter-spacing: var(--label-track); text-transform: uppercase;
-  color: var(--sc-ink-soft);
+/* The line under "Innovation" reads like act 2's: the italic, its words lit
+   one by one from the act's --sc-p while the watch is still whole. */
+.layers__text {
+  margin: 0; max-width: 24ch;
+  font-family: var(--font-italic); font-style: italic; font-weight: 400;
+  font-size: clamp(1.35rem, 1.05rem + 1vw, 2rem); line-height: 1.25; letter-spacing: -0.004em;
 }
-.layers__text { margin: 0; color: var(--sc-ink-soft); max-width: 26ch; }
+.layers__text .w {
+  opacity: clamp(0.16, calc(((var(--sc-p, 0) - 0.04) / 0.26) * (var(--n, 9) + 1) - var(--i, 0)), 1);
+}
+@media (prefers-reduced-motion: reduce) { .layers__text .w { opacity: 1; } }
 .layers__parts {
   position: absolute; z-index: var(--sc-z-copy);
   right: var(--sc-gutter); top: clamp(2.5rem, 9vh, 6rem);

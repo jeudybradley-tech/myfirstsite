@@ -26,20 +26,26 @@
   var lerp = function (a, b, t) { return a + (b - a) * t; };
   var gutterPx = function (W) { return clamp(W * 0.05, 20, 88); };
 
-  // ---- scroll-lit words (act 2 and "Custom made"): one span per word, lit
-  // from the act's --sc-p in CSS -------------------------------------------
+  // ---- scroll-lit words (act 2, "Custom made", "Innovation"): one span per
+  // word, lit from a progress in CSS; a <br> in the line is kept ------------
   [].forEach.call(document.querySelectorAll('[data-lit]'), function (p) {
-    var words = p.textContent.trim().split(/\s+/);
-    p.textContent = '';
-    p.style.setProperty('--n', words.length);
-    words.forEach(function (w, i) {
-      var s = document.createElement('span');
-      s.className = 'w';
-      s.style.setProperty('--i', i);
-      s.textContent = w;
-      p.appendChild(s);
-      if (i < words.length - 1) p.appendChild(document.createTextNode(' '));
+    var parts = [].map.call(p.childNodes, function (n) {
+      return n.nodeName === 'BR' ? null : n.textContent.trim().split(/\s+/).filter(Boolean);
     });
+    var i = 0;
+    p.textContent = '';
+    parts.forEach(function (words) {
+      if (words === null) { p.appendChild(document.createElement('br')); return; }
+      words.forEach(function (w) {
+        if (p.lastChild && p.lastChild.nodeName !== 'BR') p.appendChild(document.createTextNode(' '));
+        var s = document.createElement('span');
+        s.className = 'w';
+        s.style.setProperty('--i', i++);
+        s.textContent = w;
+        p.appendChild(s);
+      });
+    });
+    p.style.setProperty('--n', i);
   });
 
   // ---- the ring of 88 ------------------------------------------------------
