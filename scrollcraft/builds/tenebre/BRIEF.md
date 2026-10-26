@@ -106,6 +106,17 @@ Follow-ups, in order (French):
     worst frame on desktop, 390x844, 376x650, 768x1024 and reduced motion;
     23 of 23. **The photograph's source and rights are unknown:** fine on
     this private page, to be cleared or replaced before the site is public.
+16. Three photographs (`8.jpg`, `9.webp`, and a square bench shot), "install
+    in the section closer, replace the old ones with those ones". The three
+    stills cut from the hero clip are gone; Closer now shows a frosted dial
+    with a gold tourbillon under two fine points (tall, cut to 510x690),
+    an open movement on a wooden bench set with rubies and sapphires (cut
+    square), and a watchmaker's hands at the bench with a double loupe (its
+    pale table taken down 14% toward the page's dark). Captions: Tourbillon,
+    Movement, At the bench. 135 KB for the three. Harness clean on desktop,
+    390x844 and reduced motion; 23 of 23. **These show other watches (the
+    dial carries a maker's name) and their source and rights are unknown:**
+    to be cleared or replaced before the site is public.
 
 ## History
 
