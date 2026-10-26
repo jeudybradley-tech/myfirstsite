@@ -692,6 +692,11 @@
       } else {
         sc = Math.max(H / FH, W * 0.62 / FW);
         x = W * 0.6 - FW * sc / 2; y = H * 0.5 - FH * sc / 2;
+        // On a short wide screen the words reach down to where the arm comes in
+        // (its top edge, hairs included, is about a fifth of the way down the
+        // clip): lower the frame until the arm starts under the words.
+        var headBottom = head.offsetTop + head.offsetHeight + 14;
+        y = Math.max(y, headBottom - FH * sc * 0.2);
       }
       L = { W: W, H: H, dpr: dpr, x: x, y: y, w: FW * sc, h: FH * sc };
       lastKey = '';

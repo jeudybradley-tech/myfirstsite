@@ -184,9 +184,9 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   position: absolute; left: 0; bottom: 0; width: min(60vw, 46rem); height: 46vh;
   pointer-events: none; opacity: 0;
   background: radial-gradient(120% 100% at 0% 100%,
-    color-mix(in oklab, var(--sc-canvas) 82%, transparent) 0%,
-    color-mix(in oklab, var(--sc-canvas) 40%, transparent) 48%,
-    transparent 72%);
+    color-mix(in oklab, var(--sc-canvas) 90%, transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 66%, transparent) 50%,
+    transparent 78%);
 }
 
 /* ------------------------------------------------------------- story -- */
@@ -338,12 +338,18 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 .layers__head {
   position: absolute; z-index: var(--sc-z-copy);
   left: var(--sc-gutter); top: clamp(2.5rem, 9vh, 6rem);
-  max-width: 36rem;
+  width: max-content; max-width: min(36rem, 44vw);
+}
+/* A soft dark halo behind the title and its line: nothing to see over the
+   black, but it keeps the words clear where the wrist rises into them. */
+.layers__head::before {
+  content: ""; position: absolute; inset: -3rem -5rem -4rem -4rem; z-index: -1; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(8, 7, 6, 0.78), rgba(8, 7, 6, 0.5) 60%, rgba(8, 7, 6, 0));
 }
 .layers__title {
   font-family: var(--sc-font-display);
     font-weight: 400;
-  font-size: var(--sc-t-3xl);
+  font-size: clamp(2.4rem, 1.3rem + 3.1vw, 4.4rem);
   line-height: 1;
   letter-spacing: -0.018em;
   margin: 0 0 var(--sc-4);
@@ -360,6 +366,11 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
   opacity: clamp(0.16, calc(((var(--sc-p, 0) - 0.04) / 0.26) * (var(--n, 9) + 1) - var(--i, 0)), 1);
 }
 @media (prefers-reduced-motion: reduce) { .layers__text .w { opacity: 1; } }
+/* A short wide screen: the heading and its line take less of the height. */
+@media (min-aspect-ratio: 1 / 1) and (max-height: 760px) {
+  .layers__title { font-size: clamp(2.2rem, 6.4vh, 3rem); margin-bottom: var(--sc-3); }
+  .layers__text { font-size: clamp(1.15rem, 3.4vh, 1.5rem); }
+}
 .layers__parts {
   position: absolute; z-index: var(--sc-z-copy);
   right: var(--sc-gutter); top: clamp(2.5rem, 9vh, 6rem);
@@ -620,7 +631,7 @@ html:not(.tn-ready) .hero__name { position: absolute; left: var(--sc-gutter); to
 /* The second watch on any screen taller than wide: the words above and below
    the watch, never across it; the script sets the class and sizes the watch
    to the gap. */
-.layers__stage.is-stacked .layers__head { top: clamp(1.5rem, 6svh, 3rem); right: var(--sc-gutter); max-width: none; text-align: center; }
+.layers__stage.is-stacked .layers__head { top: clamp(1.5rem, 6svh, 3rem); right: var(--sc-gutter); width: auto; max-width: none; text-align: center; }
 .layers__stage.is-stacked .layers__title { font-size: var(--sc-t-2xl); margin-bottom: var(--sc-2); }
 .layers__stage.is-stacked .layers__text { margin-inline: auto; }
 .layers__stage.is-stacked .layers__parts {

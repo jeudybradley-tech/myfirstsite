@@ -181,6 +181,27 @@ Follow-ups, in order (French):
     0, 4, 10, 16, 21, 23 of 23 at 87, 80, 70, 60, 50, 40%). All lit under
     reduced motion. Harness clean on desktop, 390x844, 376x650 and reduced
     motion; 23 of 23; order page 18 of 18.
+21. "repalce the regent» to «innovation». with the words lighting up one by
+    one as you scroll down", "i want this section the words to light up one
+    by one instead", then "i want you to write at the end of the text «
+    build your wrist»". Act 4's title is now *INNOVATION* in the italic; the
+    "Example name" tag is gone (it is no longer a name). Its line is set
+    like act 2's read, smaller, and ends on a line of its own: "Four layers.
+    Each one lifts, and each one returns. / Build your wrist." Its twelve
+    words light one by one from the act's progress while the watch is still
+    whole (0, 3, 8 and 12 of 12 at p 0.02, 0.1, 0.2 and 0.32, the same on
+    desktop and phones). The word splitter now keeps a <br> in a lit line.
+    "INNOVATION" is a long word: its size is now set for it, its block fits
+    its words, and on a short wide screen (1024x700) the heading and line
+    are more compact and the frame is lowered until the arm starts under
+    them; a soft dark halo sits behind them. The hero's veil behind its lower
+    lines is a little stronger. Harness clean on desktop, 1366x768,
+    1280x720, 390x844, 376x650 and reduced motion; 23 of 23; order page 18
+    of 18. **One reading left at 1024x700:** the hero's "Two hundred and
+    seventeen parts" scores 2.49:1 on one frame, because a small gold part
+    flies beside "and" inside the line's box (the harness grades the
+    brightest patch of the whole box, with the veil hidden along with the
+    line); on screen the words read clearly.
 
 ## History
 
