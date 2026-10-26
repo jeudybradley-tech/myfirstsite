@@ -137,6 +137,22 @@ Follow-ups, in order (French):
     on the build and on the published copy: card to page, other pieces,
     back, direct arrival, unknown piece, validation; no console errors.
     Home page harness clean on desktop, 390x844 and reduced motion; 23 of 23.
+18. A reference image, "THE NEO FRAME / JUMPING HOUR", and "je veux que toute
+    la page aille cette type de police" (the whole page in this kind of
+    type). Bodoni Moda and Instrument Sans are gone. Inter Tight now carries
+    every word, its titles at weight 200 in capitals; Cormorant Garamond
+    italic (also capitals in titles) answers it on a line of its own:
+    "CRAFTED IN / *DARKNESS*", "UP / *CLOSE*" (was "Closer.", which no
+    longer read as a pair), "THE / *REGENT*", "THE / *COLLECTION*",
+    "EDITION / *OF 88*", "PRIVATE / *WAITLIST*", and on the order page
+    "PLACE YOUR / *ORDER*", "THE / *OTHERS*". Titles lose their full stops.
+    The read in act 2, the hero's lower line, the piece names and the order
+    page's name are in the italic; body text is Inter Tight 300. On a phone
+    the two closing titles keep to one line, and on a short phone (under
+    700 tall) the waitlist tightens so its title clears the dial. Both fonts
+    are OFL (licences in assets/fonts/). Harness clean on desktop, 390x844,
+    376x650, 360x640, 768x1024 and reduced motion; 23 of 23; the order page
+    18 of 18.
 
 ## History
 
