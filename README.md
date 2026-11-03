@@ -2,6 +2,8 @@
 
 Sites en scroll construits avec le skill scroll-craft (moteur `scrollcraft.js` / `scrollcraft.css`).
 
+Le skill lui-même est dans `.claude/skills/scroll-craft/` (version 0.3.1, licence MIT, de Nate Herk) : toute session Claude Code ouverte sur ce dépôt le charge automatiquement.
+
 | Site | Fichier | Contenu |
 |---|---|---|
 | **TIMELESS** | `scrollcraft/builds/tenebre/index.html` | Montre squelette en or jaune 18 carats, édition de 88, construite à partir de la vidéo fournie : à l'ouverture la montre est entière, le scroll la démonte puis la remonte ; ensuite les détails, le dessin éclaté avec les specs, l'anneau des 88 et la liste d'attente. Brief, plan et vérifications dans `BRIEF.md` à côté. |
