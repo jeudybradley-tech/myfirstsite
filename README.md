@@ -54,4 +54,4 @@ python3 -m http.server 8000
 - **Visages :** les visages qui apparaissaient dans les miroirs (photos lissage et brushing) sont floutés. Vérifier l'accord des clientes avant de rendre le site public.
 - **Inconnus :** adresse, téléphone, heures, prix. Rien de tout ça n'est affiché.
 - **Mise en ligne :** `.github/workflows/site-mechi.yml` publie ce dossier sur GitHub Pages à chaque mise à jour de `main`, une fois Settings > Pages > Source réglé sur « GitHub Actions ».
-- **Polices :** Bodoni Moda et Outfit, licence libre (OFL), dans `scrollcraft/builds/mechi/assets/fonts/`.
+- **Polices :** Inter Tight (titres en majuscules très fines, textes) et Cormorant Garamond (italique), les mêmes que TIMELESS, licence libre (OFL), dans `scrollcraft/builds/mechi/assets/fonts/`.

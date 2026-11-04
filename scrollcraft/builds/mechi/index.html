@@ -7,13 +7,15 @@
 <meta name="description" content="Salon de coiffure Mechi. Choisis tes services, décris tes cheveux, reçois une soumission, et réserve ta place avec un dépôt de 20 $ déduit de ta facture.">
 <meta name="theme-color" content="#151819">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23151819'/><text x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='19' fill='%2363d0c8'>M</text></svg>">
-<link rel="preload" href="assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="scrollcraft.css">
 <style>
-  @font-face { font-family: "Bodoni Moda"; src: url("assets/fonts/bodoni-moda.woff2") format("woff2-variations"), url("assets/fonts/bodoni-moda.woff2") format("woff2"); font-weight: 400 900; font-style: normal; font-display: swap; }
-  @font-face { font-family: "Bodoni Moda"; src: url("assets/fonts/bodoni-moda-italic.woff2") format("woff2-variations"), url("assets/fonts/bodoni-moda-italic.woff2") format("woff2"); font-weight: 400 900; font-style: italic; font-display: swap; }
-  @font-face { font-family: "Outfit"; src: url("assets/fonts/outfit.woff2") format("woff2-variations"), url("assets/fonts/outfit.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+  /* Type after the client's reference (the TIMELESS "CUSTOM MADE" panel): a very
+     thin grotesque in capitals, answered by a fine italic serif in capitals. */
+  @font-face { font-family: "Inter Tight"; src: url("assets/fonts/inter-tight-latin.woff2") format("woff2-variations"), url("assets/fonts/inter-tight-latin.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin.woff2") format("woff2-variations"), url("assets/fonts/cormorant-garamond-latin.woff2") format("woff2"); font-weight: 300 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-italic.woff2") format("woff2-variations"), url("assets/fonts/cormorant-garamond-latin-italic.woff2") format("woff2"); font-weight: 300 700; font-style: italic; font-display: swap; }
 
   :root {
     /* Slate for the salon at night, porcelain for the paperwork, teal from the lit shelves. */
@@ -26,8 +28,9 @@
     --sc-canvas: var(--porc);   --sc-surface: #ffffff;
     --sc-ink: var(--on-porc);   --sc-ink-soft: var(--on-porc-soft);
     --sc-accent: var(--teal);   --sc-accent-ink: #f3faf9;
-    --sc-font-display: "Bodoni Moda", "Didot", Georgia, serif;
-    --sc-font-text: "Outfit", system-ui, sans-serif;
+    --sc-font-display: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --sc-font-text:    "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-italic:     "Cormorant Garamond", "Times New Roman", Times, serif;
     --sc-shadow-color: 186 30% 12%;
   }
   body { background: var(--porc); }
@@ -40,7 +43,7 @@
   .disp { font-family: var(--sc-font-display); font-weight: 500; letter-spacing: -0.02em; line-height: 1.02; text-wrap: balance; font-optical-sizing: auto; }
   .disp em { font-style: italic; font-weight: 400; }
   .label { margin: 0; font: 500 var(--sc-t-xs)/1.2 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase; color: var(--sc-ink-soft); }
-  .on-slate p:not(.disp) { letter-spacing: .005em; line-height: 1.68; }
+  .on-slate :where(p:not(.disp)) { letter-spacing: .005em; line-height: 1.68; }
 
   /* ---------------------------------------------------------------- CTA -- */
   .cta {
@@ -198,7 +201,7 @@
   .dep .sc-stage { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; padding-inline: var(--sc-gutter); }
   .dep__text { position: relative; display: grid; gap: var(--sc-4); align-content: center; min-height: 60svh; }
   .dep__text h2 { margin: 0 0 var(--sc-4); font-size: var(--sc-t-3xl); max-width: 13ch; }
-  .dep__text p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.45; max-width: 30ch; color: var(--on-slate-soft); }
+  .dep__text p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.45; max-width: 34ch; color: var(--on-slate-soft); }
   .dep__text p strong { color: var(--on-slate); font-weight: 500; }
   .dep__num { justify-self: end; margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(9rem, 27vw, 27rem); line-height: .8; letter-spacing: -0.06em; color: var(--teal-lit); white-space: nowrap;
     transform: translateY(calc((0.5 - var(--sc-p, 0)) * 40px)); }
@@ -285,12 +288,36 @@
 
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
+
+  /* ------------------------------------------------------------ typography --
+     Every title: the grotesque at its thinnest, in capitals; its <em> answers
+     in the italic serif, also in capitals, a touch larger so it stands as tall.
+     Introductions read in the italic serif. Labels, buttons, the form and the
+     small print stay in the grotesque so they stay easy to read. */
+  .disp, .mark, .card__name, .rail__end h3 { font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; letter-spacing: -0.01em; }
+  .disp { line-height: .98; }
+  .steps h3, legend, .deposit h3, .done h3, .pick__txt b, .foot b { font-family: var(--sc-font-display); font-weight: 300; text-transform: uppercase; letter-spacing: .01em; }
+  .disp em, .card__name em, .rail__end h3 em, .mark em {
+    font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
+  .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
+  .bar__mark { font-family: var(--sc-font-display); font-weight: 300; font-size: 1.35rem; letter-spacing: .22em; text-transform: uppercase; }
+  .hero__lede, .rail__intro > p:not(.label):not(.rail__hint), .ba__head > p:not(.label), .book__head > p:not(.label), .dep__text p, .final p, .rail__end p {
+    font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0;
+    font-size: clamp(1.3rem, 1rem + 0.9vw, 1.8rem); line-height: 1.28; }
+  .hero__lede em { font-family: inherit; font-size: 1em; font-style: normal; font-weight: 500; }
+  .dep__text p strong { font-weight: 600; }
+  .steps .n { font-family: var(--font-italic); font-weight: 400; font-size: var(--sc-t-3xl); }
+  .dep__num { font-family: var(--sc-font-display); font-weight: 100; letter-spacing: -0.05em; }
+  .dep__num span { font-family: var(--font-italic); font-style: italic; font-weight: 400; }
+  .ba__ph figcaption, .label { font-family: var(--sc-font-text); }
+  .card__desc, .steps p { font-size: var(--sc-t-base); }
+
   @media (prefers-reduced-motion: reduce) { .dep__num { transform: none; } .slip.is-bump { animation: none; } }
 
   /* ------------------------------------------------------------- phone -- */
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
-    .mark { font-size: 27vw; }
+    .mark { font-size: 21vw; }
     .hero__lede { font-size: var(--sc-t-base); }
     .hero__media { height: 64svh; }
     .ph--a { height: 82%; }

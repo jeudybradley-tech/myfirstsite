@@ -23,6 +23,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Menu: "peux-tu installer un onglet", answered *Menu en haut du site*: a fixed bar with Accueil, Services, Comment ça marche, Le dépôt and the CTA; the tab of the section being read is underlined; on phones a Menu button opens the list.
 
+- Type: "je veux que tu utilise la même typographie qui est dans l'image" (the TIMELESS "CUSTOM MADE" panel): Inter Tight at weight 200 in capitals for every title, its emphasis in Cormorant Garamond italic capitals; introductions in the italic serif; labels, buttons, form and small print in Inter Tight.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
