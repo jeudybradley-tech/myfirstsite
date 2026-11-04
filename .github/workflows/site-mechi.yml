@@ -1,0 +1,45 @@
+# Met le site du Salon de coiffure Mechi en ligne avec GitHub Pages.
+# Se lance à chaque mise à jour de la branche main, ou à la main
+# (onglet Actions > « Publier le site Mechi » > Run workflow).
+# Avant le premier lancement : Settings > Pages > Source : « GitHub Actions ».
+name: Publier le site Mechi
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scrollcraft/builds/mechi/**"
+      - ".github/workflows/site-mechi.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Seulement ce que les visiteurs doivent voir : pas les notes de travail.
+      - name: Préparer le site
+        run: |
+          mkdir _site
+          rsync -a --exclude 'BRIEF.md' --exclude 'lab/' scrollcraft/builds/mechi/ _site/
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploiement
+        uses: actions/deploy-pages@v4
