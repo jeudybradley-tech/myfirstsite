@@ -25,6 +25,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Type: "je veux que tu utilise la même typographie qui est dans l'image" (the TIMELESS "CUSTOM MADE" panel): Inter Tight at weight 200 in capitals for every title, its emphasis in Cormorant Garamond italic capitals; introductions in the italic serif; labels, buttons, form and small print in Inter Tight.
 
+- Logo: "voici le logo", a black plaque with gold scrollwork, "Salon de Coiffure Mechi" in gold script and gold scissors, on a transparent ground. It replaces the hero wordmark and signs the footer; the favicon is its scissors. The page's palette now follows it: the logo's black `#120e09` for the dark grounds, its gold `#c59d5a` as the accent (`#7a5a1c` on the ivory ground, 5.5:1), ivory `#f3efe8`. The top menu keeps the name in type, in gold, since the logo's script is unreadable at bar size.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
