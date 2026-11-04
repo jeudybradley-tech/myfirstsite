@@ -27,6 +27,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Logo: "voici le logo", a black plaque with gold scrollwork, "Salon de Coiffure Mechi" in gold script and gold scissors, on a transparent ground. It replaces the hero wordmark and signs the footer; the favicon is its scissors. The page's palette now follows it: the logo's black `#120e09` for the dark grounds, its gold `#c59d5a` as the accent (`#7a5a1c` on the ivory ground, 5.5:1), ivory `#f3efe8`. The top menu keeps the name in type, in gold, since the logo's script is unreadable at bar size.
 
+- Appointment: "je veux qu'un calandrier et l'heure, je ne veux pas une deuxième journée". The two date fields and the time-of-day menu are replaced by a month calendar (from tomorrow, 60 days ahead, closed days struck through) and the day's half-hour times grouped Matin / Après-midi / Soir; the choice reads back as one line ("Ta demande : jeudi 5 novembre à 14 h 00."). Opening hours are an authored default, Monday to Saturday 9 h to 18 h, Sunday closed, set in `HOURS` at the top of `salon.js`, to confirm with the owner.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
@@ -66,8 +68,7 @@ veux et ta demande se remplit toute seule."
 ## Business rules on the page
 
 - The request comes first: services, *Tes cheveux aujourd'hui* (required),
-  *Ce que tu aimerais*, optional inspiration photo, two dates and a time of
-  day, name, phone, email.
+  *Ce que tu aimerais*, optional inspiration photo, the chosen day and time, name, phone, email.
 - The salon replies with the advised service, duration, price and time; the
   client then sends 20 $ by Interac to confirm, and must tick that she accepts
   the deposit rule.

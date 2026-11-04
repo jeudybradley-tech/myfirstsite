@@ -15,6 +15,22 @@
   var FORM_ENDPOINT = '';
   var INTERAC_EMAIL = '';
 
+  // HEURES D'OUVERTURE (à confirmer avec la propriétaire) : pour chaque jour,
+  // [ouverture, fermeture], ou null si le salon est fermé. Le dernier créneau
+  // proposé commence LAST_START_BEFORE_CLOSE minutes avant la fermeture.
+  var HOURS = {
+    1: ['09:00', '18:00'],  // lundi
+    2: ['09:00', '18:00'],  // mardi
+    3: ['09:00', '18:00'],  // mercredi
+    4: ['09:00', '18:00'],  // jeudi
+    5: ['09:00', '18:00'],  // vendredi
+    6: ['09:00', '18:00'],  // samedi
+    0: null                 // dimanche : fermé
+  };
+  var SLOT_MINUTES = 30;
+  var LAST_START_BEFORE_CLOSE = 60;
+  var BOOK_AHEAD_DAYS = 60;   // jusqu'à combien de jours à l'avance
+
   var SERVICES = {
     lissage:  { name: 'Lissage soyeux',  img: 'assets/lissage-m.webp' },
     coupe:    { name: 'Coupe et frange', img: 'assets/coupe-m.webp' },
@@ -195,9 +211,138 @@
   var status = form.querySelector('[data-status]');
   var done = form.querySelector('[data-done]');
   var submit = form.querySelector('button[type="submit"]');
-  var today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
-  var iso = today.toISOString().slice(0, 10);
-  form.elements.date1.min = iso; form.elements.date2.min = iso;
+  // ------------------------------------------------ calendar and times --
+  var MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  var DAYS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+  var calGrid = form.querySelector('[data-cal-grid]'), calMonth = form.querySelector('[data-cal-month]');
+  var calPrev = form.querySelector('[data-cal-prev]'), calNext = form.querySelector('[data-cal-next]');
+  var slotsEl = form.querySelector('[data-slots]'), slotsTitle = form.querySelector('[data-slots-title]');
+  var pickEl = form.querySelector('[data-pick]');
+  var dateIn = form.querySelector('[data-date]'), heureIn = form.querySelector('[data-heure]');
+  var booker = form.querySelector('.booker');
+
+  function atMidnight(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function isoDay(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function longDay(d) { return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()]; }
+  function mins(hhmm) { var p = hhmm.split(':'); return +p[0] * 60 + +p[1]; }
+  function label(m) { var h = Math.floor(m / 60), mm = m % 60; return h + ' h ' + String(mm).padStart(2, '0'); }
+
+  var first = atMidnight(new Date()); first.setDate(first.getDate() + 1);       // à partir de demain
+  var last = new Date(first); last.setDate(last.getDate() + BOOK_AHEAD_DAYS - 1);
+  var todayMid = atMidnight(new Date());
+  var view = new Date(first.getFullYear(), first.getMonth(), 1);
+  var chosenDay = null, chosenTime = null, focusDay = null;
+
+  function bookable(d) { return d >= first && d <= last && !!HOURS[d.getDay()]; }
+
+  function renderCal(focus) {
+    calMonth.textContent = MONTHS[view.getMonth()] + ' ' + view.getFullYear();
+    calPrev.disabled = view <= new Date(first.getFullYear(), first.getMonth(), 1);
+    calNext.disabled = new Date(view.getFullYear(), view.getMonth() + 1, 1) > last;
+    calGrid.textContent = '';
+    var lead = (view.getDay() + 6) % 7;                     // lundi en premier
+    for (var i = 0; i < lead; i++) calGrid.appendChild(document.createElement('span'));
+    var n = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+    var firstEnabled = null;
+    for (var d = 1; d <= n; d++) {
+      var day = new Date(view.getFullYear(), view.getMonth(), d);
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'cal__day'; b.textContent = d;
+      b.setAttribute('data-day', isoDay(day));
+      var ok = bookable(day);
+      b.disabled = !ok;
+      b.setAttribute('aria-label', longDay(day) + (ok ? '' : (HOURS[day.getDay()] ? ', non disponible' : ', fermé')));
+      b.setAttribute('aria-pressed', String(!!chosenDay && isoDay(chosenDay) === isoDay(day)));
+      if (+day === +todayMid) b.classList.add('is-today');
+      b.tabIndex = -1;
+      if (ok && !firstEnabled) firstEnabled = b;
+      calGrid.appendChild(b);
+    }
+    // une seule case du calendrier dans l'ordre de tabulation ; les flèches déplacent
+    var target = (focusDay && calGrid.querySelector('[data-day="' + isoDay(focusDay) + '"]:not(:disabled)'))
+      || (chosenDay && calGrid.querySelector('[data-day="' + isoDay(chosenDay) + '"]')) || firstEnabled;
+    if (target) { target.tabIndex = 0; if (focus) target.focus(); }
+  }
+
+  function renderSlots() {
+    slotsEl.textContent = '';
+    if (!chosenDay) { slotsTitle.textContent = 'Choisis d\'abord un jour.'; return; }
+    slotsTitle.innerHTML = '';
+    slotsTitle.append('Heures du ');
+    var em = document.createElement('em'); em.textContent = longDay(chosenDay); slotsTitle.appendChild(em);
+    var h = HOURS[chosenDay.getDay()], open = mins(h[0]), stop = mins(h[1]) - LAST_START_BEFORE_CLOSE;
+    var group = null;
+    for (var m = open; m <= stop; m += SLOT_MINUTES) {
+      var g = m < 720 ? 'Matin' : m < 1020 ? 'Après-midi' : 'Soir';
+      if (g !== group) { var p = document.createElement('p'); p.className = 'slots__group'; p.textContent = g; slotsEl.appendChild(p); group = g; }
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'slot'; b.setAttribute('role', 'radio');
+      b.textContent = label(m); b.setAttribute('data-time', String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'));
+      var on = chosenTime === b.getAttribute('data-time');
+      b.setAttribute('aria-checked', String(on));
+      b.tabIndex = on || (!chosenTime && m === open) ? 0 : -1;
+      slotsEl.appendChild(b);
+    }
+  }
+
+  function renderPick() {
+    dateIn.value = chosenDay ? isoDay(chosenDay) : '';
+    heureIn.value = chosenTime || '';
+    pickEl.textContent = '';
+    if (chosenDay && chosenTime) {
+      pickEl.append('Ta demande : ');
+      var st = document.createElement('strong');
+      st.textContent = longDay(chosenDay) + ' à ' + label(mins(chosenTime));
+      pickEl.appendChild(st); pickEl.append('.');
+      booker.removeAttribute('aria-invalid');
+    } else if (chosenDay) {
+      pickEl.textContent = 'Choisis maintenant une heure.';
+    }
+  }
+
+  calGrid.addEventListener('click', function (e) {
+    var b = e.target.closest('.cal__day'); if (!b || b.disabled) return;
+    var p = b.getAttribute('data-day').split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (!chosenDay || +d !== +chosenDay) chosenTime = null;
+    chosenDay = d; focusDay = d;
+    renderCal(true); renderSlots(); renderPick();
+  });
+  calGrid.addEventListener('keydown', function (e) {
+    var b = e.target.closest('.cal__day'); if (!b) return;
+    var step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
+    if (!step) return;
+    e.preventDefault();
+    var p = b.getAttribute('data-day').split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    for (var k = 0; k < 14; k++) {
+      d.setDate(d.getDate() + step);
+      if (d < first || d > last) return;
+      if (bookable(d)) break;
+    }
+    focusDay = d;
+    if (d.getMonth() !== view.getMonth() || d.getFullYear() !== view.getFullYear()) view = new Date(d.getFullYear(), d.getMonth(), 1);
+    renderCal(true);
+  });
+  calPrev.addEventListener('click', function () { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); focusDay = null; renderCal(false); });
+  calNext.addEventListener('click', function () { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); focusDay = null; renderCal(false); });
+
+  slotsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.slot'); if (!b) return;
+    chosenTime = b.getAttribute('data-time');
+    renderSlots(); renderPick();
+    var again = slotsEl.querySelector('[data-time="' + chosenTime + '"]'); if (again) again.focus();
+  });
+  slotsEl.addEventListener('keydown', function (e) {
+    var b = e.target.closest('.slot'); if (!b) return;
+    var all = Array.prototype.slice.call(slotsEl.querySelectorAll('.slot')), i = all.indexOf(b);
+    var j = { ArrowLeft: i - 1, ArrowUp: i - 1, ArrowRight: i + 1, ArrowDown: i + 1 }[e.key];
+    if (j === undefined) return;
+    e.preventDefault();
+    var n = all[(j + all.length) % all.length]; n.click();
+  });
+
+  renderCal(false); renderSlots(); renderPick();
 
   if (INTERAC_EMAIL) {
     var span = form.querySelector('[data-interac]');
@@ -209,7 +354,6 @@
 
   var MESSAGES = {
     cheveux: 'Décris tes cheveux aujourd\'hui et ce qui te dérange.',
-    date1: 'Choisis au moins une journée.',
     nom: 'Ajoute ton prénom et ton nom.',
     telephone: 'Ajoute un numéro de téléphone pour qu\'on puisse te joindre.',
     courriel: 'Ajoute un courriel valide pour recevoir notre réponse.',
@@ -227,23 +371,24 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     status.classList.remove('is-error'); status.textContent = '';
-    var order = ['cheveux', 'date1', 'nom', 'telephone', 'courriel', 'accepte_depot'];
-    for (var i = 0; i < order.length; i++) {
+    var order = ['cheveux', 'nom', 'telephone', 'courriel', 'accepte_depot'];
+    if (!form.elements.cheveux.value.trim()) { fail(MESSAGES.cheveux, form.elements.cheveux); return; }
+    if (!chosenDay) { booker.setAttribute('aria-invalid', 'true'); fail('Choisis le jour de ton rendez-vous dans le calendrier.', null); calGrid.querySelector('[tabindex="0"]').focus(); return; }
+    if (!chosenTime) { booker.setAttribute('aria-invalid', 'true'); fail('Choisis l\'heure de ton rendez-vous.', null); slotsEl.querySelector('.slot').focus(); return; }
+    for (var i = 1; i < order.length; i++) {
       var el = form.elements[order[i]];
       var empty = el.type === 'checkbox' ? !el.checked : !el.value.trim();
       if (empty || !el.checkValidity()) { fail(MESSAGES[order[i]], el); return; }
     }
-    var d2 = form.elements.date2;
-    if (d2.value && !d2.checkValidity()) { fail('La deuxième journée doit être aujourd\'hui ou plus tard.', d2); return; }
 
-    var first = form.elements.nom.value.trim().split(/\s+/)[0];
+    var firstName = form.elements.nom.value.trim().split(/\s+/)[0];
     if (!FORM_ENDPOINT) {
-      status.textContent = 'Merci ' + first + '. Le formulaire n\'est pas encore relié à la boîte de réception du salon, donc ta demande n\'a pas été envoyée.';
+      status.textContent = 'Merci ' + firstName + '. Le formulaire n\'est pas encore relié à la boîte de réception du salon, donc ta demande n\'a pas été envoyée.';
       return;
     }
 
     var data = new FormData(form);
-    data.append('_subject', 'Demande de soumission : ' + form.elements.nom.value.trim());
+    data.append('_subject', 'Demande de soumission : ' + form.elements.nom.value.trim() + ', ' + longDay(chosenDay) + ' à ' + label(mins(chosenTime)));
     submit.disabled = true; status.textContent = 'Envoi en cours…';
     fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
       .then(function (res) {
