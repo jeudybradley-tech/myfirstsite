@@ -192,6 +192,28 @@
   [aria-invalid="true"] { border-color: #a3322a !important; }
   input[type="file"] { font: 400 var(--sc-t-sm)/1.4 var(--sc-font-text); color: var(--sc-ink-soft); }
   input[type="file"]::file-selector-button { font: 500 var(--sc-t-sm)/1 var(--sc-font-text); padding: .75em 1em; margin-right: 1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--teal) 55%, transparent); background: transparent; color: var(--teal); cursor: pointer; }
+  /* Service picker: the client's own photos, click to choose. */
+  .pick { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sc-5); }
+  .pick__card { position: relative; display: grid; gap: var(--sc-3); align-content: start; cursor: pointer; min-width: 0; }
+  .pick__card input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; margin: 0; }
+  .pick__ph { position: relative; display: block; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 4px; box-shadow: var(--sc-e2); outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out), box-shadow 160ms var(--sc-ease-out); }
+  .pick__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 420ms var(--sc-ease-out), filter 200ms var(--sc-ease-out); }
+  .pick__tick { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgb(255 255 255 / .86); box-shadow: var(--sc-e1); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
+  .pick__tick::after { content: ""; width: 12px; height: 7px; border: 2.5px solid var(--on-porc-soft); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .35; }
+  .pick__txt { display: grid; gap: 2px; }
+  .pick__txt b { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); letter-spacing: -0.01em; line-height: 1.15; }
+  .pick__txt small { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); line-height: 1.4; }
+  .pick__state { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); min-height: 1.2em; }
+  .pick__state::before { content: "Cliquer pour choisir"; color: var(--sc-ink-soft); font-weight: 400; letter-spacing: .04em; text-transform: none; }
+  .pick__card input:checked ~ .pick__txt .pick__state::before { content: "Choisi"; color: var(--teal); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+  .pick__card input:checked ~ .pick__ph { outline-color: var(--teal); box-shadow: var(--sc-e3); }
+  .pick__card input:checked ~ .pick__ph .pick__tick { background: var(--teal); transform: scale(1.06); }
+  .pick__card input:checked ~ .pick__ph .pick__tick::after { border-color: #f3faf9; opacity: 1; }
+  .pick__card input:focus-visible ~ .pick__ph { outline: 3px dashed var(--teal); }
+  .pick__card:active .pick__ph { transform: scale(.985); }
+  @media (hover: hover) and (pointer: fine) { .pick__card:hover .pick__ph img { transform: scale(1.035); } }
+  .pick__more { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-3); margin-top: var(--sc-5); }
+  .pick__ask { font-style: normal; font-size: var(--sc-t-sm); color: var(--sc-ink-soft); margin-right: var(--sc-2); }
   .chipbox { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
   .chipbox label { position: relative; cursor: pointer; }
   .chipbox input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
@@ -272,6 +294,8 @@
     .final h2 { font-size: 17vw; }
 
     .two, .three { grid-template-columns: 1fr; gap: var(--sc-5); }
+    .pick { grid-template-columns: 1fr 1fr; gap: var(--sc-5) var(--sc-4); }
+    .pick__tick { top: 8px; right: 8px; }
     form { gap: var(--sc-7); }
     .book__head { margin-bottom: var(--sc-7); }
   }
@@ -416,15 +440,26 @@
 
       <form id="form" novalidate>
         <fieldset data-sc-in>
-          <legend>Le service</legend>
-          <p class="hint">Choisis tout ce qui t'intéresse. Si tu ne sais pas, coche « Je ne sais pas ».</p>
-          <div class="chipbox">
-            <label><input type="checkbox" name="services" value="lissage"><span><img src="assets/lissage-m.webp" alt="" width="30" height="30">Lissage soyeux</span></label>
-            <label><input type="checkbox" name="services" value="coupe"><span><img src="assets/coupe-m.webp" alt="" width="30" height="30">Coupe et frange</span></label>
-            <label><input type="checkbox" name="services" value="couleur"><span><img src="assets/cuivre-m.webp" alt="" width="30" height="30">Couleur</span></label>
-            <label><input type="checkbox" name="services" value="brushing"><span><img src="assets/apres-m.webp" alt="" width="30" height="30">Brushing</span></label>
-            <label><input type="checkbox" name="services" value="autre"><span class="noimg">Autre</span></label>
-            <label><input type="checkbox" name="services" value="ne-sais-pas"><span class="noimg">Je ne sais pas</span></label>
+          <legend>Choisis tes services</legend>
+          <p class="hint">Clique sur une photo pour la choisir, et encore une fois pour l'enlever. Tu peux en choisir plusieurs.</p>
+          <div class="pick">
+            <label class="pick__card" for="svc-lissage"><input type="checkbox" id="svc-lissage" name="services" value="lissage">
+              <span class="pick__ph"><img src="assets/lissage-m.webp" width="600" height="800" alt="Carré noir lissé et brillant, vu de dos."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__txt"><b>Lissage soyeux</b><small>Frisottis, cheveux qui gonflent.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-coupe"><input type="checkbox" id="svc-coupe" name="services" value="coupe">
+              <span class="pick__ph"><img src="assets/coupe-m.webp" width="600" height="800" alt="Carré dégradé brun foncé avec frange rideau."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__txt"><b>Coupe et frange</b><small>Dégradé, frange, forme.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-couleur"><input type="checkbox" id="svc-couleur" name="services" value="couleur">
+              <span class="pick__ph"><img src="assets/cuivre-m.webp" width="600" height="800" alt="Longueurs cuivrées, lisses et brillantes."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__txt"><b>Couleur</b><small>Cuivré, reflets, couverture.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-brushing"><input type="checkbox" id="svc-brushing" name="services" value="brushing">
+              <span class="pick__ph"><img src="assets/apres-m.webp" width="600" height="800" alt="Brushing sur cheveux longs bruns, pointes en boucles souples."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__txt"><b>Brushing</b><small>Volume, mise en forme.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+          </div>
+          <div class="pick__more chipbox">
+            <i class="pick__ask">Pas dans la liste ?</i>
+            <label for="svc-autre"><input type="checkbox" id="svc-autre" name="services" value="autre"><span class="noimg">Autre service</span></label>
+            <label for="svc-nsp"><input type="checkbox" id="svc-nsp" name="services" value="ne-sais-pas"><span class="noimg">Je ne sais pas, conseille-moi</span></label>
           </div>
         </fieldset>
 
