@@ -35,6 +35,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Owner: "est-ce que tu penses une biographie de la propriétaire serait bon ?", placed "juste après la section de vidéo". Section `#proprietaire` (photo, name, three or four sentences, facts: experience, training, specialties, languages, one quote), with a menu tab "La propriétaire". Filled from what the client gave: "son nom est Mercedes", her profile photo, and her flyer (specialties: brushing et mise en plis, coupe moderne, coloration et mèches, traitements capillaires, lissage et botox capillaire, toutes textures; the motto "Une beauté qui vous ressemble"; 8025 Léonard de Vinci, Montréal; 438-377-2535, now also in the footer). Experience, training and languages are unknown, so those rows were dropped rather than invented. The photo was sharpened with ElevenLabs (Topaz upscale v2, 2x, about 485 credits) but the result could not be downloaded from the build environment (elevenlabsusercontent.com blocked), so the original photo is on the page for now. The deploy workflow fails while any `data-todo` remains. The menu switches to its Menu button below 1240 px so the extra tab never wraps.
 
+- Colour card: "peux-tu ajouter et remplacer cette photo dans les services" (dark hair with red highlights). It replaces the copper photo on the colour card, renamed "Coloration et mèches" as on the owner's flyer, in the rail and in the form; the copper photo stays in the hero.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob

@@ -34,7 +34,7 @@
   var SERVICES = {
     lissage:  { name: 'Lissage soyeux',  img: 'assets/lissage-m.webp' },
     coupe:    { name: 'Coupe et frange', img: 'assets/coupe-m.webp' },
-    couleur:  { name: 'Couleur',         img: 'assets/cuivre-m.webp' },
+    couleur:  { name: 'Coloration et mèches', img: 'assets/couleur-m.webp' },
     brushing: { name: 'Brushing',        img: 'assets/apres-m.webp' }
   };
 
