@@ -112,25 +112,25 @@
   .fly { position: fixed; z-index: 90; border-radius: 12px; object-fit: cover; pointer-events: none; box-shadow: var(--sc-e3); }
 
   /* --------------------------------------------------------------- hero -- */
-  /* The hero is a scrubbed stage: the salon's own clip (a client turning in
-     front of the real Mechi sign) plays under the reader's hand. The clip is
-     portrait, so on a wide screen it stands in a tall frame beside the copy. */
-  .hero__stage { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: clamp(2rem, 6vw, 7rem);
-    padding: calc(var(--bar-h) + clamp(1rem, 3svh, 2.5rem)) var(--sc-gutter) clamp(1.5rem, 4svh, 3rem);
-    background: radial-gradient(60% 70% at 78% 40%, #2a2014, var(--slate) 70%); }
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 4vw;
+    min-height: 100svh; padding: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)) var(--sc-gutter) clamp(2rem, 6svh, 4rem);
+    background: radial-gradient(60% 70% at 78% 40%, #2a2014, var(--slate) 70%); overflow: clip; }
   .hero__copy { display: grid; gap: var(--sc-5); justify-items: start; }
-  .hero__low { display: grid; gap: var(--sc-5); justify-items: start; }
   .mark { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(4.5rem, 14.5vw, 15rem); line-height: .84; letter-spacing: -0.045em; color: var(--on-slate); }
   .logo { margin: 0 0 var(--sc-2) -1.2%; width: min(100%, 42rem); }
   .logo img { width: 100%; height: auto; filter: drop-shadow(0 18px 30px rgb(0 0 0 / .45)); }
   .hero__lede { margin: 0; font-size: var(--sc-t-lg); max-width: 32ch; color: var(--on-slate-soft); }
   .hero__lede em { font-family: var(--sc-font-display); font-size: 1.25em; color: var(--on-slate); }
   .hero__act { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-5); margin-top: var(--sc-3); }
+  .hero__media { position: relative; height: min(84svh, 60rem); }
+  .ph { position: absolute; overflow: hidden; border-radius: 3px; box-shadow: var(--sc-e3); aspect-ratio: 3 / 4; max-width: 100%; }
+  .ph img { width: 100%; height: 112%; margin-top: -6%; object-fit: cover; }
+  .ph--a { right: 0; top: 0; height: 76%; }
+  .ph--b { left: 0; bottom: 0; height: 46%; z-index: 2; outline: 6px solid var(--slate); }
+  /* The curls clip is portrait, so on a wide screen it stands in a tall frame. */
   .vframe { position: relative; height: calc(100svh - var(--bar-h) - clamp(3rem, 9svh, 6rem)); max-height: 56rem; aspect-ratio: 9 / 16; max-width: 100%;
     overflow: hidden; border-radius: 4px; background: var(--slate-2);
     box-shadow: 0 30px 60px -20px rgb(0 0 0 / .7), 0 0 0 1px color-mix(in oklab, var(--gold) 35%, transparent); }
-  .vframe__cap { position: absolute; z-index: 3; left: 14px; bottom: 14px; font: 600 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase;
-    padding: .7em 1em; border-radius: var(--sc-r-pill); background: rgb(18 14 9 / .72); color: var(--on-slate); }
   .scrim-v { position: absolute; inset: 0; z-index: 2; pointer-events: none; display: none; }
 
   /* ------------------------------------------------------ services rail -- */
@@ -380,17 +380,18 @@
 
   /* ------------------------------------------------------------- phone -- */
   @media (max-width: 760px) {
-    /* On a phone the portrait clip IS the screen: full bleed, copy over a
-       scrim at the top (logo) and at the bottom (line and button). */
-    .hero__stage, .curls__stage { display: block; padding: 0; }
+    .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
+    .hero__lede { font-size: var(--sc-t-base); }
+    .hero__media { height: 64svh; }
+    .ph--a { height: 82%; }
+    .ph--b { height: 42%; outline-width: 4px; }
+
+    /* On a phone the portrait curls clip IS the screen: full bleed, copy over
+       a scrim at the bottom. */
+    .curls__stage { display: block; padding: 0; }
     .vframe { position: absolute; inset: 0; height: auto; max-height: none; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
-    .vframe__cap { display: none; }
-    .scrim-v { display: block; background: linear-gradient(to bottom, rgb(18 14 9 / .92) 0, rgb(18 14 9 / .55) calc(var(--bar-h) + 9rem), transparent 42%, transparent 52%, rgb(18 14 9 / .7) 70%, rgb(18 14 9 / .96) 100%); }
-    .hero__copy, .curls__copy { position: absolute; z-index: 4; left: var(--sc-gutter); right: var(--sc-gutter); bottom: max(1.5rem, env(safe-area-inset-bottom)); }
-    .hero__copy { top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + .75rem); bottom: max(1.5rem, env(safe-area-inset-bottom)); display: flex; flex-direction: column; justify-content: space-between; }
-    .hero .logo { width: min(100%, 22rem); }
-    .hero__low { display: grid; gap: var(--sc-4); justify-items: start; }
-    .hero__lede { font-size: var(--sc-t-lg) !important; color: var(--on-slate) !important; }
+    .scrim-v { display: block; background: linear-gradient(to bottom, rgb(18 14 9 / .92) 0, rgb(18 14 9 / .55) calc(var(--bar-h) + 6rem), transparent 30%, transparent 48%, rgb(18 14 9 / .7) 66%, rgb(18 14 9 / .96) 100%); }
+    .curls__copy { position: absolute; z-index: 4; left: var(--sc-gutter); right: var(--sc-gutter); bottom: max(1.5rem, env(safe-area-inset-bottom)); }
     .curls__copy h2 { font-size: 13vw; }
     .curls__copy > p:not(.label) { font-size: var(--sc-t-lg); color: var(--on-slate); }
 
@@ -444,25 +445,22 @@
 
 <main id="top">
 
-  <!-- 1 · HERO: scrub. The salon's own clip, a client in front of the real
-       Mechi sign, turns under the reader's hand; the copy holds beside it. -->
-  <section id="accueil" class="hero" data-sc-act="scrub" data-sc-span="2.2" data-sc-dwell="0.3">
-    <div data-sc-stage class="hero__stage on-slate">
-      <div class="hero__copy">
-        <h1 class="logo"><picture><source media="(max-width: 760px)" srcset="assets/logo-m.webp"><img src="assets/logo.webp" width="1536" height="795" alt="Salon de coiffure Mechi"></picture></h1>
-        <div class="hero__low">
-          <p class="hero__lede">Coupe, couleur, lissage et brushing. Dis-nous ce que tu veux, <em>on te répond avec le prix</em> avant le rendez-vous.</p>
-          <div class="hero__act">
-            <a class="cta" href="#soumission">Demander une soumission</a>
-            <a class="link" href="#services">Voir les services</a>
-          </div>
-        </div>
+  <!-- 1 · HERO: flow + parallax. Two of the salon's own results, at two depths. -->
+  <section id="accueil" class="hero on-slate" data-sc-act="flow">
+    <div class="hero__copy" data-sc-in data-sc-stagger="70">
+      <h1 class="logo"><picture><source media="(max-width: 760px)" srcset="assets/logo-m.webp"><img src="assets/logo.webp" width="1536" height="795" alt="Salon de coiffure Mechi"></picture></h1>
+      <p class="hero__lede">Coupe, couleur, lissage et brushing. Dis-nous ce que tu veux, <em>on te répond avec le prix</em> avant le rendez-vous.</p>
+      <div class="hero__act">
+        <a class="cta" href="#soumission">Demander une soumission</a>
+        <a class="link" href="#services">Voir les services</a>
       </div>
-      <div class="vframe">
-        <picture><source media="(max-width: 760px)" srcset="assets/enseigne-poster-m.webp"><img class="sc-stage__poster" src="assets/enseigne-poster.webp" width="608" height="1080" alt="Une cliente aux longs cheveux bruns aux pointes cuivrées, devant l'enseigne du Salon de coiffure Mechi."></picture>
-        <video data-sc-scrub data-sc-src="assets/enseigne.mp4" data-sc-src-mobile="assets/enseigne-m.mp4" muted playsinline aria-hidden="true"></video>
-        <div class="scrim-v" aria-hidden="true"></div>
-        <p class="vframe__cap" aria-hidden="true">Au salon</p>
+    </div>
+    <div class="hero__media" aria-hidden="false">
+      <div class="ph ph--a" data-sc-parallax="-0.9">
+        <picture><source media="(max-width: 760px)" srcset="assets/cuivre-m.webp"><img src="assets/cuivre.webp" width="1200" height="1600" alt="Longueurs cuivrées, lisses et brillantes, dégradé aux pointes."></picture>
+      </div>
+      <div class="ph ph--b" data-sc-parallax="0.7">
+        <picture><source media="(max-width: 760px)" srcset="assets/lissage-m.webp"><img src="assets/lissage.webp" width="1200" height="1600" alt="Carré noir lissé, brillant et souple, vu de dos."></picture>
       </div>
     </div>
   </section>
@@ -549,7 +547,7 @@
     </div>
   </section>
 
-  <!-- 2c · CURLS: scrub. The second and last clip: long curls in the salon
+  <!-- 2c · CURLS: scrub. The page's only clip: long curls in the salon
        chair, moving with the scroll. Frame left, copy right. -->
   <section id="boucles" class="curls" data-sc-act="scrub" data-sc-span="2.4" data-sc-dwell="0.25" aria-labelledby="curls-h">
     <div data-sc-stage class="curls__stage on-slate">

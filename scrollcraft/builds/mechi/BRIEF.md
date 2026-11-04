@@ -29,7 +29,7 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Appointment: "je veux qu'un calandrier et l'heure, je ne veux pas une deuxième journée". The two date fields and the time-of-day menu are replaced by a month calendar (from tomorrow, 60 days ahead, closed days struck through) and the day's half-hour times grouped Matin / Après-midi / Soir; the choice reads back as one line ("Ta demande : jeudi 5 novembre à 14 h 00."). Opening hours, given by the client: Wednesday to Friday 9 h 30 to 16 h 30, closed Saturday to Tuesday; set in `HOURS` at the top of `salon.js`, shown above the calendar and in the footer. Last bookable start 15 h 30 (one hour before closing).
 
-- Videos: two portrait clips from the salon, asked for as "Vidéo au défilement". The client in front of the real Mechi sign is now the hero (`scrub`, 2.2vh, logo and copy beside a tall frame); the long curls in the chair are a second `scrub` act (2.4vh) after the before/after. Encoded with `encode.sh` (dense GOP, no audio), 608x1080 and a 720p phone variant. On phones both clips go full bleed under a top and bottom scrim.
+- Videos: two portrait clips from the salon, asked for as "Vidéo au défilement". The client in front of the Mechi sign was the hero for one round, then removed on "je ne veux pas de video à l'accueil": the hero is back to the logo and two photos. The long curls in the chair stay, as the page's one `scrub` act (2.4vh) after the before/after. Encoded with `encode.sh` (dense GOP, no audio), 608x1080 and a 720p phone variant. On phones the clip goes full bleed under a top and bottom scrim.
 
 ## Assets
 
@@ -46,8 +46,8 @@ blondes, une coupe dégradée et un brushing".
 
 Like the Nitsy Fashion film site, at the client's request:
 
-`scrub(hero clip) > pan(services rail) > flow(avant / après) > scrub(curls clip) > flow(three steps) >
-pin(the deposit) > flow(request form)`, 7 acts, about 16.5 viewport-heights.
+`flow(hero, logo and two photos on parallax) > pan(services rail) > flow(avant / après) > scrub(curls clip) > flow(three steps) >
+pin(the deposit) > flow(request form)`, 7 acts, about 15 viewport-heights.
 
 | Beat | Device | Why |
 |---|---|---|
