@@ -33,7 +33,7 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - TikTok: "tik tok: Salondecoiffuremechi [...] je veux que ça apparaît dans la section il y a des vidéos". A pill under the section's button: TikTok mark, "Plus de vidéos sur TikTok", **@salondecoiffuremechi**, linking to https://www.tiktok.com/@salondecoiffuremechi in a new tab. The address could not be opened from the build environment; the client should test it.
 
-- Owner: "est-ce que tu penses une biographie de la propriétaire serait bon ?", placed "juste après la section de vidéo". Section `#proprietaire` (photo, name, three or four sentences, facts: experience, training, specialties, languages, one quote), with a menu tab "La propriétaire". Built with visibly marked `[data-todo]` slots until her real details arrive; nothing about her is invented. The deploy workflow fails while any `data-todo` remains. The menu switches to its Menu button below 1240 px so the extra tab never wraps.
+- Owner: "est-ce que tu penses une biographie de la propriétaire serait bon ?", placed "juste après la section de vidéo". Section `#proprietaire` (photo, name, three or four sentences, facts: experience, training, specialties, languages, one quote), with a menu tab "La propriétaire". Filled from what the client gave: "son nom est Mercedes", her profile photo, and her flyer (specialties: brushing et mise en plis, coupe moderne, coloration et mèches, traitements capillaires, lissage et botox capillaire, toutes textures; the motto "Une beauté qui vous ressemble"; 8025 Léonard de Vinci, Montréal; 438-377-2535, now also in the footer). Experience, training and languages are unknown, so those rows were dropped rather than invented. The photo was sharpened with ElevenLabs (Topaz upscale v2, 2x, about 485 credits) but the result could not be downloaded from the build environment (elevenlabsusercontent.com blocked), so the original photo is on the page for now. The deploy workflow fails while any `data-todo` remains. The menu switches to its Menu button below 1240 px so the extra tab never wraps.
 
 ## Assets
 
@@ -83,7 +83,7 @@ veux et ta demande se remplit toute seule."
 
 ## Unknown, so not stated
 
-Address, phone, prices ("Prix sur devis" on every card), team.
+Prices ("Prix sur devis" on every card), team.
 
 ## Verification (4 November 2026)
 
