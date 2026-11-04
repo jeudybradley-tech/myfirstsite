@@ -65,6 +65,8 @@
     background: color-mix(in oklab, var(--slate) 95%, transparent);
     border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 10%, transparent); }
   .bar__mark { font-family: var(--sc-font-display); font-weight: 500; font-size: 1.65rem; line-height: 1; letter-spacing: -0.03em; color: var(--on-slate); text-decoration: none; }
+  .bar__mark { display: grid; gap: 3px; }
+  .bar__mark small { font-family: var(--sc-font-text); font-size: .62rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; line-height: 1; color: var(--on-slate-soft); }
   .bar__nav { display: flex; align-items: center; gap: var(--sc-1); }
   .bar__nav a[data-tab] { position: relative; padding: .75em .95em; font-size: var(--sc-t-sm); color: var(--on-slate-soft); text-decoration: none; border-radius: var(--sc-r-pill);
     transition: color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
@@ -299,7 +301,7 @@
 
 <div class="sc-grain" aria-hidden="true"></div>
 <header class="bar on-slate" data-bar>
-  <a class="bar__mark" href="#top" aria-label="Mechi, retour en haut">Mechi</a>
+  <a class="bar__mark" href="#top" aria-label="Salon de coiffure Mechi, retour en haut"><small>Salon de coiffure</small>Mechi</a>
   <button class="bar__toggle" type="button" aria-expanded="false" aria-controls="menu"><i aria-hidden="true"></i><span data-toggle-label>Menu</span></button>
   <nav class="bar__nav" id="menu" aria-label="Sections du site">
     <a href="#top" data-tab="top">Accueil</a>
