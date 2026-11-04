@@ -21,6 +21,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
   Split stage (avant on one side, après on the other, the divider sweeping
   away at the deposit). It was taken out entirely on that instruction.
 
+- Menu: "peux-tu installer un onglet", answered *Menu en haut du site*: a fixed bar with Accueil, Services, Comment ça marche, Le dépôt and the CTA; the tab of the section being read is underlined; on phones a Menu button opens the list.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob

@@ -56,6 +56,39 @@
   .cta:focus-visible, .slip:focus-visible, .link:focus-visible, .chipbox input:focus-visible + span { outline: 2px solid var(--sc-accent); outline-offset: 3px; }
   .link { font-size: var(--sc-t-sm); font-weight: 500; color: var(--sc-ink); text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; }
 
+  /* ---------------------------------------------------------- top menu -- */
+  :root { --bar-h: 4.25rem; }
+  main section[id], #top { scroll-margin-top: var(--bar-h); }
+  .bar { position: fixed; inset: 0 0 auto; z-index: calc(var(--sc-z-chrome) + 5);
+    display: flex; align-items: center; justify-content: space-between; gap: var(--sc-5);
+    height: calc(var(--bar-h) + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) var(--sc-gutter) 0;
+    background: color-mix(in oklab, var(--slate) 95%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 10%, transparent); }
+  .bar__mark { font-family: var(--sc-font-display); font-weight: 500; font-size: 1.65rem; line-height: 1; letter-spacing: -0.03em; color: var(--on-slate); text-decoration: none; }
+  .bar__nav { display: flex; align-items: center; gap: var(--sc-1); }
+  .bar__nav a[data-tab] { position: relative; padding: .75em .95em; font-size: var(--sc-t-sm); color: var(--on-slate-soft); text-decoration: none; border-radius: var(--sc-r-pill);
+    transition: color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
+  .bar__nav a[data-tab]::after { content: ""; position: absolute; left: .95em; right: .95em; bottom: .3em; height: 2px; border-radius: 2px; background: var(--teal-lit); transform: scaleX(0); transition: transform 220ms var(--sc-ease-out); }
+  .bar__nav a[data-tab][aria-current="true"] { color: var(--on-slate); }
+  .bar__nav a[data-tab][aria-current="true"]::after { transform: scaleX(1); }
+  @media (hover: hover) and (pointer: fine) { .bar__nav a[data-tab]:hover { color: var(--on-slate); background: color-mix(in oklab, var(--on-slate) 7%, transparent); } }
+  .bar__nav a:focus-visible, .bar__mark:focus-visible, .bar__toggle:focus-visible { outline: 2px solid var(--teal-lit); outline-offset: 2px; }
+  .bar__cta { margin-left: var(--sc-3); padding: .85em 1.25em; }
+  .bar__toggle { display: none; align-items: center; gap: .6em; font: 500 var(--sc-t-sm)/1 var(--sc-font-text); color: var(--on-slate); background: none; cursor: pointer;
+    padding: .75em 1.1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--on-slate) 28%, transparent); }
+  .bar__toggle i { position: relative; width: 16px; height: 10px; border-block: 1.5px solid currentColor; transition: transform 200ms var(--sc-ease-out); }
+  .bar.is-open .bar__toggle i { transform: scaleY(.15); }
+  @media (max-width: 1000px) {
+    .bar__toggle { display: inline-flex; }
+    .bar__nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+      padding: var(--sc-2) var(--sc-gutter) var(--sc-6); background: var(--slate); border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 12%, transparent); box-shadow: var(--sc-e3);
+      max-height: calc(100svh - var(--bar-h)); overflow-y: auto; }
+    .bar.is-open .bar__nav { display: flex; }
+    .bar__nav a[data-tab] { font-size: var(--sc-t-lg); padding: 1em 0; border-radius: 0; border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 10%, transparent); }
+    .bar__nav a[data-tab]::after { left: auto; right: 0; top: 50%; bottom: auto; width: 8px; height: 8px; border-radius: 50%; translate: 0 -50%; }
+    .bar__cta { margin: var(--sc-5) 0 0; justify-content: center; }
+  }
+
   /* --------------------------------------------------- the request pill -- */
   .slip {
     position: fixed; right: var(--sc-gutter); bottom: max(1.25rem, env(safe-area-inset-bottom)); z-index: var(--sc-z-chrome);
@@ -73,7 +106,7 @@
 
   /* --------------------------------------------------------------- hero -- */
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 4vw;
-    min-height: 100svh; padding: clamp(2rem, 6svh, 4rem) var(--sc-gutter);
+    min-height: 100svh; padding: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)) var(--sc-gutter) clamp(2rem, 6svh, 4rem);
     background: radial-gradient(60% 70% at 78% 40%, #1f3433, var(--slate) 70%); overflow: clip; }
   .hero__copy { display: grid; gap: var(--sc-5); justify-items: start; }
   .mark { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(4.5rem, 14.5vw, 15rem); line-height: .84; letter-spacing: -0.045em; color: var(--on-slate); }
@@ -231,7 +264,7 @@
 
   /* ------------------------------------------------------------- phone -- */
   @media (max-width: 760px) {
-    .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: max(2.5rem, env(safe-area-inset-top)); }
+    .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
     .mark { font-size: 27vw; }
     .hero__lede { font-size: var(--sc-t-base); }
     .hero__media { height: 64svh; }
@@ -265,13 +298,24 @@
 <body>
 
 <div class="sc-grain" aria-hidden="true"></div>
+<header class="bar on-slate" data-bar>
+  <a class="bar__mark" href="#top" aria-label="Mechi, retour en haut">Mechi</a>
+  <button class="bar__toggle" type="button" aria-expanded="false" aria-controls="menu"><i aria-hidden="true"></i><span data-toggle-label>Menu</span></button>
+  <nav class="bar__nav" id="menu" aria-label="Sections du site">
+    <a href="#top" data-tab="top">Accueil</a>
+    <a href="#services" data-tab="services">Services</a>
+    <a href="#comment" data-tab="comment">Comment ça marche</a>
+    <a href="#depot" data-tab="depot">Le dépôt</a>
+    <a class="cta bar__cta" href="#soumission">Demander une soumission</a>
+  </nav>
+</header>
 <a class="slip" href="#soumission" data-slip>Ma soumission</a>
 <p class="sr" role="status" aria-live="polite" data-announce></p>
 
 <main id="top">
 
   <!-- 1 · HERO: flow + parallax. Two of the salon's own results, at two depths. -->
-  <section class="hero on-slate" data-sc-act="flow">
+  <section id="accueil" class="hero on-slate" data-sc-act="flow">
     <div class="hero__copy" data-sc-in data-sc-stagger="70">
       <p class="label">Salon de coiffure</p>
       <h1 class="mark"><span class="sr">Salon de coiffure </span>Mechi</h1>
@@ -336,7 +380,7 @@
   </section>
 
   <!-- 3 · HOW: flow. A real sequence, so the steps carry their numbers. -->
-  <section class="how on-porc" data-sc-act="flow" aria-labelledby="how-h">
+  <section id="comment" class="how on-porc" data-sc-act="flow" aria-labelledby="how-h">
     <div class="sc-wrap">
       <div class="how__head" data-sc-in data-sc-stagger="60">
         <p class="label">Comment ça marche</p>

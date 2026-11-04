@@ -33,12 +33,16 @@
   var form = document.getElementById('form');
   var announce = document.querySelector('[data-announce]');
   var slip = document.querySelector('[data-slip]');
+  var bar = document.querySelector('[data-bar]');
+  var toggle = bar.querySelector('.bar__toggle'), toggleLabel = bar.querySelector('[data-toggle-label]');
+  var tabs = Array.prototype.slice.call(bar.querySelectorAll('[data-tab]'));
+  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['comment', document.getElementById('comment')], ['depot', depot], ['soumission', book]];
 
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
   // ------------------------------------------------------------ per frame --
-  var lastFinal = null, lastForm = null;
+  var lastFinal = null, lastForm = null, lastTab = null;
   function frame() {
     // The deposit act ends on "Ta chaise t'attend": make its link reachable
     // only once it is actually on screen.
@@ -58,12 +62,33 @@
       }
     }
 
+    // Top menu: underline the tab of the section being read.
+    var cur = 'top';
+    for (var k = 0; k < spy.length; k++) if (spy[k][1].getBoundingClientRect().top <= innerHeight * 0.35) cur = spy[k][0];
+    if (cur !== lastTab) {
+      tabs.forEach(function (a) { if (a.getAttribute('data-tab') === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+      lastTab = cur;
+    }
+
     // The request pill steps aside once the form itself is on screen.
     var atForm = book.getBoundingClientRect().top < innerHeight * 0.55;
     if (atForm !== lastForm) { docEl.classList.toggle('at-form', atForm); lastForm = atForm; }
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+
+  // ------------------------------------------------------- phone menu --
+  function setMenu(open) {
+    bar.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggleLabel.textContent = open ? 'Fermer' : 'Menu';
+  }
+  toggle.addEventListener('click', function () { setMenu(!bar.classList.contains('is-open')); });
+  bar.querySelectorAll('.bar__nav a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && bar.classList.contains('is-open')) { setMenu(false); toggle.focus(); }
+  });
+  document.addEventListener('click', function (e) { if (bar.classList.contains('is-open') && !bar.contains(e.target)) setMenu(false); });
 
   // ------------------------------------------------- choosing services --
   var picks = [];
