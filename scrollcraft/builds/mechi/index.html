@@ -177,12 +177,19 @@
   .curls__stage { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: clamp(2rem, 7vw, 8rem);
     padding: calc(var(--bar-h) + clamp(1rem, 3svh, 2.5rem)) var(--sc-gutter) clamp(1.5rem, 4svh, 3rem);
     background: radial-gradient(55% 70% at 22% 50%, #2a2014, var(--slate) 72%); }
+  .tiktok { display: inline-flex; align-items: center; gap: var(--sc-4); margin-top: var(--sc-2); padding: .55rem 1.2rem .55rem .55rem; border-radius: var(--sc-r-pill);
+    color: var(--on-slate); text-decoration: none; border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent); background: rgb(18 14 9 / .55);
+    transition: border-color 160ms var(--sc-ease-out), background-color 160ms var(--sc-ease-out); }
+  .tiktok__ico { width: 2.6rem; height: 2.6rem; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--gold); color: var(--slate); }
+  .tiktok__txt { display: grid; gap: 2px; line-height: 1.2; }
+  .tiktok__txt span { font-size: var(--sc-t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--on-slate-soft); }
+  .tiktok__txt b { font-weight: 500; font-size: var(--sc-t-base); color: var(--gold); }
+  .tiktok:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) { .tiktok:hover { border-color: var(--gold); background: rgb(18 14 9 / .8); } }
   .curls__media { position: relative; display: flex; align-items: flex-end; }
   .vframe--sign { flex: none; height: calc((100svh - var(--bar-h) - clamp(4rem, 12svh, 8rem)) * .58); max-height: 32rem; margin: 0 0 clamp(2rem, 6svh, 4rem) clamp(-5rem, -6vw, -3rem); z-index: 3; align-self: flex-end;
     outline: 6px solid var(--slate); }
   .vframe--sign video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .vframe--sign figcaption { position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; font: 600 var(--sc-t-xs)/1.2 var(--sc-font-text); letter-spacing: .12em; text-transform: uppercase;
-    padding: .6em .85em; border-radius: var(--sc-r-pill); background: rgb(18 14 9 / .74); color: var(--on-slate); width: max-content; max-width: calc(100% - 20px); }
   .curls__stage .vframe:not(.vframe--sign) { height: calc(100svh - var(--bar-h) - clamp(4rem, 12svh, 8rem)); }
   .curls__copy { display: grid; gap: var(--sc-5); justify-items: start; max-width: 34rem; }
   .curls__copy h2 { margin: 0; font-size: clamp(2.6rem, 5vw, 5.4rem); }
@@ -400,7 +407,6 @@
     .vframe:not(.vframe--sign) { position: absolute; inset: 0; height: auto; max-height: none; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
     .scrim-v { display: block; background: linear-gradient(to bottom, rgb(18 14 9 / .92) 0, rgb(18 14 9 / .55) calc(var(--bar-h) + 6rem), transparent 30%, transparent 48%, rgb(18 14 9 / .7) 66%, rgb(18 14 9 / .96) 100%); }
     .vframe--sign { position: absolute; top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 1rem); right: var(--sc-gutter); width: 32vw; height: auto; aspect-ratio: 9 / 16; margin: 0; outline-width: 3px; }
-    .vframe--sign figcaption { display: none; }
     .curls__copy { position: absolute; z-index: 4; left: var(--sc-gutter); right: var(--sc-gutter); bottom: max(1.5rem, env(safe-area-inset-bottom)); }
     .curls__copy h2 { font-size: 13vw; }
     .curls__copy > p:not(.label) { font-size: var(--sc-t-lg); color: var(--on-slate); }
@@ -568,16 +574,19 @@
         <video data-sc-scrub data-sc-src="assets/boucles.mp4" data-sc-src-mobile="assets/boucles-m.mp4" muted playsinline aria-hidden="true"></video>
         <div class="scrim-v" aria-hidden="true"></div>
       </div>
-      <figure class="vframe vframe--sign">
+      <div class="vframe vframe--sign">
         <video class="loop" data-loop="assets/enseigne.mp4" data-loop-mobile="assets/enseigne-m.mp4" poster="assets/enseigne-poster.webp" muted loop playsinline preload="none" aria-label="Une cliente aux longs cheveux bruns aux pointes cuivrées, devant l'enseigne du Salon de coiffure Mechi."></video>
-        <figcaption>Devant notre enseigne</figcaption>
-      </figure>
+      </div>
       </div>
       <div class="curls__copy">
         <p class="label">Au salon</p>
         <h2 id="curls-h" class="disp">Des boucles <em>qui bougent</em>.</h2>
         <p>Souples, brillantes et pleines de mouvement, comme elles sortent de notre chaise.</p>
         <a class="cta" href="#soumission">Demander une soumission</a>
+        <a class="tiktok" href="https://www.tiktok.com/@salondecoiffuremechi" target="_blank" rel="noopener">
+          <span class="tiktok__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
+          <span class="tiktok__txt"><span>Plus de vidéos sur TikTok</span><b>@salondecoiffuremechi</b></span>
+        </a>
       </div>
     </div>
   </section>
