@@ -8,7 +8,7 @@ Le skill lui-même est dans `.claude/skills/scroll-craft/` (version 0.3.1, licen
 |---|---|---|
 | **TIMELESS** | `scrollcraft/builds/tenebre/index.html` | Montre squelette en or jaune 18 carats, édition de 88, construite à partir de la vidéo fournie : à l'ouverture la montre est entière, le scroll la démonte puis la remonte ; ensuite les détails, le dessin éclaté avec les specs, l'anneau des 88 et la liste d'attente. Brief, plan et vérifications dans `BRIEF.md` à côté. |
 | **PROPAGATE** | `scrollcraft/builds/propagate/index.html` | Le t-shirt PROPAGATE, construit à partir des deux vidéos fournies. Brief, plan et vérifications dans `BRIEF.md` à côté. |
-| **Salon de coiffure Mechi** | `scrollcraft/builds/mechi/index.html` | Salon de coiffure, avant / après côte à côte. Demande de soumission et dépôt de 20 $ par Interac. Brief et vérifications dans `BRIEF.md`. |
+| **Salon de coiffure Mechi** | `scrollcraft/builds/mechi/index.html` | Salon de coiffure : services à choisir en cliquant sur les photos, demande de soumission et dépôt de 20 $ par Interac. Brief et vérifications dans `BRIEF.md`. |
 | **Nitsy Fashion** | `scrollcraft/builds/nitsy/index.html` | Salon de coiffure, style premium, tresse dessinée en code. Formulaire de contact à brancher. |
 | **Nitsy Fashion, le film** | `scrollcraft/builds/nitsy-film/index.html` | Version « film continu » avec les photos envoyées (à remplacer par celles du salon). |
 | ALBA | `index.html` | Exemple inventé (canette de café protéiné). |
@@ -49,7 +49,8 @@ python3 -m http.server 8000
 - **Recevoir les demandes :** coller l'adresse d'un service de formulaire dans `FORM_ENDPOINT`, en haut de `scrollcraft/builds/mechi/salon.js` (par exemple Formspree : `https://formspree.io/f/...`). La demande part en POST `multipart/form-data` avec les champs `services`, `avant`, `apres`, `photo`, `date1`, `date2`, `moment`, `nom`, `telephone`, `courriel`, `accepte_depot`. Tant que c'est vide, le formulaire dit « Le formulaire n'est pas encore relié à la boîte de réception du salon, donc ta demande n'a pas été envoyée. » La photo d'inspiration n'est acceptée que par les services qui prennent les fichiers (chez Formspree, un forfait payant).
 - **Dépôt Interac :** coller l'adresse courriel qui reçoit les virements dans `INTERAC_EMAIL`, au même endroit. Tant que c'est vide, la page dit que l'adresse est donnée dans la réponse du salon.
 - **Règle affichée :** 20 $ déduits de la facture ; gardés si la cliente ne vient pas ou annule moins de 24 h avant. Le site ne peut pas vérifier qu'un virement a été reçu : c'est la propriétaire qui confirme la place à la réception.
-- **Photos avant / après :** les quatre photos envoyées en dernier ne sont pas arrivées comme fichiers. En attendant, le haut de page utilise la paire cheveux ondulés / brushing. Remplacer `assets/avant.webp` et `assets/apres.webp` (format 3:4) et leurs versions `-m.webp` pour le téléphone.
+- **Services :** quatre cartes (lissage, coupe et frange, couleur, brushing) avec vos photos, « Prix sur devis ». Un clic choisit le service ; il est ajouté à « Ma soumission » et coché dans le formulaire. Les textes sont dans `index.html` et la liste `SERVICES` dans `salon.js`.
 - **Visages :** les visages qui apparaissaient dans les miroirs (photos lissage et brushing) sont floutés. Vérifier l'accord des clientes avant de rendre le site public.
 - **Inconnus :** adresse, téléphone, heures, prix. Rien de tout ça n'est affiché.
+- **Mise en ligne :** `.github/workflows/site-mechi.yml` publie ce dossier sur GitHub Pages à chaque mise à jour de `main`, une fois Settings > Pages > Source réglé sur « GitHub Actions ».
 - **Polices :** Bodoni Moda et Outfit, licence libre (OFL), dans `scrollcraft/builds/mechi/assets/fonts/`.

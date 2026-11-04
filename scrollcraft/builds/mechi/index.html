@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Salon de coiffure Mechi</title>
-<meta name="description" content="Salon de coiffure. Décris tes cheveux et ce que tu veux, reçois une soumission, et réserve ta place avec un dépôt de 20 $ déduit de ta facture.">
+<meta name="description" content="Salon de coiffure Mechi. Choisis tes services, décris tes cheveux, reçois une soumission, et réserve ta place avec un dépôt de 20 $ déduit de ta facture.">
 <meta name="theme-color" content="#151819">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='16' height='32' fill='%23151819'/><rect x='16' width='16' height='32' fill='%23EEF1EF'/><rect x='15.5' width='1' height='32' fill='%230B6B67'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23151819'/><text x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='19' fill='%2363d0c8'>M</text></svg>">
 <link rel="preload" href="assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="scrollcraft.css">
@@ -16,7 +16,7 @@
   @font-face { font-family: "Outfit"; src: url("assets/fonts/outfit.woff2") format("woff2-variations"), url("assets/fonts/outfit.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
 
   :root {
-    /* Two grounds held side by side, one hue of accent in two lightnesses. */
+    /* Slate for the salon at night, porcelain for the paperwork, teal from the lit shelves. */
     --slate: #151819;  --slate-2: #1d2223;
     --on-slate: #ece9e3;  --on-slate-soft: #a7b2b0;
     --porc: #eef1ef;   --porc-2: #e2e8e6;
@@ -29,10 +29,6 @@
     --sc-font-display: "Bodoni Moda", "Didot", Georgia, serif;
     --sc-font-text: "Outfit", system-ui, sans-serif;
     --sc-shadow-color: 186 30% 12%;
-
-    --split: 50;            /* written by salon.js from the deposit act */
-    --x: calc(var(--split) * 1vw);
-    --line: color-mix(in oklab, var(--teal-lit) 70%, #7d8b8a);
   }
   body { background: var(--porc); }
   img { display: block; }
@@ -43,7 +39,7 @@
 
   .disp { font-family: var(--sc-font-display); font-weight: 500; letter-spacing: -0.02em; line-height: 1.02; text-wrap: balance; font-optical-sizing: auto; }
   .disp em { font-style: italic; font-weight: 400; }
-  .label { font: 500 var(--sc-t-xs)/1.2 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .label { margin: 0; font: 500 var(--sc-t-xs)/1.2 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase; color: var(--sc-ink-soft); }
   .on-slate p:not(.disp) { letter-spacing: .005em; line-height: 1.68; }
 
   /* ---------------------------------------------------------------- CTA -- */
@@ -57,115 +53,104 @@
   }
   .cta:active { transform: translateY(1px) scale(.98); }
   @media (hover: hover) and (pointer: fine) { .cta:hover { background: color-mix(in oklab, var(--sc-accent) 86%, black); } }
-  .cta:focus-visible, .add:focus-visible, .slip:focus-visible, .chipbox input:focus-visible + span { outline: 2px solid var(--sc-accent); outline-offset: 3px; }
+  .cta:focus-visible, .slip:focus-visible, .link:focus-visible, .chipbox input:focus-visible + span { outline: 2px solid var(--sc-accent); outline-offset: 3px; }
+  .link { font-size: var(--sc-t-sm); font-weight: 500; color: var(--sc-ink); text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; }
 
-  /* ---------------------------------------------------------- the line -- */
-  /* The divider IS the chrome: both labels, and the request as it fills. */
-  .line {
-    position: fixed; top: 0; bottom: 0; left: 0; width: 0; z-index: var(--sc-z-chrome);
-    transform: translateX(var(--x)); pointer-events: none;
-  }
-  .line::before { content: ""; position: absolute; inset: 0 auto 0 -0.5px; width: 1px; background: var(--line); }
-  .line__lab { position: absolute; top: clamp(1rem, 3vh, 1.75rem); font: 500 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .18em; text-transform: uppercase; transition: opacity 220ms var(--sc-ease-out); }
-  .line__lab--a { right: 1rem; color: var(--on-slate-soft); }
-  .line__lab--b { left: 1rem; color: var(--on-porc-soft); }
-  .is-collapsed .line__lab { opacity: 0; }
-  .line__chips {
-    position: absolute; left: 0; bottom: calc(clamp(1rem, 4vh, 2rem) + 3.2rem); translate: -50% 0;
-    display: flex; flex-direction: column-reverse; align-items: center; gap: 6px;
-  }
-  .chip { width: 34px; height: 34px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 2px var(--porc), 0 0 0 3px var(--line), var(--sc-e2); background: var(--porc-2); }
-  .chip img { width: 100%; height: 100%; object-fit: cover; }
+  /* --------------------------------------------------- the request pill -- */
   .slip {
-    font: 500 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .06em; white-space: nowrap;
-    padding: .7em .95em; border-radius: var(--sc-r-pill); text-decoration: none;
-    background: var(--teal); color: #f3faf9; box-shadow: var(--sc-e2);
-    position: fixed; left: 0; bottom: clamp(1rem, 4vh, 2rem); z-index: calc(var(--sc-z-chrome) + 1);
-    transform: translateX(calc(var(--x) - 50%)) translateY(6px);
-    opacity: 0; pointer-events: none; transition: opacity 200ms var(--sc-ease-out);
+    position: fixed; right: var(--sc-gutter); bottom: max(1.25rem, env(safe-area-inset-bottom)); z-index: var(--sc-z-chrome);
+    font: 500 var(--sc-t-sm)/1 var(--sc-font-text); letter-spacing: .03em; white-space: nowrap;
+    padding: .95em 1.25em; border-radius: var(--sc-r-pill); text-decoration: none;
+    background: var(--teal); color: #f3faf9; box-shadow: var(--sc-e3), inset 0 1px 0 rgb(255 255 255 / .16);
+    opacity: 0; transform: translateY(10px); pointer-events: none;
+    transition: opacity 200ms var(--sc-ease-out), transform 200ms var(--sc-ease-out);
   }
-  .has-picks .slip { opacity: 1; pointer-events: auto; transform: translateX(calc(var(--x) - 50%)); }
-  .is-collapsed .slip { transform: translateX(var(--sc-gutter)); }
-  .at-form .line__chips, .at-form .slip { opacity: 0; pointer-events: none; transition: opacity 240ms var(--sc-ease-out); }
+  .has-picks .slip { opacity: 1; transform: none; pointer-events: auto; }
+  .at-form .slip { opacity: 0; transform: translateY(10px); pointer-events: none; }
+  .slip.is-bump { animation: bump 420ms var(--sc-ease-out); }
+  @keyframes bump { 40% { transform: scale(1.08); } }
   .fly { position: fixed; z-index: 90; border-radius: 12px; object-fit: cover; pointer-events: none; box-shadow: var(--sc-e3); }
 
   /* --------------------------------------------------------------- hero -- */
-  .hero { position: relative; display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; overflow: clip; }
-  .hero .half { position: relative; min-height: 100svh; }
-  .frame { position: absolute; overflow: hidden; border-radius: 2px; box-shadow: var(--sc-e3); }
-  .frame img { width: 100%; height: 116%; margin-top: -8%; object-fit: cover; }
-  .hero .frame { top: 33svh; height: 42svh; aspect-ratio: 3 / 4; }
-  .hero .half--a .frame { right: 3.2vw; }
-  .hero .half--b .frame { left: 3.2vw; }
-  .hero__line { position: absolute; bottom: clamp(2rem, 7svh, 4.5rem); margin: 0; font-size: var(--sc-t-xl); max-width: 14ch; }
-  .hero .half--a .hero__line { left: var(--sc-gutter); }
-  .hero__close { position: absolute; right: var(--sc-gutter); bottom: clamp(2rem, 7svh, 4.5rem); display: grid; justify-items: end; gap: var(--sc-5); text-align: right; }
-  .hero__close .hero__line { position: static; }
-  .hero__sub { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); max-width: 30ch; }
-  .hero .half--a .hero__sub { position: absolute; left: var(--sc-gutter); top: 12svh; max-width: 12rem; }
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 4vw;
+    min-height: 100svh; padding: clamp(2rem, 6svh, 4rem) var(--sc-gutter);
+    background: radial-gradient(60% 70% at 78% 40%, #1f3433, var(--slate) 70%); overflow: clip; }
+  .hero__copy { display: grid; gap: var(--sc-5); justify-items: start; }
+  .mark { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(4.5rem, 14.5vw, 15rem); line-height: .84; letter-spacing: -0.045em; color: var(--on-slate); }
+  .hero__lede { margin: 0; font-size: var(--sc-t-lg); max-width: 32ch; color: var(--on-slate-soft); }
+  .hero__lede em { font-family: var(--sc-font-display); font-size: 1.25em; color: var(--on-slate); }
+  .hero__act { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-5); margin-top: var(--sc-3); }
+  .hero__media { position: relative; height: min(84svh, 60rem); }
+  .ph { position: absolute; overflow: hidden; border-radius: 3px; box-shadow: var(--sc-e3); aspect-ratio: 3 / 4; max-width: 100%; }
+  .ph img { width: 100%; height: 112%; margin-top: -6%; object-fit: cover; }
+  .ph--a { right: 0; top: 0; height: 76%; }
+  .ph--b { left: 0; bottom: 0; height: 46%; z-index: 2; outline: 6px solid var(--slate); }
 
-  /* The name is cut by the line: light letters on the slate, dark on the porcelain. */
-  .mark { position: absolute; z-index: 70; top: clamp(3.2rem, 8svh, 5.5rem); left: 23vw; margin: 0; pointer-events: none;
-          font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(3.4rem, 16vw, 17rem); line-height: .86; letter-spacing: -0.04em; white-space: nowrap; }
-  .mark em { font-style: italic; font-weight: 400; letter-spacing: -0.02em; }
-  .mark--a { color: var(--on-slate); clip-path: inset(-20% calc(100% - 27vw) -20% -20%); }
-  .mark--b { color: var(--on-porc); clip-path: inset(-20% -20% -20% 27vw); }
+  /* ------------------------------------------------------ services rail -- */
+  /* As on the Nitsy site: the page holds and the services slide in from the
+     right. Here every card is a button: a click chooses the service. */
+  .rail-stage { display: flex; align-items: center; overflow: hidden;
+    background: radial-gradient(70% 80% at 22% 38%, #1f3433, var(--slate) 72%); }
+  .rail { display: flex; align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); padding: 3.5rem var(--sc-gutter) 0; }
+  .rail__intro { flex: 0 0 auto; width: min(30rem, 34vw); }
+  .rail__intro h2 { font-size: clamp(2.8rem, 5vw, 5rem); margin: var(--sc-3) 0 0; }
+  .rail__intro p { margin: var(--sc-5) 0 0; color: var(--on-slate-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 28ch; }
+  .rail__hint { display: inline-flex; align-items: center; gap: .7rem; margin-top: var(--sc-6) !important; font-size: var(--sc-t-xs) !important; letter-spacing: .18em; text-transform: uppercase; color: var(--teal-lit) !important; }
+  .rail__hint i { width: 3rem; height: 1px; background: currentColor; }
+  .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(16rem, 22vw, 21rem);
+    opacity: calc(.55 + .45 * var(--k)); translate: 0 calc((1 - var(--k)) * 3rem); }
+  .card { display: grid; gap: 0; padding: 0; margin: 0; border: 0; background: none; color: var(--on-slate); text-align: left; font: inherit; cursor: pointer; }
+  .card__img { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 3px; background: var(--slate-2);
+    outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out); }
+  .card__img img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover;
+    transform: scale(1.08) translateX(calc((1 - var(--k)) * 3%)); transition: filter 200ms var(--sc-ease-out); }
+  .card__tick { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; background: rgb(255 255 255 / .88); box-shadow: var(--sc-e1); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
+  .card__tick::after { content: ""; width: 13px; height: 7px; border: 2.5px solid var(--on-porc-soft); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .35; }
+  .card__name { display: block; margin-top: var(--sc-5); font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.02; letter-spacing: -0.015em; }
+  .card__name em { font-style: italic; font-weight: 400; color: var(--teal-lit); }
+  .card__desc { display: block; margin-top: var(--sc-3); color: var(--on-slate-soft); line-height: 1.55; font-size: var(--sc-t-base); }
+  .card__foot { display: flex; justify-content: space-between; align-items: center; gap: var(--sc-3); margin-top: var(--sc-4); padding-top: var(--sc-3); border-top: 1px solid color-mix(in oklab, var(--on-slate) 16%, transparent); font-size: var(--sc-t-sm); color: var(--on-slate-soft); }
+  .card__foot b { font-weight: 500; color: var(--on-slate); }
+  .card__state { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-lit); white-space: nowrap; padding: .55em .9em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--teal-lit) 55%, transparent); transition: background-color 150ms var(--sc-ease-out), color 150ms var(--sc-ease-out); }
+  .card[aria-pressed="true"] .card__img { outline-color: var(--teal-lit); }
+  .card[aria-pressed="true"] .card__tick { background: var(--teal-lit); transform: scale(1.06); }
+  .card[aria-pressed="true"] .card__tick::after { border-color: #0c1c1c; opacity: 1; }
+  .card[aria-pressed="true"] .card__state { background: var(--teal-lit); color: #0c1c1c; }
+  .card:focus-visible { outline: none; }
+  .card:focus-visible .card__img { outline: 3px dashed var(--teal-lit); }
+  .card:active .card__img { transform: scale(.985); }
+  @media (hover: hover) and (pointer: fine) { .card:hover .card__img img { filter: brightness(1.06); } .card:hover .card__state { background: color-mix(in oklab, var(--teal-lit) 14%, transparent); } .card[aria-pressed="true"]:hover .card__state { background: var(--teal-lit); } }
+  .rail__end { display: grid; gap: var(--sc-5); justify-items: start; align-content: center; color: var(--on-slate); }
+  .rail__end h3 { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.8rem, 2.4vw, 2.3rem); line-height: 1.02; }
+  .rail__end h3 em { font-style: italic; font-weight: 400; color: var(--teal-lit); }
+  .rail__end p { margin: 0; color: var(--on-slate-soft); line-height: 1.55; }
+  @media (prefers-reduced-motion: reduce) { .card, .rail__end { opacity: 1; translate: none; } .card__img img { transform: none; } }
 
-  /* ----------------------------------------------------------- services -- */
-  .svc .sc-stage { display: grid; grid-template-columns: 1fr 1fr; }
-  .svc .half { position: relative; overflow: hidden; }
-  .svc__head { position: absolute; top: clamp(4rem, 12svh, 7rem); left: var(--sc-gutter); }
-  .quote { position: absolute; left: var(--sc-gutter); right: 4vw; top: 34svh; margin: 0; font-size: var(--sc-t-3xl); font-style: italic; font-weight: 400; max-width: 14ch; }
-  .quote small { display: block; margin-top: var(--sc-5); font: 400 var(--sc-t-sm)/1.5 var(--sc-font-text); letter-spacing: .02em; font-style: normal; color: var(--sc-ink-soft); }
-  .svc .frame { top: 12svh; left: 3.2vw; height: 66svh; aspect-ratio: 3 / 4; }
-  .svc .frame img { position: absolute; inset: 0; height: 100%; margin: 0; }
-  .cap {
-    position: absolute; right: var(--sc-gutter); bottom: 11svh; width: min(23rem, 27vw); z-index: 3;
-    display: grid; padding: var(--sc-6); background: #f8faf9; border-radius: 4px;
-    box-shadow: var(--sc-e3), var(--sc-edge);
-  }
-  .cap > div { grid-area: 1 / 1; }
-  .cap h3 { font-size: var(--sc-t-2xl); margin: 0 0 var(--sc-3); }
-  .cap p { margin: 0 0 var(--sc-5); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); line-height: 1.55; }
-  .add {
-    font: 500 var(--sc-t-sm)/1 var(--sc-font-text); padding: .85em 1.15em; border-radius: var(--sc-r-pill); cursor: pointer;
-    background: transparent; color: var(--teal); border: 1px solid color-mix(in oklab, var(--teal) 55%, transparent);
-    transition: background-color 150ms var(--sc-ease-out), color 150ms var(--sc-ease-out), transform 120ms var(--sc-ease-out);
-  }
-  .add:active { transform: scale(.97); }
-  .add[aria-pressed="true"] { background: var(--teal); color: #f3faf9; border-color: var(--teal); }
-  @media (hover: hover) and (pointer: fine) { .add:hover { background: color-mix(in oklab, var(--teal) 10%, transparent); } .add[aria-pressed="true"]:hover { background: color-mix(in oklab, var(--teal) 88%, black); } }
-  .cap > [inert] { pointer-events: none; }
-
-  /* --------------------------------------------------------- how it works -- */
-  .how { display: grid; grid-template-columns: 1fr 1fr; }
-  .how > div { padding: var(--sc-6) var(--sc-gutter) var(--sc-6) clamp(2rem, 5vw, 5rem); }
-  .how > .on-slate { padding: var(--sc-6) clamp(2rem, 5vw, 5rem) var(--sc-6) var(--sc-gutter); }
-  .how > .h { padding-top: clamp(4rem, 9vw, 8rem); }
-  .how > .last { padding-bottom: clamp(4rem, 9vw, 8rem); }
-  .how h2 { font-size: var(--sc-t-2xl); margin: var(--sc-3) 0 0; max-width: 16ch; }
-  .how p { margin: 0; max-width: 40ch; font-size: var(--sc-t-lg); line-height: 1.5; }
-  .how .on-slate p { color: var(--on-slate); }
-  .how .tag { display: block; margin-bottom: var(--sc-2); font: 500 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase; color: var(--sc-accent); }
+  /* ------------------------------------------------------------- steps -- */
+  .how { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .how__head { display: grid; gap: var(--sc-3); margin-bottom: var(--sc-8); }
+  .how__head h2 { margin: 0; font-size: var(--sc-t-3xl); max-width: 16ch; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 4rem); }
+  .steps li { display: grid; gap: var(--sc-3); align-content: start; padding-top: var(--sc-5); border-top: 1px solid color-mix(in oklab, var(--on-porc) 16%, transparent); }
+  .steps .n { font-family: var(--sc-font-display); font-style: italic; font-size: var(--sc-t-2xl); line-height: 1; color: var(--teal); }
+  .steps h3 { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-xl); letter-spacing: -0.01em; }
+  .steps p { margin: 0; color: var(--on-porc-soft); line-height: 1.6; max-width: 34ch; }
 
   /* ------------------------------------------------------------- deposit -- */
-  .peak .sc-stage { background: var(--porc); }
-  .peak__layer { position: absolute; inset: 0; }
-  .peak__dark { z-index: 2; clip-path: inset(0 calc(100% - var(--x)) 0 0); }
-  .side { position: absolute; top: 0; bottom: 0; width: 50vw; display: flex; flex-direction: column; justify-content: center; gap: var(--sc-4); }
-  .peak__dark .side { left: 0; padding: 0 5vw 0 var(--sc-gutter); }
-  .peak__light .side { left: 50vw; padding: 0 var(--sc-gutter) 0 5vw; }
-  .side h2 { font-size: var(--sc-t-3xl); margin: 0 0 var(--sc-5); }
-  .side p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.45; max-width: 26ch; }
-  .peak__dark .side p { color: var(--on-slate-soft); }
-  .peak__light .side p { color: var(--on-porc); }
-  .final { position: absolute; left: var(--sc-gutter); right: var(--sc-gutter); top: 50%; translate: 0 -50%; display: grid; gap: var(--sc-5); justify-items: start;
-           --f: clamp(0, (var(--sc-p, 0) - 0.7) * 9, 1); opacity: var(--f); transform: translateY(calc((1 - var(--f)) * 18px)); }
-  .final > * { opacity: clamp(0, (var(--sc-p, 0) - 0.72) * 9, 1); }
-  .final > h2 { opacity: 1; }
+  .dep .sc-stage { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; padding-inline: var(--sc-gutter); }
+  .dep__text { position: relative; display: grid; gap: var(--sc-4); align-content: center; min-height: 60svh; }
+  .dep__text h2 { margin: 0 0 var(--sc-4); font-size: var(--sc-t-3xl); max-width: 13ch; }
+  .dep__text p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.45; max-width: 30ch; color: var(--on-slate-soft); }
+  .dep__text p strong { color: var(--on-slate); font-weight: 500; }
+  .dep__num { justify-self: end; margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(9rem, 27vw, 27rem); line-height: .8; letter-spacing: -0.06em; color: var(--teal-lit); white-space: nowrap;
+    transform: translateY(calc((0.5 - var(--sc-p, 0)) * 40px)); }
+  .dep__num span { font-size: .42em; letter-spacing: 0; vertical-align: .9em; margin-left: .06em; }
+  .dep__lines { display: grid; gap: var(--sc-4); }
+  .final { position: absolute; inset: 0 0 auto; top: 50%; translate: 0 -50%; display: grid; gap: var(--sc-5); justify-items: start;
+    --f: clamp(0, (var(--sc-p, 0) - 0.68) * 9, 1); opacity: var(--f); transform: translateY(calc((1 - var(--f)) * 18px)); }
+  .final h2 { font-size: clamp(3rem, 7vw, 7rem); line-height: .95; letter-spacing: -0.035em; margin: 0; max-width: none; }
+  .final p { color: var(--on-slate-soft); }
   .final[aria-hidden="true"] .cta { pointer-events: none; }
-  .final h2 { font-size: clamp(3rem, 8.6vw, 8.4rem); line-height: .95; letter-spacing: -0.035em; margin: 0; }
-  .final p { margin: 0; font-size: var(--sc-t-lg); max-width: 34ch; color: var(--on-porc-soft); line-height: 1.55; }
 
   /* ---------------------------------------------------------------- form -- */
   .book { padding-block: clamp(4rem, 8vw, 8rem) 0; }
@@ -240,58 +225,34 @@
   .foot b { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); color: var(--on-porc); }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-  /* ---------------------------------------------- reduced motion floor -- */
-  @media (prefers-reduced-motion: reduce) {
-    .peak__dark { clip-path: inset(0 50% 0 0); opacity: calc(var(--split) / 50); }
-    .line { transition: none; }
-    .svc .frame img:not(.is-on) { opacity: 0; }
-  }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  @media (prefers-reduced-motion: reduce) { .dep__num { transform: none; } .slip.is-bump { animation: none; } }
 
   /* ------------------------------------------------------------- phone -- */
-  /* On a phone the line turns horizontal: avant above, après below. */
   @media (max-width: 760px) {
-    .line { display: none; }
-    .slip, .has-picks .slip, .is-collapsed .slip { left: auto; right: var(--sc-gutter); bottom: max(1rem, env(safe-area-inset-bottom)); transform: none; font-size: var(--sc-t-sm); padding: .9em 1.15em; }
-    .at-form .slip { opacity: 0; pointer-events: none; }
+    .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: max(2.5rem, env(safe-area-inset-top)); }
+    .mark { font-size: 27vw; }
+    .hero__lede { font-size: var(--sc-t-base); }
+    .hero__media { height: 64svh; }
+    .ph--a { height: 82%; }
+    .ph--b { height: 42%; outline-width: 4px; }
 
-    .hero { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
-    .hero .half { min-height: 50svh; }
-    .hero .half--a { border-bottom: 1px solid var(--line); }
-    .mark { font-size: 24vw; left: var(--sc-gutter); top: max(1.25rem, env(safe-area-inset-top)); }
-    .mark--a { clip-path: none; }
-    .mark--b { display: none; }
-    .hero .frame { height: 33svh; top: auto; }
-    .hero .half--a .frame { right: var(--sc-gutter); bottom: 2svh; }
-    .hero .half--b .frame { left: var(--sc-gutter); top: 2svh; }
-    .hero__line { font-size: var(--sc-t-lg); max-width: 9.5ch; }
-    .hero .half--a .hero__line { bottom: 3svh; }
-    .hero .half--a .hero__sub { display: none; }
-    .hero__close { right: var(--sc-gutter); bottom: auto; top: 2svh; gap: var(--sc-4); width: 38vw; }
-    .hero__close .hero__line { max-width: none; }
-    .hero__close .cta { position: absolute; top: calc(33svh + 2.5svh); right: 0; }
+    .rail { padding-top: 3rem; gap: var(--sc-5); }
+    .rail__intro { width: 80vw; }
+    .rail__intro p { font-size: var(--sc-t-base); }
+    .card, .rail__end { width: 72vw; }
+    .card__img { aspect-ratio: 4 / 5; }
 
-    .svc .sc-stage { grid-template-columns: 1fr; grid-template-rows: 42fr 58fr; }
-    .svc .half--a { border-bottom: 1px solid var(--line); }
-    .svc__head { top: max(1.25rem, 4svh); }
-    .quote { top: 11svh; font-size: var(--sc-t-xl); max-width: 18ch; }
-    .quote small { margin-top: var(--sc-3); }
-    .svc .frame { top: 3svh; left: var(--sc-gutter); height: 34svh; }
-    .cap { right: var(--sc-gutter); bottom: 3svh; width: 64vw; padding: var(--sc-5); }
-    .cap h3 { font-size: var(--sc-t-xl); }
-    .cap p { margin-bottom: var(--sc-4); }
+    .steps { grid-template-columns: 1fr; gap: var(--sc-6); }
 
-    .how { grid-template-columns: 1fr; }
-    .how > div, .how > .on-slate { padding: var(--sc-6) var(--sc-gutter); }
-    .how > .h { padding-top: var(--sc-8); }
-    .how > .last { padding-bottom: var(--sc-8); }
-    .how p { font-size: var(--sc-t-base); }
-
-    .peak__dark { clip-path: inset(0 0 calc(100% - var(--split) * 1svh) 0); }
-    .side { width: auto; left: 0 !important; right: 0; height: 50svh; padding: 0 var(--sc-gutter) !important; gap: var(--sc-3); }
-    .peak__light .side { top: 50svh; }
-    .side h2 { font-size: var(--sc-t-2xl); margin-bottom: var(--sc-2); }
-    .side p { font-size: var(--sc-t-base); }
-    .final h2 { font-size: 17vw; }
+    .dep .sc-stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-content: center; gap: var(--sc-5); }
+    .dep__num { grid-row: 1; justify-self: start; font-size: 34vw; }
+    .dep__text { grid-row: 2; min-height: 46svh; align-content: start; }
+    .dep__text h2 { font-size: var(--sc-t-2xl); }
+    .dep__text p { font-size: var(--sc-t-base); }
+    .final { top: 0; translate: none; }
+    .final h2 { font-size: 15vw; }
 
     .two, .three { grid-template-columns: 1fr; gap: var(--sc-5); }
     .pick { grid-template-columns: 1fr 1fr; gap: var(--sc-5) var(--sc-4); }
@@ -299,118 +260,105 @@
     form { gap: var(--sc-7); }
     .book__head { margin-bottom: var(--sc-7); }
   }
-  @media (max-width: 760px) and (prefers-reduced-motion: reduce) { .peak__dark { clip-path: inset(0 0 50% 0); } }
 </style>
 </head>
 <body>
 
 <div class="sc-grain" aria-hidden="true"></div>
-
-<!-- The divider: labels for both sides, and the request as it fills. -->
-<div class="line" aria-hidden="true">
-  <span class="line__lab line__lab--a">Avant</span>
-  <span class="line__lab line__lab--b">Après</span>
-  <div class="line__chips" data-chips></div>
-</div>
 <a class="slip" href="#soumission" data-slip>Ma soumission</a>
 <p class="sr" role="status" aria-live="polite" data-announce></p>
 
 <main id="top">
 
-  <!-- 1 · RECOGNITION: flow + parallax. Both sides on the first screen. -->
-  <section class="hero" data-sc-act="flow">
-    <h1 class="mark mark--a"><span class="sr">Salon de coiffure </span>Mechi</h1>
-    <p class="mark mark--b" aria-hidden="true">Mechi</p>
-
-    <div class="half half--a on-slate">
-      <p class="hero__sub">Salon de coiffure. Coupe, couleur, lissage et brushing.</p>
-      <div class="frame" data-sc-parallax="-0.7">
-        <picture>
-          <source media="(max-width: 760px)" srcset="assets/avant-m.webp">
-          <img src="assets/avant.webp" width="1200" height="1600" alt="Avant : cheveux longs, ondulés et ternes, vus de dos, dans la chaise du salon.">
-        </picture>
-      </div>
-      <p class="hero__line disp">Tu arrives comme tu es.</p>
-    </div>
-
-    <div class="half half--b on-porc">
-      <div class="frame" data-sc-parallax="0.7">
-        <picture>
-          <source media="(max-width: 760px)" srcset="assets/apres-m.webp">
-          <img src="assets/apres.webp" width="1200" height="1600" alt="Après : cheveux lisses et brillants, longueurs dégradées qui tombent en boucles souples.">
-        </picture>
-      </div>
-      <div class="hero__close">
-        <p class="hero__line disp">Tu repars comme tu l'as <em>imaginé</em>.</p>
+  <!-- 1 · HERO: flow + parallax. Two of the salon's own results, at two depths. -->
+  <section class="hero on-slate" data-sc-act="flow">
+    <div class="hero__copy" data-sc-in data-sc-stagger="70">
+      <p class="label">Salon de coiffure</p>
+      <h1 class="mark"><span class="sr">Salon de coiffure </span>Mechi</h1>
+      <p class="hero__lede">Coupe, couleur, lissage et brushing. Dis-nous ce que tu veux, <em>on te répond avec le prix</em> avant le rendez-vous.</p>
+      <div class="hero__act">
         <a class="cta" href="#soumission">Demander une soumission</a>
+        <a class="link" href="#services">Voir les services</a>
+      </div>
+    </div>
+    <div class="hero__media" aria-hidden="false">
+      <div class="ph ph--a" data-sc-parallax="-0.9">
+        <picture><source media="(max-width: 760px)" srcset="assets/cuivre-m.webp"><img src="assets/cuivre.webp" width="1200" height="1600" alt="Longueurs cuivrées, lisses et brillantes, dégradé aux pointes."></picture>
+      </div>
+      <div class="ph ph--b" data-sc-parallax="0.7">
+        <picture><source media="(max-width: 760px)" srcset="assets/lissage-m.webp"><img src="assets/lissage.webp" width="1200" height="1600" alt="Carré noir lissé, brillant et souple, vu de dos."></picture>
       </div>
     </div>
   </section>
 
-  <!-- 2 · DESIRE: pin. Problems on the left, answers wiping up on the right. -->
-  <section id="services" class="svc" data-sc-act="pin" data-sc-span="3.2">
-    <div data-sc-stage>
-      <div class="half half--a on-slate">
-        <p class="svc__head label">Ce que tu nous dis</p>
-        <p class="quote disp" data-sc-cue="0 0.27 0">« Mes cheveux frisent dès qu'il fait humide. »<small>Lissage, frisottis, cheveux qui gonflent.</small></p>
-        <p class="quote disp" data-sc-cue="0.23 0.52">« Je veux une coupe qui tombe bien sans y penser le matin. »<small>Coupe, frange, dégradé.</small></p>
-        <p class="quote disp" data-sc-cue="0.48 0.77">« J'ai envie de couleur, mais j'ai peur d'abîmer mes cheveux. »<small>Couleur, reflets, cuivré.</small></p>
-        <p class="quote disp" data-sc-cue="0.73 1 0.3 0">« Mes longueurs sont là, mais elles n'ont aucune forme. »<small>Brushing, mise en forme, volume.</small></p>
-      </div>
-      <div class="half half--b on-porc">
-        <div class="frame">
-          <img class="is-on" src="assets/lissage.webp" width="1200" height="1600" data-svc="0" alt="Carré noir lissé, brillant et souple, vu de dos.">
-          <img src="assets/coupe.webp" width="1200" height="1600" data-svc="1" data-sc-reveal="up" data-sc-reveal-at="0.2 0.3" alt="Carré dégradé brun foncé avec frange rideau, vu de profil.">
-          <img src="assets/cuivre.webp" width="1200" height="1600" data-svc="2" data-sc-reveal="up" data-sc-reveal-at="0.45 0.55" alt="Longueurs cuivrées, lisses et brillantes, dégradé aux pointes.">
-          <img src="assets/apres.webp" width="1200" height="1600" data-svc="3" data-sc-reveal="up" data-sc-reveal-at="0.7 0.8" alt="Brushing sur cheveux longs bruns, pointes en boucles souples.">
+  <!-- 2 · DESIRE: pan, as on the Nitsy site. The page holds and the services
+       slide in from the right; a click on a card chooses the service. -->
+  <section id="services" class="svc" data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-title">
+    <div data-sc-stage class="rail-stage on-slate">
+      <div class="rail" data-sc-pan="0.04">
+        <div class="rail__intro">
+          <p class="label">Nos services</p>
+          <h2 id="rail-title" class="disp">Choisis ce qui <em>te ressemble</em>.</h2>
+          <p>Clique sur un service pour l'ajouter à ta demande de soumission. Tu peux en choisir plusieurs.</p>
+          <p class="rail__hint" aria-hidden="true"><i></i>Fais défiler</p>
         </div>
-        <div class="cap">
-          <div data-cap="0" data-sc-cue="0 0.27 0">
-            <h3 class="disp">Lissage soyeux</h3>
-            <p>Des cheveux lisses et brillants qui bougent encore, sans effet plat.</p>
-            <button class="add" type="button" data-add="lissage" aria-pressed="false">Ajouter à ma soumission</button>
-          </div>
-          <div data-cap="1" data-sc-cue="0.23 0.52" inert>
-            <h3 class="disp">Coupe et frange</h3>
-            <p>Un dégradé qui encadre le visage et se coiffe en deux gestes.</p>
-            <button class="add" type="button" data-add="coupe" aria-pressed="false">Ajouter à ma soumission</button>
-          </div>
-          <div data-cap="2" data-sc-cue="0.48 0.77" inert>
-            <h3 class="disp">Couleur cuivrée</h3>
-            <p>Une couleur riche, posée avec un soin qui protège la fibre.</p>
-            <button class="add" type="button" data-add="couleur" aria-pressed="false">Ajouter à ma soumission</button>
-          </div>
-          <div data-cap="3" data-sc-cue="0.73 1 0.3 0" inert>
-            <h3 class="disp">Brushing</h3>
-            <p>Du volume aux racines et des pointes qui tombent en boucles souples.</p>
-            <button class="add" type="button" data-add="brushing" aria-pressed="false">Ajouter à ma soumission</button>
-          </div>
+        <button class="card" type="button" data-add="lissage" aria-pressed="false">
+          <span class="card__img"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Carré noir lissé, brillant et souple, vu de dos."><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name">Lissage <em>soyeux</em></span>
+          <span class="card__desc">Pour les cheveux qui frisent ou gonflent à la moindre humidité : lisses, brillants, et qui bougent encore.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <button class="card" type="button" data-add="coupe" aria-pressed="false">
+          <span class="card__img"><img src="assets/coupe.webp" width="1200" height="1600" loading="lazy" alt="Carré dégradé brun foncé avec frange rideau, vu de profil."><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name">Coupe et <em>frange</em></span>
+          <span class="card__desc">Un dégradé qui encadre le visage et se coiffe en deux gestes le matin.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <button class="card" type="button" data-add="couleur" aria-pressed="false">
+          <span class="card__img"><img src="assets/cuivre.webp" width="1200" height="1600" loading="lazy" alt="Longueurs cuivrées, lisses et brillantes, dégradé aux pointes."><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name">Couleur <em>cuivrée</em></span>
+          <span class="card__desc">Une couleur riche, posée avec un soin qui protège la fibre.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <button class="card" type="button" data-add="brushing" aria-pressed="false">
+          <span class="card__img"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Brushing sur cheveux longs bruns, pointes en boucles souples."><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name"><em>Brushing</em></span>
+          <span class="card__desc">Du volume aux racines et des pointes qui tombent en boucles souples.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <div class="rail__end">
+          <h3>Pas sûre de ce <em>qu'il te faut ?</em></h3>
+          <p>Décris tes cheveux dans la demande : on te conseille le bon service, avec le prix et la durée.</p>
+          <a class="cta" href="#soumission">Demander une soumission</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3 · CALM: flow. The quiet act before the peak, on purpose. -->
-  <section class="how" data-sc-act="flow" aria-labelledby="how-a">
-    <div class="on-slate h" data-sc-in><p class="label">Toi</p><h2 id="how-a" class="disp">Tu nous racontes ton avant.</h2></div>
-    <div class="on-porc h" data-sc-in><p class="label">Le salon</p><h2 class="disp">On te répond avant les ciseaux.</h2></div>
-    <div class="on-slate" data-sc-in><span class="tag">La demande</span><p>Tu décris tes cheveux aujourd'hui, ce qui te dérange et ce que tu aimerais.</p></div>
-    <div class="on-porc" data-sc-in><span class="tag">La réponse</span><p>On lit tout et on te propose le service, la durée et le prix.</p></div>
-    <div class="on-slate" data-sc-in><span class="tag">Les dates</span><p>Tu proposes deux journées qui t'arrangent.</p></div>
-    <div class="on-porc" data-sc-in><span class="tag">L'heure</span><p>On confirme l'heure qui marche pour nous deux.</p></div>
-    <div class="on-slate last" data-sc-in><span class="tag">Le dépôt</span><p>Tu envoies 20 $ par virement Interac.</p></div>
-    <div class="on-porc last" data-sc-in><span class="tag">Ta place</span><p>Ta chaise est gardée. Les 20 $ sont déduits de ta facture.</p></div>
+  <!-- 3 · HOW: flow. A real sequence, so the steps carry their numbers. -->
+  <section class="how on-porc" data-sc-act="flow" aria-labelledby="how-h">
+    <div class="sc-wrap">
+      <div class="how__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Comment ça marche</p>
+        <h2 id="how-h" class="disp">Une soumission <em>avant</em> les ciseaux.</h2>
+      </div>
+      <ol class="steps" data-sc-in data-sc-stagger="80">
+        <li><span class="n">1</span><h3>Ta demande</h3><p>Tu choisis tes services, tu décris tes cheveux et ce que tu aimerais, et tu proposes deux journées.</p></li>
+        <li><span class="n">2</span><h3>Notre réponse</h3><p>On te répond avec le service conseillé, la durée, le prix et l'heure.</p></li>
+        <li><span class="n">3</span><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
+      </ol>
+    </div>
   </section>
 
-  <!-- 4 · PEAK: pin. The argument tips, then the line sweeps away. -->
-  <section id="depot" class="peak" data-sc-act="pin" data-sc-span="3.6">
-    <div data-sc-stage>
-      <div class="peak__layer peak__light on-porc">
-        <div class="side">
-          <h2 class="disp" data-sc-cue="0 0.74 0 0.1">Avec un dépôt de <em>20&nbsp;$</em></h2>
-          <p data-sc-cue="0.08 0.74 0.12 0.1">Ta place est gardée, rien que pour toi.</p>
-          <p data-sc-cue="0.16 0.74 0.12 0.1">Les 20&nbsp;$ sont déduits de ta facture le jour même.</p>
-          <p data-sc-cue="0.24 0.74 0.12 0.1">Tu viens, tu ne paies rien de plus.</p>
+  <!-- 4 · PEAK: pin. The deposit, said plainly, then the promise. -->
+  <section id="depot" class="dep" data-sc-act="pin" data-sc-span="3">
+    <div data-sc-stage class="on-slate">
+      <div class="dep__text">
+        <div class="dep__lines">
+          <h2 class="disp" data-sc-cue="0 0.62 0 0.12">Un dépôt de 20&nbsp;$ <em>garde ta place</em>.</h2>
+          <p data-sc-cue="0.1 0.62 0.15 0.12">Il est <strong>déduit de ta facture</strong> le jour du rendez-vous. Tu ne paies rien de plus.</p>
+          <p data-sc-cue="0.2 0.62 0.15 0.12">Si tu ne viens pas, ou si tu annules <strong>moins de 24&nbsp;h avant</strong>, le dépôt est gardé.</p>
+          <p data-sc-cue="0.3 0.62 0.15 0.12">Comme ça, chaque chaise réservée est une chaise occupée.</p>
         </div>
         <div class="final" data-final aria-hidden="true">
           <h2 class="disp">Ta chaise <em>t'attend</em>.</h2>
@@ -418,24 +366,17 @@
           <a class="cta" href="#soumission" tabindex="-1">Demander une soumission</a>
         </div>
       </div>
-      <div class="peak__layer peak__dark on-slate">
-        <div class="side">
-          <h2 class="disp" data-sc-cue="0 0.6 0 0.12">Sans dépôt</h2>
-          <p data-sc-cue="0.06 0.52 0.12 0.2">Un rendez-vous oublié.</p>
-          <p data-sc-cue="0.14 0.52 0.12 0.2">Une chaise vide pendant que d'autres attendent une place.</p>
-          <p data-sc-cue="0.22 0.52 0.12 0.2">Et des rendez-vous qui se font rares pour tout le monde.</p>
-        </div>
-      </div>
+      <p class="dep__num" aria-hidden="true">20<span>$</span></p>
     </div>
   </section>
 
-  <!-- 5 · COMMITMENT: flow. The winning side, full width. -->
+  <!-- 5 · CLOSE: flow. The request, on paper. -->
   <section id="soumission" class="book on-porc" data-sc-act="flow" aria-labelledby="book-h">
     <div class="sc-wrap">
       <div class="book__head" data-sc-in data-sc-stagger="60">
         <p class="label">Demande de soumission</p>
-        <h2 id="book-h" class="disp">Ton avant, ton <em>après</em>.</h2>
-        <p>Dis-nous où en sont tes cheveux et ce que tu veux. On te répond avec le service, la durée, le prix et l'heure.</p>
+        <h2 id="book-h" class="disp">Dis-nous ce que <em>tu veux</em>.</h2>
+        <p>Choisis tes services et décris tes cheveux. On te répond avec le service conseillé, la durée, le prix et l'heure.</p>
       </div>
 
       <form id="form" novalidate>
@@ -466,10 +407,10 @@
         <fieldset data-sc-in>
           <legend>Tes cheveux</legend>
           <div class="two">
-            <label class="field"><span>Ton avant</span>
-              <textarea name="avant" required placeholder="Ex. : cheveux mi-longs, frisés, colorés il y a six mois. Les pointes cassent."></textarea></label>
-            <label class="field"><span>Ton après <i>(facultatif)</i></span>
-              <textarea name="apres" placeholder="Ex. : un dégradé avec une frange rideau, et une couleur plus chaude."></textarea></label>
+            <label class="field" for="f-cheveux"><span>Tes cheveux aujourd'hui</span>
+              <textarea id="f-cheveux" name="cheveux" required placeholder="Ex. : cheveux mi-longs, frisés, colorés il y a six mois. Les pointes cassent."></textarea></label>
+            <label class="field" for="f-souhait"><span>Ce que tu aimerais <i>(facultatif)</i></span>
+              <textarea id="f-souhait" name="souhait" placeholder="Ex. : un dégradé avec une frange rideau, et une couleur plus chaude."></textarea></label>
           </div>
           <label class="field"><span>Une photo d'inspiration <i>(facultatif)</i></span>
             <input type="file" name="photo" accept="image/*"></label>
