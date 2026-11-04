@@ -93,6 +93,24 @@
   }
   requestAnimationFrame(frame);
 
+  // ------------------------------------- the sign clip beside the curls --
+  // Plays on a loop, muted, only while it is on screen; never under reduced
+  // motion, where its poster stays.
+  var loops = Array.prototype.slice.call(document.querySelectorAll('video.loop'));
+  var phoneMq = matchMedia('(max-width: 760px)');
+  if (!reduce && 'IntersectionObserver' in window) {
+    var lio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        if (en.isIntersecting) {
+          if (!v.getAttribute('src')) { v.src = phoneMq.matches ? v.getAttribute('data-loop-mobile') : v.getAttribute('data-loop'); }
+          var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+        } else if (!v.paused) v.pause();
+      });
+    }, { threshold: 0.25 });
+    loops.forEach(function (v) { lio.observe(v); });
+  }
+
   // ------------------------------------------------------- phone menu --
   function setMenu(open) {
     bar.classList.toggle('is-open', open);
