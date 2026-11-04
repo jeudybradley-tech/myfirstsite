@@ -36,7 +36,7 @@
   var bar = document.querySelector('[data-bar]');
   var toggle = bar.querySelector('.bar__toggle'), toggleLabel = bar.querySelector('[data-toggle-label]');
   var tabs = Array.prototype.slice.call(bar.querySelectorAll('[data-tab]'));
-  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['comment', document.getElementById('comment')], ['depot', depot], ['soumission', book]];
+  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['avant-apres', document.getElementById('avant-apres')], ['comment', document.getElementById('comment')], ['depot', depot], ['soumission', book]];
 
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -89,6 +89,26 @@
     if (e.key === 'Escape' && bar.classList.contains('is-open')) { setMenu(false); toggle.focus(); }
   });
   document.addEventListener('click', function (e) { if (bar.classList.contains('is-open') && !bar.contains(e.target)) setMenu(false); });
+
+  // ---------------------------------------- before / after: two views --
+  var baTabs = Array.prototype.slice.call(document.querySelectorAll('.ba__tabs [role="tab"]'));
+  function showView(tab, focus) {
+    baTabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  baTabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showView(t, false); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      showView(baTabs[(i + (e.key === 'ArrowRight' ? 1 : baTabs.length - 1)) % baTabs.length], true);
+    });
+  });
 
   // ------------------------------------------------- choosing services --
   var picks = [];

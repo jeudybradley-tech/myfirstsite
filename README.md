@@ -50,6 +50,7 @@ python3 -m http.server 8000
 - **Dépôt Interac :** coller l'adresse courriel qui reçoit les virements dans `INTERAC_EMAIL`, au même endroit. Tant que c'est vide, la page dit que l'adresse est donnée dans la réponse du salon.
 - **Règle affichée :** 20 $ déduits de la facture ; gardés si la cliente ne vient pas ou annule moins de 24 h avant. Le site ne peut pas vérifier qu'un virement a été reçu : c'est la propriétaire qui confirme la place à la réception.
 - **Services :** quatre cartes (lissage, coupe et frange, couleur, brushing) avec vos photos, « Prix sur devis ». Un clic choisit le service ; il est ajouté à « Ma soumission » et coché dans le formulaire. Les textes sont dans `index.html` et la liste `SERVICES` dans `salon.js`.
+- **Avant / Après :** une cliente, vue de dos et de profil (onglets « De dos » / « De profil »). Le visage de la photo de profil « avant » est recadré. La légende « des mèches blondes, une coupe dégradée et un brushing » est à confirmer par la propriétaire.
 - **Visages :** les visages qui apparaissaient dans les miroirs (photos lissage et brushing) sont floutés. Vérifier l'accord des clientes avant de rendre le site public.
 - **Inconnus :** adresse, téléphone, heures, prix. Rien de tout ça n'est affiché.
 - **Mise en ligne :** `.github/workflows/site-mechi.yml` publie ce dossier sur GitHub Pages à chaque mise à jour de `main`, une fois Settings > Pages > Source réglé sur « GitHub Actions ».

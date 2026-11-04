@@ -62,7 +62,7 @@
   .bar { position: fixed; inset: 0 0 auto; z-index: calc(var(--sc-z-chrome) + 5);
     display: flex; align-items: center; justify-content: space-between; gap: var(--sc-5);
     height: calc(var(--bar-h) + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) var(--sc-gutter) 0;
-    background: color-mix(in oklab, var(--slate) 95%, transparent);
+    background: var(--slate);
     border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 10%, transparent); }
   .bar__mark { font-family: var(--sc-font-display); font-weight: 500; font-size: 1.65rem; line-height: 1; letter-spacing: -0.03em; color: var(--on-slate); text-decoration: none; }
   .bar__mark { display: grid; gap: 3px; }
@@ -80,7 +80,7 @@
     padding: .75em 1.1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--on-slate) 28%, transparent); }
   .bar__toggle i { position: relative; width: 16px; height: 10px; border-block: 1.5px solid currentColor; transition: transform 200ms var(--sc-ease-out); }
   .bar.is-open .bar__toggle i { transform: scaleY(.15); }
-  @media (max-width: 1000px) {
+  @media (max-width: 1140px) {
     .bar__toggle { display: inline-flex; }
     .bar__nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
       padding: var(--sc-2) var(--sc-gutter) var(--sc-6); background: var(--slate); border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 12%, transparent); box-shadow: var(--sc-e3);
@@ -160,6 +160,29 @@
   .rail__end h3 em { font-style: italic; font-weight: 400; color: var(--teal-lit); }
   .rail__end p { margin: 0; color: var(--on-slate-soft); line-height: 1.55; }
   @media (prefers-reduced-motion: reduce) { .card, .rail__end { opacity: 1; translate: none; } .card__img img { transform: none; } }
+
+  /* ------------------------------------------------------- before / after -- */
+  .ba { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .ba__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .ba__head { display: grid; gap: var(--sc-4); justify-items: start; }
+  .ba__head h2 { margin: 0; font-size: clamp(2.4rem, 3.6vw, 3.8rem); max-width: 15ch; }
+  .ba__head > p:not(.label) { margin: 0; font-size: var(--sc-t-lg); color: var(--on-porc-soft); max-width: 34ch; line-height: 1.55; }
+  .ba__tabs { display: inline-flex; gap: 4px; padding: 4px; margin-top: var(--sc-3); border-radius: var(--sc-r-pill); background: var(--porc-2); }
+  .ba__tabs button { font: 500 var(--sc-t-sm)/1 var(--sc-font-text); padding: .8em 1.2em; border: 0; border-radius: var(--sc-r-pill); background: transparent; color: var(--on-porc-soft); cursor: pointer;
+    transition: background-color 160ms var(--sc-ease-out), color 160ms var(--sc-ease-out); }
+  .ba__tabs button[aria-selected="true"] { background: #fff; color: var(--on-porc); box-shadow: var(--sc-e1); }
+  .ba__tabs button:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .ba__head .cta { margin-top: var(--sc-4); }
+  .ba__panels { display: grid; }
+  .ba__pair { grid-area: 1 / 1; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.75rem, 1.6vw, 1.5rem); align-items: start;
+    transition: opacity 260ms var(--sc-ease-out); }
+  .ba__pair[hidden] { display: grid !important; opacity: 0; visibility: hidden; pointer-events: none; }
+  .ba__ph { position: relative; margin: 0; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 3px; box-shadow: var(--sc-e2); }
+  .ba__ph--after { margin-top: clamp(1.5rem, 5vw, 4rem); box-shadow: var(--sc-e3); }
+  .ba__ph img { width: 100%; height: 100%; object-fit: cover; }
+  .ba__ph figcaption { position: absolute; top: 12px; left: 12px; font: 600 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase;
+    padding: .65em .95em; border-radius: var(--sc-r-pill); background: rgb(255 255 255 / .92); color: var(--on-porc); box-shadow: var(--sc-e1); }
+  .ba__ph--after figcaption { background: var(--teal); color: #f3faf9; }
 
   /* ------------------------------------------------------------- steps -- */
   .how { padding-block: clamp(4.5rem, 9vw, 8rem); }
@@ -280,6 +303,10 @@
     .card__img { aspect-ratio: 4 / 5; }
 
     .steps { grid-template-columns: 1fr; gap: var(--sc-6); }
+    .ba__grid { grid-template-columns: 1fr; gap: var(--sc-7); }
+    .ba__head h2 { font-size: var(--sc-t-2xl); }
+    .ba__head > p:not(.label) { font-size: var(--sc-t-base); }
+    .ba__ph figcaption { top: 8px; left: 8px; }
 
     .dep .sc-stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-content: center; gap: var(--sc-5); }
     .dep__num { grid-row: 1; justify-self: start; font-size: 34vw; }
@@ -306,6 +333,7 @@
   <nav class="bar__nav" id="menu" aria-label="Sections du site">
     <a href="#top" data-tab="top">Accueil</a>
     <a href="#services" data-tab="services">Services</a>
+    <a href="#avant-apres" data-tab="avant-apres">Avant / Après</a>
     <a href="#comment" data-tab="comment">Comment ça marche</a>
     <a href="#depot" data-tab="depot">Le dépôt</a>
     <a class="cta bar__cta" href="#soumission">Demander une soumission</a>
@@ -376,6 +404,44 @@
           <h3>Pas sûre de ce <em>qu'il te faut ?</em></h3>
           <p>Décris tes cheveux dans la demande : on te conseille le bon service, avec le prix et la durée.</p>
           <a class="cta" href="#soumission">Demander une soumission</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2b · BEFORE / AFTER: flow + reveal. One client, two views, at the client's request. -->
+  <section id="avant-apres" class="ba on-porc" data-sc-act="flow" aria-labelledby="ba-h">
+    <div class="sc-wrap ba__grid">
+      <div class="ba__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Avant / Après</p>
+        <h2 id="ba-h" class="disp">Du gris terne au <em>blond lumineux</em>.</h2>
+        <p>Une cliente du salon : des mèches blondes, une coupe dégradée et un brushing.</p>
+        <div class="ba__tabs" role="tablist" aria-label="Choisir la vue">
+          <button type="button" role="tab" id="tab-dos" aria-controls="ba-dos" aria-selected="true">De dos</button>
+          <button type="button" role="tab" id="tab-profil" aria-controls="ba-profil" aria-selected="false" tabindex="-1">De profil</button>
+        </div>
+        <a class="cta" href="#soumission">Demander une soumission</a>
+      </div>
+      <div class="ba__panels">
+        <div class="ba__pair" id="ba-dos" role="tabpanel" aria-labelledby="tab-dos">
+          <figure class="ba__ph">
+            <picture><source media="(max-width: 760px)" srcset="assets/ba-avant-dos-m.webp"><img src="assets/ba-avant-dos.webp" width="1200" height="1600" loading="lazy" alt="Avant, vue de dos : cheveux gris et bruns, ternes et frisés, sans forme."></picture>
+            <figcaption>Avant</figcaption>
+          </figure>
+          <figure class="ba__ph ba__ph--after" data-sc-reveal="left" data-sc-reveal-at="0.12 0.42">
+            <picture><source media="(max-width: 760px)" srcset="assets/ba-apres-dos-m.webp"><img src="assets/ba-apres-dos.webp" width="1200" height="1600" loading="lazy" alt="Après, vue de dos : blond lumineux, coupe dégradée et pointes en boucles souples."></picture>
+            <figcaption>Après</figcaption>
+          </figure>
+        </div>
+        <div class="ba__pair" id="ba-profil" role="tabpanel" aria-labelledby="tab-profil" hidden>
+          <figure class="ba__ph">
+            <picture><source media="(max-width: 760px)" srcset="assets/ba-avant-profil-m.webp"><img src="assets/ba-avant-profil.webp" width="1200" height="1600" loading="lazy" alt="Avant, vue de profil : cheveux gris ondulés et secs, longueurs inégales."></picture>
+            <figcaption>Avant</figcaption>
+          </figure>
+          <figure class="ba__ph ba__ph--after" data-sc-reveal="left" data-sc-reveal-at="0.12 0.42">
+            <picture><source media="(max-width: 760px)" srcset="assets/ba-apres-profil-m.webp"><img src="assets/ba-apres-profil.webp" width="1200" height="1600" loading="lazy" alt="Après, vue de profil : blond lumineux, dégradé avec du volume et des pointes arrondies."></picture>
+            <figcaption>Après</figcaption>
+          </figure>
         </div>
       </div>
     </div>

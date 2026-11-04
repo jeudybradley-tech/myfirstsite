@@ -28,20 +28,24 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
 with curtain bangs), couleur cuivrée, brushing (long brown layers). Faces
 reflected in mirrors are blurred. A fifth photo (long wavy hair in the chair)
-was a "before" and is no longer used. Four more before/after photos showed in
-the conversation but never reached the disk; they are not needed now.
+was a "before" and is no longer used. The client then sent one client's
+before/after, back and profile ("je veux que tu fais un avant et après avec ces
+photos"): they are a section of their own, not the page's concept. The face in
+the profile "avant" is cropped out. Caption (authored, to confirm): "des mèches
+blondes, une coupe dégradée et un brushing".
 
 ## Shape (client-directed)
 
 Like the Nitsy Fashion film site, at the client's request:
 
-`flow(hero, two photos on parallax) > pan(services rail) > flow(three steps) >
-pin(the deposit) > flow(request form)`, 5 acts, about 11 viewport-heights.
+`flow(hero, two photos on parallax) > pan(services rail) > flow(avant / après) > flow(three steps) >
+pin(the deposit) > flow(request form)`, 6 acts, about 12 viewport-heights.
 
 | Beat | Device | Why |
 |---|---|---|
 | Recognition | `flow` + `parallax` | The name at poster scale and two real results at two depths |
 | Choice | `pan`, cards are buttons | As on Nitsy: the page holds and the services slide in; a click chooses one |
+| Proof | `flow` + `reveal` | One real client, avant beside après; tabs switch back and profile views; the après wipes in |
 | Clarity | `flow` + `in` | Three numbered steps, a real sequence |
 | Peak | `pin` + cues + `--sc-p` | "Un dépôt de 20 $ garde ta place.", the rule line by line beside a large 20 $, then "Ta chaise t'attend." |
 | Commitment | `flow` | The request form, with the chosen services already ticked |
