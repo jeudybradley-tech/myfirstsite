@@ -15,16 +15,16 @@
   var FORM_ENDPOINT = '';
   var INTERAC_EMAIL = '';
 
-  // HEURES D'OUVERTURE (à confirmer avec la propriétaire) : pour chaque jour,
+  // HEURES D'OUVERTURE (données par la propriétaire) : pour chaque jour,
   // [ouverture, fermeture], ou null si le salon est fermé. Le dernier créneau
   // proposé commence LAST_START_BEFORE_CLOSE minutes avant la fermeture.
   var HOURS = {
-    1: ['09:00', '18:00'],  // lundi
-    2: ['09:00', '18:00'],  // mardi
-    3: ['09:00', '18:00'],  // mercredi
-    4: ['09:00', '18:00'],  // jeudi
-    5: ['09:00', '18:00'],  // vendredi
-    6: ['09:00', '18:00'],  // samedi
+    1: null,                // lundi : fermé
+    2: null,                // mardi : fermé
+    3: ['09:30', '16:30'],  // mercredi
+    4: ['09:30', '16:30'],  // jeudi
+    5: ['09:30', '16:30'],  // vendredi
+    6: null,                // samedi : fermé
     0: null                 // dimanche : fermé
   };
   var SLOT_MINUTES = 30;

@@ -225,6 +225,7 @@
   form { display: grid; gap: var(--sc-8); }
   fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: var(--sc-4); }
   legend { padding: 0; margin-bottom: var(--sc-4); font-family: var(--sc-font-display); font-size: var(--sc-t-xl); font-weight: 500; letter-spacing: -0.01em; }
+  .hint strong { font-weight: 600; color: var(--on-porc); }
   .hint { margin: calc(var(--sc-2) * -1) 0 var(--sc-2); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-6); }
   .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sc-5); }
@@ -289,6 +290,9 @@
   .foot { margin-top: clamp(4rem, 8vw, 7rem); padding-block: var(--sc-7); border-top: 1px solid color-mix(in oklab, var(--on-porc) 14%, transparent); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sc-4); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
   .foot { align-items: center; }
   .foot__logo { width: 11rem; height: auto; }
+  .foot__info { display: grid; gap: var(--sc-2); text-align: right; }
+  .foot__info span:first-child { color: var(--on-porc); font-weight: 500; }
+  @media (max-width: 760px) { .foot__info { text-align: left; } }
   .foot b { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); color: var(--on-porc); }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
@@ -605,7 +609,7 @@
 
         <fieldset data-sc-in>
           <legend>Ton rendez-vous</legend>
-          <p class="hint">Choisis le jour, puis l'heure. On te confirme le rendez-vous dans notre réponse.</p>
+          <p class="hint">Le salon est ouvert du <strong>mercredi au vendredi, de 9&nbsp;h&nbsp;30 à 16&nbsp;h&nbsp;30</strong>. Choisis le jour, puis l'heure : on te confirme le rendez-vous dans notre réponse.</p>
           <div class="booker">
             <div class="cal" data-cal>
               <div class="cal__head">
@@ -615,7 +619,7 @@
               </div>
               <div class="cal__dow" aria-hidden="true"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span></div>
               <div class="cal__grid" data-cal-grid role="grid" aria-label="Choisir le jour"></div>
-              <p class="cal__legend"><i aria-hidden="true"></i>Fermé ou passé</p>
+              <p class="cal__legend"><i aria-hidden="true"></i>Jour fermé ou déjà passé</p>
             </div>
             <div class="slots">
               <p class="slots__title" data-slots-title>Choisis d'abord un jour.</p>
@@ -660,7 +664,7 @@
 
       <footer class="foot">
         <img class="foot__logo" src="assets/logo-m.webp" width="760" height="393" loading="lazy" alt="Salon de coiffure Mechi">
-        <span>Dépôt de 20&nbsp;$ déduit de la facture. Gardé en cas d'absence ou d'annulation à moins de 24&nbsp;h.</span>
+        <span class="foot__info"><span>Ouvert du mercredi au vendredi, de 9&nbsp;h&nbsp;30 à 16&nbsp;h&nbsp;30. Fermé du samedi au mardi.</span><span>Dépôt de 20&nbsp;$ déduit de la facture. Gardé en cas d'absence ou d'annulation à moins de 24&nbsp;h.</span></span>
       </footer>
     </div>
   </section>
