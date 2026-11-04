@@ -33,6 +33,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - TikTok: "tik tok: Salondecoiffuremechi [...] je veux que ça apparaît dans la section il y a des vidéos". A pill under the section's button: TikTok mark, "Plus de vidéos sur TikTok", **@salondecoiffuremechi**, linking to https://www.tiktok.com/@salondecoiffuremechi in a new tab. The address could not be opened from the build environment; the client should test it.
 
+- Owner: "est-ce que tu penses une biographie de la propriétaire serait bon ?", placed "juste après la section de vidéo". Section `#proprietaire` (photo, name, three or four sentences, facts: experience, training, specialties, languages, one quote), with a menu tab "La propriétaire". Built with visibly marked `[data-todo]` slots until her real details arrive; nothing about her is invented. The deploy workflow fails while any `data-todo` remains. The menu switches to its Menu button below 1240 px so the extra tab never wraps.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
@@ -48,8 +50,8 @@ blondes, une coupe dégradée et un brushing".
 
 Like the Nitsy Fashion film site, at the client's request:
 
-`flow(hero, logo and two photos on parallax) > pan(services rail) > flow(avant / après) > scrub(curls clip) > flow(three steps) >
-pin(the deposit) > flow(request form)`, 7 acts, about 15 viewport-heights.
+`flow(hero, logo and two photos on parallax) > pan(services rail) > flow(avant / après) > scrub(curls clip) > flow(the owner) > flow(three steps) >
+pin(the deposit) > flow(request form)`, 8 acts, about 16 viewport-heights.
 
 | Beat | Device | Why |
 |---|---|---|

@@ -85,7 +85,7 @@
     padding: .75em 1.1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--on-slate) 28%, transparent); }
   .bar__toggle i { position: relative; width: 16px; height: 10px; border-block: 1.5px solid currentColor; transition: transform 200ms var(--sc-ease-out); }
   .bar.is-open .bar__toggle i { transform: scaleY(.15); }
-  @media (max-width: 1140px) {
+  @media (max-width: 1240px) {
     .bar__toggle { display: inline-flex; }
     .bar__nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
       padding: var(--sc-2) var(--sc-gutter) var(--sc-6); background: var(--slate); border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 12%, transparent); box-shadow: var(--sc-e3);
@@ -172,6 +172,30 @@
   .rail__end h3 em { font-style: italic; font-weight: 400; color: var(--gold); }
   .rail__end p { margin: 0; color: var(--on-slate-soft); line-height: 1.55; }
   @media (prefers-reduced-motion: reduce) { .card, .rail__end { opacity: 1; translate: none; } .card__img img { transform: none; } }
+
+  /* ----------------------------------------------------------- the owner -- */
+  /* Her photo, her name, a few facts and one line of her own. Every [data-todo]
+     is a slot waiting for the owner's real information; the deploy workflow
+     refuses to publish while one is left. */
+  .owner { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--porc-2); }
+  .owner__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .owner__ph { position: relative; margin: 0; aspect-ratio: 3 / 4; max-width: 30rem; width: 100%; border-radius: 3px; overflow: hidden; box-shadow: var(--sc-e3);
+    outline: 1px solid color-mix(in oklab, var(--gold-deep) 40%, transparent); outline-offset: 10px; }
+  .owner__ph img { width: 100%; height: 100%; object-fit: cover; }
+  .owner__text { display: grid; gap: var(--sc-5); justify-items: start; max-width: 38rem; }
+  .owner__text h2 { margin: 0; font-size: clamp(2.8rem, 5.5vw, 5.6rem); }
+  .owner__bio { margin: 0; font-family: var(--font-italic); font-style: italic; font-size: clamp(1.3rem, 1rem + 0.9vw, 1.8rem); line-height: 1.32; color: var(--on-porc-soft); }
+  .owner__facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; width: 100%; }
+  .owner__facts li { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: var(--sc-4); padding: var(--sc-3) 0; border-top: 1px solid color-mix(in oklab, var(--on-porc) 14%, transparent); font-size: var(--sc-t-base); }
+  .owner__facts li:last-child { border-bottom: 1px solid color-mix(in oklab, var(--on-porc) 14%, transparent); }
+  .owner__facts b { font-weight: 500; font-size: var(--sc-t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--on-porc-soft); padding-top: .2em; }
+  .owner__quote { margin: var(--sc-3) 0 0; padding-left: var(--sc-5); border-left: 1px solid var(--gold-deep); font-family: var(--font-italic); font-style: italic; font-size: var(--sc-t-xl); line-height: 1.3; color: var(--on-porc); }
+  /* Slots still waiting for her information: plainly drafts, never mistaken for content. */
+  [data-todo] { color: var(--gold-deep) !important; }
+  .todo-box { display: grid; place-items: center; text-align: center; padding: var(--sc-6); background: repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in oklab, var(--gold-deep) 7%, transparent) 14px 28px);
+    border: 2px dashed color-mix(in oklab, var(--gold-deep) 55%, transparent); box-shadow: none; outline: 0; font: 500 var(--sc-t-sm)/1.4 var(--sc-font-text); color: var(--gold-deep); }
+  span[data-todo], p[data-todo] { font-style: normal; font-family: var(--sc-font-text); font-weight: 500; font-size: var(--sc-t-sm); letter-spacing: .02em; text-transform: none;
+    border: 1px dashed color-mix(in oklab, var(--gold-deep) 55%, transparent); border-radius: 4px; padding: .3em .6em; display: inline-block; line-height: 1.4; }
 
   /* ------------------------------------------------------- curls clip -- */
   .curls__stage { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: clamp(2rem, 7vw, 8rem);
@@ -418,6 +442,9 @@
     .card__img { aspect-ratio: 4 / 5; }
 
     .steps { grid-template-columns: 1fr; gap: var(--sc-6); }
+    .owner__grid { grid-template-columns: 1fr; gap: var(--sc-7); }
+    .owner__ph { max-width: 22rem; }
+    .owner__facts li { grid-template-columns: 1fr; gap: var(--sc-1); }
     .ba__grid { grid-template-columns: 1fr; gap: var(--sc-7); }
     .ba__head h2 { font-size: var(--sc-t-2xl); }
     .ba__head > p:not(.label) { font-size: var(--sc-t-base); }
@@ -451,6 +478,7 @@
     <a href="#top" data-tab="top">Accueil</a>
     <a href="#services" data-tab="services">Services</a>
     <a href="#avant-apres" data-tab="avant-apres">Avant / Après</a>
+    <a href="#proprietaire" data-tab="proprietaire">La propriétaire</a>
     <a href="#comment" data-tab="comment">Comment ça marche</a>
     <a href="#depot" data-tab="depot">Le dépôt</a>
     <a class="cta bar__cta" href="#soumission">Demander une soumission</a>
@@ -587,6 +615,27 @@
           <span class="tiktok__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
           <span class="tiktok__txt"><span>Plus de vidéos sur TikTok</span><b>@salondecoiffuremechi</b></span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2d · THE OWNER: flow. Placed right after the videos, at the client's
+       request: the visitor has seen the work, now meets who does it, then
+       reads how to book. Slots marked data-todo wait for her real details. -->
+  <section id="proprietaire" class="owner on-porc" data-sc-act="flow" aria-labelledby="owner-h">
+    <div class="sc-wrap owner__grid">
+      <figure class="owner__ph todo-box" data-todo data-sc-reveal="up" data-sc-reveal-at="0.1 0.4">À compléter :<br>une photo de la propriétaire, idéalement au travail dans le salon</figure>
+      <div class="owner__text" data-sc-in data-sc-stagger="70">
+        <p class="label">La propriétaire</p>
+        <h2 id="owner-h" class="disp"><span data-todo>À compléter : son prénom</span></h2>
+        <p class="owner__bio" data-todo>À compléter : trois ou quatre phrases sur elle. Pourquoi elle coiffe, pourquoi elle a ouvert le salon, ce qu'elle aime faire.</p>
+        <ul class="owner__facts">
+          <li><b>Expérience</b><span data-todo>À compléter : depuis combien d'années elle coiffe</span></li>
+          <li><b>Formation</b><span data-todo>À compléter : où elle a appris</span></li>
+          <li><b>Spécialités</b><span data-todo>À compléter : ses services préférés</span></li>
+          <li><b>Langues</b><span data-todo>À compléter : les langues qu'elle parle</span></li>
+        </ul>
+        <p class="owner__quote" data-todo>À compléter : une phrase d'elle, dans ses mots.</p>
       </div>
     </div>
   </section>

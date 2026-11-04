@@ -37,6 +37,16 @@ jobs:
           rsync -a --exclude 'BRIEF.md' --exclude 'lab/' scrollcraft/builds/mechi/ _site/
           touch _site/.nojekyll
 
+      # Never publish a draft: every [data-todo] slot (the owner's section)
+      # must be filled with her real information first.
+      - name: Vérifier qu'il ne reste rien à compléter
+        run: |
+          if grep -q 'data-todo' _site/index.html; then
+            echo "::error::Le site contient encore des emplacements « À compléter » (section de la propriétaire). Remplissez-les avant la mise en ligne."
+            grep -n 'data-todo' _site/index.html | head
+            exit 1
+          fi
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
