@@ -149,8 +149,6 @@
   .rail__intro { flex: 0 0 auto; width: min(30rem, 34vw); }
   .rail__intro h2 { font-size: clamp(2.8rem, 5vw, 5rem); margin: var(--sc-3) 0 0; }
   .rail__intro p { margin: var(--sc-5) 0 0; color: var(--on-slate-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 28ch; }
-  .rail__hint { display: inline-flex; align-items: center; gap: .7rem; margin-top: var(--sc-6) !important; font-size: var(--sc-t-xs) !important; letter-spacing: .18em; text-transform: uppercase; color: var(--gold) !important; }
-  .rail__hint i { width: 3rem; height: 1px; background: currentColor; }
   .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(13rem, min(22vw, calc((100svh - var(--bar-h) - 19rem) * .72)), 21rem);
     opacity: calc(.55 + .45 * var(--k)); translate: 0 calc((1 - var(--k)) * 3rem); }
   /* Arch frames: each photo in a salon-mirror arch, a fine gold filet set
@@ -379,7 +377,7 @@
   .disp em, .card__name em, .rail__end h3 em, .mark em {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
   .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
-  .rail__intro > p:not(.label):not(.rail__hint), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
+  .rail__intro > p:not(.label), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0;
     font-size: clamp(1.3rem, 1rem + 0.9vw, 1.8rem); line-height: 1.28; }
   .steps .n { font-family: var(--font-italic); font-weight: 400; font-size: var(--sc-t-3xl); }
@@ -517,8 +515,6 @@
         <div class="rail__intro">
           <p class="label">Nos services</p>
           <h2 id="rail-title" class="disp">Choisis ce qui <em>te ressemble</em>.</h2>
-          <p>Clique sur un service pour l'ajouter à ta demande de soumission. Tu peux en choisir plusieurs.</p>
-          <p class="rail__hint" aria-hidden="true"><i></i>Fais défiler</p>
         </div>
         <button class="card" type="button" data-add="silkpress" aria-pressed="false">
           <span class="card__img"><span class="card__arch"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
@@ -546,7 +542,6 @@
         </button>
         <div class="rail__end">
           <h3>Pas sûre de ce <em>qu'il te faut ?</em></h3>
-          <p>Décris tes cheveux dans la demande : on te conseille le bon service, avec le prix et la durée.</p>
           <a class="cta" href="#soumission">Demander une soumission</a>
         </div>
       </div>
