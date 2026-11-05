@@ -40,35 +40,24 @@
 
   var docEl = document.documentElement;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var depot = document.getElementById('depot');
   var svc = document.getElementById('services');
   var book = document.getElementById('soumission');
   var railEl = svc.querySelector('.rail');
   var railItems = Array.prototype.slice.call(svc.querySelectorAll('.card, .rail__end'));
-  var finalEl = document.querySelector('[data-final]'), finalCta = finalEl.querySelector('a');
   var form = document.getElementById('form');
   var announce = document.querySelector('[data-announce]');
   var slip = document.querySelector('[data-slip]');
   var bar = document.querySelector('[data-bar]');
   var toggle = bar.querySelector('.bar__toggle'), toggleLabel = bar.querySelector('[data-toggle-label]');
   var tabs = Array.prototype.slice.call(bar.querySelectorAll('[data-tab]'));
-  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['avant-apres', document.getElementById('avant-apres')], ['proprietaire', document.getElementById('proprietaire')], ['comment', document.getElementById('comment')], ['depot', depot], ['soumission', book]];
+  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['avant-apres', document.getElementById('avant-apres')], ['proprietaire', document.getElementById('proprietaire')], ['comment', document.getElementById('comment')], ['soumission', book]];
 
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
   // ------------------------------------------------------------ per frame --
-  var lastFinal = null, lastForm = null, lastTab = null;
+  var lastForm = null, lastTab = null;
   function frame() {
-    // The deposit act ends on "Ta chaise t'attend": make its link reachable
-    // only once it is actually on screen.
-    var shown = prog(depot) > 0.72;
-    if (shown !== lastFinal) {
-      finalEl.setAttribute('aria-hidden', String(!shown));
-      finalCta.tabIndex = shown ? 0 : -1;
-      lastFinal = shown;
-    }
-
     // Services rail: each card settles as it comes in from the right edge.
     var sr = svc.getBoundingClientRect();
     if (!reduce && sr.bottom > 0 && sr.top < innerHeight) {

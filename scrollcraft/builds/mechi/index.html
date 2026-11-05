@@ -142,34 +142,40 @@
      right. Here every card is a button: a click chooses the service. */
   .rail-stage { display: flex; align-items: center; overflow: hidden;
     background: radial-gradient(70% 80% at 22% 38%, #2a2014, var(--slate) 72%); }
-  .rail { display: flex; align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); padding: 3.5rem var(--sc-gutter) 0; }
+  .rail { display: flex; align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); padding: 0 var(--sc-gutter); }
+  .rail-stage { padding-top: var(--bar-h); }
+  @media (max-height: 780px) { .card__name { margin-top: var(--sc-5); } .card__desc { font-size: var(--sc-t-sm); } .card__foot { margin-top: var(--sc-3); gap: var(--sc-2); } }
   .rail__intro { flex: 0 0 auto; width: min(30rem, 34vw); }
   .rail__intro h2 { font-size: clamp(2.8rem, 5vw, 5rem); margin: var(--sc-3) 0 0; }
   .rail__intro p { margin: var(--sc-5) 0 0; color: var(--on-slate-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 28ch; }
   .rail__hint { display: inline-flex; align-items: center; gap: .7rem; margin-top: var(--sc-6) !important; font-size: var(--sc-t-xs) !important; letter-spacing: .18em; text-transform: uppercase; color: var(--gold) !important; }
   .rail__hint i { width: 3rem; height: 1px; background: currentColor; }
-  .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(16rem, 22vw, 21rem);
+  .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(13rem, min(22vw, calc((100svh - var(--bar-h) - 19rem) * .72)), 21rem);
     opacity: calc(.55 + .45 * var(--k)); translate: 0 calc((1 - var(--k)) * 3rem); }
-  .card { display: grid; gap: 0; padding: 0; margin: 0; border: 0; background: none; color: var(--on-slate); text-align: left; font: inherit; cursor: pointer; }
-  .card__img { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 3px; background: var(--slate-2);
-    outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out); }
+  /* Arch frames: each photo in a salon-mirror arch, a fine gold filet set
+     off around it, the text centred under it. */
+  .card { display: grid; justify-items: center; gap: 0; padding: 0; margin: 0; border: 0; background: none; color: var(--on-slate); text-align: center; font: inherit; cursor: pointer; }
+  .card__img { position: relative; display: block; width: 100%; padding: 9px; border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+    border-radius: 50% 50% 6px 6px / 34% 34% 6px 6px; transition: border-color 180ms var(--sc-ease-out), box-shadow 180ms var(--sc-ease-out); }
+  .card__arch { display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 50% 50% 3px 3px / 36% 36% 3px 3px; background: var(--slate-2); }
   .card__img img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover;
     transform: scale(1.08) translateX(calc((1 - var(--k)) * 3%)); transition: filter 200ms var(--sc-ease-out); }
-  .card__tick { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; background: rgb(255 255 255 / .88); box-shadow: var(--sc-e1); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
-  .card__tick::after { content: ""; width: 13px; height: 7px; border: 2.5px solid var(--on-porc-soft); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .35; }
-  .card__name { display: block; margin-top: var(--sc-5); font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.02; letter-spacing: -0.015em; }
+  .card__tick { position: absolute; left: 50%; bottom: 0; translate: -50% 50%; width: 36px; height: 36px; border-radius: 50%; background: var(--slate); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
+  .card__tick::after { content: ""; width: 13px; height: 7px; border: 2.5px solid var(--gold); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .4; }
+  .card__name { display: block; margin-top: var(--sc-7); font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.02; letter-spacing: -0.015em; }
   .card__name em { font-style: italic; font-weight: 400; color: var(--gold); }
-  .card__desc { display: block; margin-top: var(--sc-3); color: var(--on-slate-soft); line-height: 1.55; font-size: var(--sc-t-base); }
-  .card__foot { display: flex; justify-content: space-between; align-items: center; gap: var(--sc-3); margin-top: var(--sc-4); padding-top: var(--sc-3); border-top: 1px solid color-mix(in oklab, var(--on-slate) 16%, transparent); font-size: var(--sc-t-sm); color: var(--on-slate-soft); }
+  .card__desc { display: block; margin-top: var(--sc-3); color: var(--on-slate-soft); line-height: 1.55; font-size: var(--sc-t-base); max-width: 30ch; }
+  .card__foot { display: grid; justify-items: center; gap: var(--sc-3); margin-top: var(--sc-5); font-size: var(--sc-t-sm); color: var(--on-slate-soft); }
+  .card__foot::before { content: ""; width: 2.5rem; height: 1px; background: color-mix(in oklab, var(--gold) 60%, transparent); }
   .card__foot b { font-weight: 500; color: var(--on-slate); }
   .card__state { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); white-space: nowrap; padding: .55em .9em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); transition: background-color 150ms var(--sc-ease-out), color 150ms var(--sc-ease-out); }
-  .card[aria-pressed="true"] .card__img { outline-color: var(--gold); }
-  .card[aria-pressed="true"] .card__tick { background: var(--gold); transform: scale(1.06); }
+  .card[aria-pressed="true"] .card__img { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+  .card[aria-pressed="true"] .card__tick { background: var(--gold); border-color: var(--gold); transform: scale(1.08); }
   .card[aria-pressed="true"] .card__tick::after { border-color: #120e09; opacity: 1; }
   .card[aria-pressed="true"] .card__state { background: var(--gold); color: #120e09; }
   .card:focus-visible { outline: none; }
-  .card:focus-visible .card__img { outline: 3px dashed var(--gold); }
-  .card:active .card__img { transform: scale(.985); }
+  .card:focus-visible .card__img { outline: 2px dashed var(--gold); outline-offset: 4px; }
+  .card:active .card__arch { transform: scale(.985); }
   @media (hover: hover) and (pointer: fine) { .card:hover .card__img img { filter: brightness(1.06); } .card:hover .card__state { background: color-mix(in oklab, var(--gold) 14%, transparent); } .card[aria-pressed="true"]:hover .card__state { background: var(--gold); } }
   .rail__end { display: grid; gap: var(--sc-5); justify-items: start; align-content: center; color: var(--on-slate); }
   .rail__end h3 { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.8rem, 2.4vw, 2.3rem); line-height: 1.02; }
@@ -266,20 +272,6 @@
   .steps p { margin: 0; color: var(--on-porc-soft); line-height: 1.6; max-width: 34ch; }
 
   /* ------------------------------------------------------------- deposit -- */
-  .dep .sc-stage { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; padding-inline: var(--sc-gutter); }
-  .dep__text { position: relative; display: grid; gap: var(--sc-4); align-content: center; min-height: 60svh; }
-  .dep__text h2 { margin: 0 0 var(--sc-4); font-size: var(--sc-t-3xl); max-width: 13ch; }
-  .dep__text p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.45; max-width: 34ch; color: var(--on-slate-soft); }
-  .dep__text p strong { color: var(--on-slate); font-weight: 500; }
-  .dep__num { justify-self: end; margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(9rem, 27vw, 27rem); line-height: .8; letter-spacing: -0.06em; color: var(--gold); white-space: nowrap;
-    transform: translateY(calc((0.5 - var(--sc-p, 0)) * 40px)); }
-  .dep__num span { font-size: .42em; letter-spacing: 0; vertical-align: .9em; margin-left: .06em; }
-  .dep__lines { display: grid; gap: var(--sc-4); }
-  .final { position: absolute; inset: 0 0 auto; top: 50%; translate: 0 -50%; display: grid; gap: var(--sc-5); justify-items: start;
-    --f: clamp(0, (var(--sc-p, 0) - 0.68) * 9, 1); opacity: var(--f); transform: translateY(calc((1 - var(--f)) * 18px)); }
-  .final h2 { font-size: clamp(3rem, 7vw, 7rem); line-height: .95; letter-spacing: -0.035em; margin: 0; max-width: none; }
-  .final p { color: var(--on-slate-soft); }
-  .final[aria-hidden="true"] .cta { pointer-events: none; }
 
   /* ---------------------------------------------------------------- form -- */
   .book { padding-block: clamp(4rem, 8vw, 8rem) 0; }
@@ -376,14 +368,11 @@
   .disp em, .card__name em, .rail__end h3 em, .mark em {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
   .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
-  .hero__lede, .rail__intro > p:not(.label):not(.rail__hint), .ba__head > p:not(.label), .book__head > p:not(.label), .dep__text p, .final p, .rail__end p {
+  .hero__lede, .rail__intro > p:not(.label):not(.rail__hint), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0;
     font-size: clamp(1.3rem, 1rem + 0.9vw, 1.8rem); line-height: 1.28; }
   .hero__lede em { font-family: inherit; font-size: 1em; font-style: normal; font-weight: 500; }
-  .dep__text p strong { font-weight: 600; }
   .steps .n { font-family: var(--font-italic); font-weight: 400; font-size: var(--sc-t-3xl); }
-  .dep__num { font-family: var(--sc-font-display); font-weight: 100; letter-spacing: -0.05em; }
-  .dep__num span { font-family: var(--font-italic); font-style: italic; font-weight: 400; }
   .compare__tag, .ba__hint, .label { font-family: var(--sc-font-text); }
   .card__desc, .steps p { font-size: var(--sc-t-base); }
 
@@ -428,7 +417,7 @@
   .slots__pick strong { font-weight: 600; }
   .booker [aria-invalid="true"] { outline: 2px solid #a3322a; outline-offset: 4px; border-radius: 6px; }
 
-  @media (prefers-reduced-motion: reduce) { .dep__num { transform: none; } .slip.is-bump { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .slip.is-bump { animation: none; } }
 
   /* ------------------------------------------------------------- phone -- */
   @media (max-width: 760px) {
@@ -451,11 +440,12 @@
     .curls__copy > p:not(.label) { font-size: var(--sc-t-lg); color: var(--on-slate); }
     @media (max-height: 700px) { .curls__copy { gap: var(--sc-3); } .curls__copy > p:not(.label) { font-size: var(--sc-t-base); } .vframe--sign { width: 24vw; } }
 
-    .rail { padding-top: 3rem; gap: var(--sc-5); }
+    .rail { padding-top: 0; gap: var(--sc-5); }
     .rail__intro { width: 80vw; }
     .rail__intro p { font-size: var(--sc-t-base); }
-    .card, .rail__end { width: 72vw; }
-    .card__img { aspect-ratio: 4 / 5; }
+    .card, .rail__end { width: min(72vw, calc((100svh - var(--bar-h) - 17rem) * .8)); }
+    .rail__end { width: 72vw; }
+    .card__arch { aspect-ratio: 4 / 5; }
 
     .steps { grid-template-columns: 1fr; gap: var(--sc-6); }
     .owner__grid { grid-template-columns: 1fr; gap: var(--sc-7); }
@@ -468,13 +458,6 @@
     .compare__tag--before { left: 8px; }
     .compare__tag--after { right: 8px; }
 
-    .dep .sc-stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-content: center; gap: var(--sc-5); }
-    .dep__num { grid-row: 1; justify-self: start; font-size: 34vw; }
-    .dep__text { grid-row: 2; min-height: 46svh; align-content: start; }
-    .dep__text h2 { font-size: var(--sc-t-2xl); }
-    .dep__text p { font-size: var(--sc-t-base); }
-    .final { top: 0; translate: none; }
-    .final h2 { font-size: 15vw; }
 
     .two, .three { grid-template-columns: 1fr; gap: var(--sc-5); }
     .booker { grid-template-columns: 1fr; }
@@ -501,7 +484,6 @@
     </div>
     <div class="bar__group">
       <a href="#comment" data-tab="comment">Comment ça marche</a>
-      <a href="#depot" data-tab="depot">Le dépôt</a>
       <a class="cta bar__cta" href="#soumission">Demander une soumission</a>
     </div>
   </nav>
@@ -543,25 +525,25 @@
           <p class="rail__hint" aria-hidden="true"><i></i>Fais défiler</p>
         </div>
         <button class="card" type="button" data-add="silkpress" aria-pressed="false">
-          <span class="card__img"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."><span class="card__tick" aria-hidden="true"></span></span>
-          <span class="card__name">Silk <em>press</em></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name"><em>Silk press</em></span>
           <span class="card__desc">Pour les cheveux qui frisent ou gonflent à la moindre humidité : lisses, brillants, et qui bougent encore.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="permanente" aria-pressed="false">
-          <span class="card__img"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
           <span class="card__name"><em>Permanente</em></span>
           <span class="card__desc">Une permanente pour des boucles bien définies, qui tiennent jour après jour.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="teinture" aria-pressed="false">
-          <span class="card__img"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
           <span class="card__name"><em>Teinture</em></span>
           <span class="card__desc">Une teinture aux reflets éclatants, posée avec un soin qui garde la fibre brillante.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="keratine" aria-pressed="false">
-          <span class="card__img"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."></span><span class="card__tick" aria-hidden="true"></span></span>
           <span class="card__name"><em>Kératine</em></span>
           <span class="card__desc">Un traitement à la kératine qui discipline les frisottis, pour des longueurs lisses, brillantes et faciles à coiffer.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
@@ -680,26 +662,6 @@
         <li><span class="n">2</span><h3>Notre réponse</h3><p>On te répond avec le service conseillé, la durée et le prix, et on confirme l'heure.</p></li>
         <li><span class="n">3</span><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
       </ol>
-    </div>
-  </section>
-
-  <!-- 4 · PEAK: pin. The deposit, said plainly, then the promise. -->
-  <section id="depot" class="dep" data-sc-act="pin" data-sc-span="3">
-    <div data-sc-stage class="on-slate">
-      <div class="dep__text">
-        <div class="dep__lines">
-          <h2 class="disp" data-sc-cue="0 0.62 0 0.12">Un dépôt de 20&nbsp;$ <em>garde ta place</em>.</h2>
-          <p data-sc-cue="0.1 0.62 0.15 0.12">Il est <strong>déduit de ta facture</strong> le jour du rendez-vous. Tu ne paies rien de plus.</p>
-          <p data-sc-cue="0.2 0.62 0.15 0.12">Si tu ne viens pas, ou si tu annules <strong>moins de 24&nbsp;h avant</strong>, le dépôt est gardé.</p>
-          <p data-sc-cue="0.3 0.62 0.15 0.12">Comme ça, chaque chaise réservée est une chaise occupée.</p>
-        </div>
-        <div class="final" data-final aria-hidden="true">
-          <h2 class="disp">Ta chaise <em>t'attend</em>.</h2>
-          <p>Envoie ta soumission. On te répond avec le prix et l'heure, puis tu confirmes avec ton dépôt.</p>
-          <a class="cta" href="#soumission" tabindex="-1">Demander une soumission</a>
-        </div>
-      </div>
-      <p class="dep__num" aria-hidden="true">20<span>$</span></p>
     </div>
   </section>
 
