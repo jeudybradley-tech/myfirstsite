@@ -45,6 +45,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Social section: "section de réseaux je veux un titre et description accrochant". The video section becomes the TikTok invitation: label "Sur TikTok", title "Les coulisses de Mechi.", line "Des boucles qui rebondissent, des silk press qui brillent, des couleurs qui changent tout. Abonne-toi pour voir les prochaines transformations en premier.", button "Abonne-toi sur TikTok". On phones the label sits on a dark pill so it reads over the clip.
 
+- Menu logo: "je veux que ce logo soit dans le milieu de l'onglet". The transparent logo (not the newly sent copy, which has an opaque ground) sits centered in the top bar, which grows to 5.5rem (4.75rem below 1270px); the tabs split around it, Accueil to La propriétaire on the left, Comment ça marche, Le dépôt and the CTA on the right. Below 1270px the tabs fold into the Menu button and the logo stays centered.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob

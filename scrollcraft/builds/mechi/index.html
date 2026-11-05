@@ -61,32 +61,36 @@
   .link { font-size: var(--sc-t-sm); font-weight: 500; color: var(--sc-ink); text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; }
 
   /* ---------------------------------------------------------- top menu -- */
-  :root { --bar-h: 4.25rem; }
+  /* The logo sits in the middle of the bar, the tabs split around it. */
+  :root { --bar-h: 5.5rem; }
   main section[id], #top { scroll-margin-top: var(--bar-h); }
   .bar { position: fixed; inset: 0 0 auto; z-index: calc(var(--sc-z-chrome) + 5);
     display: flex; align-items: center; justify-content: space-between; gap: var(--sc-5);
     height: calc(var(--bar-h) + env(safe-area-inset-top, 0px)); padding: env(safe-area-inset-top, 0px) var(--sc-gutter) 0;
     background: var(--slate);
     border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 10%, transparent); }
-  .bar__mark { font-family: var(--sc-font-display); font-weight: 500; font-size: 1.65rem; line-height: 1; letter-spacing: -0.03em; color: var(--on-slate); text-decoration: none; }
-  .bar__mark { display: grid; gap: 3px; }
-  .bar__mark { color: var(--gold); }
-  .bar__mark small { font-family: var(--sc-font-text); font-size: .62rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; line-height: 1; color: var(--on-slate-soft); }
-  .bar__nav { display: flex; align-items: center; gap: var(--sc-1); }
+  .bar__logo { position: absolute; left: 50%; top: calc(env(safe-area-inset-top, 0px) + var(--bar-h) / 2); translate: -50% -50%;
+    height: calc(var(--bar-h) - .9rem); display: block; border-radius: 4px; }
+  .bar__logo img { height: 100%; width: auto; max-width: none; display: block; filter: drop-shadow(0 4px 10px rgb(0 0 0 / .45)); }
+  .bar__nav { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: var(--sc-5); min-width: 0; }
+  .bar__group { display: flex; align-items: center; gap: var(--sc-1); }
   .bar__nav a[data-tab] { position: relative; padding: .75em .95em; font-size: var(--sc-t-sm); color: var(--on-slate-soft); text-decoration: none; border-radius: var(--sc-r-pill);
     transition: color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
   .bar__nav a[data-tab]::after { content: ""; position: absolute; left: .95em; right: .95em; bottom: .3em; height: 2px; border-radius: 2px; background: var(--gold); transform: scaleX(0); transition: transform 220ms var(--sc-ease-out); }
   .bar__nav a[data-tab][aria-current="true"] { color: var(--on-slate); }
   .bar__nav a[data-tab][aria-current="true"]::after { transform: scaleX(1); }
   @media (hover: hover) and (pointer: fine) { .bar__nav a[data-tab]:hover { color: var(--on-slate); background: color-mix(in oklab, var(--on-slate) 7%, transparent); } }
-  .bar__nav a:focus-visible, .bar__mark:focus-visible, .bar__toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .bar__nav a:focus-visible, .bar__logo:focus-visible, .bar__toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
   .bar__cta { margin-left: var(--sc-3); padding: .85em 1.25em; }
+  @media (max-width: 1440px) { .bar__nav a[data-tab] { padding-inline: .7em; } .bar__nav a[data-tab]::after { left: .7em; right: .7em; } .bar__cta { margin-left: var(--sc-2); } }
   .bar__toggle { display: none; align-items: center; gap: .6em; font: 500 var(--sc-t-sm)/1 var(--sc-font-text); color: var(--on-slate); background: none; cursor: pointer;
     padding: .75em 1.1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--on-slate) 28%, transparent); }
   .bar__toggle i { position: relative; width: 16px; height: 10px; border-block: 1.5px solid currentColor; transition: transform 200ms var(--sc-ease-out); }
   .bar.is-open .bar__toggle i { transform: scaleY(.15); }
-  @media (max-width: 1240px) {
-    .bar__toggle { display: inline-flex; }
+  @media (max-width: 1270px) {
+    :root { --bar-h: 4.75rem; }
+    .bar__toggle { display: inline-flex; margin-left: auto; }
+    .bar__group { flex-direction: column; align-items: stretch; gap: 0; }
     .bar__nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
       padding: var(--sc-2) var(--sc-gutter) var(--sc-6); background: var(--slate); border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 12%, transparent); box-shadow: var(--sc-e3);
       max-height: calc(100svh - var(--bar-h)); overflow-y: auto; }
@@ -372,7 +376,6 @@
   .disp em, .card__name em, .rail__end h3 em, .mark em {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
   .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
-  .bar__mark { font-family: var(--sc-font-display); font-weight: 300; font-size: 1.35rem; letter-spacing: .22em; text-transform: uppercase; }
   .hero__lede, .rail__intro > p:not(.label):not(.rail__hint), .ba__head > p:not(.label), .book__head > p:not(.label), .dep__text p, .final p, .rail__end p {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0;
     font-size: clamp(1.3rem, 1rem + 0.9vw, 1.8rem); line-height: 1.28; }
@@ -487,16 +490,20 @@
 
 <div class="sc-grain" aria-hidden="true"></div>
 <header class="bar on-slate" data-bar>
-  <a class="bar__mark" href="#top" aria-label="Salon de coiffure Mechi, retour en haut"><small>Salon de coiffure</small>Mechi</a>
+  <a class="bar__logo" href="#top" aria-label="Salon de coiffure Mechi, retour en haut"><img src="assets/logo-m.webp" width="760" height="393" alt=""></a>
   <button class="bar__toggle" type="button" aria-expanded="false" aria-controls="menu"><i aria-hidden="true"></i><span data-toggle-label>Menu</span></button>
   <nav class="bar__nav" id="menu" aria-label="Sections du site">
-    <a href="#top" data-tab="top">Accueil</a>
-    <a href="#services" data-tab="services">Services</a>
-    <a href="#avant-apres" data-tab="avant-apres">Avant / Après</a>
-    <a href="#proprietaire" data-tab="proprietaire">La propriétaire</a>
-    <a href="#comment" data-tab="comment">Comment ça marche</a>
-    <a href="#depot" data-tab="depot">Le dépôt</a>
-    <a class="cta bar__cta" href="#soumission">Demander une soumission</a>
+    <div class="bar__group">
+      <a href="#top" data-tab="top">Accueil</a>
+      <a href="#services" data-tab="services">Services</a>
+      <a href="#avant-apres" data-tab="avant-apres">Avant / Après</a>
+      <a href="#proprietaire" data-tab="proprietaire">La propriétaire</a>
+    </div>
+    <div class="bar__group">
+      <a href="#comment" data-tab="comment">Comment ça marche</a>
+      <a href="#depot" data-tab="depot">Le dépôt</a>
+      <a class="cta bar__cta" href="#soumission">Demander une soumission</a>
+    </div>
   </nav>
 </header>
 <a class="slip" href="#soumission" data-slip>Ma soumission</a>
