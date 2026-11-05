@@ -43,6 +43,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Before / after, second version: "peux-tu ajouter ces photos dans la section avant et après [...] un autre modèle de présentation" (natural hair before, silk press after), model chosen "Curseur à glisser". One frame per transformation, before on the left and after on the right, the reader drags the line (pointer, touch with vertical scroll left free, or keyboard through a hidden range input); tabs Silk press / Blond lumineux switch transformation and caption (the dos/profil buttons were removed on "je ne veux pas les bouton de dos de profil"; the blond keeps its back view, the profile pair is gone); the line sweeps once on first view (not under reduced motion).
 
+- Social section: "section de réseaux je veux un titre et description accrochant". The video section becomes the TikTok invitation: label "Sur TikTok", title "Les coulisses de Mechi.", line "Des boucles qui rebondissent, des silk press qui brillent, des couleurs qui changent tout. Abonne-toi pour voir les prochaines transformations en premier.", button "Abonne-toi sur TikTok". On phones the label sits on a dark pill so it reads over the clip.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
