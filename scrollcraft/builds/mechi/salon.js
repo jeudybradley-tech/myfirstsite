@@ -15,6 +15,24 @@
   //   Tant que c'est vide, la page dit que l'adresse viendra avec la réponse.
   // ---------------------------------------------------------------------
   var FORM_ENDPOINT = 'https://formsubmit.co/ajax/jeudybradley@gmail.com';
+
+  // GOOGLE_FORM : une fois rempli, chaque demande va dans ce Google Forms
+  //   (onglet Réponses, et la feuille Google Sheets si elle est associée)
+  //   au lieu de passer par FormSubmit.
+  //   action : l'adresse du formulaire, qui finit par /formResponse.
+  //   fields : le numéro « entry.… » de chaque question, pris dans le lien
+  //   prérempli du formulaire (menu ⋮ > Obtenir le lien prérempli).
+  //   Dans Google Forms : questions de type texte, AUCUNE question
+  //   obligatoire, et « Collecter les adresses e-mail » désactivé. Sinon,
+  //   Google refuse la réponse sans prévenir le site.
+  //   Laisser action vide ('') pour garder FormSubmit.
+  var GOOGLE_FORM = {
+    action: '',
+    fields: {
+      services: '', cheveux: '', souhait: '', rendezvous: '',
+      nom: '', telephone: '', courriel: '', depot: ''
+    }
+  };
   var INTERAC_EMAIL = '';
   var PREVIEW = false;   // true only in the claude.ai preview copy, where nothing can be sent
 
@@ -485,7 +503,7 @@
       status.textContent = 'Merci ' + firstName + '. Ceci est un aperçu : sur le vrai site, ta demande serait envoyée au salon par courriel. Rien n\'a été envoyé.';
       return;
     }
-    if (!FORM_ENDPOINT) {
+    if (!FORM_ENDPOINT && !GOOGLE_FORM.action) {
       status.textContent = 'Merci ' + firstName + '. Le formulaire n\'est pas encore relié à la boîte de réception du salon, donc ta demande n\'a pas été envoyée.';
       return;
     }
@@ -509,6 +527,35 @@
       _honey: form.elements._honey.value
     };
     submit.disabled = true; status.textContent = 'Envoi en cours…';
+
+    if (GOOGLE_FORM.action) {
+      // A robot filled the hidden field: act as if it went through.
+      if (payload._honey) { showDone(); submit.disabled = false; return; }
+      var answers = {
+        services: payload['Services'],
+        cheveux: payload['Ses cheveux aujourd\'hui'],
+        souhait: payload['Ce qu\'elle aimerait'],
+        rendezvous: payload['Rendez-vous demandé'],
+        nom: payload['Nom'],
+        telephone: payload['Téléphone'],
+        courriel: payload['Courriel'],
+        depot: payload['Règle du dépôt acceptée']
+      };
+      var gbody = new URLSearchParams();
+      Object.keys(answers).forEach(function (k) {
+        if (GOOGLE_FORM.fields[k]) gbody.append(GOOGLE_FORM.fields[k], answers[k]);
+      });
+      // Google Forms gives another site no readable answer (no-cors), so a
+      // request that leaves the browser counts as sent. A network failure
+      // still lands in the catch.
+      fetch(GOOGLE_FORM.action, { method: 'POST', mode: 'no-cors', body: gbody })
+        .then(function () { showDone(); submit.disabled = false; })
+        .catch(function () {
+          fail('La demande n\'a pas pu être envoyée. Vérifie ta connexion et réessaie, ou appelle le 438-377-2535.', null);
+          submit.disabled = false;
+        });
+      return;
+    }
 
     // Sent as an ordinary form body (no custom Content-Type), so the browser
     // makes a simple request with no CORS preflight. If the request still
