@@ -37,6 +37,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Colour card: "peux-tu ajouter et remplacer cette photo dans les services" (dark hair with red highlights). It replaces the copper photo on the colour card, renamed "Coloration et mèches" as on the owner's flyer, in the rail and in the form; the copper photo stays in the hero.
 
+- Cut card: "ajouter et remplace cette photo avec la photo coupe et frange" (defined curls, no bangs). It replaces the curtain-bang bob on the cut card, renamed "Coupe et boucles" so the title matches the photo; the form value stays `coupe`. The old photo is no longer used and was removed from the build.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
