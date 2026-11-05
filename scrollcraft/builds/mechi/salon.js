@@ -4,16 +4,19 @@
   'use strict';
 
   // ---------------------------------------------------------------------
-  // À COMPLÉTER
-  // FORM_ENDPOINT : l'adresse qui reçoit les demandes (ex. un formulaire
-  //   Formspree : https://formspree.io/f/xxxxxxx). Requête POST, en
-  //   multipart/form-data (la photo d'inspiration y est jointe si elle existe).
-  //   Tant que c'est vide, rien n'est envoyé et le formulaire le dit.
+  // RÉGLAGES
+  // FORM_ENDPOINT : FormSubmit (https://formsubmit.co) relaie chaque demande
+  //   par courriel. À la toute première demande, FormSubmit envoie un courriel
+  //   d'activation à l'adresse : il faut cliquer « Activate » une fois.
+  //   Après l'activation, FormSubmit donne un alias (une suite de lettres) :
+  //   le mettre à la place de l'adresse ci-dessous la cache aux robots.
+  //   Laisser vide ('') pour ne rien envoyer : le formulaire le dit alors.
   // INTERAC_EMAIL : l'adresse qui reçoit les virements Interac du dépôt.
   //   Tant que c'est vide, la page dit que l'adresse viendra avec la réponse.
   // ---------------------------------------------------------------------
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/jeudybradley@gmail.com';
   var INTERAC_EMAIL = '';
+  var PREVIEW = false;   // true only in the claude.ai preview copy, where nothing can be sent
 
   // HEURES D'OUVERTURE (données par la propriétaire) : pour chaque jour,
   // [ouverture, fermeture], ou null si le salon est fermé. Le dernier créneau
@@ -447,23 +450,53 @@
     }
 
     var firstName = form.elements.nom.value.trim().split(/\s+/)[0];
+    if (PREVIEW) {
+      status.textContent = 'Merci ' + firstName + '. Ceci est un aperçu : sur le vrai site, ta demande serait envoyée au salon par courriel. Rien n\'a été envoyé.';
+      return;
+    }
     if (!FORM_ENDPOINT) {
       status.textContent = 'Merci ' + firstName + '. Le formulaire n\'est pas encore relié à la boîte de réception du salon, donc ta demande n\'a pas été envoyée.';
       return;
     }
 
-    var data = new FormData(form);
-    data.append('_subject', 'Demande de soumission : ' + form.elements.nom.value.trim() + ', ' + longDay(chosenDay) + ' à ' + label(mins(chosenTime)));
+    // One clear table in the salon's inbox; "Reply" goes to the client.
+    var picked = boxes.filter(function (b) { return b.checked; }).map(function (b) { return SERVICES[b.value] ? SERVICES[b.value].name : b.value; });
+    var when = longDay(chosenDay) + ' à ' + label(mins(chosenTime));
+    var payload = {
+      'Services': picked.length ? picked.join(', ') : 'Aucun choisi',
+      'Ses cheveux aujourd\'hui': form.elements.cheveux.value.trim(),
+      'Ce qu\'elle aimerait': form.elements.souhait.value.trim() || '(rien de précisé)',
+      'Rendez-vous demandé': when.charAt(0).toUpperCase() + when.slice(1),
+      'Nom': form.elements.nom.value.trim(),
+      'Téléphone': form.elements.telephone.value.trim(),
+      'Courriel': form.elements.courriel.value.trim(),
+      'Règle du dépôt acceptée': 'Oui',
+      _subject: 'Demande de soumission : ' + form.elements.nom.value.trim() + ', ' + when,
+      _replyto: form.elements.courriel.value.trim(),
+      _template: 'table',
+      _captcha: 'false',
+      _honey: form.elements._honey.value
+    };
     submit.disabled = true; status.textContent = 'Envoi en cours…';
-    fetch(FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
-      .then(function (res) {
-        if (!res.ok) throw new Error(String(res.status));
+    fetch(FORM_ENDPOINT, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json', Accept: 'application/json' } })
+      .then(function (res) { return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, j: j }; }); })
+      .then(function (r) {
+        var ok = r.ok && (r.j.success === true || r.j.success === 'true');
+        if (!ok) {
+          var msg = String(r.j.message || '');
+          if (/activ/i.test(msg)) {
+            fail('Le formulaire du salon doit d\'abord être activé : un courriel d\'activation vient d\'être envoyé au salon. Réessaie un peu plus tard, ou appelle le 438-377-2535.', null);
+          } else {
+            fail('La demande n\'a pas pu être envoyée. Réessaie dans un moment, ou appelle le 438-377-2535.', null);
+          }
+          return;
+        }
         status.textContent = '';
         form.querySelectorAll('fieldset, .deposit, .send').forEach(function (n) { n.hidden = true; });
         done.classList.add('is-on'); done.focus();
       })
       .catch(function () {
-        fail('La demande n\'a pas pu être envoyée. Vérifie ta connexion et réessaie.', null);
+        fail('La demande n\'a pas pu être envoyée. Vérifie ta connexion et réessaie, ou appelle le 438-377-2535.', null);
       })
       .then(function () { submit.disabled = false; });
   });

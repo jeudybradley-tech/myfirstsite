@@ -56,6 +56,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Hero, last version: "dans la section d'accueil je veux que ça soit le fond d'écran, je veux que la photo soit sombre et enlève les autres photos", then "je ne veux pas le logo" and "enlève ces parties" (the tagline and the two buttons). The hero is now the salon interior full bleed (framed family photo on the shelf blurred), darkened by a left-weighted gradient and a fade into the next section, with a slow parallax; on it only a gold kicker "Salon de coiffure · Montréal" and the h1 "Une beauté qui vous ressemble." (the salon's motto from the flyer; the h1 also carries the salon's name for screen readers). The logo stays in the menu; the CTA stays in the menu. The copper and silk-press photos left the hero; the copper file and the large logo file were removed as unused.
 
+- Requests by email: "je vais utiliser mon courriel pour recevoir les demandes" (jeudybradley@gmail.com). FormSubmit's AJAX endpoint, JSON body with French labels, `_replyto` set to the client, `_template: table`, a honeypot field. Handles the first-use activation reply and network failure with plain messages and the salon's phone number. The file field was replaced by a line inviting the client to send her inspiration photo by replying (FormSubmit's AJAX endpoint does not carry files). Tested against a mocked endpoint only; no real email was sent from the build environment.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
@@ -99,8 +101,8 @@ veux et ta demande se remplit toute seule."
 - The salon replies with the advised service, duration, price and time; the
   client then sends 20 $ by Interac to confirm, and must tick that she accepts
   the deposit rule.
-- `FORM_ENDPOINT` and `INTERAC_EMAIL` at the top of `salon.js` are empty until
-  the salon provides them; the page says so plainly instead of pretending.
+- `FORM_ENDPOINT` is set (FormSubmit, see below); `INTERAC_EMAIL` stays empty until
+  the salon provides it, and the page says so plainly instead of pretending.
 
 ## Unknown, so not stated
 

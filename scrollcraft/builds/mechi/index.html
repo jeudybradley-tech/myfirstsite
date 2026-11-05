@@ -691,8 +691,7 @@
             <label class="field" for="f-souhait"><span>Ce que tu aimerais <i>(facultatif)</i></span>
               <textarea id="f-souhait" name="souhait" placeholder="Ex. : un dégradé avec une frange rideau, et une couleur plus chaude."></textarea></label>
           </div>
-          <label class="field"><span>Une photo d'inspiration <i>(facultatif)</i></span>
-            <input type="file" name="photo" accept="image/*"></label>
+          <p class="hint">Une photo d'inspiration ? Tu pourras nous l'envoyer en répondant à notre courriel.</p>
         </fieldset>
 
         <fieldset data-sc-in>
@@ -739,6 +738,7 @@
           <label class="accept"><input type="checkbox" name="accepte_depot" value="oui" required><span>J'ai lu la règle du dépôt et je l'accepte.</span></label>
         </div>
 
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <div class="send">
           <button class="cta" type="submit">Envoyer ma demande</button>
           <p class="status" data-status role="status" aria-live="polite"></p>
