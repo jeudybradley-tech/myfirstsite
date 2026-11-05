@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nitsy Fashion</title>
+<meta name="description" content="Nitsy Fashion, salon de coiffure : tresses, coupe, couleur et soins, sur rendez-vous.">
+<meta name="theme-color" content="#120B10">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23120B10'/><path d='M11 4c8 6-8 10 0 16s-8 10 0 8M16 4c8 6-8 10 0 16s-8 10 0 8M21 4c8 6-8 10 0 16s-8 10 0 8' stroke='%23E9A6B8' stroke-width='2' fill='none'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..600&display=swap">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* Editorial salon, after hours: a near-black plum ground, one soft rose
+     accent, serif display for the name and the services, a fine braid
+     running down the right edge of every scene. */
+  @font-face { font-family: "Instrument Local"; src: url("assets/fonts/instrument-regular.woff2") format("woff2"); font-style: normal; font-display: swap; }
+  @font-face { font-family: "Instrument Local"; src: url("assets/fonts/instrument-italic.woff2") format("woff2"); font-style: italic; font-display: swap; }
+  @font-face { font-family: "Geist Local"; src: url("assets/fonts/geist-latin.woff2") format("woff2"); font-weight: 300 600; font-display: swap; }
+  :root {
+    color-scheme: dark;
+    --plum-night: #120B10;
+    --plum: #1D1219;
+    --rose: #E9A6B8;
+    --champagne: #D9C3A5;
+    --mauve: #8B5A7F;
+    --sc-canvas: var(--plum-night);
+    --sc-surface: var(--plum);
+    --sc-ink: #F6EEE8;
+    --sc-ink-soft: #BFAEB6;
+    --sc-accent: var(--rose);
+    --sc-accent-ink: #1A0F16;
+    --sc-font-display: "Instrument Serif", "Instrument Local", "Didot", Georgia, serif;
+    --sc-font-text: "Geist", "Geist Local", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --braid-room: 18vw;
+  }
+  body { background: var(--sc-canvas); color: var(--sc-ink); font-weight: 350; }
+  .braid { position: fixed; inset: 0; z-index: 50; pointer-events: none; width: 100%; height: 100%; }
+
+  .serif { font-family: var(--sc-font-display); font-weight: 400; letter-spacing: -.015em; line-height: .92; margin: 0; }
+  .serif em { font-style: italic; color: var(--rose); }
+  .eyebrow { margin: 0 0 1.4rem; font-size: .72rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--champagne); }
+  .pad { padding-left: var(--sc-gutter); padding-right: calc(var(--braid-room) + 1rem); }
+
+  .btn { display: inline-flex; align-items: center; gap: .8rem; min-height: 3rem; padding: .9rem 1.7rem; border-radius: 999px;
+    background: var(--rose); color: var(--sc-accent-ink); text-decoration: none; font-weight: 500; letter-spacing: .02em;
+    transition: transform var(--sc-d-fast) var(--sc-ease-out), background-color var(--sc-d-fast) var(--sc-ease-out); }
+  .btn:hover { background: #F2BCCB; transform: translateY(-1px); }
+  .btn:active { transform: scale(.97); }
+  .btn span { font-family: var(--sc-font-display); font-style: italic; font-size: 1.2em; }
+
+  .mark { position: fixed; z-index: 40; left: var(--sc-gutter); top: calc(1.4rem + env(safe-area-inset-top, 0px));
+    font-family: var(--sc-font-display); font-size: 1.35rem; color: var(--sc-ink); text-decoration: none; letter-spacing: .01em; }
+  .mark i { color: var(--rose); }
+
+  /* 1 hero */
+  .hero__stage { display: grid; align-content: center; }
+  .hero__name { font-size: clamp(5.5rem, 24vw, 22rem); }
+  .hero__name em { display: block; font-size: .42em; margin-top: -.06em; padding-left: .9em; }
+  .hero__line { margin: 2rem 0 0; max-width: 34ch; font-size: var(--sc-t-lg); line-height: 1.55; color: var(--sc-ink-soft); }
+  .hero__cta { margin-top: 2.2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
+  .hero__cta small { color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+
+  /* 2 promise */
+  .promise { padding-block: var(--sc-section); background: var(--plum); }
+  .promise h2 { font-size: clamp(3rem, 8vw, 8rem); max-width: 12ch; }
+  .promise__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem clamp(2rem, 5vw, 5rem); margin-top: clamp(3rem, 6vw, 5rem); max-width: 58rem; }
+  .promise__cols p { margin: 0; color: var(--sc-ink-soft); line-height: 1.7; }
+  .promise__cols b { display: block; margin-bottom: .5rem; color: var(--sc-ink); font-weight: 500; }
+
+  /* 3 services (peak) */
+  .svc-stage { background: var(--plum-night); }
+  .svc { position: absolute; top: 50%; translate: 0 -50%; left: var(--sc-gutter); right: calc(var(--braid-room) + 1rem); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem clamp(2rem, 5vw, 5rem); align-items: end; }
+  .svc h3 { font-size: clamp(4rem, 14vw, 13rem); }
+  .svc p { margin: 0 0 1.2em; max-width: 30ch; color: var(--sc-ink-soft); line-height: 1.65; }
+  .svc p b { display: block; color: var(--champagne); font-weight: 500; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .6rem; }
+  .svc--end { grid-template-columns: 1fr; text-align: center; right: var(--sc-gutter); justify-items: center; }
+  .svc--end h3 { font-size: clamp(2.6rem, 6vw, 6rem); }
+
+  /* 4 steps */
+  .steps { padding-block: var(--sc-section); }
+  .steps h2 { font-size: clamp(2.6rem, 6vw, 5.5rem); }
+  .steps ol { list-style: none; margin: clamp(2.5rem, 5vw, 4rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; max-width: 64rem; }
+  .steps li { border-top: 1px solid var(--sc-hairline-strong); padding-top: 1.4rem; }
+  .steps li span { font-family: var(--sc-font-display); font-style: italic; font-size: 2.4rem; color: var(--rose); line-height: 1; }
+  .steps li h3 { margin: .8rem 0 .5rem; font-size: 1.05rem; font-weight: 500; }
+  .steps li p { margin: 0; color: var(--sc-ink-soft); line-height: 1.6; }
+
+  /* 5 contact */
+  .contact { min-height: 100svh; display: grid; grid-template-rows: 1fr auto; padding-top: var(--sc-section); background: var(--plum); }
+  .contact__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; max-width: 66rem; }
+  .contact h2 { font-size: clamp(3rem, 6.5vw, 6rem); }
+  .contact__lede { margin: 1.4rem 0 0; max-width: 34ch; color: var(--sc-ink-soft); line-height: 1.65; }
+  form { display: grid; gap: 1.1rem; }
+  label { display: grid; gap: .45rem; font-size: .7rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--champagne); }
+  input, select, textarea { font: inherit; font-size: 1rem; text-transform: none; letter-spacing: 0; font-weight: 350; color: var(--sc-ink); background: transparent; border: 0; border-bottom: 1px solid #5A4452; padding: .6rem 0; border-radius: 0; }
+  select option { color: #1A0F16; }
+  textarea { min-height: 5rem; resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; }
+  input::placeholder, textarea::placeholder { color: #8E7B86; }
+  .contact .btn { justify-self: start; border: 0; cursor: pointer; font: inherit; font-weight: 500; }
+  .status { margin: 0; min-height: 1.4em; font-size: var(--sc-t-sm); color: var(--rose); }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 4rem; padding-block: 1.4rem calc(1.4rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--sc-hairline); font-size: .78rem; color: var(--sc-ink-soft); }
+
+  @media (max-width: 860px) {
+    :root { --braid-room: 10vw; }
+    .promise__cols, .contact__grid, .steps ol { grid-template-columns: 1fr; }
+    .svc { grid-template-columns: 1fr; }
+    .mark { position: absolute; }
+    .hero__name { font-size: 31vw; }
+  }
+</style>
+<noscript><style>[data-sc-cue],[data-sc-in],[data-sc-stagger]>*{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<canvas class="braid" aria-hidden="true"></canvas>
+<a class="mark" href="#top" aria-label="Nitsy Fashion, retour en haut">Nitsy <i>Fashion</i></a>
+
+<main id="top">
+  <!-- 1 · HERO -->
+  <section data-sc-act="pin" data-sc-span="1.6" data-sc-drift="#120B10" aria-labelledby="hero-title">
+    <div data-sc-stage class="hero__stage pad">
+      <div data-sc-cue="0 0.9 0 0.3">
+        <p class="eyebrow">Salon de coiffure · sur rendez-vous</p>
+        <h1 id="hero-title" class="serif hero__name">Nitsy <em>Fashion</em></h1>
+        <p class="hero__line">Tresses, coupe, couleur et soins. Une coiffure pensée pour toi, faite avec le temps qu'il faut.</p>
+        <div class="hero__cta"><a class="btn" href="#contact">Prendre <span>rendez-vous</span></a><small>Réponse rapide, sans engagement.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · PROMISE -->
+  <section class="promise pad" data-sc-act="flow" data-sc-drift="#1D1219" aria-labelledby="promise-title">
+    <p class="eyebrow" data-sc-in>L'expérience Nitsy</p>
+    <h2 id="promise-title" class="serif" data-sc-in>Ici, on prend <em>le temps.</em></h2>
+    <div class="promise__cols" data-sc-in data-sc-stagger="80">
+      <p><b>On t'écoute d'abord</b>Chaque rendez-vous commence par une vraie conversation : ce que tu aimes, ce que tu veux changer, ce que tes cheveux supportent.</p>
+      <p><b>On soigne le détail</b>Une raie nette, une tresse régulière, une couleur qui tient. C'est ce qui fait la différence une semaine plus tard.</p>
+      <p><b>Tu repars sereine</b>On t'explique comment entretenir ta coiffure à la maison, pour qu'elle reste belle plus longtemps.</p>
+      <p><b>Un moment pour toi</b>Installe-toi, détends-toi. Le temps au salon fait partie du soin.</p>
+    </div>
+  </section>
+
+  <!-- 3 · SERVICES (peak) -->
+  <section id="services" data-sc-act="pin" data-sc-span="3.6" data-sc-drift="#120B10" aria-label="Prestations">
+    <div data-sc-stage class="svc-stage">
+      <div class="svc" data-sc-cue="0 0.17 0 0.25"><h3 class="serif"><em>Tresses</em></h3><p><b>Prestation phare</b>Fines, épaisses, collées ou libres, avec ou sans rajouts. Régulières du front à la nuque.</p></div>
+      <div class="svc" data-sc-cue="0.16 0.32 0.25 0.25"><h3 class="serif">Coupe</h3><p><b>Sur mesure</b>Une coupe qui suit ta texture et ton visage, et qui reste facile à coiffer seule.</p></div>
+      <div class="svc" data-sc-cue="0.31 0.47 0.25 0.25"><h3 class="serif">Couleur</h3><p><b>Du subtil à l'audacieux</b>Reflets, mèches ou changement complet, avec une attention particulière à la santé du cheveu.</p></div>
+      <div class="svc" data-sc-cue="0.45 0.64 0.2 0.2"><h3 class="serif">Soins</h3><p><b>Pour durer</b>Hydratation, réparation, brillance. La base d'une belle coiffure.</p></div>
+      <div class="svc svc--end" data-sc-cue="0.78 1.3 0.12 0.1"><h3 class="serif">Et toi, ce sera <em>quoi ?</em></h3><a class="btn" href="#contact">Prendre <span>rendez-vous</span></a></div>
+    </div>
+  </section>
+
+  <!-- 4 · HOW IT WORKS -->
+  <section class="steps pad" data-sc-act="flow" data-sc-drift="#120B10" aria-labelledby="steps-title">
+    <p class="eyebrow" data-sc-in>Comment ça se passe</p>
+    <h2 id="steps-title" class="serif" data-sc-in>Simple, <em>du premier message</em> au miroir.</h2>
+    <ol data-sc-in data-sc-stagger="90">
+      <li><span>i.</span><h3>Tu nous écris</h3><p>Dis-nous ce que tu as en tête et tes disponibilités, avec le formulaire ci-dessous.</p></li>
+      <li><span>ii.</span><h3>On en parle</h3><p>On te répond pour préciser la prestation, la durée et fixer le créneau.</p></li>
+      <li><span>iii.</span><h3>Tu t'installes</h3><p>Le jour J, tu n'as plus qu'à te laisser faire.</p></li>
+    </ol>
+  </section>
+
+  <!-- 5 · CONTACT -->
+  <section id="contact" class="contact pad" data-sc-act="flow" data-sc-drift="#1D1219" aria-labelledby="contact-title">
+    <div class="contact__grid">
+      <div data-sc-in>
+        <p class="eyebrow">Rendez-vous</p>
+        <h2 id="contact-title" class="serif">Parlons de <em>ta coiffure.</em></h2>
+        <p class="contact__lede">Quelques mots suffisent. On te recontacte pour fixer le rendez-vous qui te convient.</p>
+      </div>
+      <form id="contact-form" novalidate>
+        <label for="f-name">Ton prénom<input id="f-name" name="name" autocomplete="given-name" required></label>
+        <label for="f-reach">Téléphone ou Instagram<input id="f-reach" name="reach" required></label>
+        <label for="f-service">Prestation
+          <select id="f-service" name="service">
+            <option>Tresses</option><option>Coupe</option><option>Couleur</option><option>Soins</option><option>Je ne sais pas encore</option>
+          </select>
+        </label>
+        <label for="f-msg">Ton idée<textarea id="f-msg" name="message" placeholder="Ex. : des tresses fines pour samedi"></textarea></label>
+        <button class="btn" type="submit">Envoyer ma <span>demande</span></button>
+        <p class="status" id="f-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <footer class="foot"><span>Nitsy Fashion · Salon de coiffure</span><span>© 2026 Nitsy Fashion</span></footer>
+  </section>
+</main>
+
+<script src="scrollcraft.js"></script>
+<script src="nitsy.js"></script>
+</body>
+</html>

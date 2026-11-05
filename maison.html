@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maison Jeudy · Objets du quotidien, choisis avec soin</title>
+<meta name="description" content="Maison Jeudy, boutique d'objets pour la maison et le quotidien : peu de pièces, bien choisies, faites pour durer.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231a1410'/><circle cx='16' cy='17' r='7' fill='%23e0603c'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  :root {
+    --sc-canvas:     #1a1410;
+    --sc-surface:    #241c16;
+    --sc-ink:        #f6ede1;
+    --sc-ink-soft:   #b9a999;
+    --sc-accent:     #e0603c;
+    --sc-accent-ink: #1a1410;
+    --sc-font-display: "Fraunces", Georgia, serif;
+    --sc-font-text:    "Inter", system-ui, sans-serif;
+  }
+  .site-bar { position: fixed; inset: 0 0 auto 0; z-index: 10; display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem var(--sc-gutter); mix-blend-mode: normal; }
+  .site-bar__mark { font-family: var(--sc-font-display); font-size: 1.25rem; letter-spacing: .01em; color: var(--sc-ink); text-decoration: none; }
+  .cta { display: inline-block; background: var(--sc-accent); color: var(--sc-accent-ink); font-weight: 500; text-decoration: none;
+    padding: .8rem 1.4rem; border-radius: 999px; }
+  .cta--sm { padding: .5rem 1rem; font-size: .9rem; }
+  .cta:focus-visible, .site-bar a:focus-visible { outline: 2px solid var(--sc-ink); outline-offset: 3px; }
+
+  /* Hero : plans indépendants */
+  .hero__plane { position: absolute; left: 50%; pointer-events: none; }
+  .hero__arch { bottom: -10%; left: 68%; width: min(52vw, 640px); translate: -50% 0; }
+  .hero__vase { bottom: 8%; left: 68%; width: min(20vw, 230px); translate: -50% 0; }
+  .hero__cloth { bottom: -2%; width: 140vw; max-width: none; translate: -50% 0; }
+  /* Geste signature : la pièce est dans le noir, la lampe suit la main. */
+  .hero__dark { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(circle 22vmax at var(--lx, 68%) var(--ly, 55%), transparent 0, rgba(26,20,16,.55) 55%, rgba(26,20,16,.94) 100%);
+    opacity: calc(1 - var(--sc-p, 0) * 1.6); }
+  .hero__fade { position: absolute; inset: auto 0 0 0; height: 24vh; background: linear-gradient(transparent, var(--sc-canvas)); z-index: 3; }
+  .hero__copy { position: absolute; z-index: 4; left: var(--sc-gutter); top: 18vh; right: var(--sc-gutter); max-width: 38rem; }
+  .hero__copy .sc-body { margin-top: 1.25rem; }
+  .hero__copy .cta { margin-top: 1.75rem; }
+
+  /* Manifeste */
+  .argument { display: grid; place-items: center; padding: 0 var(--sc-gutter); }
+  .argument p { grid-area: 1/1; font-family: var(--sc-font-display); font-size: clamp(1.9rem, 5.2vw, 4.2rem); line-height: 1.08;
+    max-width: 18ch; margin: 0; }
+  .argument p:nth-child(2) { justify-self: end; text-align: right; }
+  .argument p:nth-child(3) { justify-self: start; }
+  .argument p:nth-child(4) { color: var(--sc-accent); text-align: center; max-width: 22ch; }
+
+  /* Split */
+  .split { display: grid; gap: clamp(2rem, 6vw, 6rem); grid-template-columns: 1fr 1fr; align-items: center; }
+  .split figure { margin: 0; aspect-ratio: 4/5; border-radius: 999px 999px 1.5rem 1.5rem; overflow: hidden; background: #c9a98a; }
+  .split svg { width: 100%; height: 100%; display: block; }
+
+  /* Collection */
+  .rail { height: 100%; align-items: center; gap: clamp(2rem, 5vw, 5rem); padding: 0 var(--sc-gutter) 0 var(--sc-gutter); width: max-content; }
+  .rail__lead { flex: 0 0 clamp(16rem, 28vw, 26rem); }
+  .item { flex: 0 0 clamp(15rem, 26vw, 24rem); }
+  .item__art { aspect-ratio: 4/5; border-radius: 1.25rem; overflow: hidden; }
+  .item__art svg { width: 100%; height: 100%; display: block; }
+  .item h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: 1.6rem; margin: 1rem 0 .15rem; }
+  .item p { margin: 0; color: var(--sc-ink-soft); }
+  .item .price { color: var(--sc-ink); margin-top: .35rem; }
+  .rail__end { flex: 0 0 clamp(14rem, 22vw, 20rem); color: var(--sc-ink-soft); }
+
+  /* Engagements */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 4vw, 4rem); margin-top: clamp(2.5rem, 6vw, 5rem); }
+  .pillars h3 { font-family: var(--sc-font-display); font-weight: 400; font-size: 1.5rem; margin: 0 0 .5rem; }
+  .pillars p { margin: 0; color: var(--sc-ink-soft); }
+  .pillars > div { border-top: 1px solid var(--sc-hairline, #ffffff22); padding-top: 1.25rem; }
+
+  /* Fin */
+  .close { display: grid; place-items: center; text-align: center; }
+  .close__inner { display: grid; gap: 2rem; justify-items: center; padding: 0 var(--sc-gutter); }
+  .foot { position: absolute; inset: auto 0 0 0; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    padding: 1.25rem var(--sc-gutter); color: var(--sc-ink-soft); font-size: .85rem; }
+
+  @media (max-width: 760px) {
+    .split { grid-template-columns: 1fr; }
+    .pillars { grid-template-columns: 1fr; }
+    .hero__copy { top: 14vh; }
+    .hero__arch { left: 50%; width: 90vw; bottom: 8%; } .hero__vase { left: 50%; width: 36vw; bottom: 14%; } .hero__cloth { height: 20%; }
+    .argument p, .argument p:nth-child(n) { justify-self: start; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="site-bar">
+  <a class="site-bar__mark" href="#top">Maison Jeudy</a>
+  <a class="cta cta--sm" href="#collection">Découvrir la collection</a>
+</header>
+
+<main id="top">
+
+  <!-- 1 · Accueil : pin + plans de profondeur -->
+  <section data-sc-act="pin" data-sc-span="2.2" data-sc-drift="#1a1410">
+    <div data-sc-stage>
+      <svg class="hero__plane hero__arch" data-sc-parallax="-1.2" viewBox="0 0 400 480" aria-hidden="true">
+        <path d="M0 480V200a200 200 0 0 1 400 0v280z" fill="#e0603c"/>
+        <path d="M60 480V210a140 140 0 0 1 280 0v270z" fill="#c24a29"/>
+      </svg>
+      <svg class="hero__plane hero__vase" data-sc-parallax="-0.5" viewBox="0 0 120 220" aria-hidden="true">
+        <defs><linearGradient id="vg" x1="0" x2="1"><stop offset="0" stop-color="#f6ede1"/><stop offset="1" stop-color="#cdb79f"/></linearGradient></defs>
+        <path d="M48 6h24v36c0 14 38 30 38 78 0 52-24 94-50 94S10 172 10 120c0-48 38-64 38-78z" fill="url(#vg)"/>
+        <ellipse cx="60" cy="8" rx="12" ry="4" fill="#8f7a64"/>
+      </svg>
+      <svg class="hero__plane hero__cloth" data-sc-parallax="0.6" viewBox="0 0 1400 260" preserveAspectRatio="none" height="34%" aria-hidden="true">
+        <path d="M0 260V150C200 60 340 150 520 120S880 20 1100 100s220 30 300 0v160z" fill="#241c16"/>
+      </svg>
+      <div class="hero__dark" aria-hidden="true"></div>
+      <div class="hero__fade" aria-hidden="true"></div>
+      <div class="hero__copy" data-sc-cue="0 0.8 0">
+        <h1 class="sc-display sc-display--xl" data-sc-kinetic="lines">Peu d'objets. Les bons.</h1>
+        <p class="sc-body">Maison Jeudy choisit chaque pièce pour la maison comme on choisit un ami : pour longtemps.</p>
+        <a class="cta" href="#collection">Découvrir la collection</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · Le regard : flow + reveal -->
+  <section class="sc-section" data-sc-act="flow" data-sc-drift="#241c16">
+    <div class="sc-wrap split">
+      <div class="sc-stack" data-sc-in data-sc-stagger="70">
+        <h2 class="sc-display sc-display--lg">Choisis à la main, un par un.</h2>
+        <p class="sc-body">Chaque objet est essayé chez nous avant d'entrer en boutique. S'il ne tient pas à l'usage, il ne vient pas.</p>
+        <p class="sc-body">Résultat : une sélection courte, lisible, où rien n'est là pour faire nombre.</p>
+      </div>
+      <figure data-sc-reveal="up" data-sc-reveal-at="0.1 0.55">
+        <svg viewBox="0 0 400 500" role="img" aria-label="Composition de formes douces : une arche, un disque et une bougie.">
+          <rect width="400" height="500" fill="#d9b99a"/>
+          <circle cx="270" cy="170" r="90" fill="#e0603c"/>
+          <path d="M60 500V300a90 90 0 0 1 180 0v200z" fill="#f6ede1"/>
+          <rect x="250" y="320" width="90" height="180" rx="10" fill="#3a2a1f"/>
+          <rect x="288" y="296" width="4" height="26" fill="#3a2a1f"/>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3 · Manifeste : pin -->
+  <section data-sc-act="pin" data-sc-span="3.2" data-sc-drift="#1a1410">
+    <div data-sc-stage class="argument">
+      <p data-sc-cue="0 0.32 0">Trop d'objets jetables.</p>
+      <p data-sc-cue="0.26 0.60">Des maisons pleines, des tiroirs vides de sens.</p>
+      <p data-sc-cue="0.54 0.88">On préfère moins, mais fait pour durer.</p>
+      <p data-sc-cue="0.82">Des objets qui s'améliorent avec les années.</p>
+    </div>
+  </section>
+
+  <!-- 4 · Collection : pan -->
+  <section id="collection" data-sc-act="pan" data-sc-span="4.2" data-sc-drift="#241c16">
+    <div data-sc-stage>
+      <div class="rail" data-sc-pan="0.06">
+        <div class="rail__lead sc-stack">
+          <h2 class="sc-display sc-display--md">La sélection</h2>
+          <p class="sc-body">Quatre pièces pour commencer. Prix et fiches à confirmer avant mise en ligne.</p>
+        </div>
+        <article class="item">
+          <div class="item__art" data-sc-tilt="6"><svg viewBox="0 0 300 375" role="img" aria-label="Vase en céramique crème"><rect width="300" height="375" fill="#e0603c"/><path d="M130 70h40v50c0 22 60 40 60 100 0 60-30 100-80 100s-80-40-80-100c0-60 60-78 60-100z" fill="#f6ede1"/></svg></div>
+          <h3>Vase Alba</h3><p>Céramique émaillée</p><p class="price">48 €</p>
+        </article>
+        <article class="item">
+          <div class="item__art" data-sc-tilt="6"><svg viewBox="0 0 300 375" role="img" aria-label="Bougie dans un pot sombre"><rect width="300" height="375" fill="#c9a98a"/><rect x="95" y="170" width="110" height="140" rx="12" fill="#3a2a1f"/><rect x="148" y="140" width="4" height="34" fill="#3a2a1f"/><ellipse cx="150" cy="130" rx="8" ry="14" fill="#e0603c"/></svg></div>
+          <h3>Bougie Cèdre</h3><p>Cire végétale, 40 h</p><p class="price">32 €</p>
+        </article>
+        <article class="item">
+          <div class="item__art" data-sc-tilt="6"><svg viewBox="0 0 300 375" role="img" aria-label="Plaid plié aux bandes terracotta"><rect width="300" height="375" fill="#3a2a1f"/><rect x="40" y="110" width="220" height="160" rx="10" fill="#f6ede1"/><rect x="40" y="150" width="220" height="14" fill="#e0603c"/><rect x="40" y="180" width="220" height="14" fill="#e0603c"/></svg></div>
+          <h3>Plaid Dune</h3><p>Laine et coton</p><p class="price">95 €</p>
+        </article>
+        <article class="item">
+          <div class="item__art" data-sc-tilt="6"><svg viewBox="0 0 300 375" role="img" aria-label="Bol en grès"><rect width="300" height="375" fill="#f6ede1"/><path d="M50 170h200c0 70-45 120-100 120S50 240 50 170z" fill="#c24a29"/><ellipse cx="150" cy="170" rx="100" ry="16" fill="#e0603c"/></svg></div>
+          <h3>Bol Terra</h3><p>Grès tourné main</p><p class="price">26 €</p>
+        </article>
+        <div class="rail__end sc-stack">
+          <p class="sc-body">Chaque commande part emballée à la main, avec une carte pour dire d'où vient l'objet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Engagements : flow -->
+  <section class="sc-section" data-sc-act="flow" data-sc-drift="#1a1410">
+    <div class="sc-wrap">
+      <h2 class="sc-display sc-display--lg" data-sc-in>Trois promesses.</h2>
+      <div class="pillars" data-sc-in data-sc-stagger="90">
+        <div><h3>Fait pour durer</h3><p>Des matières choisies pour vieillir en beauté, pas pour se remplacer.</p></div>
+        <div><h3>Prix lisibles</h3><p>Un prix, un objet. Pas de fausses promotions ni de comparaisons gonflées.</p></div>
+        <div><h3>Retours simples</h3><p>Trente jours pour changer d'avis, sans formulaire interminable.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Fin : pin + pointeur -->
+  <section id="join" data-sc-act="pin" data-sc-span="1.15" data-sc-drift="#1a1410">
+    <div data-sc-stage class="close" data-sc-spotlight>
+      <div class="close__inner">
+        <h2 class="sc-display sc-display--lg" data-sc-cue="0.06" data-sc-kinetic="lines">Chez vous, il y a de la place pour mieux.</h2>
+        <a class="cta" href="#collection" data-sc-magnet="0.26" data-sc-cue="0.06" data-sc-rise="0">Découvrir la collection</a>
+      </div>
+      <footer class="foot"><span>Maison Jeudy</span><span>© 2026 · Tous droits réservés</span></footer>
+    </div>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>ScrollCraft.mount(document.body);
+// Lampe du hero : suit le pointeur, ou le doigt sur mobile.
+(function () {
+  var d = document.querySelector('.hero__dark'); if (!d) return;
+  var tx = 68, ty = 55, x = 68, y = 55;
+  function set(e) { var r = d.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width * 100; ty = (e.clientY - r.top) / r.height * 100; }
+  addEventListener('pointermove', set, { passive: true });
+  addEventListener('touchmove', function (e) { set(e.touches[0]); }, { passive: true });
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { d.style.display = 'none'; return; }
+  (function tick() { x += (tx - x) * .12; y += (ty - y) * .12; d.style.setProperty('--lx', x + '%'); d.style.setProperty('--ly', y + '%'); requestAnimationFrame(tick); })();
+})();
+</script>
+</body>
+</html>

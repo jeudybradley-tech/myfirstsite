@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Salon de coiffure Mechi</title>
+<meta name="description" content="Salon de coiffure Mechi. Choisis tes services, décris tes cheveux, reçois une soumission, et réserve ta place avec un dépôt de 20 $ déduit de ta facture.">
+<meta name="theme-color" content="#120e09">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="preload" href="assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* Type after the client's reference (the TIMELESS "CUSTOM MADE" panel): a very
+     thin grotesque in capitals, answered by a fine italic serif in capitals. */
+  @font-face { font-family: "Inter Tight"; src: url("assets/fonts/inter-tight-latin.woff2") format("woff2-variations"), url("assets/fonts/inter-tight-latin.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin.woff2") format("woff2-variations"), url("assets/fonts/cormorant-garamond-latin.woff2") format("woff2"); font-weight: 300 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: "Cormorant Garamond"; src: url("assets/fonts/cormorant-garamond-latin-italic.woff2") format("woff2-variations"), url("assets/fonts/cormorant-garamond-latin-italic.woff2") format("woff2"); font-weight: 300 700; font-style: italic; font-display: swap; }
+
+  :root {
+    /* The logo's black and gold: black grounds, an ivory ground for the paperwork,
+       the logo's gold as the one accent (a deeper gold on the light ground). */
+    --slate: #120e09;  --slate-2: #1c1610;
+    --on-slate: #efe7da;  --on-slate-soft: #b3a794;
+    --porc: #f3efe8;   --porc-2: #e8e1d6;
+    --on-porc: #1a140d;   --on-porc-soft: #5e5446;
+    --gold-deep: #7a5a1c;   --gold: #c59d5a;
+
+    --sc-canvas: var(--porc);   --sc-surface: #ffffff;
+    --sc-ink: var(--on-porc);   --sc-ink-soft: var(--on-porc-soft);
+    --sc-accent: var(--gold-deep);   --sc-accent-ink: #fbf6ec;
+    --sc-font-display: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --sc-font-text:    "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-italic:     "Cormorant Garamond", "Times New Roman", Times, serif;
+    --sc-shadow-color: 32 35% 6%;
+  }
+  body { background: var(--porc); }
+  img { display: block; }
+
+  .on-slate { background: var(--slate); --sc-ink: var(--on-slate); --sc-ink-soft: var(--on-slate-soft); --sc-accent: var(--gold); --sc-accent-ink: #120e09; color: var(--sc-ink); }
+  .on-porc  { background: var(--porc);  --sc-ink: var(--on-porc);  --sc-ink-soft: var(--on-porc-soft);  --sc-accent: var(--gold-deep);     --sc-accent-ink: #fbf6ec; color: var(--sc-ink); }
+  .on-slate ::selection { background: var(--gold); color: #120e09; }
+
+  .disp { font-family: var(--sc-font-display); font-weight: 500; letter-spacing: -0.02em; line-height: 1.02; text-wrap: balance; font-optical-sizing: auto; }
+  .disp em { font-style: italic; font-weight: 400; }
+  .label { margin: 0; font: 500 var(--sc-t-xs)/1.2 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase; color: var(--sc-ink-soft); }
+  .on-slate :where(p:not(.disp)) { letter-spacing: .005em; line-height: 1.68; }
+
+  /* ---------------------------------------------------------------- CTA -- */
+  .cta {
+    display: inline-flex; align-items: center; gap: .6em; white-space: nowrap;
+    font: 500 var(--sc-t-sm)/1 var(--sc-font-text); letter-spacing: .02em;
+    padding: 1.05em 1.5em; border-radius: var(--sc-r-pill);
+    background: var(--sc-accent); color: var(--sc-accent-ink); text-decoration: none;
+    box-shadow: var(--sc-e2), inset 0 1px 0 rgb(255 255 255 / .18);
+    transition: transform 140ms var(--sc-ease-out), background-color 160ms var(--sc-ease-out);
+  }
+  .cta:active { transform: translateY(1px) scale(.98); }
+  @media (hover: hover) and (pointer: fine) { .cta:hover { background: color-mix(in oklab, var(--sc-accent) 86%, black); } }
+  .cta:focus-visible, .slip:focus-visible, .link:focus-visible, .chipbox input:focus-visible + span { outline: 2px solid var(--sc-accent); outline-offset: 3px; }
+  .link { font-size: var(--sc-t-sm); font-weight: 500; color: var(--sc-ink); text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px; }
+
+  /* ---------------------------------------------------------- top menu -- */
+  /* A floating glass pill (client's reference): inset from the edges, fully
+     rounded, the page showing through it. The logo sits in its middle and
+     the tabs split around it. --bar-h is the room the pill takes at the top,
+     offsets included, so every section clears it. */
+  :root { --pill-h: 4.75rem; --pill-top: .8rem; --pill-x: clamp(.75rem, 2vw, 1.75rem); --bar-h: calc(var(--pill-h) + var(--pill-top) * 2); }
+  main section[id], #top { scroll-margin-top: var(--bar-h); }
+  .bar { position: fixed; z-index: calc(var(--sc-z-chrome) + 5);
+    top: calc(env(safe-area-inset-top, 0px) + var(--pill-top)); left: max(var(--pill-x), env(safe-area-inset-left, 0px)); right: max(var(--pill-x), env(safe-area-inset-right, 0px));
+    height: var(--pill-h); padding: 0 .55rem 0 1.25rem; border-radius: var(--sc-r-pill);
+    display: flex; align-items: center; justify-content: space-between; gap: var(--sc-5);
+    background: rgb(18 14 9 / .74); -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3);
+    border: 1px solid rgb(239 231 218 / .16);
+    box-shadow: 0 18px 40px -18px rgb(0 0 0 / .6), inset 0 1px 0 rgb(255 255 255 / .08); }
+  .bar__logo { position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+    height: calc(var(--pill-h) - .75rem); display: block; border-radius: 4px; }
+  .bar__logo img { height: 100%; width: auto; max-width: none; display: block; filter: drop-shadow(0 4px 10px rgb(0 0 0 / .45)); }
+  .bar__nav { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: var(--sc-5); min-width: 0; }
+  .bar__group { display: flex; align-items: center; gap: var(--sc-1); }
+  .bar__nav a[data-tab] { position: relative; padding: .75em .95em; font-size: var(--sc-t-sm); color: #e3d9c8; text-decoration: none; border-radius: var(--sc-r-pill);
+    transition: color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
+  .bar__nav a[data-tab]::after { content: ""; position: absolute; left: .95em; right: .95em; bottom: .3em; height: 2px; border-radius: 2px; background: var(--gold); transform: scaleX(0); transition: transform 220ms var(--sc-ease-out); }
+  .bar__nav a[data-tab][aria-current="true"] { color: var(--on-slate); }
+  .bar__nav a[data-tab][aria-current="true"]::after { transform: scaleX(1); }
+  @media (hover: hover) and (pointer: fine) { .bar__nav a[data-tab]:hover { color: var(--on-slate); background: color-mix(in oklab, var(--on-slate) 7%, transparent); } }
+  .bar__nav a:focus-visible, .bar__logo:focus-visible, .bar__toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .bar__cta { margin-left: var(--sc-3); padding: 1em 1.45em; font-size: var(--sc-t-sm); }
+  @media (max-width: 1440px) { .bar__nav a[data-tab] { padding-inline: .7em; } .bar__nav a[data-tab]::after { left: .7em; right: .7em; } .bar__cta { margin-left: var(--sc-2); } }
+  .bar__toggle { display: none; align-items: center; gap: .6em; font: 500 var(--sc-t-sm)/1 var(--sc-font-text); color: var(--on-slate); background: none; cursor: pointer;
+    padding: .75em 1.1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--on-slate) 28%, transparent); }
+  .bar__toggle i { position: relative; width: 16px; height: 10px; border-block: 1.5px solid currentColor; transition: transform 200ms var(--sc-ease-out); }
+  .bar.is-open .bar__toggle i { transform: scaleY(.15); }
+  @media (max-width: 1350px) {
+    :root { --pill-h: 4.25rem; --pill-top: .6rem; }
+    .bar { padding: 0 .5rem 0 1rem; }
+    .bar__toggle { display: inline-flex; margin-left: auto; }
+    .bar__group { flex-direction: column; align-items: stretch; gap: 0; }
+    .bar__nav { display: none; position: absolute; top: calc(100% + .5rem); left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+      padding: var(--sc-2) var(--sc-5) var(--sc-5); border-radius: 1.6rem; background: var(--slate);
+      border: 1px solid rgb(239 231 218 / .14); box-shadow: 0 24px 50px -20px rgb(0 0 0 / .7);
+      max-height: calc(100svh - var(--bar-h) - 1rem); overflow-y: auto; }
+    .bar.is-open .bar__nav { display: flex; }
+    .bar__nav a[data-tab] { font-size: var(--sc-t-lg); padding: 1em 0; border-radius: 0; border-bottom: 1px solid color-mix(in oklab, var(--on-slate) 10%, transparent); }
+    .bar__nav a[data-tab]::after { left: auto; right: 0; top: 50%; bottom: auto; width: 8px; height: 8px; border-radius: 50%; translate: 0 -50%; }
+    .bar__cta { margin: var(--sc-5) 0 0; justify-content: center; }
+  }
+
+  /* --------------------------------------------------- the request pill -- */
+  .slip {
+    position: fixed; right: var(--sc-gutter); bottom: max(1.25rem, env(safe-area-inset-bottom)); z-index: var(--sc-z-chrome);
+    font: 500 var(--sc-t-sm)/1 var(--sc-font-text); letter-spacing: .03em; white-space: nowrap;
+    padding: .95em 1.25em; border-radius: var(--sc-r-pill); text-decoration: none;
+    background: var(--gold-deep); color: #fbf6ec; box-shadow: var(--sc-e3), inset 0 1px 0 rgb(255 255 255 / .16);
+    opacity: 0; transform: translateY(10px); pointer-events: none;
+    transition: opacity 200ms var(--sc-ease-out), transform 200ms var(--sc-ease-out);
+  }
+  .has-picks .slip { opacity: 1; transform: none; pointer-events: auto; }
+  .at-form .slip { opacity: 0; transform: translateY(10px); pointer-events: none; }
+  .slip.is-bump { animation: bump 420ms var(--sc-ease-out); }
+  @keyframes bump { 40% { transform: scale(1.08); } }
+  .fly { position: fixed; z-index: 90; border-radius: 12px; object-fit: cover; pointer-events: none; box-shadow: var(--sc-e3); }
+
+  /* --------------------------------------------------------------- hero -- */
+  /* The salon itself, darkened, fills the first screen; the copy sits on it. */
+  .hero { position: relative; display: grid; align-items: center;
+    min-height: 100svh; padding: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)) var(--sc-gutter) clamp(2rem, 6svh, 4rem);
+    background: var(--slate); overflow: clip; isolation: isolate; }
+  .hero__bg { position: absolute; inset: -6% 0; z-index: -2; }
+  .hero__kicker { color: var(--gold) !important; }
+  .hero__title { margin: 0; font-size: clamp(3rem, 6.4vw, 6.6rem); line-height: .95; max-width: 11ch; color: var(--on-slate); text-shadow: 0 2px 24px rgb(0 0 0 / .4); }
+  .hero__title em { color: var(--gold); }
+  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(90deg, rgb(18 14 9 / .9) 0%, rgb(18 14 9 / .72) 42%, rgb(18 14 9 / .55) 100%),
+                linear-gradient(to bottom, rgb(18 14 9 / .35) 0%, transparent 30%, transparent 70%, var(--slate) 100%); }
+  .hero__copy { display: grid; gap: var(--sc-5); justify-items: start; }
+  .mark { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(4.5rem, 14.5vw, 15rem); line-height: .84; letter-spacing: -0.045em; color: var(--on-slate); }
+
+  /* ------------------------------------------------------ services rail -- */
+  /* As on the Nitsy site: the page holds and the services slide in from the
+     right. Here every card is a button: a click chooses the service. */
+  .rail-stage { display: flex; align-items: center; overflow: hidden;
+    background: radial-gradient(70% 80% at 22% 38%, #2a2014, var(--slate) 72%); }
+  .rail { display: flex; align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); padding: 0 var(--sc-gutter); }
+  .rail-stage { padding-top: var(--bar-h); }
+  @media (max-height: 780px) { .card__name { margin-top: var(--sc-5); } .card__desc { font-size: var(--sc-t-sm); } .card__foot { margin-top: var(--sc-3); gap: var(--sc-2); } }
+  .rail__intro { flex: 0 0 auto; width: min(30rem, 34vw); }
+  .rail__intro h2 { font-size: clamp(2.8rem, 5vw, 5rem); margin: var(--sc-3) 0 0; }
+  .rail__intro p { margin: var(--sc-5) 0 0; color: var(--on-slate-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 28ch; }
+  .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(13rem, min(22vw, calc((100svh - var(--bar-h) - 19rem) * .72)), 21rem);
+    opacity: calc(.55 + .45 * var(--k)); translate: 0 calc((1 - var(--k)) * 3rem); }
+  /* Arch frames: each photo in a salon-mirror arch, a fine gold filet set
+     off around it, the text centred under it. */
+  .card { display: grid; justify-items: center; gap: 0; padding: 0; margin: 0; border: 0; background: none; color: var(--on-slate); text-align: center; font: inherit; cursor: pointer; }
+  .card__img { position: relative; display: block; width: 100%; padding: 9px; border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+    border-radius: 50% 50% 6px 6px / 34% 34% 6px 6px; transition: border-color 180ms var(--sc-ease-out), box-shadow 180ms var(--sc-ease-out); }
+  .card__arch { display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 50% 50% 3px 3px / 36% 36% 3px 3px; background: var(--slate-2); }
+  .card__img img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover;
+    transform: scale(1.08) translateX(calc((1 - var(--k)) * 3%)); transition: filter 200ms var(--sc-ease-out); }
+  .card__tick { position: absolute; left: 50%; bottom: 0; translate: -50% 50%; width: 36px; height: 36px; border-radius: 50%; background: var(--slate); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
+  .card__tick::after { content: ""; width: 13px; height: 7px; border: 2.5px solid var(--gold); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .4; }
+  .card__name { display: block; margin-top: var(--sc-7); font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.02; letter-spacing: -0.015em; }
+  .card__name em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .card__desc { display: block; margin-top: var(--sc-3); color: var(--on-slate-soft); line-height: 1.55; font-size: var(--sc-t-base); max-width: 30ch; }
+  .card__foot { display: grid; justify-items: center; gap: var(--sc-3); margin-top: var(--sc-5); font-size: var(--sc-t-sm); color: var(--on-slate-soft); }
+  .card__foot::before { content: ""; width: 2.5rem; height: 1px; background: color-mix(in oklab, var(--gold) 60%, transparent); }
+  .card__foot b { font-weight: 500; color: var(--on-slate); }
+  .card__state { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); white-space: nowrap; padding: .55em .9em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); transition: background-color 150ms var(--sc-ease-out), color 150ms var(--sc-ease-out); }
+  .card[aria-pressed="true"] .card__img { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+  .card[aria-pressed="true"] .card__tick { background: var(--gold); border-color: var(--gold); transform: scale(1.08); }
+  .card[aria-pressed="true"] .card__tick::after { border-color: #120e09; opacity: 1; }
+  .card[aria-pressed="true"] .card__state { background: var(--gold); color: #120e09; }
+  .card:focus-visible { outline: none; }
+  .card:focus-visible .card__img { outline: 2px dashed var(--gold); outline-offset: 4px; }
+  .card:active .card__arch { transform: scale(.985); }
+  @media (hover: hover) and (pointer: fine) { .card:hover .card__img img { filter: brightness(1.06); } .card:hover .card__state { background: color-mix(in oklab, var(--gold) 14%, transparent); } .card[aria-pressed="true"]:hover .card__state { background: var(--gold); } }
+  .rail__end { display: grid; gap: var(--sc-5); justify-items: start; align-content: center; color: var(--on-slate); }
+  .rail__end h3 { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.8rem, 2.4vw, 2.3rem); line-height: 1.02; }
+  .rail__end h3 em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .rail__end p { margin: 0; color: var(--on-slate-soft); line-height: 1.55; }
+  @media (prefers-reduced-motion: reduce) { .card, .rail__end { opacity: 1; translate: none; } .card__img img { transform: none; } }
+
+  /* ----------------------------------------------------------- the owner -- */
+  /* Her photo, her name, a few facts and the salon's motto. Any element marked
+     with the draft attribute is refused by the deploy workflow. */
+  .owner { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--porc-2); }
+  .owner__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .owner__ph { position: relative; margin: 0; aspect-ratio: 3 / 4; max-width: 30rem; width: 100%; border-radius: 3px; overflow: hidden; box-shadow: var(--sc-e3);
+    outline: 1px solid color-mix(in oklab, var(--gold-deep) 40%, transparent); outline-offset: 10px; }
+  .owner__ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+  .owner__text { display: grid; gap: var(--sc-5); justify-items: start; max-width: 38rem; }
+  .owner__text h2 { margin: 0; font-size: clamp(2.8rem, 5.5vw, 5.6rem); }
+  .owner__bio { margin: 0; font-family: var(--font-italic); font-style: italic; font-weight: 500; font-size: clamp(1.4rem, 1.05rem + 1vw, 1.95rem); line-height: 1.36; color: var(--on-porc); max-width: 34ch; }
+  .owner__facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; width: 100%; }
+  .owner__facts li { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: var(--sc-4); padding: var(--sc-3) 0; border-top: 1px solid color-mix(in oklab, var(--on-porc) 14%, transparent); font-size: var(--sc-t-base); }
+  .owner__facts li:last-child { border-bottom: 1px solid color-mix(in oklab, var(--on-porc) 14%, transparent); }
+  .owner__facts b { font-weight: 500; font-size: var(--sc-t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--on-porc-soft); padding-top: .2em; }
+  .owner__quote { margin: var(--sc-3) 0 0; padding-left: var(--sc-5); border-left: 1px solid var(--gold-deep); display: grid; gap: var(--sc-2); }
+  .owner__quote blockquote { margin: 0; font-family: var(--font-italic); font-style: italic; font-size: var(--sc-t-xl); line-height: 1.3; color: var(--on-porc); }
+  .owner__quote figcaption { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--on-porc-soft); }
+
+
+  /* ------------------------------------------------- TikTok, two phones -- */
+  /* The two portrait clips in gold-edged phones, side by side and slightly
+     tilted, looping muted while on screen; title and buttons centred above. */
+  .curls { position: relative; overflow: clip; padding-block: calc(var(--bar-h) + clamp(1.5rem, 4vw, 3rem)) clamp(4rem, 8vw, 7rem);
+    background: radial-gradient(55% 60% at 50% 72%, #2f2416, var(--slate) 70%); }
+  .curls__copy { display: grid; gap: var(--sc-4); justify-items: center; text-align: center; max-width: 44rem; margin: 0 auto; }
+  .curls__copy h2 { margin: 0; font-size: clamp(2.6rem, 5vw, 5rem); }
+  .curls__copy > p:not(.label) { margin: 0; font-family: var(--font-italic); font-style: italic; font-size: clamp(1.25rem, 1rem + 0.8vw, 1.7rem); line-height: 1.3; color: var(--on-slate-soft); max-width: 36ch; }
+  .curls__copy .label { color: var(--gold); }
+  .curls__acts { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--sc-4); margin-top: var(--sc-3); }
+  .tiktok { display: inline-flex; align-items: center; gap: var(--sc-4); margin-top: var(--sc-2); padding: .55rem 1.2rem .55rem .55rem; border-radius: var(--sc-r-pill);
+    color: var(--on-slate); text-decoration: none; border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent); background: rgb(18 14 9 / .55);
+    transition: border-color 160ms var(--sc-ease-out), background-color 160ms var(--sc-ease-out); }
+  .tiktok__ico { width: 2.6rem; height: 2.6rem; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--gold); color: var(--slate); }
+  .tiktok__txt { display: grid; gap: 2px; line-height: 1.2; }
+  .tiktok__txt span { font-size: var(--sc-t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--on-slate-soft); }
+  .tiktok__txt b { font-weight: 500; font-size: var(--sc-t-base); color: var(--gold); }
+  .tiktok:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) { .tiktok:hover { border-color: var(--gold); background: rgb(18 14 9 / .8); } }
+  .curls__acts .tiktok { margin-top: 0; text-align: left; }
+  .phones { display: flex; justify-content: center; align-items: flex-start; gap: clamp(1.5rem, 5vw, 4.5rem); margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+  .phone { --tilt: -4deg; position: relative; flex: none; width: min(19rem, 40vw, calc((100svh - var(--bar-h) - 9rem) * 9 / 19.5)); aspect-ratio: 9 / 19.5; padding: .6rem; border-radius: 2.6rem;
+    background: linear-gradient(160deg, #2a2116, #0b0907 55%); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+    box-shadow: 0 40px 70px -30px rgb(0 0 0 / .85), inset 0 0 0 1px rgb(255 255 255 / .05);
+    transform: rotate(var(--tilt)); transition: transform 420ms var(--sc-ease-out); }
+  .phone + .phone { --tilt: 4deg; margin-top: clamp(2rem, 5vw, 4rem); }
+  .phone__screen { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 2.1rem; background: var(--slate-2); }
+  .phone__screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .phone::before { content: ""; position: absolute; z-index: 2; top: 1.1rem; left: 50%; translate: -50% 0; width: 28%; height: 1.15rem; border-radius: var(--sc-r-pill); background: #050403; }
+  .phone__tag { position: absolute; z-index: 2; left: 50%; bottom: 1.1rem; translate: -50% 0; white-space: nowrap; font: 600 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .12em; text-transform: uppercase;
+    padding: .6em .95em; border-radius: var(--sc-r-pill); background: rgb(18 14 9 / .7); color: var(--gold); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  @media (hover: hover) and (pointer: fine) { .phone:hover { transform: rotate(0deg) translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) { .phone, .phone:hover { transition: none; } }
+
+  /* ------------------------------------------------------- before / after -- */
+  .ba { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .ba__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .ba__head { display: grid; gap: var(--sc-4); justify-items: start; }
+  .ba__head h2 { margin: 0; font-size: clamp(2.4rem, 3.6vw, 3.8rem); max-width: 15ch; }
+  .ba__head > p:not(.label) { margin: 0; font-size: var(--sc-t-lg); color: var(--on-porc-soft); max-width: 34ch; line-height: 1.55; }
+  .ba__tabs { display: inline-flex; gap: 4px; padding: 4px; margin-top: var(--sc-3); border-radius: var(--sc-r-pill); background: var(--porc-2); }
+  .ba__tabs button { font: 500 var(--sc-t-sm)/1 var(--sc-font-text); padding: .8em 1.2em; border: 0; border-radius: var(--sc-r-pill); background: transparent; color: var(--on-porc-soft); cursor: pointer;
+    transition: background-color 160ms var(--sc-ease-out), color 160ms var(--sc-ease-out); }
+  .ba__tabs button[aria-selected="true"] { background: #fff; color: var(--on-porc); box-shadow: var(--sc-e1); }
+  .ba__tabs button:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+  .ba__head .cta { margin-top: var(--sc-4); }
+  .ba__tabs { flex-wrap: wrap; border-radius: 1.6rem; }
+  .ba__panels { display: grid; justify-items: center; gap: var(--sc-3); }
+  .ba__panels [role="tabpanel"][hidden] { display: none !important; }
+  .ba__panel { width: 100%; }
+  /* One frame, the before on the left and the after on the right; the
+     reader drags the line. The after layer is clipped from --pos. */
+  .compare { --pos: 50%; position: relative; aspect-ratio: 3 / 4; width: min(100%, 34rem, calc((100svh - var(--bar-h) - 8rem) * .75));
+    overflow: hidden; border-radius: 4px; box-shadow: var(--sc-e3); background: var(--porc-2); margin-inline: auto;
+    touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; }
+  .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
+  .compare__after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+  .compare__line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; translate: -1px 0; background: #fbf6ec; box-shadow: 0 0 0 1px rgb(18 14 9 / .18); pointer-events: none; }
+  .compare__knob { position: absolute; top: 50%; left: var(--pos); translate: -50% -50%; width: 3.4rem; height: 3.4rem; border-radius: 50%;
+    display: grid; place-items: center; background: var(--gold); color: var(--slate); box-shadow: var(--sc-e3), 0 0 0 4px rgb(251 246 236 / .55); pointer-events: none;
+    transition: transform 140ms var(--sc-ease-out); }
+  .compare.is-dragging .compare__knob { transform: scale(1.08); }
+  .compare__tag { position: absolute; top: 12px; z-index: 2; font: 600 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase;
+    padding: .65em .95em; border-radius: var(--sc-r-pill); box-shadow: var(--sc-e1); pointer-events: none; }
+  .compare__tag--before { left: 12px; background: rgb(255 255 255 / .92); color: var(--on-porc); }
+  .compare__tag--after { right: 12px; background: var(--gold-deep); color: #fbf6ec; }
+  .compare__range { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .compare:has(.compare__range:focus-visible) .compare__knob { outline: 3px solid var(--gold-deep); outline-offset: 3px; }
+  .ba__hint { margin: 0; font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--on-porc-soft); }
+
+  /* ------------------------------------------------------------- steps -- */
+  .how { padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .how__head { display: grid; gap: var(--sc-3); margin-bottom: var(--sc-8); }
+  .how__head h2 { margin: 0; font-size: var(--sc-t-3xl); max-width: 16ch; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 4rem); }
+  .steps li { display: grid; gap: var(--sc-3); align-content: start; padding-top: var(--sc-5); border-top: 1px solid color-mix(in oklab, var(--on-porc) 16%, transparent); }
+  .steps .n { font-family: var(--sc-font-display); font-style: italic; font-size: var(--sc-t-2xl); line-height: 1; color: var(--gold-deep); }
+  .steps h3 { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-xl); letter-spacing: -0.01em; }
+  .steps p { margin: 0; color: var(--on-porc-soft); line-height: 1.6; max-width: 34ch; }
+
+  /* ------------------------------------------------------------- deposit -- */
+
+  /* ---------------------------------------------------------------- form -- */
+  .book { padding-block: clamp(4rem, 8vw, 8rem) 0; }
+  .book__head { display: grid; gap: var(--sc-4); margin-bottom: var(--sc-8); max-width: 44rem; }
+  .book__head h2 { font-size: var(--sc-t-3xl); margin: 0; }
+  .book__head p { margin: 0; font-size: var(--sc-t-lg); color: var(--sc-ink-soft); max-width: 46ch; }
+  form { display: grid; gap: var(--sc-8); }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: var(--sc-4); }
+  legend { padding: 0; margin-bottom: var(--sc-4); font-family: var(--sc-font-display); font-size: var(--sc-t-xl); font-weight: 500; letter-spacing: -0.01em; }
+  .hint strong { font-weight: 600; color: var(--on-porc); }
+  .hint { margin: calc(var(--sc-2) * -1) 0 var(--sc-2); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-6); }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sc-5); }
+  .field { display: grid; gap: var(--sc-2); align-content: start; }
+  .field > span { font-size: var(--sc-t-sm); font-weight: 500; }
+  .field > span i { font-style: normal; font-weight: 400; color: var(--sc-ink-soft); }
+  input[type="text"], input[type="tel"], input[type="email"], input[type="date"], select, textarea {
+    font: 400 var(--sc-t-base)/1.4 var(--sc-font-text); color: var(--on-porc);
+    background: #fff; border: 1px solid color-mix(in oklab, var(--on-porc) 22%, transparent); border-radius: var(--sc-r-sm);
+    padding: .8em .9em; width: 100%; min-height: 3rem;
+    transition: border-color 150ms var(--sc-ease-out), box-shadow 150ms var(--sc-ease-out);
+  }
+  textarea { min-height: 9.5rem; resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; border-color: var(--gold-deep); box-shadow: 0 0 0 3px color-mix(in oklab, var(--gold-deep) 28%, transparent); }
+  [aria-invalid="true"] { border-color: #a3322a !important; }
+  input[type="file"] { font: 400 var(--sc-t-sm)/1.4 var(--sc-font-text); color: var(--sc-ink-soft); }
+  input[type="file"]::file-selector-button { font: 500 var(--sc-t-sm)/1 var(--sc-font-text); padding: .75em 1em; margin-right: 1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold-deep) 55%, transparent); background: transparent; color: var(--gold-deep); cursor: pointer; }
+  /* Service picker: the client's own photos, click to choose. */
+  .pick { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sc-5); }
+  .pick__card { position: relative; display: grid; gap: var(--sc-3); align-content: start; cursor: pointer; min-width: 0; }
+  .pick__card input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; margin: 0; }
+  .pick__ph { position: relative; display: block; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 4px; box-shadow: var(--sc-e2); outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out), box-shadow 160ms var(--sc-ease-out); }
+  .pick__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 420ms var(--sc-ease-out), filter 200ms var(--sc-ease-out); }
+  .pick__tick { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgb(255 255 255 / .86); box-shadow: var(--sc-e1); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
+  .pick__tick::after { content: ""; width: 12px; height: 7px; border: 2.5px solid var(--on-porc-soft); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .35; }
+  .pick__txt { display: grid; gap: 2px; }
+  .pick__txt b { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); letter-spacing: -0.01em; line-height: 1.15; }
+  .pick__txt small { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); line-height: 1.4; }
+  .pick__state { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-deep); min-height: 1.2em; }
+  .pick__state::before { content: "Cliquer pour choisir"; color: var(--sc-ink-soft); font-weight: 400; letter-spacing: .04em; text-transform: none; }
+  .pick__card input:checked ~ .pick__txt .pick__state::before { content: "Choisi"; color: var(--gold-deep); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+  .pick__card input:checked ~ .pick__ph { outline-color: var(--gold-deep); box-shadow: var(--sc-e3); }
+  .pick__card input:checked ~ .pick__ph .pick__tick { background: var(--gold-deep); transform: scale(1.06); }
+  .pick__card input:checked ~ .pick__ph .pick__tick::after { border-color: #fbf6ec; opacity: 1; }
+  .pick__card input:focus-visible ~ .pick__ph { outline: 3px dashed var(--gold-deep); }
+  .pick__card:active .pick__ph { transform: scale(.985); }
+  @media (hover: hover) and (pointer: fine) { .pick__card:hover .pick__ph img { transform: scale(1.035); } }
+  .chipbox { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
+  .chipbox label { position: relative; cursor: pointer; }
+  .chipbox input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chipbox span { display: inline-flex; align-items: center; gap: .65em; padding: .45em 1em .45em .45em; border-radius: var(--sc-r-pill); background: #fff; border: 1px solid color-mix(in oklab, var(--on-porc) 18%, transparent); font-size: var(--sc-t-sm); transition: background-color 150ms var(--sc-ease-out), color 150ms var(--sc-ease-out); }
+  .chipbox span img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+  .chipbox span.noimg { padding-left: 1em; }
+  .chipbox input:checked + span { background: var(--gold-deep); color: #fbf6ec; border-color: var(--gold-deep); }
+  .deposit { background: var(--slate); color: var(--on-slate); border-radius: 6px; padding: clamp(1.5rem, 3vw, 2.5rem); display: grid; gap: var(--sc-4); box-shadow: var(--sc-e2); }
+  .deposit h3 { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-2xl); letter-spacing: -0.01em; }
+  .deposit ul { margin: 0; padding-left: 1.1em; display: grid; gap: var(--sc-2); color: var(--on-slate); line-height: 1.6; max-width: 62ch; }
+  .deposit strong { color: var(--gold); font-weight: 600; }
+  .accept { display: flex; gap: .8em; align-items: flex-start; margin-top: var(--sc-2); cursor: pointer; line-height: 1.5; }
+  .accept input { width: 1.25rem; height: 1.25rem; margin-top: .15em; accent-color: var(--gold); flex: none; }
+  .send { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-5); }
+  .send .cta { border: 0; cursor: pointer; font-size: var(--sc-t-base); }
+  .send .cta[disabled] { opacity: .55; cursor: progress; }
+  .status { margin: 0; font-size: var(--sc-t-sm); max-width: 60ch; line-height: 1.55; }
+  .status.is-error { color: #8f2a23; }
+  .done { display: none; padding: clamp(1.5rem, 3vw, 2.5rem); border-radius: 6px; background: #fff; box-shadow: var(--sc-e2), var(--sc-edge); }
+  .done.is-on { display: grid; gap: var(--sc-3); }
+  .done h3 { margin: 0; font-family: var(--sc-font-display); font-size: var(--sc-t-2xl); font-weight: 500; }
+  .done p { margin: 0; max-width: 60ch; line-height: 1.6; }
+  .foot { margin-top: clamp(4rem, 8vw, 7rem); padding-block: var(--sc-7); border-top: 1px solid color-mix(in oklab, var(--on-porc) 14%, transparent); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sc-4); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+  .foot { align-items: center; }
+  .foot__logo { width: 11rem; height: auto; }
+  .foot__info { display: grid; gap: var(--sc-2); text-align: right; }
+  .foot__info span:first-child, .foot__info span:nth-child(2) { color: var(--on-porc); font-weight: 500; }
+  .foot__tel { color: var(--gold-deep); font-weight: 600; text-decoration: underline; text-underline-offset: .25em; text-decoration-thickness: 1px; }
+  .foot__tel:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+  @media (max-width: 760px) { .foot__info { text-align: left; } }
+  .foot b { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); color: var(--on-porc); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+
+  /* ------------------------------------------------------------ typography --
+     Every title: the grotesque at its thinnest, in capitals; its <em> answers
+     in the italic serif, also in capitals, a touch larger so it stands as tall.
+     Introductions read in the italic serif. Labels, buttons, the form and the
+     small print stay in the grotesque so they stay easy to read. */
+  .disp, .mark, .card__name, .rail__end h3 { font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; letter-spacing: -0.01em; }
+  .disp { line-height: .98; }
+  .steps h3, legend, .deposit h3, .done h3, .pick__txt b, .foot b { font-family: var(--sc-font-display); font-weight: 300; text-transform: uppercase; letter-spacing: .01em; }
+  .disp em, .card__name em, .rail__end h3 em, .mark em {
+    font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
+  .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
+  .rail__intro > p:not(.label), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
+    font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0;
+    font-size: clamp(1.3rem, 1rem + 0.9vw, 1.8rem); line-height: 1.28; }
+  .steps .n { font-family: var(--font-italic); font-weight: 400; font-size: var(--sc-t-3xl); }
+  .compare__tag, .ba__hint, .label { font-family: var(--sc-font-text); }
+  .card__desc, .steps p { font-size: var(--sc-t-base); }
+
+  /* ------------------------------------------------- calendar and times -- */
+  .booker { display: grid; grid-template-columns: minmax(0, 25rem) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+  .cal { background: #fff; border-radius: 6px; padding: var(--sc-5); box-shadow: var(--sc-e2), var(--sc-edge); }
+  .cal__head { display: flex; align-items: center; justify-content: space-between; gap: var(--sc-3); margin-bottom: var(--sc-4); }
+  .cal__month { margin: 0; font-family: var(--sc-font-display); font-weight: 300; font-size: var(--sc-t-lg); text-transform: uppercase; letter-spacing: .06em; }
+  .cal__nav { width: 2.6rem; height: 2.6rem; display: grid; place-items: center; border-radius: 50%; cursor: pointer;
+    border: 1px solid color-mix(in oklab, var(--on-porc) 18%, transparent); background: transparent; color: var(--on-porc);
+    transition: background-color 150ms var(--sc-ease-out), opacity 150ms var(--sc-ease-out); }
+  .cal__nav i { width: 8px; height: 8px; border: solid currentColor; border-width: 0 0 1.5px 1.5px; transform: translateX(2px) rotate(45deg); }
+  .cal__nav--next i { transform: translateX(-2px) rotate(-135deg); }
+  .cal__nav:disabled { opacity: .3; cursor: default; }
+  @media (hover: hover) and (pointer: fine) { .cal__nav:not(:disabled):hover { background: var(--porc-2); } }
+  .cal__dow, .cal__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+  .cal__dow span { text-align: center; font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--on-porc-soft); padding-bottom: var(--sc-2); }
+  .cal__day { aspect-ratio: 1; min-height: 2.5rem; border: 0; border-radius: 50%; background: transparent; cursor: pointer; position: relative;
+    font: 400 var(--sc-t-base)/1 var(--sc-font-text); color: var(--on-porc); font-variant-numeric: tabular-nums;
+    transition: background-color 140ms var(--sc-ease-out), color 140ms var(--sc-ease-out); }
+  .cal__day:disabled { cursor: default; color: color-mix(in oklab, var(--on-porc) 42%, transparent); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .cal__day.is-today::after { content: ""; position: absolute; left: 50%; bottom: 14%; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--gold-deep); }
+  .cal__day[aria-pressed="true"] { background: var(--gold-deep); color: #fbf6ec; font-weight: 500; }
+  .cal__day[aria-pressed="true"]::after { background: #fbf6ec; }
+  @media (hover: hover) and (pointer: fine) { .cal__day:not(:disabled):not([aria-pressed="true"]):hover { background: var(--porc-2); } }
+  .cal__day:focus-visible, .slot:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+  .cal__legend { display: flex; align-items: center; gap: .5em; margin: var(--sc-4) 0 0; font-size: var(--sc-t-xs); color: var(--on-porc-soft); }
+  .cal__legend i { width: 14px; height: 1px; background: currentColor; }
+  .slots { display: grid; gap: var(--sc-4); align-content: start; }
+  .slots__title { margin: 0; font-family: var(--sc-font-display); font-weight: 300; font-size: var(--sc-t-lg); text-transform: uppercase; letter-spacing: .04em; }
+  .slots__title em { font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.15em; letter-spacing: 0; }
+  .slots__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(5.4rem, 1fr)); gap: var(--sc-2); }
+  .slots__grid:empty { display: none; }
+  .slot { font: 500 var(--sc-t-sm)/1 var(--sc-font-text); font-variant-numeric: tabular-nums; padding: .95em .5em; border-radius: var(--sc-r-pill); cursor: pointer;
+    background: #fff; color: var(--on-porc); border: 1px solid color-mix(in oklab, var(--on-porc) 16%, transparent);
+    transition: background-color 140ms var(--sc-ease-out), color 140ms var(--sc-ease-out), border-color 140ms var(--sc-ease-out); }
+  .slot[aria-checked="true"] { background: var(--gold-deep); border-color: var(--gold-deep); color: #fbf6ec; }
+  @media (hover: hover) and (pointer: fine) { .slot:not([aria-checked="true"]):hover { border-color: var(--gold-deep); } }
+  .slot:active, .cal__day:active { transform: scale(.96); }
+  .slots__group { grid-column: 1 / -1; margin: var(--sc-2) 0 0; font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--on-porc-soft); }
+  .slots__pick { margin: 0; font-size: var(--sc-t-base); color: var(--on-porc); min-height: 1.5em; }
+  .slots__pick strong { font-weight: 600; }
+  .booker [aria-invalid="true"] { outline: 2px solid #a3322a; outline-offset: 4px; border-radius: 6px; }
+
+  @media (prefers-reduced-motion: reduce) { .slip.is-bump { animation: none; } }
+
+  /* ------------------------------------------------------------- phone -- */
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
+    .hero { align-content: end; }
+    .hero__title { font-size: 13vw; }
+    .hero__bg img { object-position: 50% 30%; }
+    .hero::before { background: linear-gradient(to bottom, rgb(18 14 9 / .55) 0%, rgb(18 14 9 / .5) 35%, rgb(18 14 9 / .88) 68%, var(--slate) 100%); }
+
+    .phones { gap: 1rem; }
+    .phone { width: min(44vw, calc((100svh - var(--bar-h) - 4rem) * 9 / 19.5)); padding: .4rem; border-radius: 1.7rem; --tilt: -3deg; }
+    .phone + .phone { --tilt: 3deg; margin-top: 2.5rem; }
+    .phone__screen { border-radius: 1.35rem; }
+    .phone::before { top: .7rem; height: .8rem; }
+    .phone__tag { bottom: .7rem; font-size: .62rem; padding: .55em .8em; }
+    .curls__copy h2 { font-size: 11vw; }
+
+    .rail { padding-top: 0; gap: var(--sc-5); }
+    .rail__intro { width: 80vw; }
+    .rail__intro p { font-size: var(--sc-t-base); }
+    .card, .rail__end { width: min(72vw, calc((100svh - var(--bar-h) - 17rem) * .8)); }
+    .rail__end { width: 72vw; }
+    .card__arch { aspect-ratio: 4 / 5; }
+
+    .steps { grid-template-columns: 1fr; gap: var(--sc-6); }
+    .owner__grid { grid-template-columns: 1fr; gap: var(--sc-7); }
+    .owner__ph { max-width: 22rem; }
+    .owner__facts li { grid-template-columns: 1fr; gap: var(--sc-1); }
+    .ba__grid { grid-template-columns: 1fr; gap: var(--sc-7); }
+    .ba__head h2 { font-size: var(--sc-t-2xl); }
+    .ba__head > p:not(.label) { font-size: var(--sc-t-base); }
+    .compare__tag { top: 8px; }
+    .compare__tag--before { left: 8px; }
+    .compare__tag--after { right: 8px; }
+
+
+    .two, .three { grid-template-columns: 1fr; gap: var(--sc-5); }
+    .booker { grid-template-columns: 1fr; }
+    .cal { padding: var(--sc-4); }
+    .pick { grid-template-columns: 1fr 1fr; gap: var(--sc-5) var(--sc-4); }
+    .pick__tick { top: 8px; right: 8px; }
+    form { gap: var(--sc-7); }
+    .book__head { margin-bottom: var(--sc-7); }
+  }
+</style>
+</head>
+<body>
+
+<div class="sc-grain" aria-hidden="true"></div>
+<header class="bar on-slate" data-bar>
+  <a class="bar__logo" href="#top" aria-label="Salon de coiffure Mechi, retour en haut"><img src="assets/logo-m.webp" width="760" height="393" alt=""></a>
+  <button class="bar__toggle" type="button" aria-expanded="false" aria-controls="menu"><i aria-hidden="true"></i><span data-toggle-label>Menu</span></button>
+  <nav class="bar__nav" id="menu" aria-label="Sections du site">
+    <div class="bar__group">
+      <a href="#top" data-tab="top">Accueil</a>
+      <a href="#services" data-tab="services">Services</a>
+      <a href="#avant-apres" data-tab="avant-apres">Avant / Après</a>
+      <a href="#proprietaire" data-tab="proprietaire">La propriétaire</a>
+      <a href="#comment" data-tab="comment">Comment ça marche</a>
+    </div>
+    <div class="bar__group">
+      <a class="cta bar__cta" href="#soumission">Demander une soumission</a>
+    </div>
+  </nav>
+</header>
+<a class="slip" href="#soumission" data-slip>Ma soumission</a>
+<p class="sr" role="status" aria-live="polite" data-announce></p>
+
+<main id="top">
+
+  <!-- 1 · HERO: flow. The salon itself, darkened, as the background of the first screen. -->
+  <section id="accueil" class="hero on-slate" data-sc-act="flow">
+    <div class="hero__copy" data-sc-in data-sc-stagger="70">
+      <p class="label hero__kicker">Salon de coiffure · Montréal</p>
+      <h1 class="disp hero__title"><span class="sr">Salon de coiffure Mechi : </span>Une beauté <em>qui vous ressemble</em>.</h1>
+    </div>
+    <div class="hero__bg" data-sc-parallax="1.2" aria-hidden="true">
+      <picture><source media="(max-width: 760px)" srcset="assets/salon-m.webp"><img src="assets/salon.webp" width="1920" height="1440" fetchpriority="high" alt=""></picture>
+    </div>
+  </section>
+
+  <!-- 2 · DESIRE: pan, as on the Nitsy site. The page holds and the services
+       slide in from the right; a click on a card chooses the service. -->
+  <section id="services" class="svc" data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-title">
+    <div data-sc-stage class="rail-stage on-slate">
+      <div class="rail" data-sc-pan="0.04">
+        <div class="rail__intro">
+          <p class="label">Nos services</p>
+          <h2 id="rail-title" class="disp">Choisis ce qui <em>te ressemble</em>.</h2>
+        </div>
+        <button class="card" type="button" data-add="silkpress" aria-pressed="false">
+          <span class="card__img"><span class="card__arch"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name"><em>Silk press</em></span>
+          <span class="card__desc">Pour les cheveux qui frisent ou gonflent à la moindre humidité : lisses, brillants, et qui bougent encore.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <button class="card" type="button" data-add="permanente" aria-pressed="false">
+          <span class="card__img"><span class="card__arch"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name"><em>Permanente</em></span>
+          <span class="card__desc">Une permanente pour des boucles bien définies, qui tiennent jour après jour.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <button class="card" type="button" data-add="teinture" aria-pressed="false">
+          <span class="card__img"><span class="card__arch"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name"><em>Teinture</em></span>
+          <span class="card__desc">Une teinture aux reflets éclatants, posée avec un soin qui garde la fibre brillante.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <button class="card" type="button" data-add="keratine" aria-pressed="false">
+          <span class="card__img"><span class="card__arch"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__name"><em>Kératine</em></span>
+          <span class="card__desc">Un traitement à la kératine qui discipline les frisottis, pour des longueurs lisses, brillantes et faciles à coiffer.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <div class="rail__end">
+          <h3>Pas sûre de ce <em>qu'il te faut ?</em></h3>
+          <a class="cta" href="#soumission">Demander une soumission</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2b · BEFORE / AFTER: flow. One frame per transformation, the before on
+       the left and the after on the right; the reader drags the line. Tabs
+       switch transformation. -->
+  <section id="avant-apres" class="ba on-porc" data-sc-act="flow" aria-labelledby="ba-h">
+    <div class="sc-wrap ba__grid">
+      <div class="ba__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Avant / Après</p>
+        <h2 id="ba-h" class="disp">Glisse pour voir <em>la différence</em>.</h2>
+        <p data-ba-caption aria-live="polite">Des cheveux naturels crépus, transformés par un silk press : lisses, brillants et pleins de mouvement.</p>
+        <div class="ba__tabs" role="tablist" aria-label="Choisir la transformation">
+          <button type="button" role="tab" id="tab-silk" aria-controls="ba-silk" aria-selected="true" data-caption="Des cheveux naturels crépus, transformés par un silk press : lisses, brillants et pleins de mouvement.">Silk press</button>
+          <button type="button" role="tab" id="tab-dos" aria-controls="ba-dos" aria-selected="false" tabindex="-1" data-caption="Du gris terne au blond lumineux : des mèches blondes, une coupe dégradée et un brushing.">Blond lumineux</button>
+        </div>
+        <a class="cta" href="#soumission">Demander une soumission</a>
+      </div>
+      <div class="ba__panels">
+        <div class="ba__panel" id="ba-silk" role="tabpanel" aria-labelledby="tab-silk">
+          <div class="compare" data-compare>
+            <picture><source media="(max-width: 760px)" srcset="assets/ba-silk-avant-m.webp"><img src="assets/ba-silk-avant.webp" width="1200" height="1600" loading="lazy" alt="Avant : cheveux naturels crépus, volumineux et secs."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 760px)" srcset="assets/ba-silk-apres-m.webp"><img src="assets/ba-silk-apres.webp" width="1200" height="1600" loading="lazy" alt="Après le silk press : carré brun foncé, lisse et brillant."></picture></div>
+            <span class="compare__tag compare__tag--before" aria-hidden="true">Avant</span>
+            <span class="compare__tag compare__tag--after" aria-hidden="true">Après</span>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Comparer l'avant et l'après : vers la gauche pour voir l'après, vers la droite pour voir l'avant">
+          </div>
+        </div>
+        <div class="ba__panel" id="ba-dos" role="tabpanel" aria-labelledby="tab-dos" hidden>
+          <div class="compare" data-compare>
+            <picture><source media="(max-width: 760px)" srcset="assets/ba-avant-dos-m.webp"><img src="assets/ba-avant-dos.webp" width="1200" height="1600" loading="lazy" alt="Avant, vue de dos : cheveux gris et bruns, ternes et frisés, sans forme."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 760px)" srcset="assets/ba-apres-dos-m.webp"><img src="assets/ba-apres-dos.webp" width="1200" height="1600" loading="lazy" alt="Après, vue de dos : blond lumineux, coupe dégradée et pointes en boucles souples."></picture></div>
+            <span class="compare__tag compare__tag--before" aria-hidden="true">Avant</span>
+            <span class="compare__tag compare__tag--after" aria-hidden="true">Après</span>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Comparer l'avant et l'après : vers la gauche pour voir l'après, vers la droite pour voir l'avant">
+          </div>
+        </div>
+        <p class="ba__hint" aria-hidden="true">← Glisse pour comparer →</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2c · TIKTOK: flow. The two portrait clips in phones side by side,
+       looping muted while on screen; title and buttons centred above. -->
+  <section id="boucles" class="curls on-slate" data-sc-act="flow" aria-labelledby="curls-h">
+    <div class="sc-wrap">
+      <div class="curls__copy" data-sc-in data-sc-stagger="60">
+        <p class="label">Sur TikTok</p>
+        <h2 id="curls-h" class="disp">Les coulisses <em>de Mechi</em>.</h2>
+        <p>Des boucles qui rebondissent, des silk press qui brillent, des couleurs qui changent tout. Abonne-toi pour voir les prochaines transformations en premier.</p>
+        <div class="curls__acts">
+          <a class="tiktok" href="https://www.tiktok.com/@salondecoiffuremechi" target="_blank" rel="noopener">
+            <span class="tiktok__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
+            <span class="tiktok__txt"><span>Abonne-toi sur TikTok</span><b>@salondecoiffuremechi</b></span>
+          </a>
+          <a class="cta" href="#soumission">Demander une soumission</a>
+        </div>
+      </div>
+      <div class="phones">
+        <div class="phone">
+          <span class="phone__screen"><video class="loop" data-loop="assets/boucles.mp4" data-loop-mobile="assets/boucles-m.mp4" poster="assets/boucles-poster.webp" muted loop playsinline preload="none" aria-label="Longues boucles brun foncé, brillantes, vues de dos dans la chaise du salon."></video></span>
+          <span class="phone__tag" aria-hidden="true">@salondecoiffuremechi</span>
+        </div>
+        <div class="phone">
+          <span class="phone__screen"><video class="loop" data-loop="assets/enseigne.mp4" data-loop-mobile="assets/enseigne-m.mp4" poster="assets/enseigne-poster.webp" muted loop playsinline preload="none" aria-label="Une cliente aux longs cheveux bruns aux pointes cuivrées, devant l'enseigne du Salon de coiffure Mechi."></video></span>
+          <span class="phone__tag" aria-hidden="true">@salondecoiffuremechi</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2d · THE OWNER: flow. Placed right after the videos, at the client's
+       request: the visitor has seen the work, now meets who does it, then
+       reads how to book. Only facts the client gave (name, flyer). -->
+  <section id="proprietaire" class="owner on-porc" data-sc-act="flow" aria-labelledby="owner-h">
+    <div class="sc-wrap owner__grid">
+      <figure class="owner__ph" data-sc-reveal="up" data-sc-reveal-at="0.1 0.4">
+        <picture><source media="(max-width: 760px)" srcset="assets/mercedes-m.webp"><img src="assets/mercedes.webp" width="896" height="1342" loading="lazy" alt="Mercedes, propriétaire du Salon de coiffure Mechi, en tailleur noir et chemise blanche."></picture>
+      </figure>
+      <div class="owner__text" data-sc-in data-sc-stagger="70">
+        <h2 id="owner-h" class="disp">Mercedes</h2>
+        <p class="owner__bio">Mercedes est la propriétaire du Salon de coiffure Mechi, à Montréal. Du brushing à la coloration, des soins au lissage, elle coiffe toutes les textures de cheveux.</p>
+        <ul class="owner__facts">
+          <li><b>Spécialités</b><span>Brushing et mise en plis, coupe moderne, coloration et mèches, traitements capillaires, lissage et botox capillaire.</span></li>
+          <li><b>Textures</b><span>Toutes les textures de cheveux.</span></li>
+          <li><b>Le salon</b><span>8025 Léonard de Vinci, Montréal (Québec)</span></li>
+        </ul>
+        <figure class="owner__quote"><blockquote>« Une beauté qui vous ressemble. »</blockquote><figcaption>La devise du salon</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · HOW: flow. A real sequence, so the steps carry their numbers. -->
+  <section id="comment" class="how on-porc" data-sc-act="flow" aria-labelledby="how-h">
+    <div class="sc-wrap">
+      <div class="how__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Comment ça marche</p>
+        <h2 id="how-h" class="disp">Une soumission <em>avant</em> les ciseaux.</h2>
+      </div>
+      <ol class="steps" data-sc-in data-sc-stagger="80">
+        <li><span class="n">1</span><h3>Ta demande</h3><p>Tu choisis tes services, tu décris tes cheveux et ce que tu aimerais, et tu choisis le jour et l'heure.</p></li>
+        <li><span class="n">2</span><h3>Notre réponse</h3><p>On te répond avec le service conseillé, la durée et le prix, et on confirme l'heure.</p></li>
+        <li><span class="n">3</span><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5 · CLOSE: flow. The request, on paper. -->
+  <section id="soumission" class="book on-porc" data-sc-act="flow" aria-labelledby="book-h">
+    <div class="sc-wrap">
+      <div class="book__head" data-sc-in data-sc-stagger="60">
+        <p class="label">Demande de soumission</p>
+        <h2 id="book-h" class="disp">Dis-nous ce que <em>tu veux</em>.</h2>
+      </div>
+
+      <form id="form" novalidate>
+        <fieldset data-sc-in>
+          <legend class="sr">Choisis tes services</legend>
+          <div class="pick">
+            <label class="pick__card" for="svc-silkpress"><input type="checkbox" id="svc-silkpress" name="services" value="silkpress">
+              <span class="pick__ph"><img src="assets/lissage-m.webp" width="600" height="800" alt="Silk press sur carré noir, lisse et brillant."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__txt"><b>Silk press</b><small>Frisottis, cheveux qui gonflent.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-permanente"><input type="checkbox" id="svc-permanente" name="services" value="permanente">
+              <span class="pick__ph"><img src="assets/boucles-coupe-m.webp" width="600" height="800" alt="Permanente : boucles châtaines bien définies."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__txt"><b>Permanente</b><small>Boucles définies et durables.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-teinture"><input type="checkbox" id="svc-teinture" name="services" value="teinture">
+              <span class="pick__ph"><img src="assets/couleur-m.webp" width="600" height="800" alt="Teinture : cheveux brun foncé aux reflets rouges."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__txt"><b>Teinture</b><small>Couleur complète, reflets.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-keratine"><input type="checkbox" id="svc-keratine" name="services" value="keratine">
+              <span class="pick__ph"><img src="assets/apres-m.webp" width="600" height="800" alt="Kératine : cheveux longs bruns, lisses et brillants."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__txt"><b>Kératine</b><small>Frisottis, cheveux difficiles à coiffer.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset data-sc-in>
+          <legend>Tes cheveux</legend>
+          <div class="two">
+            <label class="field" for="f-cheveux"><span>Tes cheveux aujourd'hui</span>
+              <textarea id="f-cheveux" name="cheveux" required placeholder="Ex. : cheveux mi-longs, frisés, colorés il y a six mois. Les pointes cassent."></textarea></label>
+            <label class="field" for="f-souhait"><span>Ce que tu aimerais <i>(facultatif)</i></span>
+              <textarea id="f-souhait" name="souhait" placeholder="Ex. : un dégradé avec une frange rideau, et une couleur plus chaude."></textarea></label>
+          </div>
+          <p class="hint">Une photo d'inspiration ? Tu pourras nous l'envoyer en répondant à notre courriel.</p>
+        </fieldset>
+
+        <fieldset data-sc-in>
+          <legend>Ton rendez-vous</legend>
+          <p class="hint">Le salon est ouvert du <strong>mercredi au vendredi, de 9&nbsp;h&nbsp;30 à 16&nbsp;h&nbsp;30</strong>. Choisis le jour, puis l'heure : on te confirme le rendez-vous dans notre réponse.</p>
+          <div class="booker">
+            <div class="cal" data-cal>
+              <div class="cal__head">
+                <button class="cal__nav" type="button" data-cal-prev aria-label="Mois précédent"><i aria-hidden="true"></i></button>
+                <p class="cal__month" data-cal-month aria-live="polite"></p>
+                <button class="cal__nav cal__nav--next" type="button" data-cal-next aria-label="Mois suivant"><i aria-hidden="true"></i></button>
+              </div>
+              <div class="cal__dow" aria-hidden="true"><span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span></div>
+              <div class="cal__grid" data-cal-grid role="grid" aria-label="Choisir le jour"></div>
+              <p class="cal__legend"><i aria-hidden="true"></i>Jour fermé ou déjà passé</p>
+            </div>
+            <div class="slots">
+              <p class="slots__title" data-slots-title>Choisis d'abord un jour.</p>
+              <div class="slots__grid" data-slots role="radiogroup" aria-label="Choisir l'heure"></div>
+              <p class="slots__pick" data-pick aria-live="polite"></p>
+            </div>
+          </div>
+          <input type="hidden" name="date" data-date>
+          <input type="hidden" name="heure" data-heure>
+        </fieldset>
+
+        <fieldset data-sc-in>
+          <legend>Pour te répondre</legend>
+          <div class="three">
+            <label class="field"><span>Prénom et nom</span><input type="text" name="nom" autocomplete="name" required></label>
+            <label class="field"><span>Téléphone</span><input type="tel" name="telephone" autocomplete="tel" required></label>
+            <label class="field"><span>Courriel</span><input type="email" name="courriel" autocomplete="email" required></label>
+          </div>
+        </fieldset>
+
+        <div class="deposit" data-sc-in>
+          <h3>Le dépôt de 20&nbsp;$</h3>
+          <ul>
+            <li>Une fois l'heure confirmée par le salon, tu envoies <strong>20&nbsp;$ par virement Interac</strong> <span data-interac>à l'adresse indiquée dans notre réponse</span>, avec ton nom et la date du rendez-vous dans le message.</li>
+            <li>Ta place est réservée à la réception du dépôt.</li>
+            <li>Les 20&nbsp;$ sont <strong>déduits de ta facture</strong> le jour du rendez-vous.</li>
+            <li>Si tu ne viens pas, ou si tu annules moins de <strong>24&nbsp;h</strong> avant, le dépôt est gardé.</li>
+          </ul>
+          <label class="accept"><input type="checkbox" name="accepte_depot" value="oui" required><span>J'ai lu la règle du dépôt et je l'accepte.</span></label>
+        </div>
+
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <div class="send">
+          <button class="cta" type="submit">Envoyer ma demande</button>
+          <p class="status" data-status role="status" aria-live="polite"></p>
+        </div>
+        <div class="done" data-done tabindex="-1">
+          <h3>Demande envoyée.</h3>
+          <p>On te répond avec le service conseillé, la durée, le prix et l'heure.</p>
+          <p data-done-depot>Pour confirmer ta place, envoie ensuite 20&nbsp;$ par virement Interac, avec ton nom et la date dans le message.</p>
+        </div>
+      </form>
+
+      <footer class="foot">
+        <img class="foot__logo" src="assets/logo-m.webp" width="760" height="393" loading="lazy" alt="Salon de coiffure Mechi">
+        <span class="foot__info"><span>8025 Léonard de Vinci, Montréal (Québec) · <a class="foot__tel" href="tel:+14383772535">438-377-2535</a></span><span>Ouvert du mercredi au vendredi, de 9&nbsp;h&nbsp;30 à 16&nbsp;h&nbsp;30. Fermé du samedi au mardi.</span><span>Dépôt de 20&nbsp;$ déduit de la facture. Gardé en cas d'absence ou d'annulation à moins de 24&nbsp;h.</span></span>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>ScrollCraft.mount(document.body);</script>
+<script src="salon.js"></script>
+</body>
+</html>

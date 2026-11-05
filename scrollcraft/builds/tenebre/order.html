@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order · TIMELESS</title>
+<meta name="description" content="Order a watch from the TIMELESS collection.">
+<meta name="theme-color" content="#0b0a09">
+<link rel="stylesheet" href="scrollcraft.css">
+<link rel="stylesheet" href="tenebre.css">
+<link rel="stylesheet" href="order.css">
+</head>
+<body class="op-body">
+<!-- The order page for one piece of the collection. Which piece comes from
+     the address (order.html#nocturne); the pieces' photos, words and prices
+     are listed in order.js. Without JavaScript it shows the first piece and
+     the form posts to itself. -->
+<header class="op-top">
+  <a class="op-back" href="./#collection"><span aria-hidden="true">&larr;</span> The collection</a>
+  <a class="op-mark" href="./">TIMELESS</a>
+</header>
+
+<main class="op" id="main">
+  <figure class="op__fig">
+    <img class="op__photo" src="assets/collection/meridian.webp" width="588" height="736" decoding="async" fetchpriority="high" alt="A steel skeleton watch with a blue dial on a tan leather strap, worn under the cuff of a suede jacket">
+    <span class="piece__tag">Example</span>
+  </figure>
+
+  <div class="op__body">
+    <p class="op__kicker">The collection</p>
+    <h1 class="op__name">Meridian</h1>
+    <p class="op__desc">Steel, blue dial, tan leather</p>
+    <p class="op__price">$4,800</p>
+    <p class="op__note">Example. Name and price to be replaced.</p>
+
+    <form class="op__form" id="order-form" method="post" action="order.html" novalidate>
+      <input type="hidden" name="piece" value="meridian">
+      <h2 class="op__formtitle">Place your <em class="t-it">order</em></h2>
+      <div class="field">
+        <label for="or-name">Name</label>
+        <input id="or-name" name="name" type="text" autocomplete="name" required maxlength="120">
+      </div>
+      <div class="field">
+        <label for="or-email">Email</label>
+        <input id="or-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="200">
+      </div>
+      <div class="field">
+        <label for="or-phone">Phone <span class="field__opt">(optional)</span></label>
+        <input id="or-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40">
+      </div>
+      <div class="field">
+        <label for="or-note">Note <span class="field__opt">(optional)</span></label>
+        <textarea id="or-note" name="note" rows="2" maxlength="600"></textarea>
+      </div>
+      <button class="close__submit" type="submit">Place order</button>
+      <p class="close__status" role="status" aria-live="polite"></p>
+      <p class="op__fine">Nothing is charged on this page. We will write to confirm the price, payment and delivery.</p>
+    </form>
+  </div>
+</main>
+
+<section class="op-more" aria-labelledby="op-more-title">
+  <h2 class="op-more__title" id="op-more-title">The <em class="t-it">others</em></h2>
+  <ul class="op-more__list" role="list"></ul>
+</section>
+
+<footer class="foot op-foot">
+  <span class="foot__mark">TIMELESS</span>
+  <span>Edition of 88</span>
+  <span>&copy; 2026</span>
+</footer>
+
+<script src="order.js"></script>
+</body>
+</html>
