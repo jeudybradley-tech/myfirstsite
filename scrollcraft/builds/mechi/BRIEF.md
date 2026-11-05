@@ -50,6 +50,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 - "enlever cette section" (the pinned deposit statement with the giant 20 $, and "Ta chaise t'attend"): removed, with its menu tab. The deposit rule still reads in the three steps, the form (with consent) and the footer.
 - Service frames, "de les rendre d'un autre modèle": arch frames (photo in a salon-mirror arch, fine gold filet set off around it, the tick on the arch's foot, text centred, a short gold rule above price and button), titles all in gold italic capitals. Card width now follows the screen height so a card always fits below the menu (1280x720 and 375x667 checked).
 
+- Menu format: "je veux l'onglet aille une format comme la photo" (a floating, rounded, frosted-glass nav). The bar is now a pill inset from the edges (4.75rem tall, .8rem from the top), translucent black with a backdrop blur, a faint ivory border and a soft shadow; the logo stays centred, tabs split around it, the gold CTA on the right. --bar-h now counts the pill plus its offsets. Below 1060px the Menu button opens an opaque rounded panel under the pill.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
