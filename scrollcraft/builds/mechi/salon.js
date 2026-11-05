@@ -436,6 +436,37 @@
   form.addEventListener('input', clear);
   form.addEventListener('change', clear);
 
+  function showDone() {
+    status.textContent = '';
+    form.querySelectorAll('fieldset, .deposit, .send').forEach(function (n) { n.hidden = true; });
+    done.classList.add('is-on'); done.focus();
+  }
+
+  // Classic POST to FormSubmit's non-AJAX address: the browser leaves for
+  // FormSubmit's page, which sends the email and comes back to ?envoye=1.
+  function classicSend(payload) {
+    status.textContent = 'Envoi en cours…';
+    var f = document.createElement('form');
+    f.method = 'POST';
+    f.action = FORM_ENDPOINT.replace('/ajax/', '/');
+    f.acceptCharset = 'UTF-8';
+    f.style.display = 'none';
+    var back = location.origin + location.pathname + '?envoye=1#soumission';
+    var all = Object.assign({}, payload, { _next: back });
+    Object.keys(all).forEach(function (k) {
+      var i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = all[k]; f.appendChild(i);
+    });
+    document.body.appendChild(f);
+    f.submit();
+  }
+
+  // Back from FormSubmit's page after a classic send.
+  if (/[?&]envoye=1\b/.test(location.search)) {
+    showDone();
+    try { history.replaceState(null, '', location.pathname + '#soumission'); } catch (err) {}
+    var anchor = document.getElementById('soumission'); if (anchor) anchor.scrollIntoView();
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     status.classList.remove('is-error'); status.textContent = '';
@@ -478,9 +509,18 @@
       _honey: form.elements._honey.value
     };
     submit.disabled = true; status.textContent = 'Envoi en cours…';
-    fetch(FORM_ENDPOINT, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json', Accept: 'application/json' } })
-      .then(function (res) { return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, j: j }; }); })
+
+    // Sent as an ordinary form body (no custom Content-Type), so the browser
+    // makes a simple request with no CORS preflight. If the request still
+    // cannot leave (a blocker, a strict browser), fall back to a classic form
+    // POST through FormSubmit's own page, which returns here with ?envoye=1.
+    var body = new URLSearchParams();
+    Object.keys(payload).forEach(function (k) { body.append(k, payload[k]); });
+    fetch(FORM_ENDPOINT, { method: 'POST', body: body, headers: { Accept: 'application/json' } })
+      .then(function (res) { return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, j: j }; }); },
+            function () { classicSend(payload); return null; })
       .then(function (r) {
+        if (!r) return;
         var ok = r.ok && (r.j.success === true || r.j.success === 'true');
         if (!ok) {
           var msg = String(r.j.message || '');
@@ -489,15 +529,15 @@
           } else {
             fail('La demande n\'a pas pu être envoyée. Réessaie dans un moment, ou appelle le 438-377-2535.', null);
           }
+          submit.disabled = false;
           return;
         }
-        status.textContent = '';
-        form.querySelectorAll('fieldset, .deposit, .send').forEach(function (n) { n.hidden = true; });
-        done.classList.add('is-on'); done.focus();
+        showDone();
+        submit.disabled = false;
       })
       .catch(function () {
         fail('La demande n\'a pas pu être envoyée. Vérifie ta connexion et réessaie, ou appelle le 438-377-2535.', null);
-      })
-      .then(function () { submit.disabled = false; });
+        submit.disabled = false;
+      });
   });
 })();
