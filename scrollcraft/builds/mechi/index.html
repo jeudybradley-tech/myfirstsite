@@ -123,21 +123,20 @@
   .fly { position: fixed; z-index: 90; border-radius: 12px; object-fit: cover; pointer-events: none; box-shadow: var(--sc-e3); }
 
   /* --------------------------------------------------------------- hero -- */
-  .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 4vw;
+  /* The salon itself, darkened, fills the first screen; the copy sits on it. */
+  .hero { position: relative; display: grid; align-items: center;
     min-height: 100svh; padding: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)) var(--sc-gutter) clamp(2rem, 6svh, 4rem);
-    background: radial-gradient(60% 70% at 78% 40%, #2a2014, var(--slate) 70%); overflow: clip; }
+    background: var(--slate); overflow: clip; isolation: isolate; }
+  .hero__bg { position: absolute; inset: -6% 0; z-index: -2; }
+  .hero__kicker { color: var(--gold) !important; }
+  .hero__title { margin: 0; font-size: clamp(3rem, 6.4vw, 6.6rem); line-height: .95; max-width: 11ch; color: var(--on-slate); text-shadow: 0 2px 24px rgb(0 0 0 / .4); }
+  .hero__title em { color: var(--gold); }
+  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(90deg, rgb(18 14 9 / .9) 0%, rgb(18 14 9 / .72) 42%, rgb(18 14 9 / .55) 100%),
+                linear-gradient(to bottom, rgb(18 14 9 / .35) 0%, transparent 30%, transparent 70%, var(--slate) 100%); }
   .hero__copy { display: grid; gap: var(--sc-5); justify-items: start; }
   .mark { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(4.5rem, 14.5vw, 15rem); line-height: .84; letter-spacing: -0.045em; color: var(--on-slate); }
-  .logo { margin: 0 0 var(--sc-2) -1.2%; width: min(100%, 42rem); }
-  .logo img { width: 100%; height: auto; filter: drop-shadow(0 18px 30px rgb(0 0 0 / .45)); }
-  .hero__lede { margin: 0; font-size: var(--sc-t-lg); max-width: 32ch; color: var(--on-slate-soft); }
-  .hero__lede em { font-family: var(--sc-font-display); font-size: 1.25em; color: var(--on-slate); }
-  .hero__act { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-5); margin-top: var(--sc-3); }
-  .hero__media { position: relative; height: min(84svh, 60rem); }
-  .ph { position: absolute; overflow: hidden; border-radius: 3px; box-shadow: var(--sc-e3); aspect-ratio: 3 / 4; max-width: 100%; }
-  .ph img { width: 100%; height: 112%; margin-top: -6%; object-fit: cover; }
-  .ph--a { right: 0; top: 0; height: 76%; }
-  .ph--b { left: 0; bottom: 0; height: 46%; z-index: 2; outline: 6px solid var(--slate); }
 
   /* ------------------------------------------------------ services rail -- */
   /* As on the Nitsy site: the page holds and the services slide in from the
@@ -382,10 +381,9 @@
   .disp em, .card__name em, .rail__end h3 em, .mark em {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
   .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
-  .hero__lede, .rail__intro > p:not(.label):not(.rail__hint), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
+  .rail__intro > p:not(.label):not(.rail__hint), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0;
     font-size: clamp(1.3rem, 1rem + 0.9vw, 1.8rem); line-height: 1.28; }
-  .hero__lede em { font-family: inherit; font-size: 1em; font-style: normal; font-weight: 500; }
   .steps .n { font-family: var(--font-italic); font-weight: 400; font-size: var(--sc-t-3xl); }
   .compare__tag, .ba__hint, .label { font-family: var(--sc-font-text); }
   .card__desc, .steps p { font-size: var(--sc-t-base); }
@@ -436,10 +434,10 @@
   /* ------------------------------------------------------------- phone -- */
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
-    .hero__lede { font-size: var(--sc-t-base); }
-    .hero__media { height: 64svh; }
-    .ph--a { height: 82%; }
-    .ph--b { height: 42%; outline-width: 4px; }
+    .hero { align-content: end; }
+    .hero__title { font-size: 13vw; }
+    .hero__bg img { object-position: 50% 30%; }
+    .hero::before { background: linear-gradient(to bottom, rgb(18 14 9 / .55) 0%, rgb(18 14 9 / .5) 35%, rgb(18 14 9 / .88) 68%, var(--slate) 100%); }
 
     .phones { gap: 1rem; }
     .phone { width: min(44vw, calc((100svh - var(--bar-h) - 4rem) * 9 / 19.5)); padding: .4rem; border-radius: 1.7rem; --tilt: -3deg; }
@@ -502,23 +500,14 @@
 
 <main id="top">
 
-  <!-- 1 · HERO: flow + parallax. Two of the salon's own results, at two depths. -->
+  <!-- 1 · HERO: flow. The salon itself, darkened, as the background of the first screen. -->
   <section id="accueil" class="hero on-slate" data-sc-act="flow">
     <div class="hero__copy" data-sc-in data-sc-stagger="70">
-      <h1 class="logo"><picture><source media="(max-width: 760px)" srcset="assets/logo-m.webp"><img src="assets/logo.webp" width="1536" height="795" alt="Salon de coiffure Mechi"></picture></h1>
-      <p class="hero__lede">Coupe, couleur, lissage et brushing. Dis-nous ce que tu veux, <em>on te répond avec le prix</em> avant le rendez-vous.</p>
-      <div class="hero__act">
-        <a class="cta" href="#soumission">Demander une soumission</a>
-        <a class="link" href="#services">Voir les services</a>
-      </div>
+      <p class="label hero__kicker">Salon de coiffure · Montréal</p>
+      <h1 class="disp hero__title"><span class="sr">Salon de coiffure Mechi : </span>Une beauté <em>qui vous ressemble</em>.</h1>
     </div>
-    <div class="hero__media" aria-hidden="false">
-      <div class="ph ph--a" data-sc-parallax="-0.9">
-        <picture><source media="(max-width: 760px)" srcset="assets/cuivre-m.webp"><img src="assets/cuivre.webp" width="1200" height="1600" alt="Longueurs cuivrées, lisses et brillantes, dégradé aux pointes."></picture>
-      </div>
-      <div class="ph ph--b" data-sc-parallax="0.7">
-        <picture><source media="(max-width: 760px)" srcset="assets/lissage-m.webp"><img src="assets/lissage.webp" width="1200" height="1600" alt="Carré noir lissé, brillant et souple, vu de dos."></picture>
-      </div>
+    <div class="hero__bg" data-sc-parallax="1.2" aria-hidden="true">
+      <picture><source media="(max-width: 760px)" srcset="assets/salon-m.webp"><img src="assets/salon.webp" width="1920" height="1440" fetchpriority="high" alt=""></picture>
     </div>
   </section>
 

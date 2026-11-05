@@ -54,6 +54,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Video model, "as-tu un autre modèle comment les vidéos peuvent être présentées", chose "Deux téléphones": the section is now a flow act; both portrait clips play muted on a loop (only while on screen, posters under reduced motion) inside gold-edged phone frames, side by side, tilted -4/+4 degrees and staggered, each tagged @salondecoiffuremechi; title, line, TikTok pill and CTA centred above. Phone size follows the screen height so both fit below the menu. The page therefore has no scrubbed clip any more.
 
+- Hero, last version: "dans la section d'accueil je veux que ça soit le fond d'écran, je veux que la photo soit sombre et enlève les autres photos", then "je ne veux pas le logo" and "enlève ces parties" (the tagline and the two buttons). The hero is now the salon interior full bleed (framed family photo on the shelf blurred), darkened by a left-weighted gradient and a fade into the next section, with a slow parallax; on it only a gold kicker "Salon de coiffure · Montréal" and the h1 "Une beauté qui vous ressemble." (the salon's motto from the flyer; the h1 also carries the salon's name for screen readers). The logo stays in the menu; the CTA stays in the menu. The copper and silk-press photos left the hero; the copper file and the large logo file were removed as unused.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
@@ -69,7 +71,7 @@ blondes, une coupe dégradée et un brushing".
 
 Like the Nitsy Fashion film site, at the client's request:
 
-`flow(hero, logo and two photos on parallax) > pan(services rail) > flow(avant / après) > flow(TikTok, two phones) > flow(the owner) > flow(three steps) >
+`flow(hero: darkened salon photo, motto) > pan(services rail) > flow(avant / après) > flow(TikTok, two phones) > flow(the owner) > flow(three steps) >
 pin(the deposit) > flow(request form)`, 8 acts, about 16 viewport-heights.
 
 | Beat | Device | Why |
