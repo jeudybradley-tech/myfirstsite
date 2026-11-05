@@ -332,8 +332,6 @@
   .pick__card input:focus-visible ~ .pick__ph { outline: 3px dashed var(--gold-deep); }
   .pick__card:active .pick__ph { transform: scale(.985); }
   @media (hover: hover) and (pointer: fine) { .pick__card:hover .pick__ph img { transform: scale(1.035); } }
-  .pick__more { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-3); margin-top: var(--sc-5); }
-  .pick__ask { font-style: normal; font-size: var(--sc-t-sm); color: var(--sc-ink-soft); margin-right: var(--sc-2); }
   .chipbox { display: flex; flex-wrap: wrap; gap: var(--sc-3); }
   .chipbox label { position: relative; cursor: pointer; }
   .chipbox input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
@@ -670,7 +668,6 @@
       <div class="book__head" data-sc-in data-sc-stagger="60">
         <p class="label">Demande de soumission</p>
         <h2 id="book-h" class="disp">Dis-nous ce que <em>tu veux</em>.</h2>
-        <p>Choisis tes services et décris tes cheveux. On te répond avec le service conseillé, la durée, le prix et l'heure.</p>
       </div>
 
       <form id="form" novalidate>
@@ -689,11 +686,6 @@
             <label class="pick__card" for="svc-keratine"><input type="checkbox" id="svc-keratine" name="services" value="keratine">
               <span class="pick__ph"><img src="assets/apres-m.webp" width="600" height="800" alt="Kératine : cheveux longs bruns, lisses et brillants."><span class="pick__tick" aria-hidden="true"></span></span>
               <span class="pick__txt"><b>Kératine</b><small>Frisottis, cheveux difficiles à coiffer.</small><span class="pick__state" aria-hidden="true"></span></span></label>
-          </div>
-          <div class="pick__more chipbox">
-            <i class="pick__ask">Pas dans la liste ?</i>
-            <label for="svc-autre"><input type="checkbox" id="svc-autre" name="services" value="autre"><span class="noimg">Autre service</span></label>
-            <label for="svc-nsp"><input type="checkbox" id="svc-nsp" name="services" value="ne-sais-pas"><span class="noimg">Je ne sais pas, conseille-moi</span></label>
           </div>
         </fieldset>
 
