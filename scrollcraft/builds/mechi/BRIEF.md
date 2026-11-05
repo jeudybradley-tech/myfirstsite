@@ -39,6 +39,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Cut card: "ajouter et remplace cette photo avec la photo coupe et frange" (defined curls, no bangs). It replaces the curtain-bang bob on the cut card, renamed "Coupe et boucles" so the title matches the photo; the form value stays `coupe`. The old photo is no longer used and was removed from the build.
 
+- Services named by the client: "deuxième photo c'est une permanente, troisième c'est une teinture, quatrième c'est une kératine" (and the first a silk press). Cards and form entries renamed Permanente, Teinture, Kératine; the values sent with a request follow (`permanente`, `teinture`, `keratine`) so the salon reads the real service.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
