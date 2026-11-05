@@ -32,7 +32,7 @@
   var BOOK_AHEAD_DAYS = 60;   // jusqu'à combien de jours à l'avance
 
   var SERVICES = {
-    lissage:  { name: 'Lissage soyeux',  img: 'assets/lissage-m.webp' },
+    silkpress:  { name: 'Silk press', img: 'assets/lissage-m.webp' },
     permanente: { name: 'Permanente', img: 'assets/boucles-coupe-m.webp' },
     teinture:   { name: 'Teinture',   img: 'assets/couleur-m.webp' },
     keratine:   { name: 'Kératine',   img: 'assets/apres-m.webp' }
