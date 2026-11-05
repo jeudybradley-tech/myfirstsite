@@ -41,6 +41,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Services named by the client: "deuxième photo c'est une permanente, troisième c'est une teinture, quatrième c'est une kératine" (and the first a silk press: "je veux le titre soit changé par Silk press"). Cards and form entries renamed Silk press, Permanente, Teinture, Kératine; the values sent with a request follow (`silkpress`, `permanente`, `teinture`, `keratine`). Descriptions say what the service gives, never the process ("je ne veux pas le processus") so the salon reads the real service.
 
+- Before / after, second version: "peux-tu ajouter ces photos dans la section avant et après [...] un autre modèle de présentation" (natural hair before, silk press after), model chosen "Curseur à glisser". One frame per transformation, before on the left and after on the right, the reader drags the line (pointer, touch with vertical scroll left free, or keyboard through a hidden range input); tabs Silk press / Blond · de dos / Blond · de profil switch transformation and caption; the line sweeps once on first view (not under reduced motion).
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob

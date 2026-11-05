@@ -227,16 +227,29 @@
   .ba__tabs button[aria-selected="true"] { background: #fff; color: var(--on-porc); box-shadow: var(--sc-e1); }
   .ba__tabs button:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
   .ba__head .cta { margin-top: var(--sc-4); }
-  .ba__panels { display: grid; }
-  .ba__pair { grid-area: 1 / 1; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.75rem, 1.6vw, 1.5rem); align-items: start;
-    transition: opacity 260ms var(--sc-ease-out); }
-  .ba__pair[hidden] { display: grid !important; opacity: 0; visibility: hidden; pointer-events: none; }
-  .ba__ph { position: relative; margin: 0; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 3px; box-shadow: var(--sc-e2); }
-  .ba__ph--after { margin-top: clamp(1.5rem, 5vw, 4rem); box-shadow: var(--sc-e3); }
-  .ba__ph img { width: 100%; height: 100%; object-fit: cover; }
-  .ba__ph figcaption { position: absolute; top: 12px; left: 12px; font: 600 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase;
-    padding: .65em .95em; border-radius: var(--sc-r-pill); background: rgb(255 255 255 / .92); color: var(--on-porc); box-shadow: var(--sc-e1); }
-  .ba__ph--after figcaption { background: var(--gold-deep); color: #fbf6ec; }
+  .ba__tabs { flex-wrap: wrap; border-radius: 1.6rem; }
+  .ba__panels { display: grid; justify-items: center; gap: var(--sc-3); }
+  .ba__panels [role="tabpanel"][hidden] { display: none !important; }
+  .ba__panel { width: 100%; }
+  /* One frame, the before on the left and the after on the right; the
+     reader drags the line. The after layer is clipped from --pos. */
+  .compare { --pos: 50%; position: relative; aspect-ratio: 3 / 4; width: min(100%, 34rem, calc((100svh - var(--bar-h) - 8rem) * .75));
+    overflow: hidden; border-radius: 4px; box-shadow: var(--sc-e3); background: var(--porc-2); margin-inline: auto;
+    touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; }
+  .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
+  .compare__after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+  .compare__line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; translate: -1px 0; background: #fbf6ec; box-shadow: 0 0 0 1px rgb(18 14 9 / .18); pointer-events: none; }
+  .compare__knob { position: absolute; top: 50%; left: var(--pos); translate: -50% -50%; width: 3.4rem; height: 3.4rem; border-radius: 50%;
+    display: grid; place-items: center; background: var(--gold); color: var(--slate); box-shadow: var(--sc-e3), 0 0 0 4px rgb(251 246 236 / .55); pointer-events: none;
+    transition: transform 140ms var(--sc-ease-out); }
+  .compare.is-dragging .compare__knob { transform: scale(1.08); }
+  .compare__tag { position: absolute; top: 12px; z-index: 2; font: 600 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase;
+    padding: .65em .95em; border-radius: var(--sc-r-pill); box-shadow: var(--sc-e1); pointer-events: none; }
+  .compare__tag--before { left: 12px; background: rgb(255 255 255 / .92); color: var(--on-porc); }
+  .compare__tag--after { right: 12px; background: var(--gold-deep); color: #fbf6ec; }
+  .compare__range { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .compare:has(.compare__range:focus-visible) .compare__knob { outline: 3px solid var(--gold-deep); outline-offset: 3px; }
+  .ba__hint { margin: 0; font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--on-porc-soft); }
 
   /* ------------------------------------------------------------- steps -- */
   .how { padding-block: clamp(4.5rem, 9vw, 8rem); }
@@ -368,7 +381,7 @@
   .steps .n { font-family: var(--font-italic); font-weight: 400; font-size: var(--sc-t-3xl); }
   .dep__num { font-family: var(--sc-font-display); font-weight: 100; letter-spacing: -0.05em; }
   .dep__num span { font-family: var(--font-italic); font-style: italic; font-weight: 400; }
-  .ba__ph figcaption, .label { font-family: var(--sc-font-text); }
+  .compare__tag, .ba__hint, .label { font-family: var(--sc-font-text); }
   .card__desc, .steps p { font-size: var(--sc-t-base); }
 
   /* ------------------------------------------------- calendar and times -- */
@@ -446,7 +459,9 @@
     .ba__grid { grid-template-columns: 1fr; gap: var(--sc-7); }
     .ba__head h2 { font-size: var(--sc-t-2xl); }
     .ba__head > p:not(.label) { font-size: var(--sc-t-base); }
-    .ba__ph figcaption { top: 8px; left: 8px; }
+    .compare__tag { top: 8px; }
+    .compare__tag--before { left: 8px; }
+    .compare__tag--after { right: 8px; }
 
     .dep .sc-stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-content: center; gap: var(--sc-5); }
     .dep__num { grid-row: 1; justify-self: start; font-size: 34vw; }
@@ -551,40 +566,57 @@
     </div>
   </section>
 
-  <!-- 2b · BEFORE / AFTER: flow + reveal. One client, two views, at the client's request. -->
+  <!-- 2b · BEFORE / AFTER: flow. One frame per transformation, the before on
+       the left and the after on the right; the reader drags the line. Tabs
+       switch transformation. -->
   <section id="avant-apres" class="ba on-porc" data-sc-act="flow" aria-labelledby="ba-h">
     <div class="sc-wrap ba__grid">
       <div class="ba__head" data-sc-in data-sc-stagger="60">
         <p class="label">Avant / Après</p>
-        <h2 id="ba-h" class="disp">Du gris terne au <em>blond lumineux</em>.</h2>
-        <p>Une cliente du salon : des mèches blondes, une coupe dégradée et un brushing.</p>
-        <div class="ba__tabs" role="tablist" aria-label="Choisir la vue">
-          <button type="button" role="tab" id="tab-dos" aria-controls="ba-dos" aria-selected="true">De dos</button>
-          <button type="button" role="tab" id="tab-profil" aria-controls="ba-profil" aria-selected="false" tabindex="-1">De profil</button>
+        <h2 id="ba-h" class="disp">Glisse pour voir <em>la différence</em>.</h2>
+        <p data-ba-caption aria-live="polite">Des cheveux naturels crépus, transformés par un silk press : lisses, brillants et pleins de mouvement.</p>
+        <div class="ba__tabs" role="tablist" aria-label="Choisir la transformation">
+          <button type="button" role="tab" id="tab-silk" aria-controls="ba-silk" aria-selected="true" data-caption="Des cheveux naturels crépus, transformés par un silk press : lisses, brillants et pleins de mouvement.">Silk press</button>
+          <button type="button" role="tab" id="tab-dos" aria-controls="ba-dos" aria-selected="false" tabindex="-1" data-caption="Du gris terne au blond lumineux : des mèches blondes, une coupe dégradée et un brushing.">Blond · de dos</button>
+          <button type="button" role="tab" id="tab-profil" aria-controls="ba-profil" aria-selected="false" tabindex="-1" data-caption="Du gris terne au blond lumineux, vu de profil : plus de volume et des pointes arrondies.">Blond · de profil</button>
         </div>
         <a class="cta" href="#soumission">Demander une soumission</a>
       </div>
       <div class="ba__panels">
-        <div class="ba__pair" id="ba-dos" role="tabpanel" aria-labelledby="tab-dos">
-          <figure class="ba__ph">
+        <div class="ba__panel" id="ba-silk" role="tabpanel" aria-labelledby="tab-silk">
+          <div class="compare" data-compare>
+            <picture><source media="(max-width: 760px)" srcset="assets/ba-silk-avant-m.webp"><img src="assets/ba-silk-avant.webp" width="1200" height="1600" loading="lazy" alt="Avant : cheveux naturels crépus, volumineux et secs."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 760px)" srcset="assets/ba-silk-apres-m.webp"><img src="assets/ba-silk-apres.webp" width="1200" height="1600" loading="lazy" alt="Après le silk press : carré brun foncé, lisse et brillant."></picture></div>
+            <span class="compare__tag compare__tag--before" aria-hidden="true">Avant</span>
+            <span class="compare__tag compare__tag--after" aria-hidden="true">Après</span>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Comparer l'avant et l'après : vers la gauche pour voir l'après, vers la droite pour voir l'avant">
+          </div>
+        </div>
+        <div class="ba__panel" id="ba-dos" role="tabpanel" aria-labelledby="tab-dos" hidden>
+          <div class="compare" data-compare>
             <picture><source media="(max-width: 760px)" srcset="assets/ba-avant-dos-m.webp"><img src="assets/ba-avant-dos.webp" width="1200" height="1600" loading="lazy" alt="Avant, vue de dos : cheveux gris et bruns, ternes et frisés, sans forme."></picture>
-            <figcaption>Avant</figcaption>
-          </figure>
-          <figure class="ba__ph ba__ph--after" data-sc-reveal="left" data-sc-reveal-at="0.12 0.42">
-            <picture><source media="(max-width: 760px)" srcset="assets/ba-apres-dos-m.webp"><img src="assets/ba-apres-dos.webp" width="1200" height="1600" loading="lazy" alt="Après, vue de dos : blond lumineux, coupe dégradée et pointes en boucles souples."></picture>
-            <figcaption>Après</figcaption>
-          </figure>
+            <div class="compare__after"><picture><source media="(max-width: 760px)" srcset="assets/ba-apres-dos-m.webp"><img src="assets/ba-apres-dos.webp" width="1200" height="1600" loading="lazy" alt="Après, vue de dos : blond lumineux, coupe dégradée et pointes en boucles souples."></picture></div>
+            <span class="compare__tag compare__tag--before" aria-hidden="true">Avant</span>
+            <span class="compare__tag compare__tag--after" aria-hidden="true">Après</span>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Comparer l'avant et l'après : vers la gauche pour voir l'après, vers la droite pour voir l'avant">
+          </div>
         </div>
-        <div class="ba__pair" id="ba-profil" role="tabpanel" aria-labelledby="tab-profil" hidden>
-          <figure class="ba__ph">
+        <div class="ba__panel" id="ba-profil" role="tabpanel" aria-labelledby="tab-profil" hidden>
+          <div class="compare" data-compare>
             <picture><source media="(max-width: 760px)" srcset="assets/ba-avant-profil-m.webp"><img src="assets/ba-avant-profil.webp" width="1200" height="1600" loading="lazy" alt="Avant, vue de profil : cheveux gris ondulés et secs, longueurs inégales."></picture>
-            <figcaption>Avant</figcaption>
-          </figure>
-          <figure class="ba__ph ba__ph--after" data-sc-reveal="left" data-sc-reveal-at="0.12 0.42">
-            <picture><source media="(max-width: 760px)" srcset="assets/ba-apres-profil-m.webp"><img src="assets/ba-apres-profil.webp" width="1200" height="1600" loading="lazy" alt="Après, vue de profil : blond lumineux, dégradé avec du volume et des pointes arrondies."></picture>
-            <figcaption>Après</figcaption>
-          </figure>
+            <div class="compare__after"><picture><source media="(max-width: 760px)" srcset="assets/ba-apres-profil-m.webp"><img src="assets/ba-apres-profil.webp" width="1200" height="1600" loading="lazy" alt="Après, vue de profil : blond lumineux, dégradé avec du volume et des pointes arrondies."></picture></div>
+            <span class="compare__tag compare__tag--before" aria-hidden="true">Avant</span>
+            <span class="compare__tag compare__tag--after" aria-hidden="true">Après</span>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Comparer l'avant et l'après : vers la gauche pour voir l'après, vers la droite pour voir l'avant">
+          </div>
         </div>
+        <p class="ba__hint" aria-hidden="true">← Glisse pour comparer →</p>
       </div>
     </div>
   </section>
