@@ -138,11 +138,6 @@
   .ph img { width: 100%; height: 112%; margin-top: -6%; object-fit: cover; }
   .ph--a { right: 0; top: 0; height: 76%; }
   .ph--b { left: 0; bottom: 0; height: 46%; z-index: 2; outline: 6px solid var(--slate); }
-  /* The curls clip is portrait, so on a wide screen it stands in a tall frame. */
-  .vframe { position: relative; height: calc(100svh - var(--bar-h) - clamp(3rem, 9svh, 6rem)); max-height: 56rem; aspect-ratio: 9 / 16; max-width: 100%;
-    overflow: hidden; border-radius: 4px; background: var(--slate-2);
-    box-shadow: 0 30px 60px -20px rgb(0 0 0 / .7), 0 0 0 1px color-mix(in oklab, var(--gold) 35%, transparent); }
-  .scrim-v { position: absolute; inset: 0; z-index: 2; pointer-events: none; display: none; }
 
   /* ------------------------------------------------------ services rail -- */
   /* As on the Nitsy site: the page holds and the services slide in from the
@@ -210,10 +205,16 @@
   .owner__quote figcaption { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--on-porc-soft); }
 
 
-  /* ------------------------------------------------------- curls clip -- */
-  .curls__stage { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: clamp(2rem, 7vw, 8rem);
-    padding: calc(var(--bar-h) + clamp(1rem, 3svh, 2.5rem)) var(--sc-gutter) clamp(1.5rem, 4svh, 3rem);
-    background: radial-gradient(55% 70% at 22% 50%, #2a2014, var(--slate) 72%); }
+  /* ------------------------------------------------- TikTok, two phones -- */
+  /* The two portrait clips in gold-edged phones, side by side and slightly
+     tilted, looping muted while on screen; title and buttons centred above. */
+  .curls { position: relative; overflow: clip; padding-block: calc(var(--bar-h) + clamp(1.5rem, 4vw, 3rem)) clamp(4rem, 8vw, 7rem);
+    background: radial-gradient(55% 60% at 50% 72%, #2f2416, var(--slate) 70%); }
+  .curls__copy { display: grid; gap: var(--sc-4); justify-items: center; text-align: center; max-width: 44rem; margin: 0 auto; }
+  .curls__copy h2 { margin: 0; font-size: clamp(2.6rem, 5vw, 5rem); }
+  .curls__copy > p:not(.label) { margin: 0; font-family: var(--font-italic); font-style: italic; font-size: clamp(1.25rem, 1rem + 0.8vw, 1.7rem); line-height: 1.3; color: var(--on-slate-soft); max-width: 36ch; }
+  .curls__copy .label { color: var(--gold); }
+  .curls__acts { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--sc-4); margin-top: var(--sc-3); }
   .tiktok { display: inline-flex; align-items: center; gap: var(--sc-4); margin-top: var(--sc-2); padding: .55rem 1.2rem .55rem .55rem; border-radius: var(--sc-r-pill);
     color: var(--on-slate); text-decoration: none; border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent); background: rgb(18 14 9 / .55);
     transition: border-color 160ms var(--sc-ease-out), background-color 160ms var(--sc-ease-out); }
@@ -223,14 +224,20 @@
   .tiktok__txt b { font-weight: 500; font-size: var(--sc-t-base); color: var(--gold); }
   .tiktok:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   @media (hover: hover) and (pointer: fine) { .tiktok:hover { border-color: var(--gold); background: rgb(18 14 9 / .8); } }
-  .curls__media { position: relative; display: flex; align-items: flex-end; }
-  .vframe--sign { flex: none; height: calc((100svh - var(--bar-h) - clamp(4rem, 12svh, 8rem)) * .58); max-height: 32rem; margin: 0 0 clamp(2rem, 6svh, 4rem) clamp(-5rem, -6vw, -3rem); z-index: 3; align-self: flex-end;
-    outline: 6px solid var(--slate); }
-  .vframe--sign video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .curls__stage .vframe:not(.vframe--sign) { height: calc(100svh - var(--bar-h) - clamp(4rem, 12svh, 8rem)); }
-  .curls__copy { display: grid; gap: var(--sc-5); justify-items: start; max-width: 34rem; }
-  .curls__copy h2 { margin: 0; font-size: clamp(2.6rem, 5vw, 5.4rem); }
-  .curls__copy > p:not(.label) { margin: 0; font-family: var(--font-italic); font-style: italic; font-size: clamp(1.3rem, 1rem + 0.9vw, 1.8rem); line-height: 1.28; color: var(--on-slate-soft); max-width: 30ch; }
+  .curls__acts .tiktok { margin-top: 0; text-align: left; }
+  .phones { display: flex; justify-content: center; align-items: flex-start; gap: clamp(1.5rem, 5vw, 4.5rem); margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+  .phone { --tilt: -4deg; position: relative; flex: none; width: min(19rem, 40vw, calc((100svh - var(--bar-h) - 9rem) * 9 / 19.5)); aspect-ratio: 9 / 19.5; padding: .6rem; border-radius: 2.6rem;
+    background: linear-gradient(160deg, #2a2116, #0b0907 55%); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+    box-shadow: 0 40px 70px -30px rgb(0 0 0 / .85), inset 0 0 0 1px rgb(255 255 255 / .05);
+    transform: rotate(var(--tilt)); transition: transform 420ms var(--sc-ease-out); }
+  .phone + .phone { --tilt: 4deg; margin-top: clamp(2rem, 5vw, 4rem); }
+  .phone__screen { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border-radius: 2.1rem; background: var(--slate-2); }
+  .phone__screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .phone::before { content: ""; position: absolute; z-index: 2; top: 1.1rem; left: 50%; translate: -50% 0; width: 28%; height: 1.15rem; border-radius: var(--sc-r-pill); background: #050403; }
+  .phone__tag { position: absolute; z-index: 2; left: 50%; bottom: 1.1rem; translate: -50% 0; white-space: nowrap; font: 600 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .12em; text-transform: uppercase;
+    padding: .6em .95em; border-radius: var(--sc-r-pill); background: rgb(18 14 9 / .7); color: var(--gold); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  @media (hover: hover) and (pointer: fine) { .phone:hover { transform: rotate(0deg) translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) { .phone, .phone:hover { transition: none; } }
 
   /* ------------------------------------------------------- before / after -- */
   .ba { padding-block: clamp(4.5rem, 9vw, 8rem); }
@@ -434,18 +441,13 @@
     .ph--a { height: 82%; }
     .ph--b { height: 42%; outline-width: 4px; }
 
-    /* On a phone the portrait curls clip IS the screen: full bleed, copy over
-       a scrim at the bottom. */
-    .curls__stage { display: block; padding: 0; }
-    .curls__media { position: absolute; inset: 0; display: block; }
-    .vframe:not(.vframe--sign) { position: absolute; inset: 0; height: auto; max-height: none; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
-    .scrim-v { display: block; background: linear-gradient(to bottom, rgb(18 14 9 / .92) 0, rgb(18 14 9 / .55) calc(var(--bar-h) + 6rem), transparent 30%, transparent 48%, rgb(18 14 9 / .7) 66%, rgb(18 14 9 / .96) 100%); }
-    .vframe--sign { position: absolute; top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 1rem); right: var(--sc-gutter); width: 32vw; height: auto; aspect-ratio: 9 / 16; margin: 0; outline-width: 3px; }
-    .curls__copy { position: absolute; z-index: 4; left: var(--sc-gutter); right: var(--sc-gutter); bottom: max(1.5rem, env(safe-area-inset-bottom)); }
-    .curls__copy h2 { font-size: 11.5vw; }
-    .curls__copy .label { color: var(--gold); font-weight: 600; background: rgb(18 14 9 / .72); padding: .55em .9em; border-radius: var(--sc-r-pill); }
-    .curls__copy > p:not(.label) { font-size: var(--sc-t-lg); color: var(--on-slate); }
-    @media (max-height: 700px) { .curls__copy { gap: var(--sc-3); } .curls__copy > p:not(.label) { font-size: var(--sc-t-base); } .vframe--sign { width: 24vw; } }
+    .phones { gap: 1rem; }
+    .phone { width: min(44vw, calc((100svh - var(--bar-h) - 4rem) * 9 / 19.5)); padding: .4rem; border-radius: 1.7rem; --tilt: -3deg; }
+    .phone + .phone { --tilt: 3deg; margin-top: 2.5rem; }
+    .phone__screen { border-radius: 1.35rem; }
+    .phone::before { top: .7rem; height: .8rem; }
+    .phone__tag { bottom: .7rem; font-size: .62rem; padding: .55em .8em; }
+    .curls__copy h2 { font-size: 11vw; }
 
     .rail { padding-top: 0; gap: var(--sc-5); }
     .rail__intro { width: 80vw; }
@@ -607,30 +609,31 @@
     </div>
   </section>
 
-  <!-- 2c · CURLS: scrub. Long curls in the salon chair move with the scroll;
-       beside them, smaller, the client in front of the Mechi sign plays on a
-       loop (the engine scrubs one clip per act). Frames left, copy right. -->
-  <section id="boucles" class="curls" data-sc-act="scrub" data-sc-span="2.4" data-sc-dwell="0.25" aria-labelledby="curls-h">
-    <div data-sc-stage class="curls__stage on-slate">
-      <div class="curls__media">
-      <div class="vframe">
-        <picture><source media="(max-width: 760px)" srcset="assets/boucles-poster-m.webp"><img class="sc-stage__poster" src="assets/boucles-poster.webp" width="608" height="1080" loading="lazy" alt="Longues boucles brun foncé, brillantes, vues de dos dans la chaise du salon."></picture>
-        <video data-sc-scrub data-sc-src="assets/boucles.mp4" data-sc-src-mobile="assets/boucles-m.mp4" muted playsinline aria-hidden="true"></video>
-        <div class="scrim-v" aria-hidden="true"></div>
-      </div>
-      <div class="vframe vframe--sign">
-        <video class="loop" data-loop="assets/enseigne.mp4" data-loop-mobile="assets/enseigne-m.mp4" poster="assets/enseigne-poster.webp" muted loop playsinline preload="none" aria-label="Une cliente aux longs cheveux bruns aux pointes cuivrées, devant l'enseigne du Salon de coiffure Mechi."></video>
-      </div>
-      </div>
-      <div class="curls__copy">
+  <!-- 2c · TIKTOK: flow. The two portrait clips in phones side by side,
+       looping muted while on screen; title and buttons centred above. -->
+  <section id="boucles" class="curls on-slate" data-sc-act="flow" aria-labelledby="curls-h">
+    <div class="sc-wrap">
+      <div class="curls__copy" data-sc-in data-sc-stagger="60">
         <p class="label">Sur TikTok</p>
         <h2 id="curls-h" class="disp">Les coulisses <em>de Mechi</em>.</h2>
         <p>Des boucles qui rebondissent, des silk press qui brillent, des couleurs qui changent tout. Abonne-toi pour voir les prochaines transformations en premier.</p>
-        <a class="cta" href="#soumission">Demander une soumission</a>
-        <a class="tiktok" href="https://www.tiktok.com/@salondecoiffuremechi" target="_blank" rel="noopener">
-          <span class="tiktok__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
-          <span class="tiktok__txt"><span>Abonne-toi sur TikTok</span><b>@salondecoiffuremechi</b></span>
-        </a>
+        <div class="curls__acts">
+          <a class="tiktok" href="https://www.tiktok.com/@salondecoiffuremechi" target="_blank" rel="noopener">
+            <span class="tiktok__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
+            <span class="tiktok__txt"><span>Abonne-toi sur TikTok</span><b>@salondecoiffuremechi</b></span>
+          </a>
+          <a class="cta" href="#soumission">Demander une soumission</a>
+        </div>
+      </div>
+      <div class="phones">
+        <div class="phone">
+          <span class="phone__screen"><video class="loop" data-loop="assets/boucles.mp4" data-loop-mobile="assets/boucles-m.mp4" poster="assets/boucles-poster.webp" muted loop playsinline preload="none" aria-label="Longues boucles brun foncé, brillantes, vues de dos dans la chaise du salon."></video></span>
+          <span class="phone__tag" aria-hidden="true">@salondecoiffuremechi</span>
+        </div>
+        <div class="phone">
+          <span class="phone__screen"><video class="loop" data-loop="assets/enseigne.mp4" data-loop-mobile="assets/enseigne-m.mp4" poster="assets/enseigne-poster.webp" muted loop playsinline preload="none" aria-label="Une cliente aux longs cheveux bruns aux pointes cuivrées, devant l'enseigne du Salon de coiffure Mechi."></video></span>
+          <span class="phone__tag" aria-hidden="true">@salondecoiffuremechi</span>
+        </div>
       </div>
     </div>
   </section>

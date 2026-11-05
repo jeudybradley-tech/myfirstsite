@@ -52,6 +52,8 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Menu format: "je veux l'onglet aille une format comme la photo" (a floating, rounded, frosted-glass nav). The bar is now a pill inset from the edges (4.75rem tall, .8rem from the top), translucent black with a backdrop blur, a faint ivory border and a soft shadow; the logo stays centred, tabs split around it, the gold CTA on the right. --bar-h now counts the pill plus its offsets. "Comment ça marche" then moved to the left group on request, so the right side holds only the CTA; with five tabs on the left the Menu button takes over below 1350px (an opaque rounded panel under the pill).
 
+- Video model, "as-tu un autre modèle comment les vidéos peuvent être présentées", chose "Deux téléphones": the section is now a flow act; both portrait clips play muted on a loop (only while on screen, posters under reduced motion) inside gold-edged phone frames, side by side, tilted -4/+4 degrees and staggered, each tagged @salondecoiffuremechi; title, line, TikTok pill and CTA centred above. Phone size follows the screen height so both fit below the menu. The page therefore has no scrubbed clip any more.
+
 ## Assets
 
 The client's own salon photos: lissage (black bob), coupe et frange (dark bob
@@ -67,7 +69,7 @@ blondes, une coupe dégradée et un brushing".
 
 Like the Nitsy Fashion film site, at the client's request:
 
-`flow(hero, logo and two photos on parallax) > pan(services rail) > flow(avant / après) > scrub(curls clip) > flow(the owner) > flow(three steps) >
+`flow(hero, logo and two photos on parallax) > pan(services rail) > flow(avant / après) > flow(TikTok, two phones) > flow(the owner) > flow(three steps) >
 pin(the deposit) > flow(request form)`, 8 acts, about 16 viewport-heights.
 
 | Beat | Device | Why |
