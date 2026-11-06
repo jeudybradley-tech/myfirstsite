@@ -16,7 +16,7 @@
   // INTERAC_EMAIL : l'adresse qui reçoit les virements Interac du dépôt.
   //   Tant que c'est vide, la page dit que l'adresse viendra avec la réponse.
   // ---------------------------------------------------------------------
-  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/jeudybradley@gmail.com';
+  var FORM_ENDPOINT = 'https://formspree.io/f/mwllzzaw';
   var INTERAC_EMAIL = '';
   var PREVIEW = false;   // true only in the claude.ai preview copy, where nothing can be sent
   var FORMSPREE = /formspree\.io\//.test(FORM_ENDPOINT);

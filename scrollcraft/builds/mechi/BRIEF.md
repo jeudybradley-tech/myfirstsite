@@ -58,6 +58,7 @@ client's "À toi de voir" (3 November 2026) and marked as such.
 
 - Requests by email: "je vais utiliser mon courriel pour recevoir les demandes" (jeudybradley@gmail.com). FormSubmit's AJAX endpoint, JSON body with French labels, `_replyto` set to the client, `_template: table`, a honeypot field. Handles the first-use activation reply and network failure with plain messages and the salon's phone number. The file field was replaced by a line inviting the client to send her inspiration photo by replying (FormSubmit's AJAX endpoint does not carry files). Tested against a mocked endpoint only; no real email was sent from the build environment.
 - Formspree: "je pense que formspree va le faire" (after a Google Forms option was offered, then dropped). `FORM_ENDPOINT` accepts a `https://formspree.io/f/…` address; the code spots it and sends the same labelled answers with `_subject`, `_replyto` and `_gotcha` (Formspree's honeypot) instead of FormSubmit's `_template`, `_captcha`, `_honey`. Success is `{ ok: true }`; error text is read from `errors[].message`. The classic fallback posts to the same Formspree address, without `_next`. Tested with mocked formspree.io routes: success (one simple POST, done panel), error (message with the phone number), outage (classic fallback).
+- Live endpoint set to `https://formspree.io/f/mwllzzaw` (the owner's Formspree form, jeudybradley@gmail.com). formspree.io cannot be reached from the build environment, so the real delivery is confirmed only by a request sent from the live site.
 
 ## Assets
 
