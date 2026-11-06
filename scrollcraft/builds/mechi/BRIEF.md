@@ -117,3 +117,4 @@ no console errors. Rail travel measured (941 px desktop, 1486 px phone).
 Functional test, desktop and phone: choosing from the rail and from the form
 cards, pill count, unchoosing, form validation, the not-connected message.
 Not verified: a real phone, a real form endpoint.
+- Experience: "elle fait de la coiffure pendant 25 ans". The bio now opens with it ("Mercedes coiffe depuis 25 ans et dirige le Salon…") and the facts list starts with Expérience : 25 ans de coiffure. Checked at 1440 and 390: four facts, no horizontal overflow.
