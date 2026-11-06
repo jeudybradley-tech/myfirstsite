@@ -118,3 +118,4 @@ Functional test, desktop and phone: choosing from the rail and from the form
 cards, pill count, unchoosing, form validation, the not-connected message.
 Not verified: a real phone, a real form endpoint.
 - Experience: "elle fait de la coiffure pendant 25 ans". The bio now opens with it ("Mercedes coiffe depuis 25 ans et dirige le Salon…") and the facts list starts with Expérience : 25 ans de coiffure. Checked at 1440 and 390: four facts, no horizontal overflow.
+- Service card frame: after a sheet of six frame models, the owner sent a reference image of a soft rounded rectangle ("je veux une forme comme ça"). The arch and its gold hairline frame are gone: the photo is a rounded rectangle (radius 1.75rem, about 10 % of the card), with a soft drop shadow. A chosen card gets a gold ring set 5px off the photo; the focus outline moved out to 11px so it never sits on that ring. Checked at 1440 and 390 with a card chosen.
