@@ -5,18 +5,21 @@
 
   // ---------------------------------------------------------------------
   // RÉGLAGES
-  // FORM_ENDPOINT : FormSubmit (https://formsubmit.co) relaie chaque demande
-  //   par courriel. À la toute première demande, FormSubmit envoie un courriel
-  //   d'activation à l'adresse : il faut cliquer « Activate » une fois.
-  //   Après l'activation, FormSubmit donne un alias (une suite de lettres) :
-  //   le mettre à la place de l'adresse ci-dessous la cache aux robots.
+  // FORM_ENDPOINT : le service qui relaie chaque demande par courriel.
+  //   Formspree (https://formspree.io) : coller l'adresse que Formspree donne
+  //   en créant le formulaire, du type https://formspree.io/f/abcdwxyz. Les
+  //   demandes arrivent à l'adresse courriel du compte Formspree.
+  //   FormSubmit (https://formsubmit.co) : https://formsubmit.co/ajax/<adresse>.
+  //   À la toute première demande, FormSubmit envoie un courriel d'activation
+  //   à l'adresse : il faut cliquer « Activate » une fois.
   //   Laisser vide ('') pour ne rien envoyer : le formulaire le dit alors.
   // INTERAC_EMAIL : l'adresse qui reçoit les virements Interac du dépôt.
   //   Tant que c'est vide, la page dit que l'adresse viendra avec la réponse.
   // ---------------------------------------------------------------------
-  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/jeudybradley@gmail.com';
+  var FORM_ENDPOINT = 'https://formspree.io/f/mwllzzaw';
   var INTERAC_EMAIL = '';
   var PREVIEW = false;   // true only in the claude.ai preview copy, where nothing can be sent
+  var FORMSPREE = /formspree\.io\//.test(FORM_ENDPOINT);
 
   // HEURES D'OUVERTURE (données par la propriétaire) : pour chaque jour,
   // [ouverture, fermeture], ou null si le salon est fermé. Le dernier créneau
@@ -442,17 +445,17 @@
     done.classList.add('is-on'); done.focus();
   }
 
-  // Classic POST to FormSubmit's non-AJAX address: the browser leaves for
-  // FormSubmit's page, which sends the email and comes back to ?envoye=1.
+  // Classic POST to the service's own page: FormSubmit sends the email and
+  // comes back to ?envoye=1; Formspree shows its thank-you page instead.
   function classicSend(payload) {
     status.textContent = 'Envoi en cours…';
     var f = document.createElement('form');
     f.method = 'POST';
-    f.action = FORM_ENDPOINT.replace('/ajax/', '/');
+    f.action = FORMSPREE ? FORM_ENDPOINT : FORM_ENDPOINT.replace('/ajax/', '/');
     f.acceptCharset = 'UTF-8';
     f.style.display = 'none';
     var back = location.origin + location.pathname + '?envoye=1#soumission';
-    var all = Object.assign({}, payload, { _next: back });
+    var all = FORMSPREE ? payload : Object.assign({}, payload, { _next: back });
     Object.keys(all).forEach(function (k) {
       var i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = all[k]; f.appendChild(i);
     });
@@ -503,11 +506,15 @@
       'Courriel': form.elements.courriel.value.trim(),
       'Règle du dépôt acceptée': 'Oui',
       _subject: 'Demande de soumission : ' + form.elements.nom.value.trim() + ', ' + when,
-      _replyto: form.elements.courriel.value.trim(),
-      _template: 'table',
-      _captcha: 'false',
-      _honey: form.elements._honey.value
+      _replyto: form.elements.courriel.value.trim()
     };
+    if (FORMSPREE) {
+      payload._gotcha = form.elements._honey.value;   // Formspree's robot trap
+    } else {
+      payload._template = 'table';
+      payload._captcha = 'false';
+      payload._honey = form.elements._honey.value;
+    }
     submit.disabled = true; status.textContent = 'Envoi en cours…';
 
     // Sent as an ordinary form body (no custom Content-Type), so the browser
@@ -521,9 +528,10 @@
             function () { classicSend(payload); return null; })
       .then(function (r) {
         if (!r) return;
-        var ok = r.ok && (r.j.success === true || r.j.success === 'true');
+        // FormSubmit answers { success: true }, Formspree { ok: true }.
+        var ok = r.ok && (r.j.success === true || r.j.success === 'true' || r.j.ok === true);
         if (!ok) {
-          var msg = String(r.j.message || '');
+          var msg = String(r.j.message || r.j.error || (r.j.errors || []).map(function (x) { return x.message; }).join(' '));
           if (/activ/i.test(msg)) {
             fail('Le formulaire du salon doit d\'abord être activé : un courriel d\'activation vient d\'être envoyé au salon. Réessaie un peu plus tard, ou appelle le 438-377-2535.', null);
           } else {
