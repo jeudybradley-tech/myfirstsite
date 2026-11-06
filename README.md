@@ -62,4 +62,5 @@ python3 -m http.server 8000
 - **Visages :** les visages qui apparaissaient dans les miroirs (photos lissage et brushing) sont floutés. Vérifier l'accord des clientes avant de rendre le site public.
 - **Inconnus :** les prix (« Prix sur devis » sur chaque service).
 - **Mise en ligne :** `.github/workflows/site-mechi.yml` publie ce dossier sur GitHub Pages à chaque mise à jour de `main`, une fois Settings > Pages > Source réglé sur « GitHub Actions ».
+- **Couleurs :** beige Alchimie (Peintures MF, MF 0251) pour les fonds, crème pour le formulaire, brun foncé pour les textes et les traits. Les couleurs sont réglées en haut des styles de `scrollcraft/builds/mechi/index.html` (`:root`), avec quelques règles en fin de styles (bloc « beige Alchimie »).
 - **Polices :** Inter Tight (titres en majuscules très fines, textes) et Cormorant Garamond (italique), les mêmes que TIMELESS, licence libre (OFL), dans `scrollcraft/builds/mechi/assets/fonts/`.
