@@ -315,7 +315,7 @@
   .pick { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sc-5); }
   .pick__card { position: relative; display: grid; gap: var(--sc-3); align-content: start; cursor: pointer; min-width: 0; }
   .pick__card input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; margin: 0; }
-  .pick__ph { position: relative; display: block; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 4px; box-shadow: var(--sc-e2); outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out), box-shadow 160ms var(--sc-ease-out); }
+  .pick__ph { position: relative; display: block; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 1.25rem; box-shadow: var(--sc-e2); outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out), box-shadow 160ms var(--sc-ease-out); }
   .pick__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 420ms var(--sc-ease-out), filter 200ms var(--sc-ease-out); }
   .pick__tick { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgb(255 255 255 / .86); box-shadow: var(--sc-e1); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
   .pick__tick::after { content: ""; width: 12px; height: 7px; border: 2.5px solid var(--on-porc-soft); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .35; }
