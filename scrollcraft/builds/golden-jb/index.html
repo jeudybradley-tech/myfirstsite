@@ -100,16 +100,36 @@
           <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver">Argent</dd></div>
           <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
         </dl>
+        <div class="seg" role="group" aria-label="Porté par" data-en-aria="Worn by">
+          <button type="button" data-wearer-btn="femme" aria-pressed="true" data-en="Women">Femme</button>
+          <button type="button" data-wearer-btn="homme" aria-pressed="false" data-en="Men">Homme</button>
+        </div>
+        <p class="seg__hint" data-en="Same bracelet. Slide the line to see it on another wrist.">Le même bracelet. Glissez la ligne pour le voir à un autre poignet.</p>
         <a class="label__ask" href="#commande" data-piece="maille-ovale" data-en="Order">Commander</a>
       </div>
       <figure class="bijou__fig">
-        <div class="bijou__frame" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
-          <picture data-sc-parallax="-1.1">
-            <source media="(max-width: 700px)" srcset="assets/maille-cafe-m.webp">
-            <img src="assets/maille-cafe.webp" width="1024" height="1024" loading="lazy" style="object-position:42% 64%"
-                 alt="Un poignet sur une table de café au soleil, avec le bracelet à mailles ovales en acier."
-                 data-en-alt="A wrist on a café table in the sun, wearing the oval-link steel bracelet.">
-          </picture>
+        <!-- Le même bracelet, porté par deux femmes ou par deux hommes : on
+             glisse la ligne pour passer d'un poignet à l'autre (comme
+             l'avant / après du site Mechi). -->
+        <div class="bijou__frame bijou__frame--compare" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
+          <div class="compare" id="mo-femme" data-compare data-wearer="femme">
+            <picture><source media="(max-width: 700px)" srcset="assets/mo-femme-1-m.webp"><img src="assets/mo-femme-1.webp" width="1024" height="1024" loading="lazy" style="object-position:45% 55%"
+              alt="Une main posée sur un carnet ouvert, manche de lin crème, le bracelet à mailles ovales au poignet, une tasse de café à côté." data-en-alt="A hand resting on an open notebook, cream linen sleeve, the oval-link bracelet on the wrist, a cup of coffee beside it."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 700px)" srcset="assets/mo-femme-2-m.webp"><img src="assets/mo-femme-2.webp" width="1024" height="1024" loading="lazy" style="object-position:45% 60%"
+              alt="Une main à la peau foncée autour d'une tasse, au soleil, le bracelet à mailles ovales au poignet." data-en-alt="A dark-skinned hand around a cup in the sun, the oval-link bracelet on the wrist."></picture></div>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Glisser pour passer d’un poignet de femme à l’autre" data-en-aria="Slide to switch between two women’s wrists">
+          </div>
+          <div class="compare" id="mo-homme" data-compare data-wearer="homme" hidden>
+            <picture><source media="(max-width: 700px)" srcset="assets/mo-homme-1-m.webp"><img src="assets/mo-homme-1.webp" width="1024" height="1024" loading="lazy" style="object-position:48% 50%"
+              alt="Un poignet sur une table de café au soleil, chemise en jean, le bracelet à mailles ovales au poignet." data-en-alt="A wrist on a café table in the sun, denim shirt, the oval-link bracelet on it."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 700px)" srcset="assets/mo-homme-2-m.webp"><img src="assets/mo-homme-2.webp" width="1024" height="1024" loading="lazy" style="object-position:45% 50%"
+              alt="Un homme à la peau foncée en chemise grise tient une tasse, le bracelet à mailles ovales au poignet." data-en-alt="A dark-skinned man in a grey shirt holding a cup, the oval-link bracelet on his wrist."></picture></div>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Glisser pour passer d’un poignet d’homme à l’autre" data-en-aria="Slide to switch between two men’s wrists">
+          </div>
         </div>
       </figure>
     </div>
