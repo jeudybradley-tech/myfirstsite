@@ -40,6 +40,8 @@
   le site de salon de Mechi », puis « fait pareil pour les femmes » : deux paires de photos, une glissière chacune.
 - **N° 5 Maille dorée :** « pareille même manière » avec quatre photos ; précisé : « Nouveau N° 5 », et la main
   sur la table en bois clair est une femme.
+- **Fond pierre :** « peux-tu faire le fond de la page comme dans la photo » (pierre calcaire « LIMESTONE ») :
+  le site passe du noir au beige pierre, encre brune. Le style « sombre et luxe » du début est donc remplacé.
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude
