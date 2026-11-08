@@ -126,3 +126,4 @@ Not verified: a real phone, a real form endpoint.
   - brown shadows, and cream ink on brown;
   - cards no longer fade while sliding in, and descriptions are weight 500 with the TikTok italic at 600 ("je veux que les descriptions soient visibles, plus noir").
   Checked at 1440 and 390: every section, the open phone menu, no horizontal overflow, no console errors.
+- "je veux moins de beige" (on the hero): the left beige veil is gone; a soft cream glow sits only behind the motto (radial, about a third of the screen), with a faint left tint, and the motto has a cream halo. On phones the veil starts lower (from 38 %) and is lighter (.55 to .75). The salon photo now shows in full colour around the text. Checked at 1440, 713 and 390.
