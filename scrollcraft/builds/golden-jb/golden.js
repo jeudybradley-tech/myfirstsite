@@ -100,6 +100,7 @@
         pic.hidden = pic.dataset.finish !== f;
         if (!pic.hidden) { var im = pic.querySelector('img'); if (im) im.loading = 'eager'; }
       });
+      frameCompares();
       if (n3ask) n3ask.dataset.piece = f === 'dore' ? 'jonc-dore' : 'jonc-argent';
     });
   });
