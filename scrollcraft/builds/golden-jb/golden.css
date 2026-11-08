@@ -279,6 +279,19 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
 }
 .home__cta:hover { background: #e2c07a; }
 
+/* Each piece's name is underlined in gold as the reader scrolls down to it
+   (client's request): the line grows with the section's own scroll progress
+   (--sc-p, published by the engine) and is drawn per line of text. */
+.bijou .t-it .u {
+  --k: clamp(0, (var(--sc-p, 1) - .2) * 3.4, 1);
+  background-image: linear-gradient(var(--sc-accent), var(--sc-accent));
+  background-repeat: no-repeat; background-position: 0 92%;
+  background-size: calc(var(--k) * 100%) 2px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  padding-bottom: .08em;
+}
+@media (prefers-reduced-motion: reduce) { .bijou .t-it .u { --k: 1; } }
+
 /* ── The pieces: every one on the same model (client's request) ─────────
    Label on the left, the photograph on the right in a frame that opens from
    the right as it arrives, the picture drifting slowly inside the frame. */
