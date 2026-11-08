@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Golden JB · Bracelets en acier inoxydable</title>
+<meta name="description" content="Golden JB : deux bracelets en acier inoxydable, la maille ovale et le trèfle noir, 20 $ chacun. Commande en ligne.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b0a08'/><ellipse cx='12' cy='16' rx='6.5' ry='4.2' fill='none' stroke='%23d2ae66' stroke-width='2.2'/><ellipse cx='20' cy='16' rx='6.5' ry='4.2' fill='none' stroke='%23d2ae66' stroke-width='2.2'/></svg>">
+<link rel="preload" href="assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="scrollcraft.css">
+<link rel="stylesheet" href="golden.css">
+</head>
+<body>
+
+<div class="sc-grain" aria-hidden="true"></div>
+
+<!-- La chaîne : le geste signature. Une vraie chaîne d'argent suspendue sous
+     l'index, simulée (verlet), qui se balance avec la vitesse du défilement et
+     que le pointeur peut pousser. Premier plan du héros, au-dessus de la photo. -->
+<canvas class="chain" id="chain" aria-hidden="true"></canvas>
+
+<header class="index">
+  <a class="index__mark" href="#n1" aria-label="Golden JB, haut de page"><span>Golden</span> JB</a>
+  <nav class="index__list" aria-label="Catalogue" data-en-aria="Catalogue">
+    <a href="#n1" data-spy="n1"><span class="index__no">N° 1</span> <span class="index__name" data-en="Oval link">Maille ovale</span></a>
+    <a href="#n2" data-spy="n2"><span class="index__no">N° 2</span> <span class="index__name" data-en="Black clover">Trèfle noir</span></a>
+    <a href="#commande" data-spy="commande" data-en="Order">Commander</a>
+  </nav>
+  <div class="index__side">
+    <a class="social" data-social="instagram" href="#" target="_blank" rel="noopener" hidden aria-label="Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" class="dot"/></svg>
+    </a>
+    <a class="social" data-social="whatsapp" href="#" target="_blank" rel="noopener" hidden aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 18.6z"/><path d="M9.2 8.6c.2 2.9 2.4 5.3 5.6 5.9l1-1.2-1.8-.9-.8.8c-1.1-.5-2-1.4-2.5-2.5l.8-.8-.9-1.8z" class="dot"/></svg>
+    </a>
+    <div class="lang" role="group" aria-label="Langue" data-en-aria="Language">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1 · N° 1 en vue dès l'arrivée. Plans : photo (recul), étiquette (1x),
+       chaîne au premier plan (fixe), reflets (devant). -->
+  <section id="n1" class="hero" data-sc-act="flow" data-sc-drift="#0b0a08">
+    <div class="hero__photo" data-sc-parallax="-1.2">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/maille-cafe-m.webp">
+        <img src="assets/maille-cafe.webp" width="1024" height="1024" fetchpriority="high"
+             alt="Un poignet sur une table de café au soleil, avec le bracelet à mailles ovales en acier."
+             data-en-alt="A wrist on a café table in the sun, wearing the oval-link steel bracelet.">
+      </picture>
+    </div>
+    <div class="hero__glints" data-sc-parallax="0.9" aria-hidden="true">
+      <i style="--x:62%;--y:58%;--s:1"></i><i style="--x:71%;--y:44%;--s:.6"></i>
+      <i style="--x:55%;--y:72%;--s:.8"></i><i style="--x:80%;--y:66%;--s:.5"></i>
+    </div>
+    <div class="hero__label label" data-sc-stagger="90">
+      <p class="label__no">N° 1</p>
+      <h1 class="label__name"><span class="brand">Golden JB</span> <span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="oval link">maille ovale</em></h1>
+      <dl class="label__facts">
+        <div><dt data-en="Material">Matière</dt><dd data-en="Stainless steel">Acier inoxydable</dd></div>
+        <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver">Argent</dd></div>
+        <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
+      </dl>
+      <a class="label__ask" href="#commande" data-en="Order">Commander</a>
+    </div>
+  </section>
+
+  <!-- 2 · Le même objet, porté autrement : un volet s'ouvre. -->
+  <section class="worn sc-section" data-sc-act="flow" data-sc-drift="#100e0b">
+    <div class="sc-wrap worn__grid">
+      <figure class="worn__fig" data-sc-reveal="up" data-sc-reveal-at="0.12 0.5">
+        <picture>
+          <source media="(max-width: 700px)" srcset="assets/maille-livre-m.webp">
+          <img src="assets/maille-livre.webp" width="1024" height="1024" loading="lazy"
+               alt="Une main posée sur un carnet ouvert, le bracelet à mailles ovales au poignet, une tasse de café à côté."
+               data-en-alt="A hand resting on an open notebook, the oval-link bracelet on the wrist, a cup of coffee beside it.">
+        </picture>
+        <figcaption class="caption"><span>N° 1</span> <span data-en="Worn with a linen sleeve, morning light.">Porté avec une manche de lin, lumière du matin.</span></figcaption>
+      </figure>
+      <div class="worn__text" data-sc-in>
+        <p class="worn__line" data-en="Oval links, close together, that follow the wrist.">Des mailles ovales, serrées, qui suivent le poignet.</p>
+        <p class="sc-body" data-en="Stainless steel keeps its colour. Wear it every day, with a shirt sleeve or bare wrist.">L'acier inoxydable garde sa couleur. On le porte tous les jours, sous une manche de chemise ou le poignet nu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Le silence avant le pic : un seul mot, beaucoup de noir. -->
+  <section class="hush" data-sc-act="flow" data-sc-drift="#070605">
+    <p class="hush__no" data-sc-in>N° 2</p>
+  </section>
+
+  <!-- 4 · LE PIC. La caméra part du trèfle, au plus près, et recule
+       jusqu'à l'homme entier. L'étiquette se pose à la fin. -->
+  <section id="n2" class="loupe" data-sc-act="pin" data-sc-span="2.6" data-sc-drift="#070605">
+    <div data-sc-stage class="loupe__stage">
+      <div class="loupe__frame">
+        <picture>
+          <source media="(max-width: 700px)" srcset="assets/trefle-polo-l.webp">
+          <img class="loupe__img" src="assets/trefle-polo-xl.webp" width="1664" height="2496" loading="lazy"
+               alt="Un homme en polo crème appuyé à un muret, le bracelet à trèfles noirs au poignet."
+               data-en-alt="A man in a cream polo leaning on a low wall, the black clover bracelet on his wrist.">
+        </picture>
+      </div>
+      <p class="loupe__whisper" data-sc-cue="0.02 0.34 0.1" data-en="Closer.">Plus près.</p>
+      <div class="loupe__label label" data-sc-cue="0.62">
+        <p class="label__no">N° 2</p>
+        <h2 class="label__name"><span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="black clover">trèfle noir</em></h2>
+        <dl class="label__facts">
+          <div><dt data-en="Material">Matière</dt><dd data-en="Stainless steel, black clovers">Acier inoxydable, trèfles noirs</dd></div>
+          <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver and black">Argent et noir</dd></div>
+          <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
+        </dl>
+        <a class="label__ask" href="#commande" data-en="Order">Commander</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Les portés : la salle continue de côté. -->
+  <section class="room" data-sc-act="pan" data-sc-span="2.8" data-sc-drift="#0d0b09">
+    <div data-sc-stage class="room__stage">
+      <div class="room__rail" data-sc-pan="0.04">
+        <div class="room__lead">
+          <h2 class="label__name"><span data-en="Worn">Portés</span> <em class="t-it" data-en="every day">au quotidien</em></h2>
+          <p class="sc-body" data-en="Both pieces, on other wrists, in other light.">Les deux pièces, à d'autres poignets, dans d'autres lumières.</p>
+        </div>
+        <figure class="room__item">
+          <img src="assets/trefle-beton.webp" width="772" height="1184" loading="lazy"
+               alt="Un avant-bras posé sur une table en béton, le bracelet à trèfles noirs au poignet."
+               data-en-alt="A forearm on a concrete table, the black clover bracelet on the wrist.">
+          <figcaption class="caption"><span>N° 2</span> <span data-en="Black clover">Trèfle noir</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
+        </figure>
+        <figure class="room__item">
+          <img src="assets/maille-tasse.webp" width="1024" height="1024" loading="lazy"
+               alt="Deux mains autour d'une tasse, le bracelet à mailles ovales au poignet gauche."
+               data-en-alt="Two hands around a cup, the oval-link bracelet on the left wrist.">
+          <figcaption class="caption"><span>N° 1</span> <span data-en="Oval link">Maille ovale</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
+        </figure>
+        <div class="room__note">
+          <p data-en="Two pieces. One price.">Deux pièces. Un seul prix.</p>
+          <a class="label__ask" href="#commande" data-en="Order">Commander</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · La fin : un bon de commande composé comme une étiquette. -->
+  <section id="commande" class="order sc-section" data-sc-act="flow" data-sc-drift="#0b0a08">
+    <div class="sc-wrap">
+      <form class="order__plate label" id="order-form" novalidate>
+        <header class="order__head">
+          <p class="label__no" data-en="Order">Commande</p>
+          <h2 class="label__name"><span data-en="Choose">Choisissez</span> <em class="t-it" data-en="your bracelets">vos bracelets</em></h2>
+        </header>
+
+        <fieldset class="order__pieces">
+          <legend class="sr-only" data-en="Bracelets">Bracelets</legend>
+          <div class="piece" data-piece="maille-ovale">
+            <img src="assets/maille-cafe-m.webp" width="760" height="760" alt="" loading="lazy">
+            <div class="piece__txt">
+              <p class="piece__no">N° 1</p>
+              <p class="piece__name" data-en="Oval link">Maille ovale</p>
+              <p class="piece__price" data-en="$20">20 $</p>
+            </div>
+            <div class="qty">
+              <button type="button" data-step="-1" aria-label="Retirer un bracelet maille ovale" data-en-aria="Remove one oval link bracelet">−</button>
+              <output aria-live="polite">0</output>
+              <button type="button" data-step="1" aria-label="Ajouter un bracelet maille ovale" data-en-aria="Add one oval link bracelet">+</button>
+            </div>
+          </div>
+          <div class="piece" data-piece="trefle-noir">
+            <img src="assets/trefle-beton-m.webp" width="760" height="1166" alt="" loading="lazy">
+            <div class="piece__txt">
+              <p class="piece__no">N° 2</p>
+              <p class="piece__name" data-en="Black clover">Trèfle noir</p>
+              <p class="piece__price" data-en="$20">20 $</p>
+            </div>
+            <div class="qty">
+              <button type="button" data-step="-1" aria-label="Retirer un bracelet trèfle noir" data-en-aria="Remove one black clover bracelet">−</button>
+              <output aria-live="polite">0</output>
+              <button type="button" data-step="1" aria-label="Ajouter un bracelet trèfle noir" data-en-aria="Add one black clover bracelet">+</button>
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="order__total"><span data-en="Total">Total</span> <strong id="order-total">0 $</strong></p>
+
+        <div class="order__fields">
+          <label><span data-en="Name">Nom</span><input name="name" autocomplete="name" required></label>
+          <label><span data-en="Email">Courriel</span><input name="email" type="email" autocomplete="email" required></label>
+          <label><span data-en="Phone (optional)">Téléphone (facultatif)</span><input name="phone" type="tel" autocomplete="tel"></label>
+          <label class="wide"><span data-en="Note (wrist size, delivery, question)">Note (tour de poignet, livraison, question)</span><textarea name="note" rows="3"></textarea></label>
+        </div>
+
+        <button class="order__send" type="submit" data-en="Send my order">Envoyer ma commande</button>
+        <p class="order__status" id="order-status" role="status" aria-live="polite"></p>
+        <p class="order__small" data-en="No payment on this page. We reply by email to confirm the order and how to pay.">Aucun paiement sur cette page. Nous répondons par courriel pour confirmer la commande et le paiement.</p>
+
+        <div class="order__social" hidden>
+          <span data-en="Or write to us:">Ou écrivez-nous :</span>
+          <a data-social="instagram" href="#" target="_blank" rel="noopener" hidden>Instagram</a>
+          <a data-social="whatsapp" href="#" target="_blank" rel="noopener" hidden>WhatsApp</a>
+        </div>
+      </form>
+
+      <footer class="foot">
+        <p class="foot__mark"><span>Golden</span> JB</p>
+        <p data-en="Stainless steel bracelets.">Bracelets en acier inoxydable.</p>
+        <p>© <span id="year">2026</span> Golden JB</p>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script src="golden.js"></script>
+</body>
+</html>
