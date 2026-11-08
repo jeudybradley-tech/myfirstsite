@@ -149,12 +149,6 @@ html.gjb-open.gjb-opened .opening { opacity: 0; visibility: hidden; pointer-even
 }
 .lang button[aria-pressed="true"] { background: var(--sc-accent); color: var(--sc-accent-ink); }
 
-/* ── The chain (signature) ──────────────────────────────────────────────── */
-.chain {
-  position: fixed; top: 0; right: 0; z-index: 30; pointer-events: none;
-  transition: opacity .6s var(--sc-ease-out);
-}
-
 /* ── Labels: one schema for every object ────────────────────────────────── */
 .label__no {
   font-family: var(--font-italic); font-style: italic; color: var(--sc-accent);

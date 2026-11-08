@@ -23,6 +23,8 @@
   titre à gauche, bouton doré, menu avec Accueil et un sac). Le compteur de diapositives « 01 / 04 » de la
   référence n'a pas été repris : il n'y a qu'une photo. Cette section passe avant le N° 1, ce qui s'écarte de la
   grammaire galerie (où le N° 1 ouvre la page) : choix de la cliente. Le N° 1 a été inversé (photo à gauche).
+- **Chaîne suspendue :** retirée à la demande de la cliente (« enlever », avec une capture de la chaîne).
+  Le geste signature qui reste est la loupe du N° 2.
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude

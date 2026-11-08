@@ -1,6 +1,6 @@
 /* Golden JB · page script.
    The engine (scrollcraft.js) is mounted first and never edited. Everything
-   below is this page's own: language, index, the hanging chain (signature),
+   below is this page's own: language, index,
    the loupe pull-back (peak), and the order plate. */
 (function () {
   'use strict';
@@ -143,134 +143,15 @@
     frame.style.clipPath = 'inset(' + ins.map(function (v) { return v.toFixed(1) + 'px'; }).join(' ') + ' round ' + (3 * t).toFixed(1) + 'px)';
   }
 
-  /* ------------------------------------- the hanging chain (signature) --
-     A silver chain of oval links hangs from under the index on the right.
-     Verlet physics: scroll speed swings it, the pointer pushes it, and it
-     settles on its own. A small gold tag stamped JB hangs at the end. */
-  var canvas = document.getElementById('chain');
-  var ctx = canvas.getContext('2d');
-  var N = 22, pts = [], seg = 14, chainW = 220, chainH = 0, dpr = 1;
-  var anchorX = 0, anchorY = 0, lastScroll = scrollY, impulse = 0, ptr = null, idle = 0, chainOn = true;
-
-  function layoutChain() {
-    dpr = Math.min(2, window.devicePixelRatio || 1);
-    var phone = innerWidth <= 700;
-    chainH = phone ? innerHeight * 0.3 : innerHeight * 0.56;
-    chainW = phone ? 120 : 240;
-    seg = chainH / N;
-    canvas.width = Math.round(chainW * dpr); canvas.height = Math.round((chainH + 80) * dpr);
-    canvas.style.width = chainW + 'px'; canvas.style.height = (chainH + 80) + 'px';
-    canvas.style.top = (phone ? 50 : 58) + 'px';
-    canvas.style.right = (phone ? 0 : Math.max(8, innerWidth * 0.035)) + 'px';
-    anchorX = chainW / 2; anchorY = 4;
-    pts = [];
-    for (var i = 0; i <= N; i++) pts.push({ x: anchorX, y: anchorY + i * seg, px: anchorX, py: anchorY + i * seg });
-    if (!reduce) for (var j = 1; j <= N; j++) pts[j].px -= j * 0.35;   // a first, small swing on arrival
-  }
-
-  function step() {
-    var g = 0.42, damp = 0.985;
-    for (var i = 1; i <= N; i++) {
-      var q = pts[i], vx = (q.x - q.px) * damp, vy = (q.y - q.py) * damp;
-      q.px = q.x; q.py = q.y;
-      q.x += vx + impulse * (i / N); q.y += vy + g;
-      if (ptr) {
-        var dx = q.x - ptr.x, dy = q.y - ptr.y, d2 = dx * dx + dy * dy;
-        if (d2 < 1600 && d2 > 0.01) { var d = Math.sqrt(d2), f = (40 - d) / d * 0.5; q.x += dx * f; q.y += dy * f; }
-      }
-    }
-    impulse *= 0.8;
-    for (var k = 0; k < 14; k++) {
-      pts[0].x = anchorX; pts[0].y = anchorY;
-      for (var s = 0; s < N; s++) {
-        var a = pts[s], b = pts[s + 1], ddx = b.x - a.x, ddy = b.y - a.y;
-        var dist = Math.sqrt(ddx * ddx + ddy * ddy) || 0.001, diff = (dist - seg) / dist;
-        if (s === 0) { b.x -= ddx * diff; b.y -= ddy * diff; }
-        else { a.x += ddx * diff * 0.5; a.y += ddy * diff * 0.5; b.x -= ddx * diff * 0.5; b.y -= ddy * diff * 0.5; }
-      }
-      for (var m = 1; m <= N; m++) pts[m].x = Math.max(6, Math.min(chainW - 6, pts[m].x));
-    }
-  }
-
-  function drawChain() {
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, chainW, chainH + 80);
-    var steel = ctx.createLinearGradient(0, 0, chainW, 0);
-    steel.addColorStop(0, '#8d9096'); steel.addColorStop(0.45, '#eef0f2'); steel.addColorStop(0.6, '#c9ccd1'); steel.addColorStop(1, '#7c7f85');
-    ctx.lineCap = 'round';
-    for (var i = 0; i < N; i++) {
-      var a = pts[i], b = pts[i + 1], mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-      var ang = Math.atan2(b.y - a.y, b.x - a.x), len = seg * 0.74;
-      ctx.save(); ctx.translate(mx, my); ctx.rotate(ang);
-      ctx.shadowColor = 'rgba(0,0,0,.55)'; ctx.shadowBlur = 6; ctx.shadowOffsetY = 3;
-      ctx.strokeStyle = steel;
-      ctx.beginPath();
-      if (i % 2 === 0) { ctx.lineWidth = Math.max(1.6, seg * 0.13); ctx.ellipse(0, 0, len, seg * 0.38, 0, 0, Math.PI * 2); }
-      else { ctx.lineWidth = Math.max(1.8, seg * 0.16); ctx.moveTo(-len * 0.9, 0); ctx.lineTo(len * 0.9, 0); }
-      ctx.stroke();
-      ctx.restore();
-    }
-    // the tag
-    var e = pts[N], p = pts[N - 1], ang2 = Math.atan2(e.y - p.y, e.x - p.x) - Math.PI / 2;
-    ctx.save(); ctx.translate(e.x, e.y); ctx.rotate(ang2);
-    ctx.shadowColor = 'rgba(0,0,0,.55)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 4;
-    var gold = ctx.createLinearGradient(-14, 0, 14, 30);
-    gold.addColorStop(0, '#f0d79a'); gold.addColorStop(0.5, '#d2ae66'); gold.addColorStop(1, '#8f6d2c');
-    ctx.fillStyle = gold;
-    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(-13, 4, 26, 32, 4) : ctx.rect(-13, 4, 26, 32); ctx.fill();
-    ctx.shadowColor = 'transparent';
-    ctx.fillStyle = '#120f0a';
-    ctx.beginPath(); ctx.arc(0, 10, 2.2, 0, Math.PI * 2); ctx.fill();
-    ctx.font = 'italic 600 13px "Cormorant Garamond", serif'; ctx.textAlign = 'center';
-    ctx.fillText('JB', 0, 29);
-    ctx.restore();
-  }
-
-  function chainVisibility() {
-    // Desktop: the chain hangs through both objects and steps aside before the
-    // lateral room, so it never covers a caption or the order plate.
-    // Phone: hero only, where it sits beside the label, not over text.
-    var phone = innerWidth <= 700, room = document.querySelector('.room').getBoundingClientRect().top;
-    var on = phone ? scrollY < innerHeight * 0.7 : room > innerHeight * 0.6;
-    if (on !== chainOn) { chainOn = on; canvas.style.opacity = on ? '1' : '0'; }
-  }
-
-  addEventListener('pointermove', function (e) {
-    if (e.pointerType !== 'mouse' || reduce) return;
-    var r = canvas.getBoundingClientRect();
-    ptr = { x: e.clientX - r.left, y: e.clientY - r.top }; idle = 0;
-  }, { passive: true });
-  document.addEventListener('pointerleave', function () { ptr = null; });
-
-  /* ------------------------------------------------------------- loop --- */
+  /* ------------------------------------------------------------- loop ---
+     One frame per scroll or resize: the loupe and the index. Nothing runs
+     while the page is still. */
   var raf = 0;
-  function frameLoop() {
-    raf = 0;
-    var dy = scrollY - lastScroll; lastScroll = scrollY;
-    if (!reduce && dy) { impulse += Math.max(-6, Math.min(6, dy * 0.05)); idle = 0; }
-    chainVisibility();
-    if (chainOn && !reduce) {
-      step(); drawChain();
-      var energy = 0;
-      for (var i = 1; i <= N; i++) energy += Math.abs(pts[i].x - pts[i].px) + Math.abs(pts[i].y - pts[i].py);
-      idle = energy < 0.05 ? idle + 1 : 0;
-    }
-    drawLoupe();
-    spy();
-    if (!document.hidden && (idle < 30 || !chainOn)) raf = requestAnimationFrame(frameLoop);
-  }
-  function wake() { idle = 0; if (!raf) raf = requestAnimationFrame(frameLoop); }
+  function frameLoop() { raf = 0; drawLoupe(); spy(); }
+  function wake() { if (!raf) raf = requestAnimationFrame(frameLoop); }
   addEventListener('scroll', wake, { passive: true });
-  addEventListener('pointermove', wake, { passive: true });
-  document.addEventListener('visibilitychange', wake);
-  addEventListener('resize', function () { layoutChain(); if (loupe) loupeGeometry(); if (reduce) settleStatic(); wake(); });
-
-  function settleStatic() { for (var i = 0; i < 160; i++) step(); drawChain(); }
-
-  layoutChain();
+  addEventListener('resize', function () { if (loupe) loupeGeometry(); wake(); });
   if (loupe) loupeGeometry();
-  if (reduce) settleStatic();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (reduce) drawChain(); else wake(); });
   wake();
 
   /* -------------------------------------------------------- the order --- */

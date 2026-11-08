@@ -126,4 +126,6 @@ constrain yours.
 against `nitsy` 5 of 6 (both close on an in-flow form; this one is an order plate with quantities, not a
 contact form, but the pattern is close enough to count as shared); against `mechi` 5 of 6, for the same reason. Typography is shared with `tenebre`
 and `mechi` at the client's request; type is not a gate dimension.
-
+- **Removed:** the hanging chain in `golden-jb` was taken out at the client's request after shipping. The
+  row stays as built (rows are append-only); its remaining signature is the clip-path loupe pull-back, and
+  the build gained a client-directed homepage hero (full-bleed photo, title left, gold button) before N° 1.
