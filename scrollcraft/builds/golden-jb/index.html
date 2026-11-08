@@ -12,6 +12,27 @@
 </head>
 <body>
 
+<!-- L'écran d'ouverture (comme TIMELESS) : à chaque ouverture, le nom puis
+     sa phrase sont révélés par un bloc doré sur fond noir, puis le site
+     apparaît. Pas quand l'adresse vise une section (#n1, #n2, #commande) ;
+     un défilement, un clic ou une touche le passe. Décoratif : le <h1> du
+     héros porte déjà le nom. -->
+<div class="opening" aria-hidden="true">
+  <p class="opening__name"><span><b>Golden</b> JB</span></p>
+  <p class="opening__line"><span id="opening-line">Porté chaque jour, gardé pour toujours.</span></p>
+</div>
+<script>
+  (function () {
+    var r = document.documentElement, lang = null;
+    if (/^#(n1|n2|commande)$/.test(location.hash)) return;
+    try { lang = localStorage.getItem('gjb-lang'); } catch (e) {}
+    if (lang === 'en') document.getElementById('opening-line').textContent = 'Worn every day, kept for good.';
+    r.classList.add('gjb-open');
+    // ne jamais bloquer la page si le script n'arrive pas
+    setTimeout(function () { r.classList.remove('gjb-open'); }, 12000);
+  })();
+</script>
+
 <div class="sc-grain" aria-hidden="true"></div>
 
 <!-- La chaîne : le geste signature. Une vraie chaîne d'argent suspendue sous

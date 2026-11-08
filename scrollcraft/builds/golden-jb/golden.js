@@ -14,6 +14,25 @@
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root = document.documentElement;
+
+  /* ----------------------------------------------------------- opening --
+     The markup put the name on black (html.gjb-open). It holds a little over
+     six seconds (under three with reduced motion), then fades; a scroll, a
+     click, a touch or a key ends it at once. */
+  (function () {
+    if (!root.classList.contains('gjb-open')) return;
+    var done = false;
+    function finish() {
+      if (done) return;
+      done = true;
+      root.classList.add('gjb-opened');
+      setTimeout(function () { root.classList.remove('gjb-open', 'gjb-opened'); }, 1850);
+    }
+    setTimeout(finish, reduce ? 2600 : 6400);
+    ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (t) {
+      addEventListener(t, finish, { once: true, passive: true });
+    });
+  })();
   ScrollCraft.mount(document.body);
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
@@ -40,6 +59,8 @@
       b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
     });
     document.title = lang === 'en' ? 'Golden JB · Stainless steel bracelets' : 'Golden JB · Bracelets en acier inoxydable';
+    var ol = document.getElementById('opening-line');
+    if (ol) ol.textContent = lang === 'en' ? 'Worn every day, kept for good.' : 'Porté chaque jour, gardé pour toujours.';
     updateTotal();
     store('gjb-lang', lang);
   }

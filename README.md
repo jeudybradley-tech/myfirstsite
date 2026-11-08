@@ -74,3 +74,5 @@ python3 -m http.server 8000
 - **Textes et traductions :** chaque texte français est dans `index.html`, sa version anglaise dans l'attribut `data-en` du même élément.
 - **Bracelet trèfle :** le modèle ressemble beaucoup à un dessin protégé d'une grande maison de joaillerie. Le site ne cite aucune marque ; vérifier auprès du fournisseur que ce n'est pas une copie avant de vendre.
 - **Photos :** les cinq photos envoyées, dans `assets/` (versions `-m` pour le téléphone). Pour en changer une, garder le même cadrage ou donner un nouveau nom de fichier.
+- **Écran d'ouverture :** à chaque ouverture de la page, « GOLDEN JB » puis « Porté chaque jour, gardé pour toujours. » (« Worn every day, kept for good. » en anglais) sont révélés par un bloc doré sur fond noir, comme pour TIMELESS ; un peu plus de 6 s, puis un fondu. Un défilement, un clic ou une touche le passe. Pas d'écran d'ouverture quand le lien vise une section (`#n1`, `#n2`, `#commande`). La phrase se change dans `index.html` (juste après `<body>`) et dans `golden.js` (fonction `setLang`).
+

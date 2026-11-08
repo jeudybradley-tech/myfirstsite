@@ -16,6 +16,8 @@
 - **Langue :** « Français et anglais » : bouton FR / EN, français par défaut, choix retenu.
 - **Commande :** « Les deux » : un bon de commande et des boutons vers les réseaux.
 - **Réseaux :** « Plus tard » : Instagram et WhatsApp prévus, cachés tant qu'ils sont vides.
+- **Page d'accueil :** « ils faut avoir une page d'accueil », précisé : « Écran d'ouverture » comme TIMELESS,
+  phrase proposée par Claude : « Porté chaque jour, gardé pour toujours. » / « Worn every day, kept for good. »
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude
