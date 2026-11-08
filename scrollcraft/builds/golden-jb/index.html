@@ -86,51 +86,37 @@
     </div>
   </section>
 
-  <!-- 1 · N° 1. Plans : photo (recul), étiquette (1x), reflets (devant). -->
-  <section id="n1" class="hero" data-sc-act="flow" data-sc-drift="#0b0a08">
-    <div class="hero__photo" data-sc-parallax="-1.2">
-      <picture data-sc-reveal="up" data-sc-reveal-at="0.04 0.42">
-        <source media="(max-width: 700px)" srcset="assets/maille-cafe-m.webp">
-        <img src="assets/maille-cafe.webp" width="1024" height="1024" fetchpriority="high"
-             alt="Un poignet sur une table de café au soleil, avec le bracelet à mailles ovales en acier."
-             data-en-alt="A wrist on a café table in the sun, wearing the oval-link steel bracelet.">
-      </picture>
-    </div>
-    <div class="hero__glints" data-sc-parallax="0.9" aria-hidden="true">
-      <i style="--x:38%;--y:58%;--s:1"></i><i style="--x:29%;--y:44%;--s:.6"></i>
-      <i style="--x:45%;--y:72%;--s:.8"></i><i style="--x:20%;--y:66%;--s:.5"></i>
-    </div>
-    <div class="hero__label label" data-sc-in data-sc-stagger="90">
-      <p class="label__no">N° 1</p>
-      <h2 class="label__name"><span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="oval link">maille ovale</em></h2>
-      <dl class="label__facts">
-        <div><dt data-en="Material">Matière</dt><dd data-en="Stainless steel">Acier inoxydable</dd></div>
-        <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver">Argent</dd></div>
-        <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
-      </dl>
-      <a class="label__ask" href="#commande" data-piece="maille-ovale" data-en="Order">Commander</a>
-    </div>
-  </section>
-
-  <!-- 3 · Le silence avant le pic : un seul mot, beaucoup de noir. -->
-  <section class="hush" data-sc-act="flow" data-sc-drift="#070605">
-    <p class="hush__no" data-sc-in>N° 2</p>
-  </section>
-
-  <!-- 4 · LE PIC. La caméra part du trèfle, au plus près, et recule
-       jusqu'à l'homme entier. L'étiquette se pose à la fin. -->
-  <section id="n2" class="loupe" data-sc-act="pin" data-sc-span="2.6" data-sc-drift="#070605">
-    <div data-sc-stage class="loupe__stage">
-      <div class="loupe__frame">
-        <picture>
-          <source media="(max-width: 700px)" srcset="assets/trefle-polo-l.webp">
-          <img class="loupe__img" src="assets/trefle-polo-xl.webp" width="1664" height="2496" loading="lazy"
-               alt="Un homme en polo crème appuyé à un muret, le bracelet à trèfles noirs au poignet."
-               data-en-alt="A man in a cream polo leaning on a low wall, the black clover bracelet on his wrist.">
-        </picture>
+  <!-- Les quatre bijoux, tous sur le même modèle (demande de la cliente) :
+       l'étiquette à gauche, la photo à droite dans un cadre qui s'ouvre par la
+       droite au défilement, la photo glissant doucement dans le cadre. -->
+  <section id="n1" class="bijou sc-section" data-sc-act="flow" data-sc-drift="#0b0a08">
+    <div class="sc-wrap bijou__grid">
+      <div class="bijou__label label" data-sc-in data-sc-stagger="90">
+        <p class="label__no">N° 1</p>
+        <h2 class="label__name"><span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="oval link">maille ovale</em></h2>
+        <dl class="label__facts">
+          <div><dt data-en="Material">Matière</dt><dd data-en="Stainless steel">Acier inoxydable</dd></div>
+          <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver">Argent</dd></div>
+          <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
+        </dl>
+        <a class="label__ask" href="#commande" data-piece="maille-ovale" data-en="Order">Commander</a>
       </div>
-      <p class="loupe__whisper" data-sc-cue="0.02 0.34 0.1" data-en="Closer.">Plus près.</p>
-      <div class="loupe__label label" data-sc-cue="0.62">
+      <figure class="bijou__fig">
+        <div class="bijou__frame" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
+          <picture data-sc-parallax="-1.1">
+            <source media="(max-width: 700px)" srcset="assets/maille-cafe-m.webp">
+            <img src="assets/maille-cafe.webp" width="1024" height="1024" loading="lazy" style="object-position:42% 64%"
+                 alt="Un poignet sur une table de café au soleil, avec le bracelet à mailles ovales en acier."
+                 data-en-alt="A wrist on a café table in the sun, wearing the oval-link steel bracelet.">
+          </picture>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="n2" class="bijou sc-section" data-sc-act="flow" data-sc-drift="#0d0b09">
+    <div class="sc-wrap bijou__grid">
+      <div class="bijou__label label" data-sc-in data-sc-stagger="90">
         <p class="label__no">N° 2</p>
         <h2 class="label__name"><span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="black clover">trèfle noir</em></h2>
         <dl class="label__facts">
@@ -140,23 +126,22 @@
         </dl>
         <a class="label__ask" href="#commande" data-piece="trefle-noir" data-en="Order">Commander</a>
       </div>
+      <figure class="bijou__fig">
+        <div class="bijou__frame" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
+          <picture data-sc-parallax="-1.1">
+            <source media="(max-width: 700px)" srcset="assets/trefle-polo-l.webp">
+            <img src="assets/trefle-polo-xl.webp" width="1664" height="2496" loading="lazy" style="object-position:50% 58%"
+                 alt="Un homme en polo crème appuyé à un muret, le bracelet à trèfles noirs au poignet."
+                 data-en-alt="A man in a cream polo leaning on a low wall, the black clover bracelet on his wrist.">
+          </picture>
+        </div>
+      </figure>
     </div>
   </section>
 
-  <!-- 3 · N° 3 : le jonc serti, une seule pièce en deux teintes. Les deux
-       photos s'ouvrent en volets opposés, l'étiquette entre elles. -->
-  <section id="n3" class="pair sc-section" data-sc-act="flow" data-sc-drift="#0e0c0a">
-    <div class="sc-wrap pair__grid">
-      <figure class="pair__fig pair__fig--a" data-sc-reveal="down" data-sc-reveal-at="0.08 0.42">
-        <picture>
-          <source media="(max-width: 700px)" srcset="assets/jonc-argent-m.webp">
-          <img src="assets/jonc-argent.webp" width="1200" height="1800" loading="lazy"
-               alt="Une femme assise sur une chaise en bois, le jonc serti argent au poignet."
-               data-en-alt="A woman sitting on a wooden chair, the silver set bangle on her wrist.">
-        </picture>
-        <figcaption class="caption"><span>N° 3</span> <span data-en="Silver">Argent</span></figcaption>
-      </figure>
-      <div class="pair__label label" data-sc-in data-sc-stagger="90">
+  <section id="n3" class="bijou sc-section" data-sc-act="flow" data-sc-drift="#0e0c0a">
+    <div class="sc-wrap bijou__grid">
+      <div class="bijou__label label" data-sc-in data-sc-stagger="90">
         <p class="label__no">N° 3</p>
         <h2 class="label__name"><span data-en="Bangle">Jonc</span> <em class="t-it" data-en="with stones">serti</em></h2>
         <dl class="label__facts">
@@ -164,27 +149,34 @@
           <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver or gold">Argent ou doré</dd></div>
           <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
         </dl>
-        <div class="pair__asks">
-          <a class="label__ask" href="#commande" data-piece="jonc-argent" data-en="Silver">Argent</a>
-          <a class="label__ask" href="#commande" data-piece="jonc-dore" data-en="Gold">Doré</a>
+        <div class="finish" role="group" aria-label="Teinte" data-en-aria="Finish">
+          <button type="button" data-finish-btn="argent" aria-pressed="true" data-en="Silver">Argent</button>
+          <button type="button" data-finish-btn="dore" aria-pressed="false" data-en="Gold">Doré</button>
         </div>
+        <a class="label__ask" href="#commande" data-piece="jonc-argent" id="n3-ask" data-en="Order">Commander</a>
       </div>
-      <figure class="pair__fig pair__fig--b" data-sc-reveal="up" data-sc-reveal-at="0.16 0.5">
-        <picture>
-          <source media="(max-width: 700px)" srcset="assets/jonc-dore-m.webp">
-          <img src="assets/jonc-dore.webp" width="1200" height="1788" loading="lazy"
-               alt="Une main dans la poche d'un pantalon noir, le jonc serti doré au poignet."
-               data-en-alt="A hand in the pocket of black trousers, the gold set bangle on the wrist.">
-        </picture>
-        <figcaption class="caption"><span>N° 3</span> <span data-en="Gold">Doré</span></figcaption>
+      <figure class="bijou__fig">
+        <div class="bijou__frame" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
+          <picture data-sc-parallax="-1.1" data-finish="argent">
+            <source media="(max-width: 700px)" srcset="assets/jonc-argent-m.webp">
+            <img src="assets/jonc-argent.webp" width="1200" height="1800" loading="lazy" style="object-position:50% 62%"
+                 alt="Une femme assise sur une chaise en bois, le jonc serti argent au poignet."
+                 data-en-alt="A woman sitting on a wooden chair, the silver set bangle on her wrist.">
+          </picture>
+          <picture data-sc-parallax="-1.1" data-finish="dore" hidden>
+            <source media="(max-width: 700px)" srcset="assets/jonc-dore-m.webp">
+            <img src="assets/jonc-dore.webp" width="1200" height="1788" loading="lazy" style="object-position:40% 45%"
+                 alt="Une main dans la poche d'un pantalon noir, le jonc serti doré au poignet."
+                 data-en-alt="A hand in the pocket of black trousers, the gold set bangle on the wrist.">
+          </picture>
+        </div>
       </figure>
     </div>
   </section>
 
-  <!-- 4 · N° 4 : le trèfle blanc, dans un cadre qui glisse sous l'étiquette. -->
-  <section id="n4" class="white sc-section" data-sc-act="flow" data-sc-drift="#100e0c">
-    <div class="sc-wrap white__grid">
-      <div class="white__label label" data-sc-in data-sc-stagger="90">
+  <section id="n4" class="bijou sc-section" data-sc-act="flow" data-sc-drift="#100e0c">
+    <div class="sc-wrap bijou__grid">
+      <div class="bijou__label label" data-sc-in data-sc-stagger="90">
         <p class="label__no">N° 4</p>
         <h2 class="label__name"><span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="white clover">trèfle blanc</em></h2>
         <dl class="label__facts">
@@ -194,11 +186,11 @@
         </dl>
         <a class="label__ask" href="#commande" data-piece="trefle-blanc" data-en="Order">Commander</a>
       </div>
-      <figure class="white__fig">
-        <div class="white__frame" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
+      <figure class="bijou__fig">
+        <div class="bijou__frame" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
           <picture data-sc-parallax="-1.1">
             <source media="(max-width: 700px)" srcset="assets/trefle-blanc-m.webp">
-            <img src="assets/trefle-blanc.webp" width="1200" height="1788" loading="lazy"
+            <img src="assets/trefle-blanc.webp" width="1200" height="1788" loading="lazy" style="object-position:60% 80%"
                  alt="Une femme en t-shirt noir, la main dans la poche, le bracelet à trèfles blancs au poignet."
                  data-en-alt="A woman in a black t-shirt, hand in her pocket, the white clover bracelet on her wrist.">
           </picture>

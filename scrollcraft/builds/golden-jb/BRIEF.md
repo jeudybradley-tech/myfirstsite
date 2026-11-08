@@ -32,6 +32,9 @@
 - **Apparition au défilement :** « je veux lorsque je scroll vers le bas chaque bijoux apparait fu à mesure ».
 - **Pas de répétition :** « ne répète pas les bijoux » : retrait de la deuxième photo du N° 1 (acte « Porté ») et
   de la galerie « Portés » ; il reste accueil > N° 1 > silence > N° 2 (pic) > N° 3 > N° 4 > commande.
+- **Même modèle pour tous :** « je veux que toute les bijoux font se mode ainsi » (capture du N° 4) et « je ne veux
+  pas la photo du bracelet trèfle noir zoom » : quatre sections identiques (étiquette à gauche, cadre à droite),
+  plus de loupe ni de silence avant le N° 2 ; jonc en une seule photo avec un bouton Argent / Doré.
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude

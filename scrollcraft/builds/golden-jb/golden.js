@@ -1,7 +1,7 @@
 /* Golden JB · page script.
    The engine (scrollcraft.js) is mounted first and never edited. Everything
-   below is this page's own: language, index,
-   the loupe pull-back (peak), and the order plate. */
+   below is this page's own: opening, language, index, the N° 3 finish
+   switch, and the order plate. */
 (function () {
   'use strict';
 
@@ -88,66 +88,29 @@
     spyLinks.forEach(function (a) { a.classList.toggle('is-here', a === here); });
   }
 
-  /* ------------------------------------------- 4 · the loupe (peak) --- */
-  var loupe = document.querySelector('.loupe');
-  var frame = loupe && loupe.querySelector('.loupe__frame');
-  var limg = loupe && loupe.querySelector('.loupe__img');
-  var llabel = loupe && loupe.querySelector('.loupe__label');
-  var FX = 0.262, FY = 0.715, ASPECT = 1664 / 2496;   // the bracelet, in the photo
-  var lerp = function (a, b, t) { return a + (b - a) * t; };
-  var ease = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
-  var geo = null;
-
-  function loupeGeometry() {
-    var vw = innerWidth, vh = loupe.querySelector('.loupe__stage').clientHeight, phone = vw <= 700;
-    var W1, H1, x1, y1;
-    if (phone) {
-      H1 = Math.min(vh * 0.42, (vw - 32) / ASPECT); W1 = H1 * ASPECT;
-      x1 = (vw - W1) / 2; y1 = 64;
-    } else {
-      H1 = vh * 0.8; W1 = H1 * ASPECT;
-      x1 = Math.max(vw * 0.3 - W1 / 2, vw * 0.05); y1 = (vh - H1) / 2 + 12;
-    }
-    var sx = vw * (phone ? 0.5 : 0.42), sy = vh * 0.5;          // where the bracelet sits at the start
-    var W0 = Math.max(sx / FX, (vw - sx) / (1 - FX), sy / FY * ASPECT, (vh - sy) / (1 - FY) * ASPECT) * 1.04;
-    geo = { vw: vw, vh: vh, phone: phone, W0: W0, W1: W1, H1: H1, x1: x1, y1: y1, sx: sx, sy: sy };
-    if (llabel) {
-      if (phone) {
-        llabel.style.left = '16px'; llabel.style.right = '16px';
-        llabel.style.top = (y1 + H1 + 20) + 'px'; llabel.style.bottom = 'auto';
-      } else {
-        llabel.style.left = (x1 + W1 + vw * 0.07) + 'px'; llabel.style.right = 'auto';
-        llabel.style.top = '50%'; llabel.style.bottom = 'auto';
-        llabel.style.translate = '0 -50%';
-      }
-    }
-  }
-
-  function drawLoupe() {
-    if (!loupe || !geo) return;
-    var r = loupe.getBoundingClientRect();
-    var travel = r.height - geo.vh;
-    var p = travel > 0 ? Math.min(1, Math.max(0, -r.top / travel)) : 1;
-    if (r.bottom < 0 || r.top > geo.vh) return;
-    var t = reduce ? 1 : ease(Math.min(1, Math.max(0, (p - 0.04) / 0.6)));
-    var W = Math.exp(lerp(Math.log(geo.W0), Math.log(geo.W1), t));
-    var fx = lerp(geo.sx, geo.x1 + FX * geo.W1, t);
-    var fy = lerp(geo.sy, geo.y1 + FY * geo.H1, t);
-    var left = fx - FX * W, top = fy - FY * (W / ASPECT);
-    limg.style.transform = 'translate3d(' + left.toFixed(1) + 'px,' + top.toFixed(1) + 'px,0) scale(' + (W / 1000).toFixed(4) + ')';
-    var ins = [geo.y1 * t, (geo.vw - geo.x1 - geo.W1) * t, (geo.vh - geo.y1 - geo.H1) * t, geo.x1 * t];
-    frame.style.clipPath = 'inset(' + ins.map(function (v) { return v.toFixed(1) + 'px'; }).join(' ') + ' round ' + (3 * t).toFixed(1) + 'px)';
-  }
+  /* --------------------------------------------- N° 3 · the finish --- */
+  // One bangle, two finishes: the switch shows that photo and sets which
+  // finish "Commander" adds to the order.
+  var n3ask = document.getElementById('n3-ask');
+  document.querySelectorAll('[data-finish-btn]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.dataset.finishBtn;
+      document.querySelectorAll('[data-finish-btn]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      document.querySelectorAll('#n3 [data-finish]').forEach(function (pic) {
+        pic.hidden = pic.dataset.finish !== f;
+        if (!pic.hidden) { var im = pic.querySelector('img'); if (im) im.loading = 'eager'; }
+      });
+      if (n3ask) n3ask.dataset.piece = f === 'dore' ? 'jonc-dore' : 'jonc-argent';
+    });
+  });
 
   /* ------------------------------------------------------------- loop ---
-     One frame per scroll or resize: the loupe and the index. Nothing runs
-     while the page is still. */
+     One frame per scroll: the index. Nothing runs while the page is still. */
   var raf = 0;
-  function frameLoop() { raf = 0; drawLoupe(); spy(); }
+  function frameLoop() { raf = 0; spy(); }
   function wake() { if (!raf) raf = requestAnimationFrame(frameLoop); }
   addEventListener('scroll', wake, { passive: true });
-  addEventListener('resize', function () { if (loupe) loupeGeometry(); wake(); });
-  if (loupe) loupeGeometry();
+  addEventListener('resize', wake);
   wake();
 
   /* -------------------------------------------------------- the order --- */

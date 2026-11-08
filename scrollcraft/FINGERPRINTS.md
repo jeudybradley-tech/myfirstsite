@@ -132,4 +132,7 @@ and `mechi` at the client's request; type is not a gate dimension.
 - **Changed after shipping (`golden-jb`):** at the client's request the `pan` rail and the second N° 1 act were
   removed (no piece shown twice) and two pieces were added as flow acts. Shape is now
   `flow(home) > flow(parallax + reveal) > flow(hush) > pin(loupe) > flow(two opposed reveals) > flow(framed reveal) > flow(order)`.
+- **Changed again (`golden-jb`):** the client asked for every piece on the N° 4 model and for the loupe to go.
+  Shape is now `flow(home) > 4 × flow(label left, framed reveal right) > flow(order)`; the loupe and the hush
+  act are gone, so the build no longer has a pinned act or the loupe peak.
 
