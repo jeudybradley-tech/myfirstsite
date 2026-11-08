@@ -32,6 +32,7 @@
     ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (t) {
       addEventListener(t, finish, { once: true, passive: true });
     });
+    addEventListener('scroll', function () { if (scrollY > 2) finish(); }, { passive: true });
   })();
   ScrollCraft.mount(document.body);
   var year = document.getElementById('year');
@@ -177,10 +178,10 @@
       });
     });
   });
-  // "Commander" from a label pre-selects that piece once
+  // "Commander" from a label pre-selects its piece (data-piece) once
   document.querySelectorAll('.label__ask').forEach(function (a) {
     a.addEventListener('click', function () {
-      var key = a.closest('#n2') ? 'trefle-noir' : a.closest('#n1') ? 'maille-ovale' : null;
+      var key = a.dataset.piece || null;
       if (key && qty[key] === 0) {
         qty[key] = 1;
         document.querySelector('.piece[data-piece="' + key + '"] output').textContent = '1';

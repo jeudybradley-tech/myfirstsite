@@ -25,6 +25,10 @@
   grammaire galerie (où le N° 1 ouvre la page) : choix de la cliente. Le N° 1 a été inversé (photo à gauche).
 - **Chaîne suspendue :** retirée à la demande de la cliente (« enlever », avec une capture de la chaîne).
   Le geste signature qui reste est la loupe du N° 2.
+- **Nouveaux produits (5 photos de plus) :** « Nouveaux produits » et « Galerie Portés », 20 $ chacun,
+  jonc « Un produit, 2 teintes », trèfle blanc « Produit séparé ». N° 3 Jonc serti (deux photos qui s'ouvrent
+  en volets opposés, étiquette au milieu) et N° 4 Trèfle blanc (photo qui glisse dans un cadre), avant la
+  galerie, qui passe à six éléments (4,2 écrans).
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude

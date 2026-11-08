@@ -14,7 +14,7 @@
 
 <!-- L'écran d'ouverture (comme TIMELESS) : à chaque ouverture, le nom puis
      sa phrase sont révélés par un bloc doré sur fond noir, puis le site
-     apparaît. Pas quand l'adresse vise une section (#n1, #n2, #commande) ;
+     apparaît. Pas quand l'adresse vise une section (#n1 à #n4, #commande) ;
      un défilement, un clic ou une touche le passe. Décoratif : le <h1> du
      héros porte déjà le nom. -->
 <div class="opening" aria-hidden="true">
@@ -24,7 +24,7 @@
 <script>
   (function () {
     var r = document.documentElement, lang = null;
-    if (/^#(n1|n2|commande)$/.test(location.hash)) return;   // #accueil keeps it
+    if (/^#(n[1-4]|commande)$/.test(location.hash)) return;   // #accueil keeps it
     try { lang = localStorage.getItem('gjb-lang'); } catch (e) {}
     if (lang === 'en') document.getElementById('opening-line').textContent = 'Worn every day, kept for good.';
     r.classList.add('gjb-open');
@@ -41,6 +41,8 @@
     <a href="#accueil" data-spy="accueil" data-en="Home">Accueil</a>
     <a href="#n1" data-spy="n1"><span class="index__no">N° 1</span> <span class="index__name" data-en="Oval link">Maille ovale</span></a>
     <a href="#n2" data-spy="n2"><span class="index__no">N° 2</span> <span class="index__name" data-en="Black clover">Trèfle noir</span></a>
+    <a href="#n3" data-spy="n3"><span class="index__no">N° 3</span> <span class="index__name" data-en="Set bangle">Jonc serti</span></a>
+    <a href="#n4" data-spy="n4"><span class="index__no">N° 4</span> <span class="index__name" data-en="White clover">Trèfle blanc</span></a>
     <a href="#commande" data-spy="commande" data-en="Order">Commander</a>
   </nav>
   <div class="index__side">
@@ -65,7 +67,7 @@
 
   <!-- 0 · ACCUEIL (demande de la cliente, d'après sa référence) : la photo en
        plein écran, le titre à gauche, un bouton doré. Plans : photo (recule
-       et se resserre un peu), voile sombre, texte (1x), chaîne devant. -->
+       et se resserre un peu), voile sombre, texte (1x). -->
   <section id="accueil" class="home" data-sc-act="flow" data-sc-drift="#0b0a08">
     <div class="home__photo" data-sc-parallax="-1.4">
       <picture>
@@ -84,8 +86,7 @@
     </div>
   </section>
 
-  <!-- 1 · N° 1 en vue dès l'arrivée. Plans : photo (recul), étiquette (1x),
-       chaîne au premier plan (fixe), reflets (devant). -->
+  <!-- 1 · N° 1. Plans : photo (recul), étiquette (1x), reflets (devant). -->
   <section id="n1" class="hero" data-sc-act="flow" data-sc-drift="#0b0a08">
     <div class="hero__photo" data-sc-parallax="-1.2">
       <picture>
@@ -107,7 +108,7 @@
         <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver">Argent</dd></div>
         <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
       </dl>
-      <a class="label__ask" href="#commande" data-en="Order">Commander</a>
+      <a class="label__ask" href="#commande" data-piece="maille-ovale" data-en="Order">Commander</a>
     </div>
   </section>
 
@@ -156,18 +157,82 @@
           <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver and black">Argent et noir</dd></div>
           <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
         </dl>
-        <a class="label__ask" href="#commande" data-en="Order">Commander</a>
+        <a class="label__ask" href="#commande" data-piece="trefle-noir" data-en="Order">Commander</a>
       </div>
     </div>
   </section>
 
+  <!-- 3 · N° 3 : le jonc serti, une seule pièce en deux teintes. Les deux
+       photos s'ouvrent en volets opposés, l'étiquette entre elles. -->
+  <section id="n3" class="pair sc-section" data-sc-act="flow" data-sc-drift="#0e0c0a">
+    <div class="sc-wrap pair__grid">
+      <figure class="pair__fig pair__fig--a" data-sc-reveal="down" data-sc-reveal-at="0.08 0.42">
+        <picture>
+          <source media="(max-width: 700px)" srcset="assets/jonc-argent-m.webp">
+          <img src="assets/jonc-argent.webp" width="1200" height="1800" loading="lazy"
+               alt="Une femme assise sur une chaise en bois, le jonc serti argent au poignet."
+               data-en-alt="A woman sitting on a wooden chair, the silver set bangle on her wrist.">
+        </picture>
+        <figcaption class="caption"><span>N° 3</span> <span data-en="Silver">Argent</span></figcaption>
+      </figure>
+      <div class="pair__label label" data-sc-in data-sc-stagger="90">
+        <p class="label__no">N° 3</p>
+        <h2 class="label__name"><span data-en="Bangle">Jonc</span> <em class="t-it" data-en="with stones">serti</em></h2>
+        <dl class="label__facts">
+          <div><dt data-en="Material">Matière</dt><dd data-en="Stainless steel, small set stones">Acier inoxydable, petites pierres serties</dd></div>
+          <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver or gold">Argent ou doré</dd></div>
+          <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
+        </dl>
+        <div class="pair__asks">
+          <a class="label__ask" href="#commande" data-piece="jonc-argent" data-en="Silver">Argent</a>
+          <a class="label__ask" href="#commande" data-piece="jonc-dore" data-en="Gold">Doré</a>
+        </div>
+      </div>
+      <figure class="pair__fig pair__fig--b" data-sc-reveal="up" data-sc-reveal-at="0.16 0.5">
+        <picture>
+          <source media="(max-width: 700px)" srcset="assets/jonc-dore-m.webp">
+          <img src="assets/jonc-dore.webp" width="1200" height="1788" loading="lazy"
+               alt="Une main dans la poche d'un pantalon noir, le jonc serti doré au poignet."
+               data-en-alt="A hand in the pocket of black trousers, the gold set bangle on the wrist.">
+        </picture>
+        <figcaption class="caption"><span>N° 3</span> <span data-en="Gold">Doré</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 4 · N° 4 : le trèfle blanc, dans un cadre qui glisse sous l'étiquette. -->
+  <section id="n4" class="white sc-section" data-sc-act="flow" data-sc-drift="#100e0c">
+    <div class="sc-wrap white__grid">
+      <div class="white__label label" data-sc-in data-sc-stagger="90">
+        <p class="label__no">N° 4</p>
+        <h2 class="label__name"><span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="white clover">trèfle blanc</em></h2>
+        <dl class="label__facts">
+          <div><dt data-en="Material">Matière</dt><dd data-en="Stainless steel, white clovers">Acier inoxydable, trèfles blancs</dd></div>
+          <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver and white">Argent et blanc</dd></div>
+          <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
+        </dl>
+        <a class="label__ask" href="#commande" data-piece="trefle-blanc" data-en="Order">Commander</a>
+      </div>
+      <figure class="white__fig">
+        <div class="white__frame">
+          <picture data-sc-parallax="-1.1">
+            <source media="(max-width: 700px)" srcset="assets/trefle-blanc-m.webp">
+            <img src="assets/trefle-blanc.webp" width="1200" height="1788" loading="lazy"
+                 alt="Une femme en t-shirt noir, la main dans la poche, le bracelet à trèfles blancs au poignet."
+                 data-en-alt="A woman in a black t-shirt, hand in her pocket, the white clover bracelet on her wrist.">
+          </picture>
+        </div>
+      </figure>
+    </div>
+  </section>
+
   <!-- 5 · Les portés : la salle continue de côté. -->
-  <section class="room" data-sc-act="pan" data-sc-span="2.8" data-sc-drift="#0d0b09">
+  <section class="room" data-sc-act="pan" data-sc-span="4.2" data-sc-drift="#0d0b09">
     <div data-sc-stage class="room__stage">
       <div class="room__rail" data-sc-pan="0.04">
         <div class="room__lead">
           <h2 class="label__name"><span data-en="Worn">Portés</span> <em class="t-it" data-en="every day">au quotidien</em></h2>
-          <p class="sc-body" data-en="Both pieces, on other wrists, in other light.">Les deux pièces, à d'autres poignets, dans d'autres lumières.</p>
+          <p class="sc-body" data-en="The pieces, on other wrists, in other light.">Les pièces, à d'autres poignets, dans d'autres lumières.</p>
         </div>
         <figure class="room__item">
           <img src="assets/trefle-beton.webp" width="772" height="1184" loading="lazy"
@@ -176,13 +241,25 @@
           <figcaption class="caption"><span>N° 2</span> <span data-en="Black clover">Trèfle noir</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
         </figure>
         <figure class="room__item">
+          <img src="assets/trefle-canape.webp" width="1200" height="1800" loading="lazy"
+               alt="Un homme en t-shirt noir assis sur un canapé, le bracelet à trèfles noirs au poignet."
+               data-en-alt="A man in a black t-shirt sitting on a sofa, the black clover bracelet on his wrist.">
+          <figcaption class="caption"><span>N° 2</span> <span data-en="Black clover">Trèfle noir</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
+        </figure>
+        <figure class="room__item">
+          <img src="assets/jonc-dore-main.webp" width="1024" height="1024" loading="lazy"
+               alt="Une main posée sur un livre, le jonc serti doré au poignet, au soleil."
+               data-en-alt="A hand resting on a book in the sun, the gold set bangle on the wrist.">
+          <figcaption class="caption"><span>N° 3</span> <span data-en="Set bangle, gold">Jonc serti, doré</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
+        </figure>
+        <figure class="room__item">
           <img src="assets/maille-tasse.webp" width="1024" height="1024" loading="lazy"
                alt="Deux mains autour d'une tasse, le bracelet à mailles ovales au poignet gauche."
                data-en-alt="Two hands around a cup, the oval-link bracelet on the left wrist.">
           <figcaption class="caption"><span>N° 1</span> <span data-en="Oval link">Maille ovale</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
         </figure>
         <div class="room__note">
-          <p data-en="Two pieces. One price.">Deux pièces. Un seul prix.</p>
+          <p data-en="Four pieces. One price.">Quatre pièces. Un seul prix.</p>
           <a class="label__ask" href="#commande" data-en="Order">Commander</a>
         </div>
       </div>
@@ -224,6 +301,45 @@
               <button type="button" data-step="-1" aria-label="Retirer un bracelet trèfle noir" data-en-aria="Remove one black clover bracelet">−</button>
               <output aria-live="polite">0</output>
               <button type="button" data-step="1" aria-label="Ajouter un bracelet trèfle noir" data-en-aria="Add one black clover bracelet">+</button>
+            </div>
+          </div>
+          <div class="piece" data-piece="jonc-argent">
+            <img src="assets/jonc-argent-m.webp" width="720" height="1080" alt="" loading="lazy">
+            <div class="piece__txt">
+              <p class="piece__no">N° 3</p>
+              <p class="piece__name" data-en="Set bangle, silver">Jonc serti, argent</p>
+              <p class="piece__price" data-en="$20">20 $</p>
+            </div>
+            <div class="qty">
+              <button type="button" data-step="-1" aria-label="Retirer un jonc serti argent" data-en-aria="Remove one silver set bangle">−</button>
+              <output aria-live="polite">0</output>
+              <button type="button" data-step="1" aria-label="Ajouter un jonc serti argent" data-en-aria="Add one silver set bangle">+</button>
+            </div>
+          </div>
+          <div class="piece" data-piece="jonc-dore">
+            <img src="assets/jonc-dore-main-m.webp" width="720" height="720" alt="" loading="lazy">
+            <div class="piece__txt">
+              <p class="piece__no">N° 3</p>
+              <p class="piece__name" data-en="Set bangle, gold">Jonc serti, doré</p>
+              <p class="piece__price" data-en="$20">20 $</p>
+            </div>
+            <div class="qty">
+              <button type="button" data-step="-1" aria-label="Retirer un jonc serti doré" data-en-aria="Remove one gold set bangle">−</button>
+              <output aria-live="polite">0</output>
+              <button type="button" data-step="1" aria-label="Ajouter un jonc serti doré" data-en-aria="Add one gold set bangle">+</button>
+            </div>
+          </div>
+          <div class="piece" data-piece="trefle-blanc">
+            <img src="assets/trefle-blanc-m.webp" width="720" height="1073" alt="" loading="lazy">
+            <div class="piece__txt">
+              <p class="piece__no">N° 4</p>
+              <p class="piece__name" data-en="White clover">Trèfle blanc</p>
+              <p class="piece__price" data-en="$20">20 $</p>
+            </div>
+            <div class="qty">
+              <button type="button" data-step="-1" aria-label="Retirer un bracelet trèfle blanc" data-en-aria="Remove one white clover bracelet">−</button>
+              <output aria-live="polite">0</output>
+              <button type="button" data-step="1" aria-label="Ajouter un bracelet trèfle blanc" data-en-aria="Add one white clover bracelet">+</button>
             </div>
           </div>
         </fieldset>

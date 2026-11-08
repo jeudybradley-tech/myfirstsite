@@ -282,6 +282,25 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
 }
 .loupe__label { position: absolute; z-index: 2; width: min(28rem, 36vw); }
 
+/* ── N° 3 · The set bangle: two finishes, two opposite wipes ──────────── */
+.pair__grid {
+  display: grid; grid-template-columns: 1fr minmax(18rem, 26rem) 1fr;
+  gap: clamp(1.6rem, 4vw, 4.5rem); align-items: center;
+}
+.pair__fig { margin: 0; }
+.pair__fig img { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; }
+.pair__fig--a img { object-position: 50% 62%; }
+.pair__fig--b { margin-top: 18vh; }
+.pair__fig--b img { object-position: 40% 45%; }
+.pair__asks { display: flex; gap: 2rem; flex-wrap: wrap; }
+
+/* ── N° 4 · The white clover: a frame the picture drifts inside ─────────── */
+.white__grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(2rem, 6vw, 7rem); align-items: center; }
+.white__fig { margin: 0; }
+.white__frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; }
+.white__frame picture { position: absolute; left: 0; right: 0; top: -12%; height: 124%; display: block; }
+.white__frame img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 80%; max-width: none; }
+
 /* ── 5 · The room: lateral walk ─────────────────────────────────────────── */
 .room__stage { height: 100svh; display: flex; align-items: center; overflow: hidden; }
 .room__rail {
@@ -357,8 +376,15 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
 .foot__mark { font-size: .8rem; }
 
 /* ── Phones: their own composition ──────────────────────────────────────── */
+@media (max-width: 1360px) {
+  .index__name { display: none; }
+}
 @media (max-width: 860px) {
   .index { grid-template-columns: auto 1fr; gap: .6rem; }
+  .pair__grid { grid-template-columns: 1fr 1fr; }
+  .pair__label { grid-column: 1 / -1; grid-row: 1; }
+  .pair__fig--b { margin-top: 3rem; }
+  .white__grid { grid-template-columns: 1fr; }
   .index__list { display: none; }
   .worn__grid { grid-template-columns: 1fr; }
   .worn__text { padding-bottom: 0; }
