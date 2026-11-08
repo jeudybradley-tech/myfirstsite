@@ -22,13 +22,13 @@
   font-weight: 300 700; font-style: italic; font-display: swap;
 }
 :root {
-  /* Limestone ground (client's reference): warm beige stone, brown ink. */
-  --sc-canvas:     #bea98f;
+  /* Warm greige ground (client's reference), brown ink. */
+  --sc-canvas:     #b19d90;
   --sc-surface:    rgba(250, 244, 234, .42);
   --sc-ink:        #2a1f17;
-  --sc-ink-soft:   #4d3e31;
-  --canvas-rgb:    190, 169, 143;
-  --gold-text:     #6b4a12;   /* gold for words on the stone (readable) */
+  --sc-ink-soft:   #3b2e24;
+  --canvas-rgb:    177, 157, 144;
+  --gold-text:     #503508;   /* gold for words on the stone (readable) */
   --sc-accent:     #d2ae66;
   --sc-accent-ink: #120f0a;
   --sc-font-display: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -38,7 +38,7 @@
   --line: rgba(42, 31, 23, .2);
 }
 
-html { background: var(--sc-canvas) url("assets/limestone.webp") repeat; background-size: 768px; }
+html { background: var(--sc-canvas); }
 body { background: transparent; color: var(--sc-ink); font-family: var(--sc-font-text); font-weight: 300; letter-spacing: .01em; line-height: 1.66; }
 img { display: block; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
