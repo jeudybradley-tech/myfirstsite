@@ -77,6 +77,25 @@
     if (box) box.hidden = false;
   });
 
+  /* ------------------------------------------------- tab bar menu --- */
+  // Below 1200px the tabs live in a panel under the pill (as on the Mechi
+  // site): the Menu button opens it; a link, Escape or a click outside closes it.
+  var bar = document.querySelector('[data-bar]');
+  var toggle = bar && bar.querySelector('.bar__toggle');
+  function setMenu(open) {
+    if (!bar) return;
+    bar.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  }
+  if (toggle) {
+    toggle.addEventListener('click', function () { setMenu(!bar.classList.contains('is-open')); });
+    bar.querySelectorAll('.bar__nav a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && bar.classList.contains('is-open')) { setMenu(false); toggle.focus(); }
+    });
+    document.addEventListener('click', function (e) { if (bar.classList.contains('is-open') && !bar.contains(e.target)) setMenu(false); });
+  }
+
   /* ------------------------------------------------------- index spy --- */
   var spyLinks = Array.prototype.slice.call(document.querySelectorAll('[data-spy]'));
   function spy() {

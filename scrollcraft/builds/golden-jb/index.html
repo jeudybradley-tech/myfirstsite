@@ -35,18 +35,25 @@
 
 <div class="sc-grain" aria-hidden="true"></div>
 
-<header class="index">
-  <a class="index__mark" href="#accueil" aria-label="Golden JB, haut de page" data-en-aria="Golden JB, back to the top"><span>Golden</span> JB</a>
-  <nav class="index__list" aria-label="Catalogue" data-en-aria="Catalogue">
-    <a href="#accueil" data-spy="accueil" data-en="Home">Accueil</a>
-    <a href="#n1" data-spy="n1"><span class="index__no">N° 1</span> <span class="index__name" data-en="Oval link">Maille ovale</span></a>
-    <a href="#n2" data-spy="n2"><span class="index__no">N° 2</span> <span class="index__name" data-en="Black clover">Trèfle noir</span></a>
-    <a href="#n3" data-spy="n3"><span class="index__no">N° 3</span> <span class="index__name" data-en="Set bangle">Jonc serti</span></a>
-    <a href="#n4" data-spy="n4"><span class="index__no">N° 4</span> <span class="index__name" data-en="White clover">Trèfle blanc</span></a>
-    <a href="#n5" data-spy="n5"><span class="index__no">N° 5</span> <span class="index__name" data-en="Gold link">Maille dorée</span></a>
-    <a href="#commande" data-spy="commande" data-en="Order">Commander</a>
+<!-- La barre d'onglets, comme celle du site Mechi : une pilule en verre
+     dépoli qui flotte, le nom au centre, les onglets à gauche soulignés selon
+     la section à l'écran, « Commander » à droite. Sous 1200 px, un bouton
+     Menu ouvre la liste. -->
+<header class="bar" data-bar>
+  <a class="bar__mark" href="#accueil" aria-label="Golden JB, haut de page" data-en-aria="Golden JB, back to the top"><span>Golden</span> JB</a>
+  <button class="bar__toggle" type="button" aria-expanded="false" aria-controls="menu"><i aria-hidden="true"></i><span data-en="Menu">Menu</span></button>
+  <nav class="bar__nav" id="menu" aria-label="Catalogue" data-en-aria="Catalogue">
+    <div class="bar__group">
+        <a href="#accueil" data-spy="accueil" data-en="Home">Accueil</a>
+        <a href="#n1" data-spy="n1"><span class="index__no">N° 1</span> <span class="index__name" data-en="Oval link">Maille ovale</span></a>
+        <a href="#n2" data-spy="n2"><span class="index__no">N° 2</span> <span class="index__name" data-en="Black clover">Trèfle noir</span></a>
+        <a href="#n3" data-spy="n3"><span class="index__no">N° 3</span> <span class="index__name" data-en="Set bangle">Jonc serti</span></a>
+        <a href="#n4" data-spy="n4"><span class="index__no">N° 4</span> <span class="index__name" data-en="White clover">Trèfle blanc</span></a>
+        <a href="#n5" data-spy="n5"><span class="index__no">N° 5</span> <span class="index__name" data-en="Gold link">Maille dorée</span></a>
+    </div>
+    <a class="bar__cta" href="#commande" data-spy="commande" data-en="Order">Commander</a>
   </nav>
-  <div class="index__side">
+  <div class="bar__side">
     <a class="social" data-social="instagram" href="#" target="_blank" rel="noopener" hidden aria-label="Instagram">
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" class="dot"/></svg>
     </a>
