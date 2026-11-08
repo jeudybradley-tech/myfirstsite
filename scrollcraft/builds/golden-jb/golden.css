@@ -110,9 +110,14 @@ main section[id] { scroll-margin-top: calc(var(--index-h) - 1rem); }
   left: max(var(--pill-x), env(safe-area-inset-left, 0px)); right: max(var(--pill-x), env(safe-area-inset-right, 0px));
   height: var(--pill-h); padding: 0 .5rem 0 1.1rem; border-radius: 999px;
   display: flex; align-items: center; gap: 1rem;
-  background: rgba(18, 15, 11, .72); -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3);
-  border: 1px solid rgba(241, 236, 226, .16);
-  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .07);
+  /* "Clear" liquid glass (client's iOS reference): almost no tint, a light
+     blur that keeps shapes behind readable, boosted colour, a bright rim. A
+     touch of dark keeps the tabs legible over the bright photos. */
+  background: linear-gradient(135deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .02) 45%, rgba(255, 255, 255, .06)), rgba(12, 10, 8, .28);
+  -webkit-backdrop-filter: blur(8px) saturate(1.8) brightness(1.06); backdrop-filter: blur(8px) saturate(1.8) brightness(1.06);
+  border: 0;
+  box-shadow: inset 0 0 22px rgba(255, 255, 255, .07), 0 18px 40px -18px rgba(0, 0, 0, .6);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .45);
 }
 .bar__mark, .foot__mark {
   font-family: var(--sc-font-display); font-size: .95rem; font-weight: 300;
@@ -163,7 +168,7 @@ main section[id] { scroll-margin-top: calc(var(--index-h) - 1rem); }
   .bar__nav {
     display: none; position: absolute; top: calc(100% + .5rem); left: 0; right: 0;
     flex-direction: column; align-items: stretch; gap: 0;
-    padding: .5rem 1.4rem 1.4rem; border-radius: 1.6rem; background: #14110d;
+    padding: .5rem 1.4rem 1.4rem; border-radius: 1.6rem; background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02)), #0f0d0a;
     border: 1px solid rgba(241, 236, 226, .14); box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .7);
     max-height: calc(100svh - var(--index-h) - 1rem); overflow-y: auto;
   }
@@ -315,9 +320,10 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
 .glass {
   margin-top: 1.8rem; width: max-content; min-width: 14rem; max-width: 100%;
   padding: 1.2rem 1.5rem 1.25rem; border-radius: 16px;
-  background: rgba(58, 54, 48, .42);
-  -webkit-backdrop-filter: blur(16px) saturate(1.1); backdrop-filter: blur(16px) saturate(1.1);
-  box-shadow: inset 0 0 0 1px rgba(241, 236, 226, .16), 0 18px 40px -18px rgba(0, 0, 0, .7);
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .13), rgba(255, 255, 255, .03) 45%, rgba(255, 255, 255, .07));
+  -webkit-backdrop-filter: blur(8px) saturate(1.8) brightness(1.06); backdrop-filter: blur(8px) saturate(1.8) brightness(1.06);
+  box-shadow: inset 0 0 26px rgba(255, 255, 255, .08), 0 18px 40px -18px rgba(0, 0, 0, .7);
 }
 .glass p { margin: 0; }
 .glass__big {
@@ -450,3 +456,20 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
   .home__photo img { animation: none; }
 }
+
+/* The liquid-glass rim shared by the tab bar and the description cards: a
+   1.5px edge, bright at the top-left and bottom-right like light caught by a
+   curved pane, nearly clear along the sides. Drawn with a masked gradient so
+   it follows the rounded corners. */
+.bar::before, .glass::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; padding: 1.5px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .85) 0%, rgba(255, 255, 255, .18) 22%, rgba(255, 255, 255, .06) 50%, rgba(255, 255, 255, .18) 78%, rgba(255, 255, 255, .6) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.glass::after {
+  /* a soft highlight across the top, like the sheen on the reference */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, .10), rgba(255, 255, 255, 0) 42%);
+}
+
