@@ -131,6 +131,31 @@
     el.addEventListener('lostpointercapture', stop);
     range.addEventListener('input', function () { touched = true; setPos(el, +range.value); });
   });
+  // Framing: in a compare frame only the left part of the first photo and the
+  // right part of the second are seen. Each photo carries data-focus (where its
+  // bracelet sits, 0..1) and is scaled and placed so that bracelet lands in the
+  // middle of its own visible half, a little below centre.
+  function frameCompares() {
+    compares.forEach(function (c) {
+      var frame = c.closest('.bijou__frame'); if (!frame) return;
+      var W = frame.clientWidth, H = frame.clientHeight; if (!W || !H) return;
+      c.querySelectorAll('img[data-focus]').forEach(function (im, i) {
+        var f = im.dataset.focus.split(' ').map(Number), fx = f[0], fy = f[1];
+        var tx = W * (i === 0 ? 0.27 : 0.73), ty = H * 0.56;
+        var S = Math.max(W, H, tx / fx, (W - tx) / (1 - fx), ty / fy, (H - ty) / (1 - fy));
+        S = Math.min(S, Math.max(W, H) * 2.1);
+        var left = Math.min(0, Math.max(W - S, tx - fx * S));
+        var top = Math.min(0, Math.max(H - S, ty - fy * S));
+        im.style.width = S.toFixed(1) + 'px'; im.style.height = S.toFixed(1) + 'px';
+        im.style.left = left.toFixed(1) + 'px'; im.style.top = top.toFixed(1) + 'px';
+        im.style.right = 'auto'; im.style.bottom = 'auto';
+      });
+    });
+  }
+  addEventListener('resize', frameCompares);
+  addEventListener('load', frameCompares);
+  frameCompares();
+
   // Show once that the line moves: a small sweep when the frame first comes
   // into view, unless the reader already moved it or prefers less motion.
   function sweep(el) {
@@ -167,6 +192,7 @@
         var on = c.dataset.wearer === w;
         c.hidden = !on;
         if (on) {
+          frameCompares();
           c.querySelectorAll('img').forEach(function (im) { im.loading = 'eager'; });
           setPos(c, 50);
           if (!reduce) { touched = false; sweep(c); }
