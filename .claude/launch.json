@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bradley-co",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/serve-bradley-co.mjs"],
+      "port": 4385
+    }
+  ]
+}
