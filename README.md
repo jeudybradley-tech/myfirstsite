@@ -8,6 +8,7 @@ Le skill lui-même est dans `.claude/skills/scroll-craft/` (version 0.3.1, licen
 |---|---|---|
 | **TIMELESS** | `scrollcraft/builds/tenebre/index.html` | Montre squelette en or jaune 18 carats, édition de 88, construite à partir de la vidéo fournie : à l'ouverture la montre est entière, le scroll la démonte puis la remonte ; ensuite les détails, le dessin éclaté avec les specs, l'anneau des 88 et la liste d'attente. Brief, plan et vérifications dans `BRIEF.md` à côté. |
 | **PROPAGATE** | `scrollcraft/builds/propagate/index.html` | Le t-shirt PROPAGATE, construit à partir des deux vidéos fournies. Brief, plan et vérifications dans `BRIEF.md` à côté. |
+| **Golden JB** | `scrollcraft/builds/golden-jb/index.html` | Bijoux : deux bracelets en acier inoxydable (maille ovale, trèfle noir), 20 $ chacun, en français et en anglais, avec un bon de commande. Brief et vérifications dans `BRIEF.md`. |
 | **Salon de coiffure Mechi** | `scrollcraft/builds/mechi/index.html` | Salon de coiffure : services à choisir en cliquant sur les photos, demande de soumission et dépôt de 20 $ par Interac. Brief et vérifications dans `BRIEF.md`. |
 | **Nitsy Fashion** | `scrollcraft/builds/nitsy/index.html` | Salon de coiffure, style premium, tresse dessinée en code. Formulaire de contact à brancher. |
 | **Nitsy Fashion, le film** | `scrollcraft/builds/nitsy-film/index.html` | Version « film continu » avec les photos envoyées (à remplacer par celles du salon). |
@@ -64,3 +65,12 @@ python3 -m http.server 8000
 - **Mise en ligne :** `.github/workflows/site-mechi.yml` publie ce dossier sur GitHub Pages à chaque mise à jour de `main`, une fois Settings > Pages > Source réglé sur « GitHub Actions ».
 - **Couleurs :** beige Alchimie (Peintures MF, MF 0251) pour les fonds, crème pour le formulaire, brun foncé pour les textes et les traits. Les couleurs sont réglées en haut des styles de `scrollcraft/builds/mechi/index.html` (`:root`), avec quelques règles en fin de styles (bloc « beige Alchimie »).
 - **Polices :** Inter Tight (titres en majuscules très fines, textes) et Cormorant Garamond (italique), les mêmes que TIMELESS, licence libre (OFL), dans `scrollcraft/builds/mechi/assets/fonts/`.
+
+## GOLDEN JB : à compléter
+
+- **Commandes :** coller l'adresse qui recevra les commandes dans `ORDER_ENDPOINT`, en haut de `scrollcraft/builds/golden-jb/golden.js` (requête POST en JSON `{ items: [{ piece, qty }], total, name, email, phone, note, lang }`, `piece` valant `maille-ovale` ou `trefle-noir`). Tant que c'est vide, le formulaire dit « Les commandes ne sont pas encore branchées, donc rien n'a été envoyé. » et n'envoie rien. Aucun paiement sur la page.
+- **Réseaux :** coller le lien Instagram dans `INSTAGRAM` et le lien WhatsApp (`https://wa.me/1…`) dans `WHATSAPP`, au même endroit. Les boutons apparaissent seulement quand le lien est rempli (dans le menu et sous le formulaire).
+- **Prix :** `PRICE` (20) dans `golden.js` pour le total ; le texte « 20 $ » / « $20 » est aussi écrit dans `index.html`.
+- **Textes et traductions :** chaque texte français est dans `index.html`, sa version anglaise dans l'attribut `data-en` du même élément.
+- **Bracelet trèfle :** le modèle ressemble beaucoup à un dessin protégé d'une grande maison de joaillerie. Le site ne cite aucune marque ; vérifier auprès du fournisseur que ce n'est pas une copie avant de vendre.
+- **Photos :** les cinq photos envoyées, dans `assets/` (versions `-m` pour le téléphone). Pour en changer une, garder le même cadrage ou donner un nouveau nom de fichier.

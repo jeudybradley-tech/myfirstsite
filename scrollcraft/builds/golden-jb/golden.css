@@ -175,7 +175,7 @@ img { display: block; }
 }
 
 /* ── 4 · The peak: the loupe pulls back ─────────────────────────────────── */
-.loupe__stage { position: relative; height: 100svh; overflow: hidden; }
+.loupe__stage { height: 100svh; overflow: hidden; }   /* the engine makes it sticky */
 .loupe__frame { position: absolute; inset: 0; will-change: clip-path; }
 .loupe__img {
   position: absolute; left: 0; top: 0; width: 1000px; height: auto; max-width: none;
@@ -293,5 +293,6 @@ img { display: block; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .loupe__whisper { display: none; }
   .hero__glints i { animation: none; opacity: .5; transform: none; }
 }
