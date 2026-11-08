@@ -232,14 +232,39 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
 .bijou__frame picture { position: absolute; left: 0; right: 0; top: -12%; height: 124%; display: block; }
 .bijou__frame picture[hidden] { display: none; }
 .bijou__frame img { width: 100%; height: 100%; object-fit: cover; max-width: none; }
-.finish { display: inline-flex; margin-top: 1.6rem; border: 1px solid var(--line); border-radius: 999px; padding: 2px; }
-.finish button {
+.finish, .seg { display: inline-flex; margin-top: 1.6rem; border: 1px solid var(--line); border-radius: 999px; padding: 2px; }
+.finish button, .seg button {
   font: 600 .74rem/1 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase;
   color: var(--sc-ink-soft); background: none; border: 0; border-radius: 999px;
   padding: .7rem 1.1rem; min-height: 40px; cursor: pointer;
 }
-.finish button[aria-pressed="true"] { background: var(--sc-accent); color: var(--sc-accent-ink); }
+.finish button[aria-pressed="true"], .seg button[aria-pressed="true"] { background: var(--sc-accent); color: var(--sc-accent-ink); }
 .finish + .label__ask { display: flex; width: max-content; margin-top: .8rem; }
+.seg__hint { margin: .9rem 0 0; font-size: .88rem; color: var(--sc-ink-soft); max-width: 26rem; }
+
+/* N° 4: drag to pass from one wrist to the other (after the Mechi before/after). */
+.bijou__frame--compare { aspect-ratio: 4 / 5; }
+.compare {
+  --pos: 50%; position: absolute; inset: 0; overflow: hidden;
+  touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none;
+}
+.compare[hidden] { display: none; }
+.compare picture { position: absolute; inset: 0; display: block; }
+.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; max-width: none; }
+.compare__after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
+.compare__line {
+  position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; translate: -1px 0;
+  background: #f6f1e8; box-shadow: 0 0 0 1px rgba(18,14,9,.25); pointer-events: none;
+}
+.compare__knob {
+  position: absolute; top: 50%; left: var(--pos); translate: -50% -50%; width: 3.2rem; height: 3.2rem; border-radius: 50%;
+  display: grid; place-items: center; background: var(--sc-accent); color: var(--sc-accent-ink);
+  box-shadow: 0 6px 18px rgba(0,0,0,.35), 0 0 0 4px rgba(246,241,232,.4); pointer-events: none;
+  transition: transform 140ms var(--sc-ease-out);
+}
+.compare.is-dragging .compare__knob { transform: scale(1.08); }
+.compare__range { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.compare:has(.compare__range:focus-visible) .compare__knob { outline: 3px solid var(--sc-ink); outline-offset: 3px; }
 
 /* ── 6 · Order plate ────────────────────────────────────────────────────── */
 .order { padding-top: calc(var(--index-h) + var(--sc-section) * .6); }

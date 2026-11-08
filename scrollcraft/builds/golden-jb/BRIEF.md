@@ -35,6 +35,9 @@
 - **Même modèle pour tous :** « je veux que toute les bijoux font se mode ainsi » (capture du N° 4) et « je ne veux
   pas la photo du bracelet trèfle noir zoom » : quatre sections identiques (étiquette à gauche, cadre à droite),
   plus de loupe ni de silence avant le N° 2 ; jonc en une seule photo avec un bouton Argent / Doré.
+- **Femme / Homme (N° 4) :** « c'est le même produit, la différence est qu'il est sur les poignets d'hommes et
+  femmes je veux que tu crées un bouton pour homme et femme [...] faire un truc de glissage comme tu as fait pour
+  le site de salon de Mechi », puis « fait pareil pour les femmes » : deux paires de photos, une glissière chacune.
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude

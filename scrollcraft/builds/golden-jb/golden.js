@@ -1,7 +1,7 @@
 /* Golden JB · page script.
    The engine (scrollcraft.js) is mounted first and never edited. Everything
    below is this page's own: opening, language, index, the N° 3 finish
-   switch, and the order plate. */
+   switch, the N° 4 women / men compare, and the order plate. */
 (function () {
   'use strict';
 
@@ -101,6 +101,75 @@
         if (!pic.hidden) { var im = pic.querySelector('img'); if (im) im.loading = 'eager'; }
       });
       if (n3ask) n3ask.dataset.piece = f === 'dore' ? 'jonc-dore' : 'jonc-argent';
+    });
+  });
+
+  /* ------------------------------- N° 4 · women / men, drag to compare --
+     The same bracelet on two wrists. A drag moves the line (vertical page
+     scroll stays free on touch); a hidden range input carries the keyboard
+     and screen readers. Femme / Homme picks which pair is shown. */
+  var compares = Array.prototype.slice.call(document.querySelectorAll('[data-compare]'));
+  var touched = false;
+  function setPos(el, pct) {
+    pct = Math.max(0, Math.min(100, pct));
+    el.style.setProperty('--pos', pct.toFixed(2) + '%');
+    var r = el.querySelector('.compare__range'); if (r && +r.value !== Math.round(pct)) r.value = Math.round(pct);
+  }
+  compares.forEach(function (el) {
+    var range = el.querySelector('.compare__range'), dragging = false;
+    function fromEvent(e) { var b = el.getBoundingClientRect(); setPos(el, (e.clientX - b.left) / b.width * 100); }
+    el.addEventListener('pointerdown', function (e) {
+      if (e.button !== undefined && e.button !== 0) return;
+      dragging = true; touched = true; el.classList.add('is-dragging');
+      try { el.setPointerCapture(e.pointerId); } catch (err) {}
+      fromEvent(e);
+    });
+    el.addEventListener('pointermove', function (e) { if (dragging) fromEvent(e); });
+    function stop() { dragging = false; el.classList.remove('is-dragging'); }
+    el.addEventListener('pointerup', stop);
+    el.addEventListener('pointercancel', stop);
+    el.addEventListener('lostpointercapture', stop);
+    range.addEventListener('input', function () { touched = true; setPos(el, +range.value); });
+  });
+  // Show once that the line moves: a small sweep when the frame first comes
+  // into view, unless the reader already moved it or prefers less motion.
+  function sweep(el) {
+    var t0 = null, keys = [[0, 50], [0.35, 30], [0.75, 68], [1, 50]];
+    function stepFn(ts) {
+      if (touched) return;
+      if (t0 === null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / 1600), i = 1;
+      while (i < keys.length - 1 && k > keys[i][0]) i++;
+      var a = keys[i - 1], b = keys[i], u = (k - a[0]) / (b[0] - a[0]);
+      u = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+      setPos(el, a[1] + (b[1] - a[1]) * u);
+      if (k < 1) requestAnimationFrame(stepFn);
+    }
+    setTimeout(function () { requestAnimationFrame(stepFn); }, 450);
+  }
+  if (!reduce && 'IntersectionObserver' in window && compares[0]) {
+    var nudge = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        nudge.disconnect();
+        if (!touched) sweep(en.target);
+      });
+    }, { threshold: 0.6 });
+    nudge.observe(compares[0]);
+  }
+  document.querySelectorAll('[data-wearer-btn]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var w = btn.dataset.wearerBtn;
+      document.querySelectorAll('[data-wearer-btn]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      compares.forEach(function (c) {
+        var on = c.dataset.wearer === w;
+        c.hidden = !on;
+        if (on) {
+          c.querySelectorAll('img').forEach(function (im) { im.loading = 'eager'; });
+          setPos(c, 50);
+          if (!reduce) { touched = false; sweep(c); }
+        }
+      });
     });
   });
 

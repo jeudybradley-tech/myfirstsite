@@ -184,16 +184,36 @@
           <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver and white">Argent et blanc</dd></div>
           <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
         </dl>
+        <div class="seg" role="group" aria-label="Porté par" data-en-aria="Worn by">
+          <button type="button" data-wearer-btn="femme" aria-pressed="true" data-en="Women">Femme</button>
+          <button type="button" data-wearer-btn="homme" aria-pressed="false" data-en="Men">Homme</button>
+        </div>
+        <p class="seg__hint" data-en="Same bracelet. Slide the line to see it on another wrist.">Le même bracelet. Glissez la ligne pour le voir à un autre poignet.</p>
         <a class="label__ask" href="#commande" data-piece="trefle-blanc" data-en="Order">Commander</a>
       </div>
       <figure class="bijou__fig">
-        <div class="bijou__frame" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
-          <picture data-sc-parallax="-1.1">
-            <source media="(max-width: 700px)" srcset="assets/trefle-blanc-m.webp">
-            <img src="assets/trefle-blanc.webp" width="1200" height="1788" loading="lazy" style="object-position:60% 80%"
-                 alt="Une femme en t-shirt noir, la main dans la poche, le bracelet à trèfles blancs au poignet."
-                 data-en-alt="A woman in a black t-shirt, hand in her pocket, the white clover bracelet on her wrist.">
-          </picture>
+        <!-- Le même bracelet, porté par deux femmes ou par deux hommes : on
+             glisse la ligne pour passer d'un poignet à l'autre (comme
+             l'avant / après du site Mechi). -->
+        <div class="bijou__frame bijou__frame--compare" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
+          <div class="compare" id="tb-femme" data-compare data-wearer="femme">
+            <picture><source media="(max-width: 700px)" srcset="assets/tb-femme-1-m.webp"><img src="assets/tb-femme-1.webp" width="1024" height="1024" loading="lazy" style="object-position:50% 50%"
+              alt="Une femme en chemisier crème tient une tasse, le bracelet à trèfles blancs au poignet, près d'un livre ouvert." data-en-alt="A woman in a cream blouse holding a cup, the white clover bracelet on her wrist, beside an open book."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 700px)" srcset="assets/tb-femme-2-m.webp"><img src="assets/tb-femme-2.webp" width="1024" height="1024" loading="lazy" style="object-position:45% 60%"
+              alt="Une femme à la peau foncée tient une tasse de café en terrasse, le bracelet à trèfles blancs au poignet." data-en-alt="A dark-skinned woman holding a coffee cup on a terrace, the white clover bracelet on her wrist."></picture></div>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Glisser pour passer d’un poignet de femme à l’autre" data-en-aria="Slide to switch between two women’s wrists">
+          </div>
+          <div class="compare" id="tb-homme" data-compare data-wearer="homme" hidden>
+            <picture><source media="(max-width: 700px)" srcset="assets/tb-homme-1-m.webp"><img src="assets/tb-homme-1.webp" width="1024" height="1024" loading="lazy" style="object-position:48% 50%"
+              alt="Un homme en veston bleu, la main posée sur un bureau près d'un ordinateur, le bracelet à trèfles blancs au poignet." data-en-alt="A man in a blue jacket, hand on a desk by a laptop, the white clover bracelet on his wrist."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 700px)" srcset="assets/tb-homme-2-m.webp"><img src="assets/tb-homme-2.webp" width="1024" height="1024" loading="lazy" style="object-position:45% 50%"
+              alt="Un homme à la peau foncée en costume tient une tasse de café, le bracelet à trèfles blancs au poignet." data-en-alt="A dark-skinned man in a suit holding a coffee cup, the white clover bracelet on his wrist."></picture></div>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Glisser pour passer d’un poignet d’homme à l’autre" data-en-aria="Slide to switch between two men’s wrists">
+          </div>
         </div>
       </figure>
     </div>
