@@ -136,17 +136,21 @@
   // bracelet sits, 0..1) and is scaled and placed so that bracelet lands in the
   // middle of its own visible half, a little below centre.
   function frameCompares() {
-    compares.forEach(function (c) {
+    document.querySelectorAll('.bijou__frame--compare .compare').forEach(function (c) {
       var frame = c.closest('.bijou__frame'); if (!frame) return;
       var W = frame.clientWidth, H = frame.clientHeight; if (!W || !H) return;
+      var single = c.classList.contains('compare--single');
       c.querySelectorAll('img[data-focus]').forEach(function (im, i) {
         var f = im.dataset.focus.split(' ').map(Number), fx = f[0], fy = f[1];
-        var tx = W * (i === 0 ? 0.27 : 0.73), ty = H * 0.56;
-        var S = Math.max(W, H, tx / fx, (W - tx) / (1 - fx), ty / fy, (H - ty) / (1 - fy));
-        S = Math.min(S, Math.max(W, H) * 2.1);
-        var left = Math.min(0, Math.max(W - S, tx - fx * S));
-        var top = Math.min(0, Math.max(H - S, ty - fy * S));
-        im.style.width = S.toFixed(1) + 'px'; im.style.height = S.toFixed(1) + 'px';
+        var r = (+im.getAttribute('height') || 1) / (+im.getAttribute('width') || 1);   // height / width
+        var tx = W * (single ? 0.5 : i === 0 ? 0.27 : 0.73), ty = H * 0.56;
+        // displayed width: covers the frame and lets the bracelet reach its target
+        var Sw = Math.max(W, H / r, tx / fx, (W - tx) / (1 - fx), ty / (fy * r), (H - ty) / ((1 - fy) * r));
+        Sw = Math.min(Sw, Math.max(W, H / r) * 2.1);
+        var Sh = Sw * r;
+        var left = Math.min(0, Math.max(W - Sw, tx - fx * Sw));
+        var top = Math.min(0, Math.max(H - Sh, ty - fy * Sh));
+        im.style.width = Sw.toFixed(1) + 'px'; im.style.height = Sh.toFixed(1) + 'px';
         im.style.left = left.toFixed(1) + 'px'; im.style.top = top.toFixed(1) + 'px';
         im.style.right = 'auto'; im.style.bottom = 'auto';
       });
@@ -188,14 +192,16 @@
     btn.addEventListener('click', function () {
       var w = btn.dataset.wearerBtn, sec = btn.closest('section');
       sec.querySelectorAll('[data-wearer-btn]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
-      sec.querySelectorAll('[data-compare]').forEach(function (c) {
+      sec.querySelectorAll('[data-wearer]').forEach(function (c) {
         var on = c.dataset.wearer === w;
         c.hidden = !on;
         if (on) {
           frameCompares();
           c.querySelectorAll('img').forEach(function (im) { im.loading = 'eager'; });
-          setPos(c, 50);
-          if (!reduce) { touched = false; sweep(c); }
+          if (c.hasAttribute('data-compare')) {
+            setPos(c, 50);
+            if (!reduce) { touched = false; sweep(c); }
+          }
         }
       });
     });

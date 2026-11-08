@@ -249,6 +249,7 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
   touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none;
 }
 .compare[hidden] { display: none; }
+.compare--single { cursor: default; }
 .compare picture { position: absolute; inset: 0; display: block; }
 .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; max-width: none; }
 .compare__after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
