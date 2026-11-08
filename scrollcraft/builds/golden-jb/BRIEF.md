@@ -18,6 +18,11 @@
 - **Réseaux :** « Plus tard » : Instagram et WhatsApp prévus, cachés tant qu'ils sont vides.
 - **Page d'accueil :** « ils faut avoir une page d'accueil », précisé : « Écran d'ouverture » comme TIMELESS,
   phrase proposée par Claude : « Porté chaque jour, gardé pour toujours. » / « Worn every day, kept for good. »
+- **Accueil :** « fait le homepage comme la deuxième photo en utilisant le style et modèle finale intégre la
+  première photo comme fond d'écran » : une section d'accueil d'après sa référence (photo plein écran à droite,
+  titre à gauche, bouton doré, menu avec Accueil et un sac). Le compteur de diapositives « 01 / 04 » de la
+  référence n'a pas été repris : il n'y a qu'une photo. Cette section passe avant le N° 1, ce qui s'écarte de la
+  grammaire galerie (où le N° 1 ouvre la page) : choix de la cliente. Le N° 1 a été inversé (photo à gauche).
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude

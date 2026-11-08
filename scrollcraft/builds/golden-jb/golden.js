@@ -283,6 +283,8 @@
     var n = 0;
     Object.keys(qty).forEach(function (k) { n += qty[k]; });
     if (totalEl) totalEl.textContent = money(n * PRICE);
+    var bag = document.getElementById('bag-count');
+    if (bag) { bag.textContent = n; bag.hidden = n === 0; }
   }
   document.querySelectorAll('.piece').forEach(function (row) {
     var key = row.dataset.piece, out = row.querySelector('output');

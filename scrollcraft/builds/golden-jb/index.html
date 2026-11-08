@@ -24,7 +24,7 @@
 <script>
   (function () {
     var r = document.documentElement, lang = null;
-    if (/^#(n1|n2|commande)$/.test(location.hash)) return;
+    if (/^#(n1|n2|commande)$/.test(location.hash)) return;   // #accueil keeps it
     try { lang = localStorage.getItem('gjb-lang'); } catch (e) {}
     if (lang === 'en') document.getElementById('opening-line').textContent = 'Worn every day, kept for good.';
     r.classList.add('gjb-open');
@@ -41,8 +41,9 @@
 <canvas class="chain" id="chain" aria-hidden="true"></canvas>
 
 <header class="index">
-  <a class="index__mark" href="#n1" aria-label="Golden JB, haut de page"><span>Golden</span> JB</a>
+  <a class="index__mark" href="#accueil" aria-label="Golden JB, haut de page" data-en-aria="Golden JB, back to the top"><span>Golden</span> JB</a>
   <nav class="index__list" aria-label="Catalogue" data-en-aria="Catalogue">
+    <a href="#accueil" data-spy="accueil" data-en="Home">Accueil</a>
     <a href="#n1" data-spy="n1"><span class="index__no">N° 1</span> <span class="index__name" data-en="Oval link">Maille ovale</span></a>
     <a href="#n2" data-spy="n2"><span class="index__no">N° 2</span> <span class="index__name" data-en="Black clover">Trèfle noir</span></a>
     <a href="#commande" data-spy="commande" data-en="Order">Commander</a>
@@ -54,6 +55,10 @@
     <a class="social" data-social="whatsapp" href="#" target="_blank" rel="noopener" hidden aria-label="WhatsApp">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 18.6z"/><path d="M9.2 8.6c.2 2.9 2.4 5.3 5.6 5.9l1-1.2-1.8-.9-.8.8c-1.1-.5-2-1.4-2.5-2.5l.8-.8-.9-1.8z" class="dot"/></svg>
     </a>
+    <a class="bag" href="#commande" aria-label="Ma commande" data-en-aria="My order">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1 12h-11z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <span class="bag__count" id="bag-count" hidden>0</span>
+    </a>
     <div class="lang" role="group" aria-label="Langue" data-en-aria="Language">
       <button type="button" data-lang="fr" aria-pressed="true">FR</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -62,6 +67,27 @@
 </header>
 
 <main id="top">
+
+  <!-- 0 · ACCUEIL (demande de la cliente, d'après sa référence) : la photo en
+       plein écran, le titre à gauche, un bouton doré. Plans : photo (recule
+       et se resserre un peu), voile sombre, texte (1x), chaîne devant. -->
+  <section id="accueil" class="home" data-sc-act="flow" data-sc-drift="#0b0a08">
+    <div class="home__photo" data-sc-parallax="-1.4">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/accueil-m.webp">
+        <img src="assets/accueil-xl.webp" width="1342" height="2000" fetchpriority="high"
+             alt="Une femme aux longues tresses, les bras croisés sur le dossier d'une chaise, un jonc en acier serti de petites pierres au poignet."
+             data-en-alt="A woman with long braids, arms folded on the back of a chair, a steel bangle set with small stones on her wrist.">
+      </picture>
+    </div>
+    <div class="home__veil" aria-hidden="true"></div>
+    <div class="home__copy" data-sc-in data-sc-stagger="120">
+      <p class="home__kicker" data-en="Stainless steel jewellery">Bijoux en acier inoxydable</p>
+      <h1 class="home__title"><span data-en="Luxury,">Le luxe,</span> <em class="t-it" data-en="every day.">au quotidien.</em></h1>
+      <p class="home__lede" data-en="Bracelets made to be worn every day, that keep their shine. 20 $ each.">Des bracelets faits pour être portés tous les jours, qui gardent leur éclat. 20 $ chacun.</p>
+      <a class="home__cta" href="#n1" data-en="See the collection">Voir la collection</a>
+    </div>
+  </section>
 
   <!-- 1 · N° 1 en vue dès l'arrivée. Plans : photo (recul), étiquette (1x),
        chaîne au premier plan (fixe), reflets (devant). -->
@@ -75,12 +101,12 @@
       </picture>
     </div>
     <div class="hero__glints" data-sc-parallax="0.9" aria-hidden="true">
-      <i style="--x:62%;--y:58%;--s:1"></i><i style="--x:71%;--y:44%;--s:.6"></i>
-      <i style="--x:55%;--y:72%;--s:.8"></i><i style="--x:80%;--y:66%;--s:.5"></i>
+      <i style="--x:38%;--y:58%;--s:1"></i><i style="--x:29%;--y:44%;--s:.6"></i>
+      <i style="--x:45%;--y:72%;--s:.8"></i><i style="--x:20%;--y:66%;--s:.5"></i>
     </div>
     <div class="hero__label label" data-sc-in data-sc-stagger="90">
       <p class="label__no">N° 1</p>
-      <h1 class="label__name"><span class="brand">Golden JB</span> <span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="oval link">maille ovale</em></h1>
+      <h2 class="label__name"><span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="oval link">maille ovale</em></h2>
       <dl class="label__facts">
         <div><dt data-en="Material">Matière</dt><dd data-en="Stainless steel">Acier inoxydable</dd></div>
         <div><dt data-en="Finish">Teinte</dt><dd data-en="Silver">Argent</dd></div>
