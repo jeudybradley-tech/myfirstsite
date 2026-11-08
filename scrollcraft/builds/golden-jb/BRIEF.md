@@ -38,6 +38,8 @@
 - **Femme / Homme (N° 4) :** « c'est le même produit, la différence est qu'il est sur les poignets d'hommes et
   femmes je veux que tu crées un bouton pour homme et femme [...] faire un truc de glissage comme tu as fait pour
   le site de salon de Mechi », puis « fait pareil pour les femmes » : deux paires de photos, une glissière chacune.
+- **N° 5 Maille dorée :** « pareille même manière » avec quatre photos ; précisé : « Nouveau N° 5 », et la main
+  sur la table en bois clair est une femme.
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude

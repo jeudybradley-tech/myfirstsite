@@ -24,7 +24,7 @@
 <script>
   (function () {
     var r = document.documentElement, lang = null;
-    if (/^#(n[1-4]|commande)$/.test(location.hash)) return;   // #accueil keeps it
+    if (/^#(n[1-5]|commande)$/.test(location.hash)) return;   // #accueil keeps it
     try { lang = localStorage.getItem('gjb-lang'); } catch (e) {}
     if (lang === 'en') document.getElementById('opening-line').textContent = 'Worn every day, kept for good.';
     r.classList.add('gjb-open');
@@ -43,6 +43,7 @@
     <a href="#n2" data-spy="n2"><span class="index__no">N° 2</span> <span class="index__name" data-en="Black clover">Trèfle noir</span></a>
     <a href="#n3" data-spy="n3"><span class="index__no">N° 3</span> <span class="index__name" data-en="Set bangle">Jonc serti</span></a>
     <a href="#n4" data-spy="n4"><span class="index__no">N° 4</span> <span class="index__name" data-en="White clover">Trèfle blanc</span></a>
+    <a href="#n5" data-spy="n5"><span class="index__no">N° 5</span> <span class="index__name" data-en="Gold link">Maille dorée</span></a>
     <a href="#commande" data-spy="commande" data-en="Order">Commander</a>
   </nav>
   <div class="index__side">
@@ -219,6 +220,51 @@
     </div>
   </section>
 
+  <section id="n5" class="bijou sc-section" data-sc-act="flow" data-sc-drift="#0c0b09">
+    <div class="sc-wrap bijou__grid">
+      <div class="bijou__label label" data-sc-in data-sc-stagger="90">
+        <p class="label__no">N° 5</p>
+        <h2 class="label__name"><span data-en="Bracelet">Bracelet</span> <em class="t-it" data-en="gold link">maille dorée</em></h2>
+        <dl class="label__facts">
+          <div><dt data-en="Material">Matière</dt><dd data-en="Stainless steel, gold-tone links">Acier inoxydable, mailles dorées</dd></div>
+          <div><dt data-en="Finish">Teinte</dt><dd data-en="Gold">Doré</dd></div>
+          <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
+        </dl>
+        <div class="seg" role="group" aria-label="Porté par" data-en-aria="Worn by">
+          <button type="button" data-wearer-btn="femme" aria-pressed="true" data-en="Women">Femme</button>
+          <button type="button" data-wearer-btn="homme" aria-pressed="false" data-en="Men">Homme</button>
+        </div>
+        <p class="seg__hint" data-en="Same bracelet. Slide the line to see it on another wrist.">Le même bracelet. Glissez la ligne pour le voir à un autre poignet.</p>
+        <a class="label__ask" href="#commande" data-piece="maille-doree" data-en="Order">Commander</a>
+      </div>
+      <figure class="bijou__fig">
+        <!-- Le même bracelet, porté par deux femmes ou par deux hommes : on
+             glisse la ligne pour passer d'un poignet à l'autre (comme
+             l'avant / après du site Mechi). -->
+        <div class="bijou__frame bijou__frame--compare" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
+          <div class="compare" id="md-femme" data-compare data-wearer="femme">
+            <picture><source media="(max-width: 700px)" srcset="assets/md-femme-1-m.webp"><img src="assets/md-femme-1.webp" width="1024" height="1024" loading="lazy" style="object-position:45% 55%"
+              alt="Une femme en chemisier blanc lève la main près d'un café, le bracelet à mailles dorées au poignet." data-en-alt="A woman in a white blouse raising her hand by a coffee, the gold link bracelet on her wrist."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 700px)" srcset="assets/md-femme-2-m.webp"><img src="assets/md-femme-2.webp" width="1024" height="1024" loading="lazy" style="object-position:45% 60%"
+              alt="Une main à la peau foncée posée sur une table en bois clair, près d'une tasse qui fume, le bracelet à mailles dorées au poignet." data-en-alt="A dark-skinned hand resting on a light wooden table by a steaming cup, the gold link bracelet on the wrist."></picture></div>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Glisser pour passer d’un poignet de femme à l’autre" data-en-aria="Slide to switch between two women’s wrists">
+          </div>
+          <div class="compare" id="md-homme" data-compare data-wearer="homme" hidden>
+            <picture><source media="(max-width: 700px)" srcset="assets/md-homme-1-m.webp"><img src="assets/md-homme-1.webp" width="1024" height="1024" loading="lazy" style="object-position:48% 50%"
+              alt="Un homme en costume bleu marine, le poing fermé près d'un ordinateur, le bracelet à mailles dorées au poignet." data-en-alt="A man in a navy suit, fist closed by a laptop, the gold link bracelet on his wrist."></picture>
+            <div class="compare__after"><picture><source media="(max-width: 700px)" srcset="assets/md-homme-2-m.webp"><img src="assets/md-homme-2.webp" width="1024" height="1024" loading="lazy" style="object-position:45% 50%"
+              alt="Un homme à la peau foncée en chemise bleue tape sur un ordinateur, le bracelet à mailles dorées au poignet." data-en-alt="A dark-skinned man in a blue shirt typing on a laptop, the gold link bracelet on his wrist."></picture></div>
+            <span class="compare__line" aria-hidden="true"></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Glisser pour passer d’un poignet d’homme à l’autre" data-en-aria="Slide to switch between two men’s wrists">
+          </div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
   <!-- 6 · La fin : un bon de commande composé comme une étiquette. -->
   <section id="commande" class="order sc-section" data-sc-act="flow" data-sc-drift="#0b0a08">
     <div class="sc-wrap">
@@ -293,6 +339,19 @@
               <button type="button" data-step="-1" aria-label="Retirer un bracelet trèfle blanc" data-en-aria="Remove one white clover bracelet">−</button>
               <output aria-live="polite">0</output>
               <button type="button" data-step="1" aria-label="Ajouter un bracelet trèfle blanc" data-en-aria="Add one white clover bracelet">+</button>
+            </div>
+          </div>
+          <div class="piece" data-piece="maille-doree">
+            <img src="assets/md-femme-1-m.webp" width="640" height="640" alt="" loading="lazy">
+            <div class="piece__txt">
+              <p class="piece__no">N° 5</p>
+              <p class="piece__name" data-en="Gold link">Maille dorée</p>
+              <p class="piece__price" data-en="$20">20 $</p>
+            </div>
+            <div class="qty">
+              <button type="button" data-step="-1" aria-label="Retirer un bracelet maille dorée" data-en-aria="Remove one gold link bracelet">−</button>
+              <output aria-live="polite">0</output>
+              <button type="button" data-step="1" aria-label="Ajouter un bracelet maille dorée" data-en-aria="Add one gold link bracelet">+</button>
             </div>
           </div>
         </fieldset>

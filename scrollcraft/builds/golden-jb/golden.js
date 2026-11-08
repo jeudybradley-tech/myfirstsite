@@ -1,7 +1,7 @@
 /* Golden JB · page script.
    The engine (scrollcraft.js) is mounted first and never edited. Everything
    below is this page's own: opening, language, index, the N° 3 finish
-   switch, the N° 4 women / men compare, and the order plate. */
+   switch, the N° 4 and N° 5 women / men compare, and the order plate. */
 (function () {
   'use strict';
 
@@ -147,21 +147,23 @@
     }
     setTimeout(function () { requestAnimationFrame(stepFn); }, 450);
   }
-  if (!reduce && 'IntersectionObserver' in window && compares[0]) {
+  // One sweep per section (N° 4, N° 5), the first time its frame is in view.
+  if (!reduce && 'IntersectionObserver' in window && compares.length) {
     var nudge = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (!en.isIntersecting) return;
-        nudge.disconnect();
+        nudge.unobserve(en.target);
         if (!touched) sweep(en.target);
       });
     }, { threshold: 0.6 });
-    nudge.observe(compares[0]);
+    compares.forEach(function (c) { if (!c.hidden) nudge.observe(c); });
   }
+  // Each Femme / Homme switch only drives the frames of its own section.
   document.querySelectorAll('[data-wearer-btn]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var w = btn.dataset.wearerBtn;
-      document.querySelectorAll('[data-wearer-btn]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
-      compares.forEach(function (c) {
+      var w = btn.dataset.wearerBtn, sec = btn.closest('section');
+      sec.querySelectorAll('[data-wearer-btn]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      sec.querySelectorAll('[data-compare]').forEach(function (c) {
         var on = c.dataset.wearer === w;
         c.hidden = !on;
         if (on) {
