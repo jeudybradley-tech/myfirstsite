@@ -29,6 +29,9 @@
   jonc « Un produit, 2 teintes », trèfle blanc « Produit séparé ». N° 3 Jonc serti (deux photos qui s'ouvrent
   en volets opposés, étiquette au milieu) et N° 4 Trèfle blanc (photo qui glisse dans un cadre), avant la
   galerie, qui passe à six éléments (4,2 écrans).
+- **Apparition au défilement :** « je veux lorsque je scroll vers le bas chaque bijoux apparait fu à mesure ».
+- **Pas de répétition :** « ne répète pas les bijoux » : retrait de la deuxième photo du N° 1 (acte « Porté ») et
+  de la galerie « Portés » ; il reste accueil > N° 1 > silence > N° 2 (pic) > N° 3 > N° 4 > commande.
 - **Origine du modèle trèfle :** « Je ne sais pas ». Voir la remarque plus bas.
 
 ## Décidé par Claude

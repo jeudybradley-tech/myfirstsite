@@ -88,11 +88,6 @@
     spyLinks.forEach(function (a) { a.classList.toggle('is-here', a === here); });
   }
 
-  /* ------------------------------------------------- the rail settle --- */
-  document.querySelectorAll('.room__rail > .room__item, .room__rail > .room__note').forEach(function (el, i) {
-    el.style.setProperty('--i', i);
-  });
-
   /* ------------------------------------------- 4 · the loupe (peak) --- */
   var loupe = document.querySelector('.loupe');
   var frame = loupe && loupe.querySelector('.loupe__frame');

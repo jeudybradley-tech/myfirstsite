@@ -129,3 +129,7 @@ and `mechi` at the client's request; type is not a gate dimension.
 - **Removed:** the hanging chain in `golden-jb` was taken out at the client's request after shipping. The
   row stays as built (rows are append-only); its remaining signature is the clip-path loupe pull-back, and
   the build gained a client-directed homepage hero (full-bleed photo, title left, gold button) before N° 1.
+- **Changed after shipping (`golden-jb`):** at the client's request the `pan` rail and the second N° 1 act were
+  removed (no piece shown twice) and two pieces were added as flow acts. Shape is now
+  `flow(home) > flow(parallax + reveal) > flow(hush) > pin(loupe) > flow(two opposed reveals) > flow(framed reveal) > flow(order)`.
+

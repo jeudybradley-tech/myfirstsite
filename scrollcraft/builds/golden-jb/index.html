@@ -89,7 +89,7 @@
   <!-- 1 · N° 1. Plans : photo (recul), étiquette (1x), reflets (devant). -->
   <section id="n1" class="hero" data-sc-act="flow" data-sc-drift="#0b0a08">
     <div class="hero__photo" data-sc-parallax="-1.2">
-      <picture>
+      <picture data-sc-reveal="up" data-sc-reveal-at="0.04 0.42">
         <source media="(max-width: 700px)" srcset="assets/maille-cafe-m.webp">
         <img src="assets/maille-cafe.webp" width="1024" height="1024" fetchpriority="high"
              alt="Un poignet sur une table de café au soleil, avec le bracelet à mailles ovales en acier."
@@ -109,25 +109,6 @@
         <div><dt data-en="Price">Prix</dt><dd data-en="$20">20 $</dd></div>
       </dl>
       <a class="label__ask" href="#commande" data-piece="maille-ovale" data-en="Order">Commander</a>
-    </div>
-  </section>
-
-  <!-- 2 · Le même objet, porté autrement : un volet s'ouvre. -->
-  <section class="worn sc-section" data-sc-act="flow" data-sc-drift="#100e0b">
-    <div class="sc-wrap worn__grid">
-      <figure class="worn__fig" data-sc-reveal="up" data-sc-reveal-at="0.12 0.5">
-        <picture>
-          <source media="(max-width: 700px)" srcset="assets/maille-livre-m.webp">
-          <img src="assets/maille-livre.webp" width="1024" height="1024" loading="lazy"
-               alt="Une main posée sur un carnet ouvert, le bracelet à mailles ovales au poignet, une tasse de café à côté."
-               data-en-alt="A hand resting on an open notebook, the oval-link bracelet on the wrist, a cup of coffee beside it.">
-        </picture>
-        <figcaption class="caption"><span>N° 1</span> <span data-en="Worn with a linen sleeve, morning light.">Porté avec une manche de lin, lumière du matin.</span></figcaption>
-      </figure>
-      <div class="worn__text" data-sc-in>
-        <p class="worn__line" data-en="Oval links, close together, that follow the wrist.">Des mailles ovales, serrées, qui suivent le poignet.</p>
-        <p class="sc-body" data-en="Stainless steel keeps its colour. Wear it every day, with a shirt sleeve or bare wrist.">L'acier inoxydable garde sa couleur. On le porte tous les jours, sous une manche de chemise ou le poignet nu.</p>
-      </div>
     </div>
   </section>
 
@@ -214,7 +195,7 @@
         <a class="label__ask" href="#commande" data-piece="trefle-blanc" data-en="Order">Commander</a>
       </div>
       <figure class="white__fig">
-        <div class="white__frame">
+        <div class="white__frame" data-sc-reveal="left" data-sc-reveal-at="0.1 0.46">
           <picture data-sc-parallax="-1.1">
             <source media="(max-width: 700px)" srcset="assets/trefle-blanc-m.webp">
             <img src="assets/trefle-blanc.webp" width="1200" height="1788" loading="lazy"
@@ -223,46 +204,6 @@
           </picture>
         </div>
       </figure>
-    </div>
-  </section>
-
-  <!-- 5 · Les portés : la salle continue de côté. -->
-  <section class="room" data-sc-act="pan" data-sc-span="4.2" data-sc-drift="#0d0b09">
-    <div data-sc-stage class="room__stage">
-      <div class="room__rail" data-sc-pan="0.04">
-        <div class="room__lead">
-          <h2 class="label__name"><span data-en="Worn">Portés</span> <em class="t-it" data-en="every day">au quotidien</em></h2>
-          <p class="sc-body" data-en="The pieces, on other wrists, in other light.">Les pièces, à d'autres poignets, dans d'autres lumières.</p>
-        </div>
-        <figure class="room__item">
-          <img src="assets/trefle-beton.webp" width="772" height="1184" loading="lazy"
-               alt="Un avant-bras posé sur une table en béton, le bracelet à trèfles noirs au poignet."
-               data-en-alt="A forearm on a concrete table, the black clover bracelet on the wrist.">
-          <figcaption class="caption"><span>N° 2</span> <span data-en="Black clover">Trèfle noir</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
-        </figure>
-        <figure class="room__item">
-          <img src="assets/trefle-canape.webp" width="1200" height="1800" loading="lazy"
-               alt="Un homme en t-shirt noir assis sur un canapé, le bracelet à trèfles noirs au poignet."
-               data-en-alt="A man in a black t-shirt sitting on a sofa, the black clover bracelet on his wrist.">
-          <figcaption class="caption"><span>N° 2</span> <span data-en="Black clover">Trèfle noir</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
-        </figure>
-        <figure class="room__item">
-          <img src="assets/jonc-dore-main.webp" width="1024" height="1024" loading="lazy"
-               alt="Une main posée sur un livre, le jonc serti doré au poignet, au soleil."
-               data-en-alt="A hand resting on a book in the sun, the gold set bangle on the wrist.">
-          <figcaption class="caption"><span>N° 3</span> <span data-en="Set bangle, gold">Jonc serti, doré</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
-        </figure>
-        <figure class="room__item">
-          <img src="assets/maille-tasse.webp" width="1024" height="1024" loading="lazy"
-               alt="Deux mains autour d'une tasse, le bracelet à mailles ovales au poignet gauche."
-               data-en-alt="Two hands around a cup, the oval-link bracelet on the left wrist.">
-          <figcaption class="caption"><span>N° 1</span> <span data-en="Oval link">Maille ovale</span> <span class="caption__price" data-en="$20">20 $</span></figcaption>
-        </figure>
-        <div class="room__note">
-          <p data-en="Four pieces. One price.">Quatre pièces. Un seul prix.</p>
-          <a class="label__ask" href="#commande" data-en="Order">Commander</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -275,7 +216,7 @@
           <h2 class="label__name"><span data-en="Choose">Choisissez</span> <em class="t-it" data-en="your bracelets">vos bracelets</em></h2>
         </header>
 
-        <fieldset class="order__pieces">
+        <fieldset class="order__pieces" data-sc-in data-sc-stagger="90">
           <legend class="sr-only" data-en="Bracelets">Bracelets</legend>
           <div class="piece" data-piece="maille-ovale">
             <img src="assets/maille-cafe-m.webp" width="760" height="760" alt="" loading="lazy">
