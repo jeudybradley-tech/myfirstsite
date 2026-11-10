@@ -490,7 +490,15 @@
                               linear-gradient(90deg, rgb(222 202 175 / .3) 0%, transparent 50%),
                               linear-gradient(to bottom, transparent 0%, transparent 80%, var(--slate) 100%); }
   .hero__title, .hero__kicker { text-shadow: 0 0 2px rgb(245 237 225 / .6), 0 1px 24px rgb(245 237 225 / .75); }
-  @media (max-width: 760px) { .hero::before { background: linear-gradient(to bottom, transparent 0%, transparent 38%, rgb(222 202 175 / .55) 56%, rgb(218 196 168 / .75) 72%, var(--slate) 100%); } }
+  /* Phones look like the larger screens: the photo in full colour, the motto
+     in the middle with a cream glow that follows the text block. */
+  @media (max-width: 760px) {
+    .hero { align-content: center; }
+    .hero::before { background: linear-gradient(to bottom, transparent 0%, transparent 84%, var(--slate) 100%); }
+    .hero__copy { position: relative; }
+    .hero__copy::before { content: ""; position: absolute; inset: -22% -14%; z-index: -1; pointer-events: none;
+      background: radial-gradient(closest-side, rgb(238 225 206 / .92), rgb(238 225 206 / .8) 60%, rgb(238 225 206 / 0)); }
+  }
   .rail-stage { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, var(--slate) 72%); }
   .curls { background: radial-gradient(55% 60% at 50% 72%, #e3cfb5, var(--slate) 70%); }
   .card__img { box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
