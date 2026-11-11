@@ -17,7 +17,7 @@
   //   Tant que c'est vide, la page dit que l'adresse viendra avec la réponse.
   // ---------------------------------------------------------------------
   var FORM_ENDPOINT = 'https://formspree.io/f/mwllzzaw';
-  var INTERAC_EMAIL = '';
+  var INTERAC_EMAIL = 'jeudybradley@gmail.com';
   var PREVIEW = false;   // true only in the claude.ai preview copy, where nothing can be sent
   var FORMSPREE = /formspree\.io\//.test(FORM_ENDPOINT);
 
@@ -125,7 +125,8 @@
   // line (vertical page scroll stays free on touch); a hidden range input
   // carries keyboard and screen-reader control and stays in sync.
   var compares = Array.prototype.slice.call(document.querySelectorAll('[data-compare]'));
-  var touched = false;
+  var lastTouch = -1e9;   // when the reader last moved a line
+  function poke() { lastTouch = performance.now(); }
   function setPos(el, pct) {
     pct = Math.max(0, Math.min(100, pct));
     el.style.setProperty('--pos', pct.toFixed(2) + '%');
@@ -137,41 +138,45 @@
     function fromEvent(e) { var b = el.getBoundingClientRect(); setPos(el, (e.clientX - b.left) / b.width * 100); }
     el.addEventListener('pointerdown', function (e) {
       if (e.button !== undefined && e.button !== 0) return;
-      dragging = true; touched = true; el.classList.add('is-dragging');
+      dragging = true; poke(); el.classList.add('is-dragging');
       try { el.setPointerCapture(e.pointerId); } catch (err) {}
       fromEvent(e);
     });
-    el.addEventListener('pointermove', function (e) { if (dragging) fromEvent(e); });
+    el.addEventListener('pointermove', function (e) { if (dragging) { poke(); fromEvent(e); } });
     function stop() { dragging = false; el.classList.remove('is-dragging'); }
     el.addEventListener('pointerup', stop);
     el.addEventListener('pointercancel', stop);
     el.addEventListener('lostpointercapture', stop);
-    range.addEventListener('input', function () { touched = true; setPos(el, +range.value); });
+    range.addEventListener('input', function () { poke(); setPos(el, +range.value); });
   });
 
-  // Show once that the line moves: a small sweep when the frame first comes
-  // into view, unless the reader already moved it or prefers less motion.
-  if (!reduce && 'IntersectionObserver' in window && compares[0]) {
-    var nudge = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        nudge.disconnect();
-        if (touched) return;
-        var el = en.target, t0 = null, keys = [[0, 50], [0.35, 30], [0.75, 66], [1, 50]];
-        function step(ts) {
-          if (touched) return;
-          if (t0 === null) t0 = ts;
-          var k = Math.min(1, (ts - t0) / 1600), i = 1;
-          while (i < keys.length - 1 && k > keys[i][0]) i++;
-          var a = keys[i - 1], b = keys[i], u = (k - a[0]) / (b[0] - a[0]);
-          u = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
-          setPos(el, a[1] + (b[1] - a[1]) * u);
-          if (k < 1) requestAnimationFrame(step);
+  // The line glides from side to side on its own while the frame is on
+  // screen. A drag or a key hands it to the reader; it starts again from
+  // where it was left after a few idle seconds. Never under reduced motion.
+  var AUTO_MIN = 22, AUTO_MAX = 78, AUTO_PERIOD = 5200, AUTO_IDLE = 6000;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var mid = (AUTO_MIN + AUTO_MAX) / 2, amp = (AUTO_MAX - AUTO_MIN) / 2;
+    compares.forEach(function (el) {
+      var raf = 0, phase = 0, last = 0, running = false;
+      function frame(ts) {
+        raf = requestAnimationFrame(frame);
+        if (ts - lastTouch < AUTO_IDLE || el.classList.contains('is-dragging')) { running = false; return; }
+        if (!running) {   // (re)start from where the line is now
+          var cur = parseFloat(el.style.getPropertyValue('--pos'));
+          if (isNaN(cur)) cur = 50;
+          phase = Math.asin(Math.max(-1, Math.min(1, (cur - mid) / amp)));
+          running = true; last = ts; return;
         }
-        setTimeout(function () { requestAnimationFrame(step); }, 350);
-      });
-    }, { threshold: 0.6 });
-    nudge.observe(compares[0]);
+        phase += (ts - last) / AUTO_PERIOD * 2 * Math.PI; last = ts;
+        setPos(el, mid + amp * Math.sin(phase));
+      }
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && !raf) { running = false; raf = requestAnimationFrame(frame); }
+          else if (!en.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+        });
+      }, { threshold: 0.3 }).observe(el);
+    });
   }
 
   // Tabs switch the transformation.
@@ -420,6 +425,10 @@
     var strong = document.createElement('strong'); strong.textContent = INTERAC_EMAIL; span.appendChild(strong);
     form.querySelector('[data-done-depot]').textContent =
       'Pour confirmer ta place, envoie ensuite 20 $ par virement Interac à ' + INTERAC_EMAIL + ', avec ton nom et la date dans le message.';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-interac-how]'), function (n) {
+      n.textContent = ' à ';
+      var b = document.createElement('strong'); b.textContent = INTERAC_EMAIL; n.appendChild(b);
+    });
   }
 
   var MESSAGES = {
