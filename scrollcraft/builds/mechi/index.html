@@ -209,6 +209,20 @@
     .shop__set { padding: var(--sc-5); }
     .shop__set ul { grid-template-columns: 1fr; }
   }
+  /* The products, each in the same soft rounded frame as the service cards. */
+  .shop__more { margin-top: clamp(3.5rem, 7vw, 6rem); display: grid; gap: clamp(1.75rem, 3vw, 2.75rem); }
+  .shop__more-h { margin: 0; text-align: center; font-size: clamp(1.9rem, 3vw, 2.8rem); line-height: 1.05; }
+  .shop__more-h em { color: var(--gold-deep); }
+  .prods { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.25rem, 2.5vw, 2.25rem); }
+  .prod { display: grid; justify-items: center; align-content: start; text-align: center; }
+  .prod__img { display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 1.75rem; background: #ece8e2; box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
+  .prod__img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .prod__name { display: block; margin-top: var(--sc-5); font-size: clamp(1.25rem, 1.6vw, 1.6rem); line-height: 1.05; }
+  .prod__name em { color: var(--gold-deep); }
+  .prod__desc { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-sm); font-weight: 500; line-height: 1.5; color: var(--on-porc); max-width: 28ch; }
+  .prod__foot { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep); }
+  @media (max-width: 1000px) { .prods { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 760px) { .prods { gap: var(--sc-6) var(--sc-4); } .prod__img { border-radius: 1.25rem; } .prod__desc { font-size: var(--sc-t-xs); } }
 
   /* ----------------------------------------------------------- the owner -- */
   /* Her photo, her name, a few facts and the salon's motto. Any element marked
@@ -400,10 +414,10 @@
      in the italic serif, also in capitals, a touch larger so it stands as tall.
      Introductions read in the italic serif. Labels, buttons, the form and the
      small print stay in the grotesque so they stay easy to read. */
-  .disp, .mark, .card__name, .rail__end h3 { font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; letter-spacing: -0.01em; }
+  .disp, .mark, .card__name, .rail__end h3, .prod__name, .shop__more-h { font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; letter-spacing: -0.01em; }
   .disp { line-height: .98; }
   .steps h3, legend, .deposit h3, .done h3, .pick__txt b, .foot b { font-family: var(--sc-font-display); font-weight: 300; text-transform: uppercase; letter-spacing: .01em; }
-  .disp em, .card__name em, .rail__end h3 em, .mark em {
+  .disp em, .card__name em, .rail__end h3 em, .mark em, .prod__name em, .shop__more-h em {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
   .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
   .rail__intro > p:not(.label), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
@@ -689,6 +703,35 @@
         <p class="shop__note">Pour le prix et les produits disponibles, demande au salon.</p>
         <a class="cta" href="tel:+14383772535">Appeler le salon</a>
       </div>
+    </div>
+    <div class="sc-wrap shop__more" data-sc-in data-sc-stagger="70">
+      <h3 class="shop__more-h">Aussi en vente <em>au salon</em></h3>
+      <ul class="prods">
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-hydratant.webp" width="570" height="712" loading="lazy" alt="Shampooing Hydratant Moroccanoil, grande bouteille turquoise à pompe."></span>
+          <span class="prod__name"><em>Shampooing hydratant</em></span>
+          <span class="prod__desc">Hydrate et adoucit tous les types de cheveux, en respectant la couleur.</span>
+          <span class="prod__foot">1&nbsp;L · Prix en salon</span>
+        </li>
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-volume.webp" width="600" height="750" loading="lazy" alt="Shampooing et après-shampooing Extra Volume Moroccanoil, deux grandes bouteilles à pompe, turquoise et blanche."></span>
+          <span class="prod__name"><em>Duo Extra Volume</em></span>
+          <span class="prod__desc">Shampooing et après-shampooing : du volume et de la légèreté pour les cheveux fins à moyens.</span>
+          <span class="prod__foot">1&nbsp;L chacun · Prix en salon</span>
+        </li>
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-traitement.webp" width="399" height="499" loading="lazy" alt="Traitement Moroccanoil, flacon d'huile ambré à l'étiquette turquoise."></span>
+          <span class="prod__name"><em>Traitement Moroccanoil</em></span>
+          <span class="prod__desc">L'huile originale de Moroccanoil, pour des cheveux brillants et doux.</span>
+          <span class="prod__foot">Prix en salon</span>
+        </li>
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-sans-rincage.webp" width="600" height="750" loading="lazy" alt="Revitalisant sans rinçage Tout-en-un Moroccanoil, vaporisateur turquoise."></span>
+          <span class="prod__name"><em>Revitalisant sans rinçage</em></span>
+          <span class="prod__desc">Tout-en-un : démêle instantanément et garde les cheveux doux jusqu'à 72&nbsp;heures.</span>
+          <span class="prod__foot">160&nbsp;ml · Prix en salon</span>
+        </li>
+      </ul>
     </div>
   </section>
 

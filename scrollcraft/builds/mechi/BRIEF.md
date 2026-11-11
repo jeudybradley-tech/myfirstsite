@@ -137,3 +137,8 @@ Not verified: a real phone, a real form endpoint.
   Checked at 1440 and 390: section order, no overflow, no console errors, no missing files.
 - "à la place d'écrire coulisses écris tendance": the TikTok title is now "Les tendances de Mechi." (plural, to agree with « Les »).
 - "ENLÈVE" (two screenshots): removed the before/after caption ("Des cheveux naturels crépus, transformés par un silk press…", which also changed with the tabs) together with the tabs' data-caption attributes and the caption code in salon.js, and the TikTok paragraph ("Des boucles qui rebondissent…"). Tabs still switch the slider. Checked at 1440 and 390, no console errors.
+- Product cards: "je veux que ces produits soient dans un cadre comme les services de cheveux", with four Moroccanoil product shots (brand photos on a cream wall and stone ledge).
+  - Each photo is cropped to 4:5 (sides trimmed on the wide ones, a little top on the tall one), never upscaled: prod-hydratant 570x712, prod-volume 600x750, prod-traitement 399x499, prod-sans-rincage 600x750.
+  - Under the set in #produits, a row titled "Aussi en vente au salon": four cards, each with the same rounded frame and shadow as the service cards, the name in the service-name style (italic caps, brown), a one-line benefit taken from the label, and size plus "Prix en salon".
+  - Four columns, two below 1000 px and on phones.
+  - Checked at 1440, 900 and 390: no overflow, no console errors, no missing files.
