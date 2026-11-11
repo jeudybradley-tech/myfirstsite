@@ -142,3 +142,9 @@ Not verified: a real phone, a real form endpoint.
   - Under the set in #produits, a row titled "Aussi en vente au salon": four cards, each with the same rounded frame and shadow as the service cards, the name in the service-name style (italic caps, brown), a one-line benefit taken from the label, and size plus "Prix en salon".
   - Four columns, two below 1000 px and on phones.
   - Checked at 1440, 900 and 390: no overflow, no console errors, no missing files.
+- "je veux pareil pour ça" (the set photo), then "je veux qu'il soit dans la même section": the Moroccanoil Stylist Set leaves its large photo-plus-list layout and becomes the first of five product cards in one row, framed and styled like the others.
+  - Its photo is cropped to 4:5 from the bottom of the original: prod-coffret 600x750. produits.webp and produits-m.webp are removed.
+  - The section head (label, title, lead, note, call button) is now centred above the row.
+  - The cards sit in five columns, three below 1100 px and two on phones; on phones the set spans both columns.
+  - Rules for the old two-column layout are gone.
+  - Checked at 1440, 900 and 390: five cards, no overflow, no console errors, no missing files.

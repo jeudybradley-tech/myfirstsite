@@ -187,42 +187,29 @@
   @media (prefers-reduced-motion: reduce) { .card, .rail__end { opacity: 1; translate: none; } .card__img img { transform: none; } }
 
   /* -------------------------------------------------------- the products -- */
-  /* The Moroccanoil stylist set on the salon's counter, and what is in it.
-     A sand ground between the cream before/after and the beige TikTok. */
+  /* What the salon sells, each in the same soft rounded frame as the service
+     cards. A sand ground between the cream before/after and the beige TikTok. */
   .shop { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--porc-2); }
-  .shop__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-  .shop__ph { margin: 0; aspect-ratio: 3 / 4; max-width: 30rem; width: 100%; border-radius: 1.75rem; overflow: hidden; box-shadow: 0 30px 60px -30px rgb(57 36 13 / .5); }
-  .shop__ph img { width: 100%; height: 100%; object-fit: cover; }
-  .shop__text { display: grid; gap: var(--sc-5); justify-items: start; max-width: 36rem; }
-  .shop__text h2 { margin: 0; font-size: clamp(2.6rem, 5vw, 5rem); }
-  .shop__lead { margin: 0; font-family: var(--font-italic); font-style: italic; font-weight: 500; font-size: clamp(1.3rem, 1rem + .9vw, 1.8rem); line-height: 1.35; color: var(--on-porc); max-width: 32ch; }
-  .shop__set { width: 100%; padding: var(--sc-5) var(--sc-6); border-radius: 1.25rem; background: var(--porc); box-shadow: var(--sc-e1), var(--sc-edge); }
-  .shop__set h3 { margin: 0 0 var(--sc-4); font-family: var(--sc-font-display); font-weight: 300; text-transform: uppercase; font-size: var(--sc-t-xl); line-height: 1.1; letter-spacing: -0.005em; }
-  .shop__set h3 em { font-family: var(--font-italic); font-weight: 500; text-transform: none; color: var(--gold-deep); }
-  .shop__set ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-2) var(--sc-5); }
-  .shop__set li { position: relative; padding-left: 1.1em; font-size: var(--sc-t-base); font-weight: 500; line-height: 1.4; color: var(--on-porc); }
-  .shop__set li::before { content: ""; position: absolute; left: 0; top: .6em; width: .4em; height: .4em; border-radius: 50%; background: var(--gold-deep); }
+  .shop__head { display: grid; justify-items: center; text-align: center; gap: var(--sc-5); }
+  .shop__head h2 { margin: 0; font-size: clamp(2.6rem, 5vw, 5rem); }
+  .shop__lead { margin: 0; font-family: var(--font-italic); font-style: italic; font-weight: 500; font-size: clamp(1.3rem, 1rem + .9vw, 1.8rem); line-height: 1.35; color: var(--on-porc); max-width: 40ch; }
   .shop__note { margin: 0; font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
-  @media (max-width: 760px) {
-    .shop__grid { grid-template-columns: 1fr; }
-    .shop__ph { max-width: none; aspect-ratio: 4 / 5; }
-    .shop__set { padding: var(--sc-5); }
-    .shop__set ul { grid-template-columns: 1fr; }
-  }
-  /* The products, each in the same soft rounded frame as the service cards. */
-  .shop__more { margin-top: clamp(3.5rem, 7vw, 6rem); display: grid; gap: clamp(1.75rem, 3vw, 2.75rem); }
-  .shop__more-h { margin: 0; text-align: center; font-size: clamp(1.9rem, 3vw, 2.8rem); line-height: 1.05; }
-  .shop__more-h em { color: var(--gold-deep); }
-  .prods { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.25rem, 2.5vw, 2.25rem); }
+  .shop__more { margin-top: clamp(3rem, 6vw, 5rem); }
+  .prods { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(1.25rem, 2.2vw, 2rem); }
   .prod { display: grid; justify-items: center; align-content: start; text-align: center; }
   .prod__img { display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 1.75rem; background: #ece8e2; box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
   .prod__img img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .prod__name { display: block; margin-top: var(--sc-5); font-size: clamp(1.25rem, 1.6vw, 1.6rem); line-height: 1.05; }
+  .prod__name { display: block; margin-top: var(--sc-5); font-size: clamp(1.2rem, 1.5vw, 1.5rem); line-height: 1.05; }
   .prod__name em { color: var(--gold-deep); }
   .prod__desc { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-sm); font-weight: 500; line-height: 1.5; color: var(--on-porc); max-width: 28ch; }
   .prod__foot { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep); }
-  @media (max-width: 1000px) { .prods { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 760px) { .prods { gap: var(--sc-6) var(--sc-4); } .prod__img { border-radius: 1.25rem; } .prod__desc { font-size: var(--sc-t-xs); } }
+  @media (max-width: 1100px) { .prods { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 760px) {
+    .prods { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sc-6) var(--sc-4); }
+    .prod--set { grid-column: 1 / -1; }
+    .prod__img { border-radius: 1.25rem; }
+    .prod__desc { font-size: var(--sc-t-xs); }
+  }
 
   /* ----------------------------------------------------------- the owner -- */
   /* Her photo, her name, a few facts and the salon's motto. Any element marked
@@ -414,10 +401,10 @@
      in the italic serif, also in capitals, a touch larger so it stands as tall.
      Introductions read in the italic serif. Labels, buttons, the form and the
      small print stay in the grotesque so they stay easy to read. */
-  .disp, .mark, .card__name, .rail__end h3, .prod__name, .shop__more-h { font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; letter-spacing: -0.01em; }
+  .disp, .mark, .card__name, .rail__end h3, .prod__name { font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; letter-spacing: -0.01em; }
   .disp { line-height: .98; }
   .steps h3, legend, .deposit h3, .done h3, .pick__txt b, .foot b { font-family: var(--sc-font-display); font-weight: 300; text-transform: uppercase; letter-spacing: .01em; }
-  .disp em, .card__name em, .rail__end h3 em, .mark em, .prod__name em, .shop__more-h em {
+  .disp em, .card__name em, .rail__end h3 em, .mark em, .prod__name em {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
   .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
   .rail__intro > p:not(.label), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
@@ -679,34 +666,24 @@
     </div>
   </section>
 
-  <!-- 2b+ · PRODUCTS: flow. The Moroccanoil stylist set on the salon's
-       counter, and what is in it. Contents and price: to confirm with the owner. -->
+  <!-- 2b+ · PRODUCTS: flow. What the salon sells, the Moroccanoil stylist set
+       first, each card framed like a service. Prices: to confirm with the owner. -->
   <section id="produits" class="shop on-porc" data-sc-act="flow" aria-labelledby="shop-h">
-    <div class="sc-wrap shop__grid">
-      <figure class="shop__ph" data-sc-reveal="up" data-sc-reveal-at="0.1 0.4">
-        <picture><source media="(max-width: 760px)" srcset="assets/produits-m.webp"><img src="assets/produits.webp" width="1200" height="1600" loading="lazy" alt="Le coffret Styliste Moroccanoil sur le comptoir du salon : un grand sac noir et des produits turquoise."></picture>
-      </figure>
-      <div class="shop__text" data-sc-in data-sc-stagger="70">
-        <p class="label">En vente au salon</p>
-        <h2 id="shop-h" class="disp">Tes soins, <em>à la maison</em>.</h2>
-        <p class="shop__lead">Les produits Moroccanoil sont en vente au salon, pour garder tes cheveux brillants, doux et faciles à coiffer entre deux rendez-vous.</p>
-        <div class="shop__set">
-          <h3>Coffret Styliste <em>Moroccanoil</em></h3>
-          <ul>
-            <li>Traitement Moroccanoil</li>
-            <li>Brume Traitement Ultra‑Light</li>
-            <li>Masque Gloss Ultra‑Brillant</li>
-            <li>Poudre Texture et Volume</li>
-            <li>Crème Sculptante</li>
-          </ul>
-        </div>
-        <p class="shop__note">Pour le prix et les produits disponibles, demande au salon.</p>
-        <a class="cta" href="tel:+14383772535">Appeler le salon</a>
-      </div>
+    <div class="sc-wrap shop__head" data-sc-in data-sc-stagger="70">
+      <p class="label">En vente au salon</p>
+      <h2 id="shop-h" class="disp">Tes soins, <em>à la maison</em>.</h2>
+      <p class="shop__lead">Les produits Moroccanoil sont en vente au salon, pour garder tes cheveux brillants, doux et faciles à coiffer entre deux rendez-vous.</p>
+      <p class="shop__note">Pour le prix et les produits disponibles, demande au salon.</p>
+      <a class="cta" href="tel:+14383772535">Appeler le salon</a>
     </div>
     <div class="sc-wrap shop__more" data-sc-in data-sc-stagger="70">
-      <h3 class="shop__more-h">Aussi en vente <em>au salon</em></h3>
       <ul class="prods">
+        <li class="prod prod--set">
+          <span class="prod__img"><img src="assets/prod-coffret.webp" width="600" height="750" loading="lazy" alt="Le coffret Styliste Moroccanoil sur le comptoir du salon : un grand sac noir et des produits turquoise."></span>
+          <span class="prod__name"><em>Coffret Styliste</em></span>
+          <span class="prod__desc">Le Traitement, la Brume Ultra‑Light, le Masque Gloss Ultra‑Brillant, la Poudre Texture et Volume et la Crème Sculptante.</span>
+          <span class="prod__foot">Prix en salon</span>
+        </li>
         <li class="prod">
           <span class="prod__img"><img src="assets/prod-hydratant.webp" width="570" height="712" loading="lazy" alt="Shampooing Hydratant Moroccanoil, grande bouteille turquoise à pompe."></span>
           <span class="prod__name"><em>Shampooing hydratant</em></span>
