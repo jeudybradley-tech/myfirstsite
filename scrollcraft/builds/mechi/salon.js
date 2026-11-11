@@ -41,7 +41,8 @@
     silkpress:  { name: 'Silk press', img: 'assets/lissage-m.webp' },
     permanente: { name: 'Permanente', img: 'assets/boucles-coupe-m.webp' },
     teinture:   { name: 'Teinture',   img: 'assets/couleur-m.webp' },
-    keratine:   { name: 'Kératine',   img: 'assets/apres-m.webp' }
+    keratine:   { name: 'Kératine',   img: 'assets/apres-m.webp' },
+    shampoing:  { name: 'Shampoing traitant', img: 'assets/shampoing-m.webp' }
   };
 
   var docEl = document.documentElement;
