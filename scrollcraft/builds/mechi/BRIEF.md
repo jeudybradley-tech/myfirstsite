@@ -136,3 +136,4 @@ Not verified: a real phone, a real form endpoint.
   - No price and no full contents are invented; the README lists them as unknown. Not added to the menu: a sixth link would run into the centred logo at 1350 to 1440 px.
   Checked at 1440 and 390: section order, no overflow, no console errors, no missing files.
 - "à la place d'écrire coulisses écris tendance": the TikTok title is now "Les tendances de Mechi." (plural, to agree with « Les »).
+- "ENLÈVE" (two screenshots): removed the before/after caption ("Des cheveux naturels crépus, transformés par un silk press…", which also changed with the tabs) together with the tabs' data-caption attributes and the caption code in salon.js, and the TikTok paragraph ("Des boucles qui rebondissent…"). Tabs still switch the slider. Checked at 1440 and 390, no console errors.

@@ -174,9 +174,8 @@
     nudge.observe(compares[0]);
   }
 
-  // Tabs switch the transformation; the caption follows.
+  // Tabs switch the transformation.
   var baTabs = Array.prototype.slice.call(document.querySelectorAll('.ba__tabs [role="tab"]'));
-  var baCaption = document.querySelector('[data-ba-caption]');
   function showView(tab, focus) {
     baTabs.forEach(function (t) {
       var on = t === tab;
@@ -186,7 +185,6 @@
       panel.hidden = !on;
       if (on) { var c = panel.querySelector('[data-compare]'); if (c) setPos(c, 50); }
     });
-    if (baCaption && tab.getAttribute('data-caption')) baCaption.textContent = tab.getAttribute('data-caption');
     if (focus) tab.focus();
   }
   baTabs.forEach(function (t, i) {
