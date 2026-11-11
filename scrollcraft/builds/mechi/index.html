@@ -126,19 +126,16 @@
   .fly { position: fixed; z-index: 90; border-radius: 12px; object-fit: cover; pointer-events: none; box-shadow: var(--sc-e3); }
 
   /* --------------------------------------------------------------- hero -- */
-  /* The salon itself, darkened, fills the first screen; the copy sits on it. */
+  /* The salon itself fills the first screen, with no text on it (the page's
+     heading is kept for screen readers only). */
   .hero { position: relative; display: grid; align-items: center;
     min-height: 100svh; padding: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)) var(--sc-gutter) clamp(2rem, 6svh, 4rem);
     background: var(--slate); overflow: clip; isolation: isolate; }
   .hero__bg { position: absolute; inset: -6% 0; z-index: -2; }
-  .hero__kicker { color: var(--gold) !important; }
-  .hero__title { margin: 0; font-size: clamp(3rem, 6.4vw, 6.6rem); line-height: .95; max-width: 11ch; color: var(--on-slate); text-shadow: 0 2px 24px rgb(0 0 0 / .4); }
-  .hero__title em { color: var(--gold); }
   .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
   .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background: linear-gradient(90deg, rgb(18 14 9 / .9) 0%, rgb(18 14 9 / .72) 42%, rgb(18 14 9 / .55) 100%),
                 linear-gradient(to bottom, rgb(18 14 9 / .35) 0%, transparent 30%, transparent 70%, var(--slate) 100%); }
-  .hero__copy { display: grid; gap: var(--sc-5); justify-items: start; }
   .mark { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(4.5rem, 14.5vw, 15rem); line-height: .84; letter-spacing: -0.045em; color: var(--on-slate); }
 
   /* ------------------------------------------------------ services rail -- */
@@ -451,9 +448,7 @@
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
     .hero { align-content: end; }
-    .hero__title { font-size: 13vw; }
     .hero__bg img { object-position: 50% 30%; }
-    .hero::before { background: linear-gradient(to bottom, rgb(18 14 9 / .55) 0%, rgb(18 14 9 / .5) 35%, rgb(18 14 9 / .88) 68%, var(--slate) 100%); }
 
     .phones { gap: 1rem; }
     .phone { width: min(44vw, calc((100svh - var(--bar-h) - 4rem) * 9 / 19.5)); padding: .4rem; border-radius: 1.7rem; --tilt: -3deg; }
@@ -499,21 +494,9 @@
   .bar__nav a[data-tab] { color: #4d3720; }
   .bar__logo img { filter: drop-shadow(0 3px 8px rgb(57 36 13 / .25)); }
   @media (max-width: 1350px) { .bar__nav { background: #f5ede1; border-color: rgb(57 36 13 / .14); box-shadow: 0 24px 50px -24px rgb(57 36 13 / .45); } }
-  /* La photo du salon reste visible : le voile beige ne couvre que la zone
-     du texte (à gauche sur ordinateur, en bas sur téléphone). */
-  .hero::before { background: radial-gradient(ellipse 36% 42% at 23% 55%, rgb(238 225 206 / .86) 0%, rgb(238 225 206 / .72) 45%, rgb(238 225 206 / 0) 100%),
-                              linear-gradient(90deg, rgb(222 202 175 / .3) 0%, transparent 50%),
-                              linear-gradient(to bottom, transparent 0%, transparent 80%, var(--slate) 100%); }
-  .hero__title, .hero__kicker { text-shadow: 0 0 2px rgb(245 237 225 / .6), 0 1px 24px rgb(245 237 225 / .75); }
-  /* Phones look like the larger screens: the photo in full colour, the motto
-     in the middle with a cream glow that follows the text block. */
-  @media (max-width: 760px) {
-    .hero { align-content: center; }
-    .hero::before { background: linear-gradient(to bottom, transparent 0%, transparent 84%, var(--slate) 100%); }
-    .hero__copy { position: relative; }
-    .hero__copy::before { content: ""; position: absolute; inset: -22% -14%; z-index: -1; pointer-events: none;
-      background: radial-gradient(closest-side, rgb(238 225 206 / .92), rgb(238 225 206 / .8) 60%, rgb(238 225 206 / 0)); }
-  }
+  /* The salon photo in full colour, with only a short fade into the beige
+     at the very bottom, on every screen. */
+  .hero::before { background: linear-gradient(to bottom, transparent 0%, transparent 84%, var(--slate) 100%); }
   .rail-stage { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, var(--slate) 72%); }
   .curls { background: radial-gradient(55% 60% at 50% 72%, #e3cfb5, var(--slate) 70%); }
   .card__img { box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
@@ -556,10 +539,7 @@
 
   <!-- 1 · HERO: flow. The salon itself, darkened, as the background of the first screen. -->
   <section id="accueil" class="hero on-slate" data-sc-act="flow">
-    <div class="hero__copy" data-sc-in data-sc-stagger="70">
-      <p class="label hero__kicker">Salon de coiffure · Montréal</p>
-      <h1 class="disp hero__title"><span class="sr">Salon de coiffure Mechi : </span>Une beauté <em>qui vous ressemble</em>.</h1>
-    </div>
+    <h1 class="sr">Salon de coiffure Mechi, à Montréal : une beauté qui vous ressemble.</h1>
     <div class="hero__bg" data-sc-parallax="1.2" aria-hidden="true">
       <picture><source media="(max-width: 760px)" srcset="assets/salon-m.webp"><img src="assets/salon.webp" width="1920" height="1440" fetchpriority="high" alt=""></picture>
     </div>
