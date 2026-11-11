@@ -186,6 +186,30 @@
   .rail__end p { margin: 0; color: var(--on-slate-soft); line-height: 1.55; }
   @media (prefers-reduced-motion: reduce) { .card, .rail__end { opacity: 1; translate: none; } .card__img img { transform: none; } }
 
+  /* -------------------------------------------------------- the products -- */
+  /* The Moroccanoil stylist set on the salon's counter, and what is in it.
+     A sand ground between the cream before/after and the beige TikTok. */
+  .shop { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--porc-2); }
+  .shop__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .shop__ph { margin: 0; aspect-ratio: 3 / 4; max-width: 30rem; width: 100%; border-radius: 1.75rem; overflow: hidden; box-shadow: 0 30px 60px -30px rgb(57 36 13 / .5); }
+  .shop__ph img { width: 100%; height: 100%; object-fit: cover; }
+  .shop__text { display: grid; gap: var(--sc-5); justify-items: start; max-width: 36rem; }
+  .shop__text h2 { margin: 0; font-size: clamp(2.6rem, 5vw, 5rem); }
+  .shop__lead { margin: 0; font-family: var(--font-italic); font-style: italic; font-weight: 500; font-size: clamp(1.3rem, 1rem + .9vw, 1.8rem); line-height: 1.35; color: var(--on-porc); max-width: 32ch; }
+  .shop__set { width: 100%; padding: var(--sc-5) var(--sc-6); border-radius: 1.25rem; background: var(--porc); box-shadow: var(--sc-e1), var(--sc-edge); }
+  .shop__set h3 { margin: 0 0 var(--sc-4); font-family: var(--sc-font-display); font-weight: 300; text-transform: uppercase; font-size: var(--sc-t-xl); line-height: 1.1; letter-spacing: -0.005em; }
+  .shop__set h3 em { font-family: var(--font-italic); font-weight: 500; text-transform: none; color: var(--gold-deep); }
+  .shop__set ul { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-2) var(--sc-5); }
+  .shop__set li { position: relative; padding-left: 1.1em; font-size: var(--sc-t-base); font-weight: 500; line-height: 1.4; color: var(--on-porc); }
+  .shop__set li::before { content: ""; position: absolute; left: 0; top: .6em; width: .4em; height: .4em; border-radius: 50%; background: var(--gold-deep); }
+  .shop__note { margin: 0; font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
+  @media (max-width: 760px) {
+    .shop__grid { grid-template-columns: 1fr; }
+    .shop__ph { max-width: none; aspect-ratio: 4 / 5; }
+    .shop__set { padding: var(--sc-5); }
+    .shop__set ul { grid-template-columns: 1fr; }
+  }
+
   /* ----------------------------------------------------------- the owner -- */
   /* Her photo, her name, a few facts and the salon's motto. Any element marked
      with the draft attribute is refused by the deploy workflow. */
@@ -638,6 +662,33 @@
           </div>
         </div>
         <p class="ba__hint" aria-hidden="true">← Glisse pour comparer →</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2b+ · PRODUCTS: flow. The Moroccanoil stylist set on the salon's
+       counter, and what is in it. Contents and price: to confirm with the owner. -->
+  <section id="produits" class="shop on-porc" data-sc-act="flow" aria-labelledby="shop-h">
+    <div class="sc-wrap shop__grid">
+      <figure class="shop__ph" data-sc-reveal="up" data-sc-reveal-at="0.1 0.4">
+        <picture><source media="(max-width: 760px)" srcset="assets/produits-m.webp"><img src="assets/produits.webp" width="1200" height="1600" loading="lazy" alt="Le coffret Styliste Moroccanoil sur le comptoir du salon : un grand sac noir et des produits turquoise."></picture>
+      </figure>
+      <div class="shop__text" data-sc-in data-sc-stagger="70">
+        <p class="label">En vente au salon</p>
+        <h2 id="shop-h" class="disp">Tes soins, <em>à la maison</em>.</h2>
+        <p class="shop__lead">Les produits Moroccanoil sont en vente au salon, pour garder tes cheveux brillants, doux et faciles à coiffer entre deux rendez-vous.</p>
+        <div class="shop__set">
+          <h3>Coffret Styliste <em>Moroccanoil</em></h3>
+          <ul>
+            <li>Traitement Moroccanoil</li>
+            <li>Brume Traitement Ultra‑Light</li>
+            <li>Masque Gloss Ultra‑Brillant</li>
+            <li>Poudre Texture et Volume</li>
+            <li>Crème Sculptante</li>
+          </ul>
+        </div>
+        <p class="shop__note">Pour le prix et les produits disponibles, demande au salon.</p>
+        <a class="cta" href="tel:+14383772535">Appeler le salon</a>
       </div>
     </div>
   </section>
