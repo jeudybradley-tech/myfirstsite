@@ -155,3 +155,4 @@ Not verified: a real phone, a real form endpoint.
   - The lead now reads "Des soins Moroccanoil et des mèches, en vente au salon…".
   - The grid becomes three across (max 62rem) on every screen above 760 px, two on phones; the set no longer spans two columns on phones, so six cards make even rows.
   - Checked at 1440, 900 and 390.
+- "je ne veux pas de crochet lors des sélections", then "c'est pareil pour la catégorie en haut": the check circles are gone from the service cards (.card__tick) and from the form photos (.pick__tick), markup and styles. A choice still shows: on a service card, the brown ring around the photo and the "Choisi" pill; on a form photo, the brown outline and "Choisi". Checked at 1440 and 390.

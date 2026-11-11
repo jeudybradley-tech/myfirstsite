@@ -163,8 +163,6 @@
   .card__arch { display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: var(--round); background: var(--slate-2); }
   .card__img img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover;
     transform: scale(1.08) translateX(calc((1 - var(--k)) * 3%)); transition: filter 200ms var(--sc-ease-out); }
-  .card__tick { position: absolute; left: 50%; bottom: 0; translate: -50% 50%; width: 36px; height: 36px; border-radius: 50%; background: var(--slate); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
-  .card__tick::after { content: ""; width: 13px; height: 7px; border: 2.5px solid var(--gold); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .4; }
   .card__name { display: block; margin-top: var(--sc-7); font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.02; letter-spacing: -0.015em; }
   .card__name em { font-style: italic; font-weight: 400; color: var(--gold); }
   .card__desc { display: block; margin-top: var(--sc-3); color: var(--on-slate-soft); line-height: 1.55; font-size: var(--sc-t-base); max-width: 30ch; }
@@ -173,8 +171,6 @@
   .card__foot b { font-weight: 500; color: var(--on-slate); }
   .card__state { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); white-space: nowrap; padding: .55em .9em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); transition: background-color 150ms var(--sc-ease-out), color 150ms var(--sc-ease-out); }
   .card[aria-pressed="true"] .card__img { box-shadow: 0 0 0 5px var(--slate), 0 0 0 6.5px var(--gold), 0 26px 48px -26px rgb(0 0 0 / .75); }
-  .card[aria-pressed="true"] .card__tick { background: var(--gold); border-color: var(--gold); transform: scale(1.08); }
-  .card[aria-pressed="true"] .card__tick::after { border-color: #120e09; opacity: 1; }
   .card[aria-pressed="true"] .card__state { background: var(--gold); color: #120e09; }
   .card:focus-visible { outline: none; }
   .card:focus-visible .card__img { outline: 2px dashed var(--gold); outline-offset: 11px; }
@@ -344,8 +340,6 @@
   .pick__card input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; margin: 0; }
   .pick__ph { position: relative; display: block; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 1.25rem; box-shadow: var(--sc-e2); outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out), box-shadow 160ms var(--sc-ease-out); }
   .pick__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 420ms var(--sc-ease-out), filter 200ms var(--sc-ease-out); }
-  .pick__tick { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgb(255 255 255 / .86); box-shadow: var(--sc-e1); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
-  .pick__tick::after { content: ""; width: 12px; height: 7px; border: 2.5px solid var(--on-porc-soft); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .35; }
   .pick__txt { display: grid; gap: 2px; }
   .pick__txt b { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); letter-spacing: -0.01em; line-height: 1.15; }
   .pick__txt small { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); line-height: 1.4; }
@@ -353,8 +347,6 @@
   .pick__state::before { content: "Cliquer pour choisir"; color: var(--sc-ink-soft); font-weight: 400; letter-spacing: .04em; text-transform: none; }
   .pick__card input:checked ~ .pick__txt .pick__state::before { content: "Choisi"; color: var(--gold-deep); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
   .pick__card input:checked ~ .pick__ph { outline-color: var(--gold-deep); box-shadow: var(--sc-e3); }
-  .pick__card input:checked ~ .pick__ph .pick__tick { background: var(--gold-deep); transform: scale(1.06); }
-  .pick__card input:checked ~ .pick__ph .pick__tick::after { border-color: #fbf6ec; opacity: 1; }
   .pick__card input:focus-visible ~ .pick__ph { outline: 3px dashed var(--gold-deep); }
   .pick__card:active .pick__ph { transform: scale(.985); }
   @media (hover: hover) and (pointer: fine) { .pick__card:hover .pick__ph img { transform: scale(1.035); } }
@@ -494,7 +486,6 @@
     .booker { grid-template-columns: 1fr; }
     .cal { padding: var(--sc-4); }
     .pick { grid-template-columns: 1fr 1fr; gap: var(--sc-5) var(--sc-4); }
-    .pick__tick { top: 8px; right: 8px; }
     form { gap: var(--sc-7); }
     .book__head { margin-bottom: var(--sc-7); }
   }
@@ -527,7 +518,6 @@
   .curls { background: radial-gradient(55% 60% at 50% 72%, #e3cfb5, var(--slate) 70%); }
   .card__img { box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
   .card[aria-pressed="true"] .card__img { box-shadow: 0 0 0 5px var(--slate), 0 0 0 6.5px var(--gold), 0 26px 44px -26px rgb(57 36 13 / .5); }
-  .card[aria-pressed="true"] .card__tick::after { border-color: #fbf6ec; }
   .card[aria-pressed="true"] .card__state { color: #fbf6ec; }
   .tiktok { background: rgb(245 237 225 / .6); }
   @media (hover: hover) and (pointer: fine) { .tiktok:hover { background: rgb(245 237 225 / .92); } }
@@ -585,31 +575,31 @@
           <h2 id="rail-title" class="disp">Choisis ce qui <em>te ressemble</em>.</h2>
         </div>
         <button class="card" type="button" data-add="silkpress" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."></span></span>
           <span class="card__name"><em>Silk press</em></span>
           <span class="card__desc">Pour les cheveux qui frisent ou gonflent à la moindre humidité : lisses, brillants, et qui bougent encore.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="permanente" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."></span></span>
           <span class="card__name"><em>Permanente</em></span>
           <span class="card__desc">Une permanente pour des boucles bien définies, qui tiennent jour après jour.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="teinture" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."></span></span>
           <span class="card__name"><em>Teinture</em></span>
           <span class="card__desc">Une teinture aux reflets éclatants, posée avec un soin qui garde la fibre brillante.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="keratine" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."></span></span>
           <span class="card__name"><em>Kératine</em></span>
           <span class="card__desc">Un traitement à la kératine qui discipline les frisottis, pour des longueurs lisses, brillantes et faciles à coiffer.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="shampoing" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/shampoing.webp" width="736" height="981" loading="lazy" alt="Shampoing traitant : longs cheveux bruns rincés au bac, la tête renversée."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/shampoing.webp" width="736" height="981" loading="lazy" alt="Shampoing traitant : longs cheveux bruns rincés au bac, la tête renversée."></span></span>
           <span class="card__name"><em>Shampoing traitant</em></span>
           <span class="card__desc">Un shampoing qui nourrit la fibre et apaise le cuir chevelu, pour des cheveux propres, doux et légers.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
@@ -794,19 +784,19 @@
           <legend class="sr">Choisis tes services</legend>
           <div class="pick">
             <label class="pick__card" for="svc-silkpress"><input type="checkbox" id="svc-silkpress" name="services" value="silkpress">
-              <span class="pick__ph"><img src="assets/lissage-m.webp" width="600" height="800" alt="Silk press sur carré noir, lisse et brillant."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__ph"><img src="assets/lissage-m.webp" width="600" height="800" alt="Silk press sur carré noir, lisse et brillant."></span>
               <span class="pick__txt"><b>Silk press</b><small>Frisottis, cheveux qui gonflent.</small><span class="pick__state" aria-hidden="true"></span></span></label>
             <label class="pick__card" for="svc-permanente"><input type="checkbox" id="svc-permanente" name="services" value="permanente">
-              <span class="pick__ph"><img src="assets/boucles-coupe-m.webp" width="600" height="800" alt="Permanente : boucles châtaines bien définies."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__ph"><img src="assets/boucles-coupe-m.webp" width="600" height="800" alt="Permanente : boucles châtaines bien définies."></span>
               <span class="pick__txt"><b>Permanente</b><small>Boucles définies et durables.</small><span class="pick__state" aria-hidden="true"></span></span></label>
             <label class="pick__card" for="svc-teinture"><input type="checkbox" id="svc-teinture" name="services" value="teinture">
-              <span class="pick__ph"><img src="assets/couleur-m.webp" width="600" height="800" alt="Teinture : cheveux brun foncé aux reflets rouges."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__ph"><img src="assets/couleur-m.webp" width="600" height="800" alt="Teinture : cheveux brun foncé aux reflets rouges."></span>
               <span class="pick__txt"><b>Teinture</b><small>Couleur complète, reflets.</small><span class="pick__state" aria-hidden="true"></span></span></label>
             <label class="pick__card" for="svc-keratine"><input type="checkbox" id="svc-keratine" name="services" value="keratine">
-              <span class="pick__ph"><img src="assets/apres-m.webp" width="600" height="800" alt="Kératine : cheveux longs bruns, lisses et brillants."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__ph"><img src="assets/apres-m.webp" width="600" height="800" alt="Kératine : cheveux longs bruns, lisses et brillants."></span>
               <span class="pick__txt"><b>Kératine</b><small>Frisottis, cheveux difficiles à coiffer.</small><span class="pick__state" aria-hidden="true"></span></span></label>
             <label class="pick__card" for="svc-shampoing"><input type="checkbox" id="svc-shampoing" name="services" value="shampoing">
-              <span class="pick__ph"><img src="assets/shampoing-m.webp" width="600" height="800" alt="Shampoing traitant : longs cheveux bruns rincés au bac."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__ph"><img src="assets/shampoing-m.webp" width="600" height="800" alt="Shampoing traitant : longs cheveux bruns rincés au bac."></span>
               <span class="pick__txt"><b>Shampoing traitant</b><small>Cuir chevelu apaisé, cheveux doux.</small><span class="pick__state" aria-hidden="true"></span></span></label>
           </div>
         </fieldset>
