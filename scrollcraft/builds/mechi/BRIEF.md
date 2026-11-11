@@ -135,3 +135,4 @@ Not verified: a real phone, a real form endpoint.
   - on the right: label "En vente au salon", h2 "Tes soins, à la maison.", an italic lead, a cream card listing only the products whose names are legible on their boxes in the photo, a note to ask the salon for price and stock, and a CTA "Appeler le salon" (tel:).
   - No price and no full contents are invented; the README lists them as unknown. Not added to the menu: a sixth link would run into the centred logo at 1350 to 1440 px.
   Checked at 1440 and 390: section order, no overflow, no console errors, no missing files.
+- "à la place d'écrire coulisses écris tendance": the TikTok title is now "Les tendances de Mechi." (plural, to agree with « Les »).
