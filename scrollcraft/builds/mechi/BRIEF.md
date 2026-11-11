@@ -148,3 +148,10 @@ Not verified: a real phone, a real form endpoint.
   - The cards sit in five columns, three below 1100 px and two on phones; on phones the set spans both columns.
   - Rules for the old two-column layout are gone.
   - Checked at 1440, 900 and 390: five cards, no overflow, no console errors, no missing files.
+- Hair bundles: "pareille" with a photo of two body-wave bundles in their bags (labels "STYLE: R-BW 18\" COLOR: NATURAL").
+  - Added as a sixth card, "Mèches ondulées": "Paquets de cheveux ondulés (body wave), couleur naturelle.", 18 po · Prix en salon.
+  - The photo is cropped to 4:5 keeping both labels: prod-meches 600x750.
+  - Nothing is claimed about the hair's origin.
+  - The lead now reads "Des soins Moroccanoil et des mèches, en vente au salon…".
+  - The grid becomes three across (max 62rem) on every screen above 760 px, two on phones; the set no longer spans two columns on phones, so six cards make even rows.
+  - Checked at 1440, 900 and 390.
