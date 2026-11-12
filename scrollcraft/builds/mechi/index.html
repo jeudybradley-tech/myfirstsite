@@ -202,6 +202,41 @@
     .prod__desc { font-size: var(--sc-t-xs); }
   }
 
+  /* ------------------------------------------------- service options -- */
+  /* A service with options (Teinture) opens this window: each option is a
+     row with its price; a chosen row turns brown, with no checkmark. */
+  .opts { width: min(32rem, calc(100% - 2rem)); max-height: calc(100svh - 2rem); padding: 0; border: 0; border-radius: 1.5rem; overflow: auto;
+    background: var(--porc); color: var(--on-porc); box-shadow: 0 40px 80px -30px rgb(31 22 12 / .6); }
+  .opts::backdrop { background: rgb(31 22 12 / .45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .opts__box { position: relative; display: grid; gap: var(--sc-4); padding: clamp(1.5rem, 4vw, 2.25rem); }
+  .opts__box .label { color: var(--gold-deep); }
+  .opts__h { margin: 0; padding-right: 3rem; font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.05; }
+  .opts__h em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold-deep); }
+  .opts__hint { margin: 0; font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
+  .opts__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sc-2); }
+  .opts__list label { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--sc-3); row-gap: 2px; align-items: center;
+    padding: .85rem 1rem; border-radius: 1rem; background: #fff; border: 1.5px solid color-mix(in oklab, var(--on-porc) 14%, transparent); cursor: pointer;
+    transition: border-color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
+  .opts__list input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+  .opts__name { grid-column: 1; font-weight: 500; font-size: var(--sc-t-base); }
+  .opts__price { grid-column: 1; font-size: var(--sc-t-sm); font-weight: 500; color: var(--gold-deep); }
+  .opts__list label::after { content: "Choisir"; grid-column: 2; grid-row: 1 / span 2; font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+    padding: .5em .85em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold-deep) 55%, transparent); color: var(--gold-deep); }
+  .opts__list label:has(input:checked) { border-color: var(--gold-deep); background: color-mix(in oklab, var(--gold-deep) 8%, #fff); }
+  .opts__list label:has(input:checked)::after { content: "Choisi"; background: var(--gold-deep); border-color: var(--gold-deep); color: #fbf6ec; }
+  .opts__list label:has(input:focus-visible) { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
+  .opts__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-4); margin-top: var(--sc-2); }
+  .opts__acts .cta[disabled] { opacity: .45; cursor: not-allowed; }
+  .opts__cancel { background: none; border: 0; padding: .6em .2em; font: 500 var(--sc-t-sm)/1 var(--sc-font-text); color: var(--on-porc-soft); text-decoration: underline; text-underline-offset: .25em; cursor: pointer; }
+  .opts__x { position: absolute; top: 1rem; right: 1rem; width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 50%;
+    border: 1px solid color-mix(in oklab, var(--on-porc) 18%, transparent); background: transparent; color: var(--on-porc); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+  .opts__x:focus-visible, .opts__cancel:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+  /* What was chosen shows under the service, on the card and in the form. */
+  .card__opts { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-sm); font-weight: 600; color: var(--gold); max-width: 30ch; }
+  .pick__opts { display: block; font-size: var(--sc-t-sm); font-weight: 600; color: var(--gold-deep); }
+  .card__opts:empty, .pick__opts:empty { display: none; }
+  .pick__card--opts input:not(:checked) ~ .pick__txt .pick__state::before { content: "Voir les options"; }
+
   /* ----------------------------------------------------------- the owner -- */
   /* Her photo, her name, a few facts and the salon's motto. Any element marked
      with the draft attribute is refused by the deploy workflow. */
@@ -570,7 +605,8 @@
           <span class="card__img"><span class="card__arch"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."></span></span>
           <span class="card__name"><em>Teinture</em></span>
           <span class="card__desc">Une teinture aux reflets éclatants, posée avec un soin qui garde la fibre brillante.</span>
-          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+          <span class="card__opts" data-opts-chosen="teinture"></span>
+          <span class="card__foot"><span>À partir de <b>130&nbsp;$</b></span><span class="card__state" data-state>Voir les options</span></span>
         </button>
         <button class="card" type="button" data-add="keratine" aria-pressed="false">
           <span class="card__img"><span class="card__arch"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."></span></span>
@@ -769,9 +805,9 @@
             <label class="pick__card" for="svc-permanente"><input type="checkbox" id="svc-permanente" name="services" value="permanente">
               <span class="pick__ph"><img src="assets/boucles-coupe-m.webp" width="600" height="800" alt="Permanente : boucles châtaines bien définies."></span>
               <span class="pick__txt"><b>Permanente</b><small>Boucles définies et durables.</small><span class="pick__state" aria-hidden="true"></span></span></label>
-            <label class="pick__card" for="svc-teinture"><input type="checkbox" id="svc-teinture" name="services" value="teinture">
+            <label class="pick__card pick__card--opts" for="svc-teinture"><input type="checkbox" id="svc-teinture" name="services" value="teinture">
               <span class="pick__ph"><img src="assets/couleur-m.webp" width="600" height="800" alt="Teinture : cheveux brun foncé aux reflets rouges."></span>
-              <span class="pick__txt"><b>Teinture</b><small>Couleur complète, reflets.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+              <span class="pick__txt"><b>Teinture</b><small>Couleur complète, reflets.</small><small class="pick__opts" data-opts-chosen="teinture"></small><span class="pick__state" aria-hidden="true"></span></span></label>
             <label class="pick__card" for="svc-keratine"><input type="checkbox" id="svc-keratine" name="services" value="keratine">
               <span class="pick__ph"><img src="assets/apres-m.webp" width="600" height="800" alt="Kératine : cheveux longs bruns, lisses et brillants."></span>
               <span class="pick__txt"><b>Kératine</b><small>Frisottis, cheveux difficiles à coiffer.</small><span class="pick__state" aria-hidden="true"></span></span></label>
@@ -856,6 +892,22 @@
   </section>
 
 </main>
+
+<!-- Options of a service (Teinture). The list is built by salon.js from
+     OPTIONS, where the prices live. -->
+<dialog class="opts" data-opts aria-labelledby="opts-h">
+  <div class="opts__box">
+    <p class="label" data-opts-service>Teinture</p>
+    <h3 id="opts-h" class="opts__h">Choisis <em>tes options</em></h3>
+    <p class="opts__hint">Tu peux en choisir plusieurs.</p>
+    <ul class="opts__list" data-opts-list></ul>
+    <div class="opts__acts">
+      <button type="button" class="cta" data-opts-ok>Ajouter à ma soumission</button>
+      <button type="button" class="opts__cancel" data-opts-cancel>Annuler</button>
+    </div>
+    <button type="button" class="opts__x" data-opts-cancel aria-label="Fermer">×</button>
+  </div>
+</dialog>
 
 <script src="scrollcraft.js"></script>
 <script>ScrollCraft.mount(document.body);</script>

@@ -45,6 +45,19 @@
     shampoing:  { name: 'Shampoing traitant', img: 'assets/shampoing-m.webp' }
   };
 
+  // OPTIONS : un service qui a des options ouvre une fenêtre pour les choisir
+  // (plusieurs à la fois). Les prix affichés et envoyés dans la demande
+  // viennent d'ici.
+  var OPTIONS = {
+    teinture: [
+      { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ et plus, selon la quantité' },
+      { id: 'couleur',    name: 'Teinture couleur',      price: '150 $ à 400 $, selon la quantité' },
+      { id: 'balayage',   name: 'Balayage',              price: '150 $ à 400 $, selon la quantité' },
+      { id: 'meches',     name: 'Mèches',                price: '150 $ à 400 $, selon la quantité' },
+      { id: 'cellophane', name: 'Cellophane capillaire', price: '130 $' }
+    ]
+  };
+
   var docEl = document.documentElement;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var svc = document.getElementById('services');
@@ -204,6 +217,12 @@
   // ------------------------------------------------- choosing services --
   var picks = [];
   var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="services"]'));
+  var chosenOpts = {};   // service id -> ids of its chosen options
+  function optNames(id) {
+    return (chosenOpts[id] || []).map(function (o) {
+      return OPTIONS[id].filter(function (x) { return x.id === o; })[0].name;
+    });
+  }
 
   function render() {
     slip.textContent = picks.length ? 'Ma soumission · ' + picks.length : 'Ma soumission';
@@ -212,9 +231,13 @@
       var on = picks.indexOf(b.getAttribute('data-add')) > -1;
       b.setAttribute('aria-pressed', String(on));
       var st = b.querySelector('[data-state]');
-      if (st) st.textContent = on ? 'Choisi' : 'Choisir';
+      if (st) st.textContent = on ? 'Choisi' : (OPTIONS[b.getAttribute('data-add')] ? 'Voir les options' : 'Choisir');
     });
     boxes.forEach(function (bx) { if (SERVICES[bx.value]) bx.checked = picks.indexOf(bx.value) > -1; });
+    document.querySelectorAll('[data-opts-chosen]').forEach(function (n) {
+      var id = n.getAttribute('data-opts-chosen');
+      n.textContent = picks.indexOf(id) > -1 ? optNames(id).join(', ') : '';
+    });
   }
 
   // The chosen photo flies into the pill, so the visitor sees where it went.
@@ -259,15 +282,73 @@
   document.querySelectorAll('[data-add]').forEach(function (b) {
     b.addEventListener('click', function () {
       var id = b.getAttribute('data-add');
+      if (OPTIONS[id] && openOpts(id, b.querySelector('img'), b)) return;
       if (picks.indexOf(id) > -1) remove(id); else add(id, b.querySelector('img'));
     });
   });
   boxes.forEach(function (bx) {
+    // In the form too, a service with options opens the window instead of ticking.
+    bx.addEventListener('click', function (e) {
+      if (!OPTIONS[bx.value]) return;
+      e.preventDefault();
+      openOpts(bx.value, null, bx);
+    });
     bx.addEventListener('change', function () {
       if (!SERVICES[bx.value]) return;
       if (bx.checked) add(bx.value, null); else remove(bx.value);
     });
   });
+  // ------------------------------------------------ the options window --
+  // Opened by a service that has OPTIONS, from its card or its form photo.
+  // Rows turn brown when chosen; the button adds, updates or removes the
+  // service in "Ma soumission". Esc, Annuler, × or a click outside close it
+  // without changing anything.
+  var dlg = document.querySelector('[data-opts]');
+  var dlgList = dlg && dlg.querySelector('[data-opts-list]');
+  var dlgOk = dlg && dlg.querySelector('[data-opts-ok]');
+  var dlgFor = null, dlgFrom = null, dlgBack = null;
+  function okLabel() {
+    var n = dlgList.querySelectorAll('input:checked').length, inPicks = picks.indexOf(dlgFor) > -1;
+    dlgOk.textContent = n ? (inPicks ? 'Mettre à jour ma soumission' : 'Ajouter à ma soumission')
+                          : (inPicks ? 'Retirer de ma soumission' : 'Ajouter à ma soumission');
+    dlgOk.disabled = !n && !inPicks;
+  }
+  function openOpts(id, fromImg, backTo) {
+    if (!dlg || !OPTIONS[id]) return false;
+    dlgFor = id; dlgFrom = fromImg; dlgBack = backTo;
+    dlg.querySelector('[data-opts-service]').textContent = SERVICES[id].name;
+    dlgList.textContent = '';
+    OPTIONS[id].forEach(function (o) {
+      var li = document.createElement('li'), lab = document.createElement('label'), cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.value = o.id; cb.checked = (chosenOpts[id] || []).indexOf(o.id) > -1;
+      var nm = document.createElement('span'); nm.className = 'opts__name'; nm.textContent = o.name;
+      var pr = document.createElement('span'); pr.className = 'opts__price'; pr.textContent = o.price;
+      lab.appendChild(cb); lab.appendChild(nm); lab.appendChild(pr); li.appendChild(lab); dlgList.appendChild(li);
+    });
+    okLabel();
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    var first = dlgList.querySelector('input'); if (first) first.focus();
+    return true;
+  }
+  function closeOpts() {
+    if (typeof dlg.close === 'function') dlg.close(); else { dlg.removeAttribute('open'); dlg.dispatchEvent(new Event('close')); }
+  }
+  if (dlg) {
+    dlgList.addEventListener('change', okLabel);
+    dlg.querySelectorAll('[data-opts-cancel]').forEach(function (b) { b.addEventListener('click', closeOpts); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) closeOpts(); });   // the backdrop
+    dlg.addEventListener('close', function () { if (dlgBack) dlgBack.focus({ preventScroll: true }); dlgFor = null; });
+    dlgOk.addEventListener('click', function () {
+      var id = dlgFor, from = dlgFrom;
+      var ids = Array.prototype.map.call(dlgList.querySelectorAll('input:checked'), function (c) { return c.value; });
+      chosenOpts[id] = ids;
+      closeOpts();
+      if (ids.length && picks.indexOf(id) < 0) add(id, from);
+      else if (!ids.length && picks.indexOf(id) > -1) remove(id);
+      else { render(); announce.textContent = SERVICES[id].name + ' : ' + optNames(id).join(', ') + '.'; }
+    });
+  }
+
   render();
 
   // A keyboard user tabbing through the rail: scroll the page to where the
@@ -502,7 +583,10 @@
     }
 
     // One clear table in the salon's inbox; "Reply" goes to the client.
-    var picked = boxes.filter(function (b) { return b.checked; }).map(function (b) { return SERVICES[b.value] ? SERVICES[b.value].name : b.value; });
+    var picked = boxes.filter(function (b) { return b.checked; }).map(function (b) {
+      var name = SERVICES[b.value] ? SERVICES[b.value].name : b.value, opts = OPTIONS[b.value] ? optNames(b.value) : [];
+      return opts.length ? name + ' (' + opts.join(', ') + ')' : name;
+    });
     var when = longDay(chosenDay) + ' à ' + label(mins(chosenTime));
     var payload = {
       'Services': picked.length ? picked.join(', ') : 'Aucun choisi',
