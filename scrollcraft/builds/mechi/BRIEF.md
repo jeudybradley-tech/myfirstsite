@@ -168,9 +168,4 @@ Not verified: a real phone, a real form endpoint.
   - The rail card opens it instead of toggling; its state pill says "Voir les options" until chosen, and its foot says "À partir de 130 $". In the form, a click on the Teinture photo is intercepted (preventDefault) and opens the same window.
   - The chosen options show under Teinture on the card and in the form, and go to Formspree as "Teinture (Balayage, Cellophane capillaire)".
   - Tested at 1440 and 390: open from the card and the form; add two; Esc keeps them; remove all; Kératine still ticks normally; payload text correct; no console errors.
-- "lorsqu'on sélectionne une option la photo apparaît" and "la photo apparaît à côté de l'option".
-  - A first try put one large photo frame in the window; it was replaced within the same turn.
-  - Now each option row holds a hidden thumbnail (.opts__thumb, 4.4 x 5.5 rem, rounded). It slides open beside the option when chosen (width, margin and opacity transition, none under reduced motion).
-  - OPTIONS entries take an optional img and fall back to the service photo. Teinture couleur uses couleur-m.webp and Mèches uses ba-apres-dos-m.webp (the blond highlights after-photo). Peroxyde, balayage and cellophane wait for their own photos.
-  - The window is 34 rem wide.
-  - Checked at 1440 and 390: thumbnails 0 px when not chosen, 70 px when chosen, no console errors.
+- "annuler": the option photos are reverted (commit reverted), so the colour window is back to names, prices and the "Choisi" pill, with no images.

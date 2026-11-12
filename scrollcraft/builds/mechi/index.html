@@ -205,7 +205,7 @@
   /* ------------------------------------------------- service options -- */
   /* A service with options (Teinture) opens this window: each option is a
      row with its price; a chosen row turns brown, with no checkmark. */
-  .opts { width: min(34rem, calc(100% - 2rem)); max-height: calc(100svh - 2rem); padding: 0; border: 0; border-radius: 1.5rem; overflow: auto;
+  .opts { width: min(32rem, calc(100% - 2rem)); max-height: calc(100svh - 2rem); padding: 0; border: 0; border-radius: 1.5rem; overflow: auto;
     background: var(--porc); color: var(--on-porc); box-shadow: 0 40px 80px -30px rgb(31 22 12 / .6); }
   .opts::backdrop { background: rgb(31 22 12 / .45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
   .opts__box { position: relative; display: grid; gap: var(--sc-4); padding: clamp(1.5rem, 4vw, 2.25rem); }
@@ -214,19 +214,13 @@
   .opts__h em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold-deep); }
   .opts__hint { margin: 0; font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
   .opts__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sc-2); }
-  .opts__list label { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 0; row-gap: 2px; align-items: center;
+  .opts__list label { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--sc-3); row-gap: 2px; align-items: center;
     padding: .85rem 1rem; border-radius: 1rem; background: #fff; border: 1.5px solid color-mix(in oklab, var(--on-porc) 14%, transparent); cursor: pointer;
     transition: border-color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
   .opts__list input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
-  .opts__name { grid-column: 2; font-weight: 500; font-size: var(--sc-t-base); }
-  .opts__price { grid-column: 2; font-size: var(--sc-t-sm); font-weight: 500; color: var(--gold-deep); }
-  /* The option's photo appears beside it once it is chosen. */
-  .opts__thumb { grid-column: 1; grid-row: 1 / span 2; width: 0; height: 5.5rem; margin-right: 0; border-radius: .9rem; overflow: hidden; opacity: 0;
-    transition: width 260ms var(--sc-ease-out), margin-right 260ms var(--sc-ease-out), opacity 200ms var(--sc-ease-out); }
-  .opts__thumb img { display: block; width: 4.4rem; height: 100%; object-fit: cover; }
-  .opts__list label:has(input:checked) .opts__thumb { width: 4.4rem; margin-right: var(--sc-4); opacity: 1; }
-  @media (prefers-reduced-motion: reduce) { .opts__thumb { transition: none; } }
-  .opts__list label::after { content: "Choisir"; grid-column: 3; grid-row: 1 / span 2; margin-left: var(--sc-3); font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  .opts__name { grid-column: 1; font-weight: 500; font-size: var(--sc-t-base); }
+  .opts__price { grid-column: 1; font-size: var(--sc-t-sm); font-weight: 500; color: var(--gold-deep); }
+  .opts__list label::after { content: "Choisir"; grid-column: 2; grid-row: 1 / span 2; font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
     padding: .5em .85em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold-deep) 55%, transparent); color: var(--gold-deep); }
   .opts__list label:has(input:checked) { border-color: var(--gold-deep); background: color-mix(in oklab, var(--gold-deep) 8%, #fff); }
   .opts__list label:has(input:checked)::after { content: "Choisi"; background: var(--gold-deep); border-color: var(--gold-deep); color: #fbf6ec; }
