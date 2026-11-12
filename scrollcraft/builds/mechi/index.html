@@ -214,7 +214,7 @@
   .opts__h em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold-deep); }
   .opts__hint { margin: 0; font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
   .opts__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sc-2); }
-  .opts__list label { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 0; row-gap: 2px; align-items: center;
+  .opts__list label { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 0; row-gap: 2px; align-items: center;
     padding: .85rem 1rem; border-radius: 1rem; background: #fff; border: 1.5px solid color-mix(in oklab, var(--on-porc) 14%, transparent); cursor: pointer;
     transition: border-color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
   .opts__list input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
@@ -237,10 +237,7 @@
     .opts__ph { position: relative; order: -1; aspect-ratio: 4 / 3; }
   }
   @media (prefers-reduced-motion: reduce) { .opts__ph img { animation: none; } }
-  .opts__list label::after { content: "Choisir"; grid-column: 2; grid-row: 1 / span 2; margin-left: var(--sc-3); font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
-    padding: .5em .85em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold-deep) 55%, transparent); color: var(--gold-deep); }
-  .opts__list label:has(input:checked) { border-color: var(--gold-deep); background: color-mix(in oklab, var(--gold-deep) 8%, #fff); }
-  .opts__list label:has(input:checked)::after { content: "Choisi"; background: var(--gold-deep); border-color: var(--gold-deep); color: #fbf6ec; }
+  .opts__list label:has(input:checked) { border-color: var(--gold-deep); box-shadow: inset 0 0 0 1.5px var(--gold-deep); background: color-mix(in oklab, var(--gold-deep) 10%, #fff); }
   .opts__list label:has(input:focus-visible) { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
   .opts__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-4); margin-top: var(--sc-2); }
   .opts__acts .cta[disabled] { opacity: .45; cursor: not-allowed; }
