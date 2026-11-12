@@ -214,30 +214,30 @@
   .opts__h em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold-deep); }
   .opts__hint { margin: 0; font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
   .opts__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sc-2); }
-  .opts__list label { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 0; row-gap: 2px; align-items: center;
+  .opts__list label { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 0; row-gap: 2px; align-items: center;
     padding: .85rem 1rem; border-radius: 1rem; background: #fff; border: 1.5px solid color-mix(in oklab, var(--on-porc) 14%, transparent); cursor: pointer;
     transition: border-color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
   .opts__list input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
-  .opts__name { grid-column: 2; font-weight: 500; font-size: var(--sc-t-base); }
-  .opts__price { grid-column: 2; font-size: var(--sc-t-sm); font-weight: 500; color: var(--gold-deep); }
-  /* The option's photo appears beside it once it is chosen. */
-  .opts__thumb { grid-column: 1; grid-row: 1 / span 2; width: 0; height: 0; margin-right: 0; border-radius: .9rem; overflow: hidden; opacity: 0;
-    transition: width 260ms var(--sc-ease-out), margin-right 260ms var(--sc-ease-out), opacity 200ms var(--sc-ease-out); }
-  .opts__thumb img { display: block; width: 8rem; height: 100%; object-fit: cover; }
-  .opts__list label:has(input:checked) .opts__thumb { width: 8rem; height: 10rem; margin-right: var(--sc-5); opacity: 1; }
-  /* On a phone the chosen photo takes the whole width of its row, above the name. */
-  @media (max-width: 600px) {
-    .opts__list label { grid-template-columns: minmax(0, 1fr) auto; }
-    .opts__thumb { grid-column: 1 / -1; grid-row: 1; width: 100%; }
-    .opts__thumb img { width: 100%; }
-    .opts__name { grid-column: 1; grid-row: 2; }
-    .opts__price { grid-column: 1; grid-row: 3; }
-    .opts__list label::after { grid-column: 2; grid-row: 2 / span 2; margin-left: var(--sc-3); }
-    .opts__list label:has(input:checked) .opts__thumb img { width: 100%; }
-    .opts__list label:has(input:checked) .opts__thumb { width: 100%; height: auto; aspect-ratio: 4 / 3; margin: 0 0 var(--sc-4); }
+  .opts__name { grid-column: 1; font-weight: 500; font-size: var(--sc-t-base); }
+  .opts__price { grid-column: 1; font-size: var(--sc-t-sm); font-weight: 500; color: var(--gold-deep); }
+  /* Once an option is chosen, its photo shows large beside the list; the
+     window widens to make room. On a phone the photo sits above the list. */
+  .opts:has(.opts__list input:checked) { width: min(64rem, calc(100% - 2rem)); }
+  .opts__box:has(.opts__list input:checked) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); column-gap: clamp(1.5rem, 3vw, 2.5rem); align-items: start; }
+  .opts__main { display: grid; gap: var(--sc-4); min-width: 0; }
+  .opts__ph { display: none; position: sticky; top: 0; margin: 0; aspect-ratio: 4 / 5; border-radius: 1.5rem; overflow: hidden; background: var(--porc-2); box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
+  .opts__box:has(.opts__list input:checked) .opts__ph { display: block; }
+  @media (min-width: 761px) { .opts__box:has(.opts__list input:checked) { padding-top: 4rem; } }
+  .opts__ph img { display: block; width: 100%; height: 100%; object-fit: cover; animation: opts-in 260ms var(--sc-ease-out); }
+  .opts__ph figcaption { position: absolute; left: .85rem; bottom: .85rem; max-width: calc(100% - 1.7rem); padding: .55em .95em; border-radius: var(--sc-r-pill);
+    background: rgb(245 237 225 / .92); color: var(--on-porc); font-size: var(--sc-t-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+  @keyframes opts-in { from { opacity: 0; transform: scale(1.03); } }
+  @media (max-width: 760px) {
+    .opts__box:has(.opts__list input:checked) { grid-template-columns: 1fr; }
+    .opts__ph { position: relative; order: -1; aspect-ratio: 4 / 3; }
   }
-  @media (prefers-reduced-motion: reduce) { .opts__thumb { transition: none; } }
-  .opts__list label::after { content: "Choisir"; grid-column: 3; grid-row: 1 / span 2; margin-left: var(--sc-3); font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  @media (prefers-reduced-motion: reduce) { .opts__ph img { animation: none; } }
+  .opts__list label::after { content: "Choisir"; grid-column: 2; grid-row: 1 / span 2; margin-left: var(--sc-3); font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
     padding: .5em .85em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold-deep) 55%, transparent); color: var(--gold-deep); }
   .opts__list label:has(input:checked) { border-color: var(--gold-deep); background: color-mix(in oklab, var(--gold-deep) 8%, #fff); }
   .opts__list label:has(input:checked)::after { content: "Choisi"; background: var(--gold-deep); border-color: var(--gold-deep); color: #fbf6ec; }
@@ -245,7 +245,7 @@
   .opts__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-4); margin-top: var(--sc-2); }
   .opts__acts .cta[disabled] { opacity: .45; cursor: not-allowed; }
   .opts__cancel { background: none; border: 0; padding: .6em .2em; font: 500 var(--sc-t-sm)/1 var(--sc-font-text); color: var(--on-porc-soft); text-decoration: underline; text-underline-offset: .25em; cursor: pointer; }
-  .opts__x { position: absolute; top: 1rem; right: 1rem; width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 50%;
+  .opts__x { position: absolute; z-index: 2; top: 1rem; right: 1rem; background: rgb(245 237 225 / .92) !important; width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 50%;
     border: 1px solid color-mix(in oklab, var(--on-porc) 18%, transparent); background: transparent; color: var(--on-porc); font-size: 1.5rem; line-height: 1; cursor: pointer; }
   .opts__x:focus-visible, .opts__cancel:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
   /* What was chosen shows under the service, on the card and in the form. */
@@ -915,14 +915,17 @@
      OPTIONS, where the prices live. -->
 <dialog class="opts" data-opts aria-labelledby="opts-h">
   <div class="opts__box">
-    <p class="label" data-opts-service>Teinture</p>
-    <h3 id="opts-h" class="opts__h">Choisis <em>tes options</em></h3>
-    <p class="opts__hint">Tu peux en choisir plusieurs.</p>
-    <ul class="opts__list" data-opts-list></ul>
-    <div class="opts__acts">
-      <button type="button" class="cta" data-opts-ok>Ajouter à ma soumission</button>
-      <button type="button" class="opts__cancel" data-opts-cancel>Annuler</button>
+    <div class="opts__main">
+      <p class="label" data-opts-service>Teinture</p>
+      <h3 id="opts-h" class="opts__h">Choisis <em>tes options</em></h3>
+      <p class="opts__hint">Tu peux en choisir plusieurs.</p>
+      <ul class="opts__list" data-opts-list></ul>
+      <div class="opts__acts">
+        <button type="button" class="cta" data-opts-ok>Ajouter à ma soumission</button>
+        <button type="button" class="opts__cancel" data-opts-cancel>Annuler</button>
+      </div>
     </div>
+    <figure class="opts__ph" aria-hidden="true"><img data-opts-img src="assets/couleur-m.webp" width="600" height="800" alt=""><figcaption data-opts-cap></figcaption></figure>
     <button type="button" class="opts__x" data-opts-cancel aria-label="Fermer">×</button>
   </div>
 </dialog>

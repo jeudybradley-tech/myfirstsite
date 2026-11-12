@@ -320,6 +320,14 @@
                           : (inPicks ? 'Retirer de ma soumission' : 'Ajouter à ma soumission');
     dlgOk.disabled = !n && !inPicks;
   }
+  // The large photo beside the list shows the option just chosen.
+  function showPhoto(optId) {
+    var o = OPTIONS[dlgFor].filter(function (x) { return x.id === optId; })[0]; if (!o) return;
+    var img = dlg.querySelector('[data-opts-img]'), fresh = img.cloneNode(false);
+    fresh.src = o.img || SERVICES[dlgFor].img;
+    img.replaceWith(fresh);   // a new node replays the fade-in
+    dlg.querySelector('[data-opts-cap]').textContent = o.name;
+  }
   function openOpts(id, fromImg, backTo) {
     if (!dlg || !OPTIONS[id]) return false;
     dlgFor = id; dlgFrom = fromImg; dlgBack = backTo;
@@ -328,13 +336,12 @@
     OPTIONS[id].forEach(function (o) {
       var li = document.createElement('li'), lab = document.createElement('label'), cb = document.createElement('input');
       cb.type = 'checkbox'; cb.value = o.id; cb.checked = (chosenOpts[id] || []).indexOf(o.id) > -1;
-      var th = document.createElement('span'); th.className = 'opts__thumb';
-      var im = document.createElement('img'); im.src = o.img || SERVICES[id].img; im.alt = ''; im.loading = 'lazy'; th.appendChild(im);
       var nm = document.createElement('span'); nm.className = 'opts__name'; nm.textContent = o.name;
       var pr = document.createElement('span'); pr.className = 'opts__price'; pr.textContent = o.price;
-      lab.appendChild(cb); lab.appendChild(th); lab.appendChild(nm); lab.appendChild(pr); li.appendChild(lab); dlgList.appendChild(li);
+      lab.appendChild(cb); lab.appendChild(nm); lab.appendChild(pr); li.appendChild(lab); dlgList.appendChild(li);
     });
     okLabel();
+    var firstOn = dlgList.querySelector('input:checked'); if (firstOn) showPhoto(firstOn.value);
     if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
     var first = dlgList.querySelector('input'); if (first) first.focus();
     return true;
@@ -343,7 +350,11 @@
     if (typeof dlg.close === 'function') dlg.close(); else { dlg.removeAttribute('open'); dlg.dispatchEvent(new Event('close')); }
   }
   if (dlg) {
-    dlgList.addEventListener('change', okLabel);
+    dlgList.addEventListener('change', function (e) {
+      okLabel();
+      if (e.target.checked) showPhoto(e.target.value);
+      else { var on = dlgList.querySelector('input:checked'); if (on) showPhoto(on.value); }
+    });
     dlg.querySelectorAll('[data-opts-cancel]').forEach(function (b) { b.addEventListener('click', closeOpts); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) closeOpts(); });   // the backdrop
     dlg.addEventListener('close', function () { if (dlgBack) dlgBack.focus({ preventScroll: true }); dlgFor = null; });
