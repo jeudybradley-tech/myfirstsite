@@ -47,13 +47,14 @@
 
   // OPTIONS : un service qui a des options ouvre une fenêtre pour les choisir
   // (plusieurs à la fois). Les prix affichés et envoyés dans la demande
-  // viennent d'ici.
+  // viennent d'ici. img : la photo qui apparaît à côté de l'option quand on
+  // la choisit ; sans img, c'est la photo du service.
   var OPTIONS = {
     teinture: [
       { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ et plus, selon la quantité' },
-      { id: 'couleur',    name: 'Teinture couleur',      price: '150 $ à 400 $, selon la quantité' },
+      { id: 'couleur',    name: 'Teinture couleur',      price: '150 $ à 400 $, selon la quantité', img: 'assets/couleur-m.webp' },
       { id: 'balayage',   name: 'Balayage',              price: '150 $ à 400 $, selon la quantité' },
-      { id: 'meches',     name: 'Mèches',                price: '150 $ à 400 $, selon la quantité' },
+      { id: 'meches',     name: 'Mèches',                price: '150 $ à 400 $, selon la quantité', img: 'assets/ba-apres-dos-m.webp' },
       { id: 'cellophane', name: 'Cellophane capillaire', price: '130 $' }
     ]
   };
@@ -321,9 +322,11 @@
     OPTIONS[id].forEach(function (o) {
       var li = document.createElement('li'), lab = document.createElement('label'), cb = document.createElement('input');
       cb.type = 'checkbox'; cb.value = o.id; cb.checked = (chosenOpts[id] || []).indexOf(o.id) > -1;
+      var th = document.createElement('span'); th.className = 'opts__thumb';
+      var im = document.createElement('img'); im.src = o.img || SERVICES[id].img; im.alt = ''; im.loading = 'lazy'; th.appendChild(im);
       var nm = document.createElement('span'); nm.className = 'opts__name'; nm.textContent = o.name;
       var pr = document.createElement('span'); pr.className = 'opts__price'; pr.textContent = o.price;
-      lab.appendChild(cb); lab.appendChild(nm); lab.appendChild(pr); li.appendChild(lab); dlgList.appendChild(li);
+      lab.appendChild(cb); lab.appendChild(th); lab.appendChild(nm); lab.appendChild(pr); li.appendChild(lab); dlgList.appendChild(li);
     });
     okLabel();
     if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');

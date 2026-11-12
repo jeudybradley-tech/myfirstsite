@@ -169,3 +169,4 @@ Not verified: a real phone, a real form endpoint.
   - The chosen options show under Teinture on the card and in the form, and go to Formspree as "Teinture (Balayage, Cellophane capillaire)".
   - Tested at 1440 and 390: open from the card and the form; add two; Esc keeps them; remove all; Kératine still ticks normally; payload text correct; no console errors.
 - "annuler": the option photos are reverted (commit reverted), so the colour window is back to names, prices and the "Choisi" pill, with no images.
+- "annule pas": the option photos are back exactly as before the undo (files restored from that commit). Teinture couleur and Mèches have their own photos, and the other three show the service photo until the owner sends theirs.
