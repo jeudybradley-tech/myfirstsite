@@ -50,6 +50,12 @@
   // viennent d'ici. img : la photo qui apparaît à côté de l'option quand on
   // la choisit ; sans img, c'est la photo du service.
   var OPTIONS = {
+    permanente: [
+      { id: 'bouclee',  name: 'Permanente bouclée',            price: '150 $ à 400 $, varie selon la longueur et la quantité' },
+      { id: 'souple',   name: 'Permanente ondulation souple',  price: '150 $ à 400 $, varie selon la longueur et la quantité' },
+      { id: 'spirale',  name: 'Permanente spirale',            price: '150 $ à 400 $, varie selon la longueur et la quantité' },
+      { id: 'classique', name: 'Permanente classique',         price: '150 $ à 400 $, varie selon la longueur et la quantité' }
+    ],
     teinture: [
       { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ à 400 $, varie selon la longueur et la quantité' },
       { id: 'couleur',    name: 'Teinture couleur',      price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/couleur-m.webp' },

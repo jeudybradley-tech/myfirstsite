@@ -616,7 +616,8 @@
           <span class="card__img"><span class="card__arch"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."></span></span>
           <span class="card__name"><em>Permanente</em></span>
           <span class="card__desc">Une permanente pour des boucles bien définies, qui tiennent jour après jour.</span>
-          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+          <span class="card__opts" data-opts-chosen="permanente"></span>
+          <span class="card__foot"><span>À partir de <b>150&nbsp;$</b></span><span class="card__state" data-state>Voir les options</span></span>
         </button>
         <button class="card" type="button" data-add="teinture" aria-pressed="false">
           <span class="card__img"><span class="card__arch"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."></span></span>
@@ -819,9 +820,9 @@
             <label class="pick__card" for="svc-silkpress"><input type="checkbox" id="svc-silkpress" name="services" value="silkpress">
               <span class="pick__ph"><img src="assets/lissage-m.webp" width="600" height="800" alt="Silk press sur carré noir, lisse et brillant."></span>
               <span class="pick__txt"><b>Silk press</b><small>Frisottis, cheveux qui gonflent.</small><span class="pick__state" aria-hidden="true"></span></span></label>
-            <label class="pick__card" for="svc-permanente"><input type="checkbox" id="svc-permanente" name="services" value="permanente">
+            <label class="pick__card pick__card--opts" for="svc-permanente"><input type="checkbox" id="svc-permanente" name="services" value="permanente">
               <span class="pick__ph"><img src="assets/boucles-coupe-m.webp" width="600" height="800" alt="Permanente : boucles châtaines bien définies."></span>
-              <span class="pick__txt"><b>Permanente</b><small>Boucles définies et durables.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+              <span class="pick__txt"><b>Permanente</b><small>Boucles définies et durables.</small><small class="pick__opts" data-opts-chosen="permanente"></small><span class="pick__state" aria-hidden="true"></span></span></label>
             <label class="pick__card pick__card--opts" for="svc-teinture"><input type="checkbox" id="svc-teinture" name="services" value="teinture">
               <span class="pick__ph"><img src="assets/couleur-m.webp" width="600" height="800" alt="Teinture : cheveux brun foncé aux reflets rouges."></span>
               <span class="pick__txt"><b>Teinture</b><small>Couleur complète, reflets.</small><small class="pick__opts" data-opts-chosen="teinture"></small><span class="pick__state" aria-hidden="true"></span></span></label>
