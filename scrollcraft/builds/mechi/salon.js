@@ -52,9 +52,7 @@
   var OPTIONS = {
     permanente: [
       { id: 'bouclee',  name: 'Permanente bouclée',            price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-bouclee.webp' },
-      { id: 'souple',   name: 'Permanente ondulation souple',  price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-souple.webp' },
-      { id: 'spirale',  name: 'Permanente spirale',            price: '150 $ à 400 $, varie selon la longueur et la quantité' },
-      { id: 'classique', name: 'Permanente classique',         price: '150 $ à 400 $, varie selon la longueur et la quantité' }
+      { id: 'souple',   name: 'Permanente ondulation souple',  price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-souple.webp' }
     ],
     teinture: [
       { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ à 400 $, varie selon la longueur et la quantité' },

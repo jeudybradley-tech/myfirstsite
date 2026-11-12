@@ -184,3 +184,4 @@ Not verified: a real phone, a real form endpoint.
 - Option photo: "Permanente bouclée" gets the owner's photo (long brown spiral curls from the back), cropped to 4:5 as opt-perm-bouclee.webp (600x750).
 - Option photo: "Permanente ondulation souple" gets the owner's photo (soft light-brown waves, from the side), cropped to 4:5 as opt-perm-souple.webp.
 - "je ne veux pas que les gens prennent plein de choix en même temps": options are now one at a time. Choosing an option clears the others (checkboxes kept, so tapping the chosen one again clears it and the button reads Retirer). The hint reads "Choisis une option."
+- "efface l'option permanente spirale, classique": Permanente now has two options, bouclée and ondulation souple, both with the owner's photos.
