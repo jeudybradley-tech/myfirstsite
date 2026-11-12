@@ -51,11 +51,11 @@
   // la choisit ; sans img, c'est la photo du service.
   var OPTIONS = {
     teinture: [
-      { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ et plus, selon la longueur et la quantité' },
+      { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ à 400 $, varie selon la longueur et la quantité' },
       { id: 'couleur',    name: 'Teinture couleur',      price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/couleur-m.webp' },
       { id: 'balayage',   name: 'Balayage',              price: '150 $ à 400 $, varie selon la longueur et la quantité' },
       { id: 'meches',     name: 'Mèches',                price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/ba-apres-dos-m.webp' },
-      { id: 'cellophane', name: 'Cellophane capillaire', price: '130 $' }
+      { id: 'cellophane', name: 'Cellophane capillaire', price: '150 $ à 400 $, varie selon la longueur et la quantité' }
     ]
   };
 
