@@ -380,8 +380,7 @@
   input[type="file"] { font: 400 var(--sc-t-sm)/1.4 var(--sc-font-text); color: var(--sc-ink-soft); }
   input[type="file"]::file-selector-button { font: 500 var(--sc-t-sm)/1 var(--sc-font-text); padding: .75em 1em; margin-right: 1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold-deep) 55%, transparent); background: transparent; color: var(--gold-deep); cursor: pointer; }
   /* Service picker: the client's own photos, click to choose. */
-  .pick { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--sc-5); }
-  @media (max-width: 1100px) { .pick { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .pick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sc-5); max-width: 52rem; }
   .pick__card { position: relative; display: grid; gap: var(--sc-3); align-content: start; cursor: pointer; min-width: 0; }
   .pick__card input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; margin: 0; }
   .pick__ph { position: relative; display: block; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 1.25rem; box-shadow: var(--sc-e2); outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out), box-shadow 160ms var(--sc-ease-out); }
@@ -635,6 +634,12 @@
           <span class="card__desc">Un shampoing qui nourrit la fibre et apaise le cuir chevelu, pour des cheveux propres, doux et légers.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
+        <button class="card" type="button" data-add="botox" aria-pressed="false">
+          <span class="card__img"><span class="card__arch"><img src="assets/botox.webp" width="1200" height="1600" loading="lazy" alt="Botox capillaire : cheveux noirs mi-longs, lisses et brillants, vus de dos."></span></span>
+          <span class="card__name"><em>Botox capillaire</em></span>
+          <span class="card__desc">Un soin qui gaine et répare la fibre, pour des cheveux lisses, brillants et doux, sans frisottis.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
         <div class="rail__end">
           <h3>Pas sûre de ce <em>qu'il te faut ?</em></h3>
           <a class="cta" href="#soumission">Demander une soumission</a>
@@ -829,6 +834,9 @@
             <label class="pick__card" for="svc-shampoing"><input type="checkbox" id="svc-shampoing" name="services" value="shampoing">
               <span class="pick__ph"><img src="assets/shampoing-m.webp" width="600" height="800" alt="Shampoing traitant : longs cheveux bruns rincés au bac."></span>
               <span class="pick__txt"><b>Shampoing traitant</b><small>Cuir chevelu apaisé, cheveux doux.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-botox"><input type="checkbox" id="svc-botox" name="services" value="botox">
+              <span class="pick__ph"><img src="assets/botox-m.webp" width="600" height="800" alt="Botox capillaire : cheveux noirs lisses et brillants."></span>
+              <span class="pick__txt"><b>Botox capillaire</b><small>Cheveux lisses, brillants, sans frisottis.</small><span class="pick__state" aria-hidden="true"></span></span></label>
           </div>
         </fieldset>
 
