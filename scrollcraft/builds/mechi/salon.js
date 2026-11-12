@@ -51,7 +51,7 @@
   // la choisit ; sans img, c'est la photo du service.
   var OPTIONS = {
     permanente: [
-      { id: 'bouclee',  name: 'Permanente bouclée',            price: '150 $ à 400 $, varie selon la longueur et la quantité' },
+      { id: 'bouclee',  name: 'Permanente bouclée',            price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-bouclee.webp' },
       { id: 'souple',   name: 'Permanente ondulation souple',  price: '150 $ à 400 $, varie selon la longueur et la quantité' },
       { id: 'spirale',  name: 'Permanente spirale',            price: '150 $ à 400 $, varie selon la longueur et la quantité' },
       { id: 'classique', name: 'Permanente classique',         price: '150 $ à 400 $, varie selon la longueur et la quantité' }
