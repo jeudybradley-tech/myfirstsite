@@ -256,8 +256,10 @@
      with the draft attribute is refused by the deploy workflow. */
   .owner { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--porc-2); }
   .owner__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-  .owner__ph { position: relative; margin: 0; aspect-ratio: 3 / 4; max-width: 30rem; width: 100%; border-radius: 3px; overflow: hidden; box-shadow: var(--sc-e3);
-    outline: 1px solid color-mix(in oklab, var(--gold-deep) 40%, transparent); outline-offset: 10px; }
+  /* A soft rounded frame with a wide, light shadow, like the owner's reference. */
+  .owner__ph { position: relative; margin: 0; aspect-ratio: 3 / 4; max-width: 30rem; width: 100%; border-radius: 2rem; overflow: hidden;
+    box-shadow: 0 40px 80px -30px rgb(57 36 13 / .45), 0 12px 30px -18px rgb(57 36 13 / .3); }
+  .owner__ph picture { display: block; height: 100%; }
   .owner__ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
   .owner__text { display: grid; gap: var(--sc-5); justify-items: start; max-width: 38rem; }
   .owner__text h2 { margin: 0; font-size: clamp(2.8rem, 5.5vw, 5.6rem); }
@@ -775,7 +777,7 @@
        reads how to book. Only facts the client gave (name, flyer). -->
   <section id="proprietaire" class="owner on-porc" data-sc-act="flow" aria-labelledby="owner-h">
     <div class="sc-wrap owner__grid">
-      <figure class="owner__ph" data-sc-reveal="up" data-sc-reveal-at="0.1 0.4">
+      <figure class="owner__ph" data-sc-in>
         <picture><source media="(max-width: 760px)" srcset="assets/mercedes-m.webp"><img src="assets/mercedes.webp" width="896" height="1342" loading="lazy" alt="Mercedes, propriétaire du Salon de coiffure Mechi, en tailleur noir et chemise blanche."></picture>
       </figure>
       <div class="owner__text" data-sc-in data-sc-stagger="70">
