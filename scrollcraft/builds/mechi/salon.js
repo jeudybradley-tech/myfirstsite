@@ -46,7 +46,7 @@
   };
 
   // OPTIONS : un service qui a des options ouvre une fenêtre pour les choisir
-  // (plusieurs à la fois). Les prix affichés et envoyés dans la demande
+  // (une seule à la fois). Les prix affichés et envoyés dans la demande
   // viennent d'ici. img : la photo qui apparaît à côté de l'option quand on
   // la choisit ; sans img, c'est la photo du service.
   var OPTIONS = {
@@ -351,6 +351,8 @@
   }
   if (dlg) {
     dlgList.addEventListener('change', function (e) {
+      // One option at a time: choosing one lets go of the others.
+      if (e.target.checked) dlgList.querySelectorAll('input:checked').forEach(function (c) { if (c !== e.target) c.checked = false; });
       okLabel();
       if (e.target.checked) showPhoto(e.target.value);
       else { var on = dlgList.querySelector('input:checked'); if (on) showPhoto(on.value); }
