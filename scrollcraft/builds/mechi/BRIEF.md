@@ -197,3 +197,4 @@ Not verified: a real phone, a real form endpoint.
   - Darkened in CSS (brightness .62, saturate .55, contrast 1.05) under a grey-green veil (rgb 28 32 28 / .42).
   - The logo (logo-m.webp) sits large on the empty left, clamp(15rem, 30vw, 30rem), with a drop shadow; on phones it is centred near the bottom.
   - Checked at 1440, 713 and 390.
+- "je veux des espaces comme ça dans chaque catégorie, du blanc entre" (reference: cream bands parted by white). The body is now white, and every section after the first gets a top margin of clamp(1.25rem, 3vw, 2.75rem): 43 px at 1440, 20 px at 390. The pinned services rail still works; no overflow, no console errors.

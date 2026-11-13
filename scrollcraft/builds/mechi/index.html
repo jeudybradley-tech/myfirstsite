@@ -577,6 +577,9 @@
   .card, .rail__end { opacity: 1; }
   .curls__copy > p:not(.label) { font-weight: 600; }
   .card__desc, .pick__txt small { font-weight: 500; }
+  /* A white band between every section, as in the owner's reference. */
+  body { background: #fff; }
+  main > section + section { margin-top: clamp(1.25rem, 3vw, 2.75rem); }
 </style>
 </head>
 <body>
