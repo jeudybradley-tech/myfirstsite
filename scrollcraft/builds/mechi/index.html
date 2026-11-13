@@ -606,6 +606,15 @@
      only the welcome card keeps its dark photo. */
   main > section:not(.hero), .rail-stage, .curls { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, #d3ba9c 72%); }
   .deposit { background: #c9ad8b; }
+  /* Smaller welcome card: about three quarters of the screen, set below the
+     menu with a wider beige margin around it. */
+  .hero { margin: calc(var(--bar-h) + .25rem) clamp(1rem, 5vw, 5rem) 0; min-height: calc(75svh - var(--bar-h));
+    padding: clamp(1.5rem, 4svh, 3rem) clamp(1.5rem, 4vw, 3.5rem); }
+  #services { margin-top: clamp(1rem, 3vw, 2.5rem); }
+  @media (max-width: 760px) {
+    .hero { margin: calc(var(--bar-h) + .25rem) .75rem 0; min-height: calc(75svh - var(--bar-h)); padding: 1.5rem 1rem; }
+    .hero__logo { margin-bottom: 2rem; }
+  }
 </style>
 </head>
 <body>

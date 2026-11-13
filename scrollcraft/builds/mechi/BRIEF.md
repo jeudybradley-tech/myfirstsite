@@ -208,3 +208,9 @@ Not verified: a real phone, a real form endpoint.
 - "je veux que le fond de toutes les sections soit la même couleur que la photo" (the services rail's beige). Every section except the dark welcome card now uses the services background, radial-gradient(70% 80% at 22% 38%, #e3cfb5, #d3ba9c 72%). This covers before/after, products, TikTok, owner, how-it-works and the form. The deposit box, which was --slate (now the same beige), gets #c9ad8b to stay distinct. White bands between sections stay. Checked every section at 1440; no console errors.
 - "la page d'accueil ait la couleur aussi derrière": the page background is now beige (#dbc3a6), so the margin around the welcome card is beige rather than white. The white bands between sections, which showed the white body through a top margin, are now a white top border on every section after the first (same width). Checked at 1440, 713 and 390; no overflow, no console errors.
 - "enlève la couleur sombre dans le cadre de la section accueil": the dark treatment is removed. No brightness or saturate filter, and no grey-green veil. The card fill behind the photo is beige (#c9a98a). The grid lines become a light cream (30 %) so they still read on the bright photo. Photo, logo and frame shape unchanged.
+- "réajuste le cadre de l'accueil, rends-le moins grand" (asked: 3/4 height, more margin, same on phones).
+  - The welcome card now starts just below the menu.
+  - Height is about three quarters of the screen: min-height calc(75svh - bar).
+  - Side margins are clamp(1rem, 5vw, 5rem) (.75rem on phones), with lighter inner padding.
+  - Services gets a little beige space above its white band.
+  - Checked at 1440, 713 and 390: no overflow, no console errors.
