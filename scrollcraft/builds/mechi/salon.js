@@ -17,7 +17,7 @@
   //   Tant que c'est vide, la page dit que l'adresse viendra avec la réponse.
   // ---------------------------------------------------------------------
   var FORM_ENDPOINT = 'https://formspree.io/f/mwllzzaw';
-  var INTERAC_EMAIL = '';
+  var INTERAC_EMAIL = 'jeudybradley@gmail.com';
   var PREVIEW = false;   // true only in the claude.ai preview copy, where nothing can be sent
   var FORMSPREE = /formspree\.io\//.test(FORM_ENDPOINT);
 
@@ -41,7 +41,27 @@
     silkpress:  { name: 'Silk press', img: 'assets/lissage-m.webp' },
     permanente: { name: 'Permanente', img: 'assets/boucles-coupe-m.webp' },
     teinture:   { name: 'Teinture',   img: 'assets/couleur-m.webp' },
-    keratine:   { name: 'Kératine',   img: 'assets/apres-m.webp' }
+    keratine:   { name: 'Kératine',   img: 'assets/apres-m.webp' },
+    shampoing:  { name: 'Shampoing traitant', img: 'assets/shampoing-m.webp' },
+    botox:      { name: 'Botox capillaire',   img: 'assets/botox-m.webp' }
+  };
+
+  // OPTIONS : un service qui a des options ouvre une fenêtre pour les choisir
+  // (une seule à la fois). Les prix affichés et envoyés dans la demande
+  // viennent d'ici. img : la photo qui apparaît à côté de l'option quand on
+  // la choisit ; sans img, c'est la photo du service.
+  var OPTIONS = {
+    permanente: [
+      { id: 'bouclee',  name: 'Permanente bouclée',            price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-bouclee.webp' },
+      { id: 'souple',   name: 'Permanente ondulation souple',  price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-souple.webp' }
+    ],
+    teinture: [
+      { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ à 400 $, varie selon la longueur et la quantité' },
+      { id: 'couleur',    name: 'Teinture couleur',      price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/couleur-m.webp' },
+      { id: 'balayage',   name: 'Balayage',              price: '150 $ à 400 $, varie selon la longueur et la quantité' },
+      { id: 'meches',     name: 'Mèches',                price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/ba-apres-dos-m.webp' },
+      { id: 'cellophane', name: 'Cellophane capillaire', price: '150 $ à 400 $, varie selon la longueur et la quantité' }
+    ]
   };
 
   var docEl = document.documentElement;
@@ -56,7 +76,7 @@
   var bar = document.querySelector('[data-bar]');
   var toggle = bar.querySelector('.bar__toggle'), toggleLabel = bar.querySelector('[data-toggle-label]');
   var tabs = Array.prototype.slice.call(bar.querySelectorAll('[data-tab]'));
-  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['avant-apres', document.getElementById('avant-apres')], ['proprietaire', document.getElementById('proprietaire')], ['comment', document.getElementById('comment')], ['soumission', book]];
+  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['avant-apres', document.getElementById('avant-apres')], ['produits', document.getElementById('produits')], ['boucles', document.getElementById('boucles')], ['proprietaire', document.getElementById('proprietaire')], ['comment', document.getElementById('comment')], ['soumission', book]];
 
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -124,7 +144,8 @@
   // line (vertical page scroll stays free on touch); a hidden range input
   // carries keyboard and screen-reader control and stays in sync.
   var compares = Array.prototype.slice.call(document.querySelectorAll('[data-compare]'));
-  var touched = false;
+  var lastTouch = -1e9;   // when the reader last moved a line
+  function poke() { lastTouch = performance.now(); }
   function setPos(el, pct) {
     pct = Math.max(0, Math.min(100, pct));
     el.style.setProperty('--pos', pct.toFixed(2) + '%');
@@ -136,46 +157,49 @@
     function fromEvent(e) { var b = el.getBoundingClientRect(); setPos(el, (e.clientX - b.left) / b.width * 100); }
     el.addEventListener('pointerdown', function (e) {
       if (e.button !== undefined && e.button !== 0) return;
-      dragging = true; touched = true; el.classList.add('is-dragging');
+      dragging = true; poke(); el.classList.add('is-dragging');
       try { el.setPointerCapture(e.pointerId); } catch (err) {}
       fromEvent(e);
     });
-    el.addEventListener('pointermove', function (e) { if (dragging) fromEvent(e); });
+    el.addEventListener('pointermove', function (e) { if (dragging) { poke(); fromEvent(e); } });
     function stop() { dragging = false; el.classList.remove('is-dragging'); }
     el.addEventListener('pointerup', stop);
     el.addEventListener('pointercancel', stop);
     el.addEventListener('lostpointercapture', stop);
-    range.addEventListener('input', function () { touched = true; setPos(el, +range.value); });
+    range.addEventListener('input', function () { poke(); setPos(el, +range.value); });
   });
 
-  // Show once that the line moves: a small sweep when the frame first comes
-  // into view, unless the reader already moved it or prefers less motion.
-  if (!reduce && 'IntersectionObserver' in window && compares[0]) {
-    var nudge = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        nudge.disconnect();
-        if (touched) return;
-        var el = en.target, t0 = null, keys = [[0, 50], [0.35, 30], [0.75, 66], [1, 50]];
-        function step(ts) {
-          if (touched) return;
-          if (t0 === null) t0 = ts;
-          var k = Math.min(1, (ts - t0) / 1600), i = 1;
-          while (i < keys.length - 1 && k > keys[i][0]) i++;
-          var a = keys[i - 1], b = keys[i], u = (k - a[0]) / (b[0] - a[0]);
-          u = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
-          setPos(el, a[1] + (b[1] - a[1]) * u);
-          if (k < 1) requestAnimationFrame(step);
+  // The line glides from side to side on its own while the frame is on
+  // screen. A drag or a key hands it to the reader; it starts again from
+  // where it was left after a few idle seconds. Never under reduced motion.
+  var AUTO_MIN = 22, AUTO_MAX = 78, AUTO_PERIOD = 5200, AUTO_IDLE = 6000;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var mid = (AUTO_MIN + AUTO_MAX) / 2, amp = (AUTO_MAX - AUTO_MIN) / 2;
+    compares.forEach(function (el) {
+      var raf = 0, phase = 0, last = 0, running = false;
+      function frame(ts) {
+        raf = requestAnimationFrame(frame);
+        if (ts - lastTouch < AUTO_IDLE || el.classList.contains('is-dragging')) { running = false; return; }
+        if (!running) {   // (re)start from where the line is now
+          var cur = parseFloat(el.style.getPropertyValue('--pos'));
+          if (isNaN(cur)) cur = 50;
+          phase = Math.asin(Math.max(-1, Math.min(1, (cur - mid) / amp)));
+          running = true; last = ts; return;
         }
-        setTimeout(function () { requestAnimationFrame(step); }, 350);
-      });
-    }, { threshold: 0.6 });
-    nudge.observe(compares[0]);
+        phase += (ts - last) / AUTO_PERIOD * 2 * Math.PI; last = ts;
+        setPos(el, mid + amp * Math.sin(phase));
+      }
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && !raf) { running = false; raf = requestAnimationFrame(frame); }
+          else if (!en.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+        });
+      }, { threshold: 0.3 }).observe(el);
+    });
   }
 
-  // Tabs switch the transformation; the caption follows.
+  // Tabs switch the transformation.
   var baTabs = Array.prototype.slice.call(document.querySelectorAll('.ba__tabs [role="tab"]'));
-  var baCaption = document.querySelector('[data-ba-caption]');
   function showView(tab, focus) {
     baTabs.forEach(function (t) {
       var on = t === tab;
@@ -185,7 +209,6 @@
       panel.hidden = !on;
       if (on) { var c = panel.querySelector('[data-compare]'); if (c) setPos(c, 50); }
     });
-    if (baCaption && tab.getAttribute('data-caption')) baCaption.textContent = tab.getAttribute('data-caption');
     if (focus) tab.focus();
   }
   baTabs.forEach(function (t, i) {
@@ -200,6 +223,12 @@
   // ------------------------------------------------- choosing services --
   var picks = [];
   var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="services"]'));
+  var chosenOpts = {};   // service id -> ids of its chosen options
+  function optNames(id) {
+    return (chosenOpts[id] || []).map(function (o) {
+      return OPTIONS[id].filter(function (x) { return x.id === o; })[0].name;
+    });
+  }
 
   function render() {
     slip.textContent = picks.length ? 'Ma soumission · ' + picks.length : 'Ma soumission';
@@ -208,9 +237,13 @@
       var on = picks.indexOf(b.getAttribute('data-add')) > -1;
       b.setAttribute('aria-pressed', String(on));
       var st = b.querySelector('[data-state]');
-      if (st) st.textContent = on ? 'Choisi' : 'Choisir';
+      if (st) st.textContent = on ? 'Choisi' : (OPTIONS[b.getAttribute('data-add')] ? 'Voir les options' : 'Choisir');
     });
     boxes.forEach(function (bx) { if (SERVICES[bx.value]) bx.checked = picks.indexOf(bx.value) > -1; });
+    document.querySelectorAll('[data-opts-chosen]').forEach(function (n) {
+      var id = n.getAttribute('data-opts-chosen');
+      n.textContent = picks.indexOf(id) > -1 ? optNames(id).join(', ') : '';
+    });
   }
 
   // The chosen photo flies into the pill, so the visitor sees where it went.
@@ -255,15 +288,88 @@
   document.querySelectorAll('[data-add]').forEach(function (b) {
     b.addEventListener('click', function () {
       var id = b.getAttribute('data-add');
+      if (OPTIONS[id] && openOpts(id, b.querySelector('img'), b)) return;
       if (picks.indexOf(id) > -1) remove(id); else add(id, b.querySelector('img'));
     });
   });
   boxes.forEach(function (bx) {
+    // In the form too, a service with options opens the window instead of ticking.
+    bx.addEventListener('click', function (e) {
+      if (!OPTIONS[bx.value]) return;
+      e.preventDefault();
+      openOpts(bx.value, null, bx);
+    });
     bx.addEventListener('change', function () {
       if (!SERVICES[bx.value]) return;
       if (bx.checked) add(bx.value, null); else remove(bx.value);
     });
   });
+  // ------------------------------------------------ the options window --
+  // Opened by a service that has OPTIONS, from its card or its form photo.
+  // Rows turn brown when chosen; the button adds, updates or removes the
+  // service in "Ma soumission". Esc, Annuler, × or a click outside close it
+  // without changing anything.
+  var dlg = document.querySelector('[data-opts]');
+  var dlgList = dlg && dlg.querySelector('[data-opts-list]');
+  var dlgOk = dlg && dlg.querySelector('[data-opts-ok]');
+  var dlgFor = null, dlgFrom = null, dlgBack = null;
+  function okLabel() {
+    var n = dlgList.querySelectorAll('input:checked').length, inPicks = picks.indexOf(dlgFor) > -1;
+    dlgOk.textContent = n ? (inPicks ? 'Mettre à jour ma soumission' : 'Ajouter à ma soumission')
+                          : (inPicks ? 'Retirer de ma soumission' : 'Ajouter à ma soumission');
+    dlgOk.disabled = !n && !inPicks;
+  }
+  // The large photo beside the list shows the option just chosen.
+  function showPhoto(optId) {
+    var o = OPTIONS[dlgFor].filter(function (x) { return x.id === optId; })[0]; if (!o) return;
+    var img = dlg.querySelector('[data-opts-img]'), fresh = img.cloneNode(false);
+    fresh.src = o.img || SERVICES[dlgFor].img;
+    img.replaceWith(fresh);   // a new node replays the fade-in
+    dlg.querySelector('[data-opts-cap]').textContent = o.name;
+  }
+  function openOpts(id, fromImg, backTo) {
+    if (!dlg || !OPTIONS[id]) return false;
+    dlgFor = id; dlgFrom = fromImg; dlgBack = backTo;
+    dlg.querySelector('[data-opts-service]').textContent = SERVICES[id].name;
+    dlgList.textContent = '';
+    OPTIONS[id].forEach(function (o) {
+      var li = document.createElement('li'), lab = document.createElement('label'), cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.value = o.id; cb.checked = (chosenOpts[id] || []).indexOf(o.id) > -1;
+      var nm = document.createElement('span'); nm.className = 'opts__name'; nm.textContent = o.name;
+      var pr = document.createElement('span'); pr.className = 'opts__price'; pr.textContent = o.price;
+      lab.appendChild(cb); lab.appendChild(nm); lab.appendChild(pr); li.appendChild(lab); dlgList.appendChild(li);
+    });
+    okLabel();
+    var firstOn = dlgList.querySelector('input:checked'); if (firstOn) showPhoto(firstOn.value);
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    var first = dlgList.querySelector('input'); if (first) first.focus();
+    return true;
+  }
+  function closeOpts() {
+    if (typeof dlg.close === 'function') dlg.close(); else { dlg.removeAttribute('open'); dlg.dispatchEvent(new Event('close')); }
+  }
+  if (dlg) {
+    dlgList.addEventListener('change', function (e) {
+      // One option at a time: choosing one lets go of the others.
+      if (e.target.checked) dlgList.querySelectorAll('input:checked').forEach(function (c) { if (c !== e.target) c.checked = false; });
+      okLabel();
+      if (e.target.checked) showPhoto(e.target.value);
+      else { var on = dlgList.querySelector('input:checked'); if (on) showPhoto(on.value); }
+    });
+    dlg.querySelectorAll('[data-opts-cancel]').forEach(function (b) { b.addEventListener('click', closeOpts); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) closeOpts(); });   // the backdrop
+    dlg.addEventListener('close', function () { if (dlgBack) dlgBack.focus({ preventScroll: true }); dlgFor = null; });
+    dlgOk.addEventListener('click', function () {
+      var id = dlgFor, from = dlgFrom;
+      var ids = Array.prototype.map.call(dlgList.querySelectorAll('input:checked'), function (c) { return c.value; });
+      chosenOpts[id] = ids;
+      closeOpts();
+      if (ids.length && picks.indexOf(id) < 0) add(id, from);
+      else if (!ids.length && picks.indexOf(id) > -1) remove(id);
+      else { render(); announce.textContent = SERVICES[id].name + ' : ' + optNames(id).join(', ') + '.'; }
+    });
+  }
+
   render();
 
   // A keyboard user tabbing through the rail: scroll the page to where the
@@ -421,6 +527,10 @@
     var strong = document.createElement('strong'); strong.textContent = INTERAC_EMAIL; span.appendChild(strong);
     form.querySelector('[data-done-depot]').textContent =
       'Pour confirmer ta place, envoie ensuite 20 $ par virement Interac à ' + INTERAC_EMAIL + ', avec ton nom et la date dans le message.';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-interac-how]'), function (n) {
+      n.textContent = ' à ';
+      var b = document.createElement('strong'); b.textContent = INTERAC_EMAIL; n.appendChild(b);
+    });
   }
 
   var MESSAGES = {
@@ -494,7 +604,10 @@
     }
 
     // One clear table in the salon's inbox; "Reply" goes to the client.
-    var picked = boxes.filter(function (b) { return b.checked; }).map(function (b) { return SERVICES[b.value] ? SERVICES[b.value].name : b.value; });
+    var picked = boxes.filter(function (b) { return b.checked; }).map(function (b) {
+      var name = SERVICES[b.value] ? SERVICES[b.value].name : b.value, opts = OPTIONS[b.value] ? optNames(b.value) : [];
+      return opts.length ? name + ' (' + opts.join(', ') + ')' : name;
+    });
     var when = longDay(chosenDay) + ' à ' + label(mins(chosenTime));
     var payload = {
       'Services': picked.length ? picked.join(', ') : 'Aucun choisi',

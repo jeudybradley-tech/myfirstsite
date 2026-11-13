@@ -90,12 +90,12 @@
   @media (hover: hover) and (pointer: fine) { .bar__nav a[data-tab]:hover { color: var(--on-slate); background: color-mix(in oklab, var(--on-slate) 7%, transparent); } }
   .bar__nav a:focus-visible, .bar__logo:focus-visible, .bar__toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
   .bar__cta { margin-left: var(--sc-3); padding: 1em 1.45em; font-size: var(--sc-t-sm); }
-  @media (max-width: 1440px) { .bar__nav a[data-tab] { padding-inline: .7em; } .bar__nav a[data-tab]::after { left: .7em; right: .7em; } .bar__cta { margin-left: var(--sc-2); } }
+  @media (max-width: 1720px) { .bar__nav a[data-tab] { padding-inline: .7em; } .bar__nav a[data-tab]::after { left: .7em; right: .7em; } .bar__cta { margin-left: var(--sc-2); } }
   .bar__toggle { display: none; align-items: center; gap: .6em; font: 500 var(--sc-t-sm)/1 var(--sc-font-text); color: var(--on-slate); background: none; cursor: pointer;
     padding: .75em 1.1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--on-slate) 28%, transparent); }
   .bar__toggle i { position: relative; width: 16px; height: 10px; border-block: 1.5px solid currentColor; transition: transform 200ms var(--sc-ease-out); }
   .bar.is-open .bar__toggle i { transform: scaleY(.15); }
-  @media (max-width: 1350px) {
+  @media (max-width: 1240px) {
     :root { --pill-h: 4.25rem; --pill-top: .6rem; }
     .bar { padding: 0 .5rem 0 1rem; }
     .bar__toggle { display: inline-flex; margin-left: auto; }
@@ -126,19 +126,16 @@
   .fly { position: fixed; z-index: 90; border-radius: 12px; object-fit: cover; pointer-events: none; box-shadow: var(--sc-e3); }
 
   /* --------------------------------------------------------------- hero -- */
-  /* The salon itself, darkened, fills the first screen; the copy sits on it. */
+  /* The salon itself fills the first screen, with no text on it (the page's
+     heading is kept for screen readers only). */
   .hero { position: relative; display: grid; align-items: center;
     min-height: 100svh; padding: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)) var(--sc-gutter) clamp(2rem, 6svh, 4rem);
     background: var(--slate); overflow: clip; isolation: isolate; }
   .hero__bg { position: absolute; inset: -6% 0; z-index: -2; }
-  .hero__kicker { color: var(--gold) !important; }
-  .hero__title { margin: 0; font-size: clamp(3rem, 6.4vw, 6.6rem); line-height: .95; max-width: 11ch; color: var(--on-slate); text-shadow: 0 2px 24px rgb(0 0 0 / .4); }
-  .hero__title em { color: var(--gold); }
-  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 30%; }
   .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background: linear-gradient(90deg, rgb(18 14 9 / .9) 0%, rgb(18 14 9 / .72) 42%, rgb(18 14 9 / .55) 100%),
                 linear-gradient(to bottom, rgb(18 14 9 / .35) 0%, transparent 30%, transparent 70%, var(--slate) 100%); }
-  .hero__copy { display: grid; gap: var(--sc-5); justify-items: start; }
   .mark { margin: 0; font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(4.5rem, 14.5vw, 15rem); line-height: .84; letter-spacing: -0.045em; color: var(--on-slate); }
 
   /* ------------------------------------------------------ services rail -- */
@@ -147,12 +144,12 @@
   .rail-stage { display: flex; align-items: center; overflow: hidden;
     background: radial-gradient(70% 80% at 22% 38%, #2a2014, var(--slate) 72%); }
   .rail { display: flex; align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); padding: 0 var(--sc-gutter); }
-  .rail-stage { padding-top: var(--bar-h); }
+  .rail-stage { padding-top: var(--bar-h); padding-bottom: clamp(1.5rem, 4svh, 2.5rem); }
   @media (max-height: 780px) { .card__name { margin-top: var(--sc-5); } .card__desc { font-size: var(--sc-t-sm); } .card__foot { margin-top: var(--sc-3); gap: var(--sc-2); } }
   .rail__intro { flex: 0 0 auto; width: min(30rem, 34vw); }
   .rail__intro h2 { font-size: clamp(2.8rem, 5vw, 5rem); margin: var(--sc-3) 0 0; }
   .rail__intro p { margin: var(--sc-5) 0 0; color: var(--on-slate-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 28ch; }
-  .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(13rem, min(22vw, calc((100svh - var(--bar-h) - 19rem) * .72)), 21rem);
+  .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(12rem, min(27vw, calc((100svh - var(--bar-h) - 19.5rem) * .8)), 25rem);
     opacity: calc(.55 + .45 * var(--k)); translate: 0 calc((1 - var(--k)) * 3rem); }
   /* Arch frames: each photo in a salon-mirror arch, a fine gold filet set
      off around it, the text centred under it. */
@@ -160,11 +157,9 @@
   /* A soft rounded rectangle, no frame line (the owner's reference image). */
   .card__img { --round: 1.75rem; position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: var(--round);
     box-shadow: 0 26px 48px -26px rgb(0 0 0 / .75); transition: box-shadow 180ms var(--sc-ease-out); }
-  .card__arch { display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: var(--round); background: var(--slate-2); }
+  .card__arch { display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--round); background: var(--slate-2); }
   .card__img img { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover;
     transform: scale(1.08) translateX(calc((1 - var(--k)) * 3%)); transition: filter 200ms var(--sc-ease-out); }
-  .card__tick { position: absolute; left: 50%; bottom: 0; translate: -50% 50%; width: 36px; height: 36px; border-radius: 50%; background: var(--slate); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
-  .card__tick::after { content: ""; width: 13px; height: 7px; border: 2.5px solid var(--gold); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .4; }
   .card__name { display: block; margin-top: var(--sc-7); font-family: var(--sc-font-display); font-weight: 500; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.02; letter-spacing: -0.015em; }
   .card__name em { font-style: italic; font-weight: 400; color: var(--gold); }
   .card__desc { display: block; margin-top: var(--sc-3); color: var(--on-slate-soft); line-height: 1.55; font-size: var(--sc-t-base); max-width: 30ch; }
@@ -173,8 +168,6 @@
   .card__foot b { font-weight: 500; color: var(--on-slate); }
   .card__state { font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); white-space: nowrap; padding: .55em .9em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); transition: background-color 150ms var(--sc-ease-out), color 150ms var(--sc-ease-out); }
   .card[aria-pressed="true"] .card__img { box-shadow: 0 0 0 5px var(--slate), 0 0 0 6.5px var(--gold), 0 26px 48px -26px rgb(0 0 0 / .75); }
-  .card[aria-pressed="true"] .card__tick { background: var(--gold); border-color: var(--gold); transform: scale(1.08); }
-  .card[aria-pressed="true"] .card__tick::after { border-color: #120e09; opacity: 1; }
   .card[aria-pressed="true"] .card__state { background: var(--gold); color: #120e09; }
   .card:focus-visible { outline: none; }
   .card:focus-visible .card__img { outline: 2px dashed var(--gold); outline-offset: 11px; }
@@ -186,13 +179,95 @@
   .rail__end p { margin: 0; color: var(--on-slate-soft); line-height: 1.55; }
   @media (prefers-reduced-motion: reduce) { .card, .rail__end { opacity: 1; translate: none; } .card__img img { transform: none; } }
 
+  /* -------------------------------------------------------- the products -- */
+  /* What the salon sells, each in the same soft rounded frame as the service
+     cards. A sand ground between the cream before/after and the beige TikTok. */
+  .shop { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--porc-2); }
+  .shop__head { display: grid; justify-items: center; text-align: center; gap: var(--sc-5); }
+  .shop__head h2 { margin: 0; font-size: clamp(2.6rem, 5vw, 5rem); }
+  .shop__lead { margin: 0; font-family: var(--font-italic); font-style: italic; font-weight: 500; font-size: clamp(1.3rem, 1rem + .9vw, 1.8rem); line-height: 1.35; color: var(--on-porc); max-width: 40ch; }
+  .shop__note { margin: 0; font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
+  .shop__more { margin-top: clamp(3rem, 6vw, 5rem); }
+  .prods { margin: 0 auto; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.75rem) clamp(1.25rem, 2.5vw, 2.25rem); max-width: 62rem; }
+  .prod { display: grid; justify-items: center; align-content: start; text-align: center; }
+  .prod__img { display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 1.75rem; background: #ece8e2; box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
+  .prod__img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: filter 260ms var(--sc-ease-out); }
+  .prod__img { transition: transform 300ms var(--sc-ease-out), box-shadow 300ms var(--sc-ease-out); }
+  /* Under the mouse a product lifts and catches a warm light. */
+  @media (hover: hover) and (pointer: fine) {
+    .prod:hover .prod__img { transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 0 0 2px rgb(255 240 210 / .9), 0 0 46px 10px rgb(255 214 140 / .6), 0 44px 64px -26px rgb(57 36 13 / .6); }
+    .prod:hover .prod__img img { filter: brightness(1.12) saturate(1.08); }
+  }
+  @media (prefers-reduced-motion: reduce) { .prod:hover .prod__img { transform: none; } }
+  .prod__name { display: block; margin-top: var(--sc-5); font-size: clamp(1.2rem, 1.5vw, 1.5rem); line-height: 1.05; }
+  .prod__name em { color: var(--gold-deep); }
+  .prod__desc { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-sm); font-weight: 500; line-height: 1.5; color: var(--on-porc); max-width: 28ch; }
+  .prod__foot { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep); }
+  @media (max-width: 760px) {
+    .prods { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sc-6) var(--sc-4); }
+    .prod__img { border-radius: 1.25rem; }
+    .prod__desc { font-size: var(--sc-t-xs); }
+  }
+
+  /* ------------------------------------------------- service options -- */
+  /* A service with options (Teinture) opens this window: each option is a
+     row with its price; a chosen row turns brown, with no checkmark. */
+  .opts { width: min(46rem, calc(100% - 2rem)); max-height: calc(100svh - 2rem); padding: 0; border: 0; border-radius: 1.5rem; overflow: auto;
+    background: var(--porc); color: var(--on-porc); box-shadow: 0 40px 80px -30px rgb(31 22 12 / .6); }
+  .opts::backdrop { background: rgb(31 22 12 / .45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .opts__box { position: relative; display: grid; gap: var(--sc-4); padding: clamp(1.5rem, 4vw, 2.25rem); }
+  .opts__box .label { color: var(--gold-deep); }
+  .opts__h { margin: 0; padding-right: 3rem; font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.05; }
+  .opts__h em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold-deep); }
+  .opts__hint { margin: 0; font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
+  .opts__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sc-2); }
+  .opts__list label { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 0; row-gap: 2px; align-items: center;
+    padding: .85rem 1rem; border-radius: 1rem; background: #fff; border: 1.5px solid color-mix(in oklab, var(--on-porc) 14%, transparent); cursor: pointer;
+    transition: border-color 150ms var(--sc-ease-out), background-color 150ms var(--sc-ease-out); }
+  .opts__list input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+  .opts__name { grid-column: 1; font-weight: 500; font-size: var(--sc-t-base); }
+  .opts__price { grid-column: 1; font-size: var(--sc-t-sm); font-weight: 500; color: var(--gold-deep); }
+  /* Once an option is chosen, its photo shows large beside the list; the
+     window widens to make room. On a phone the photo sits above the list. */
+  .opts:has(.opts__list input:checked) { width: min(64rem, calc(100% - 2rem)); }
+  .opts__box:has(.opts__list input:checked) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); column-gap: clamp(1.5rem, 3vw, 2.5rem); align-items: start; }
+  .opts__main { display: grid; gap: var(--sc-4); min-width: 0; }
+  .opts__ph { display: none; position: sticky; top: 0; margin: 0; aspect-ratio: 4 / 5; border-radius: 1.5rem; overflow: hidden; background: var(--porc-2); box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
+  .opts__box:has(.opts__list input:checked) .opts__ph { display: block; }
+  @media (min-width: 761px) { .opts__box:has(.opts__list input:checked) { padding-top: 4rem; } }
+  .opts__ph img { display: block; width: 100%; height: 100%; object-fit: cover; animation: opts-in 260ms var(--sc-ease-out); }
+  .opts__ph figcaption { position: absolute; left: .85rem; bottom: .85rem; max-width: calc(100% - 1.7rem); padding: .55em .95em; border-radius: var(--sc-r-pill);
+    background: rgb(245 237 225 / .92); color: var(--on-porc); font-size: var(--sc-t-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+  @keyframes opts-in { from { opacity: 0; transform: scale(1.03); } }
+  @media (max-width: 760px) {
+    .opts__box:has(.opts__list input:checked) { grid-template-columns: 1fr; }
+    .opts__ph { position: relative; order: -1; aspect-ratio: 4 / 3; }
+  }
+  @media (prefers-reduced-motion: reduce) { .opts__ph img { animation: none; } }
+  .opts__list label:has(input:checked) { border-color: var(--gold-deep); box-shadow: inset 0 0 0 1.5px var(--gold-deep); background: color-mix(in oklab, var(--gold-deep) 10%, #fff); }
+  .opts__list label:has(input:focus-visible) { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
+  .opts__acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-4); margin-top: var(--sc-2); }
+  .opts__acts .cta[disabled] { opacity: .45; cursor: not-allowed; }
+  .opts__cancel { background: none; border: 0; padding: .6em .2em; font: 500 var(--sc-t-sm)/1 var(--sc-font-text); color: var(--on-porc-soft); text-decoration: underline; text-underline-offset: .25em; cursor: pointer; }
+  .opts__x { position: absolute; z-index: 2; top: 1rem; right: 1rem; background: rgb(245 237 225 / .92) !important; width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 50%;
+    border: 1px solid color-mix(in oklab, var(--on-porc) 18%, transparent); background: transparent; color: var(--on-porc); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+  .opts__x:focus-visible, .opts__cancel:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
+  /* What was chosen shows under the service, on the card and in the form. */
+  .card__opts { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-sm); font-weight: 600; color: var(--gold); max-width: 30ch; }
+  .pick__opts { display: block; font-size: var(--sc-t-sm); font-weight: 600; color: var(--gold-deep); }
+  .card__opts:empty, .pick__opts:empty { display: none; }
+  .pick__card--opts input:not(:checked) ~ .pick__txt .pick__state::before { content: "Voir les options"; }
+
   /* ----------------------------------------------------------- the owner -- */
   /* Her photo, her name, a few facts and the salon's motto. Any element marked
      with the draft attribute is refused by the deploy workflow. */
   .owner { padding-block: clamp(4.5rem, 9vw, 8rem); background: var(--porc-2); }
   .owner__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-  .owner__ph { position: relative; margin: 0; aspect-ratio: 3 / 4; max-width: 30rem; width: 100%; border-radius: 3px; overflow: hidden; box-shadow: var(--sc-e3);
-    outline: 1px solid color-mix(in oklab, var(--gold-deep) 40%, transparent); outline-offset: 10px; }
+  /* A soft rounded frame with a wide, light shadow, like the owner's reference. */
+  .owner__ph { position: relative; margin: 0; aspect-ratio: 3 / 4; max-width: 30rem; width: 100%; border-radius: 2rem; overflow: hidden;
+    box-shadow: 0 40px 80px -30px rgb(57 36 13 / .45), 0 12px 30px -18px rgb(57 36 13 / .3); }
+  .owner__ph picture { display: block; height: 100%; }
   .owner__ph img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
   .owner__text { display: grid; gap: var(--sc-5); justify-items: start; max-width: 38rem; }
   .owner__text h2 { margin: 0; font-size: clamp(2.8rem, 5.5vw, 5.6rem); }
@@ -264,8 +339,8 @@
   .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
   .compare__after { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos)); }
   .compare__line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; translate: -1px 0; background: #fbf6ec; box-shadow: 0 0 0 1px rgb(18 14 9 / .18); pointer-events: none; }
-  .compare__knob { position: absolute; top: 50%; left: var(--pos); translate: -50% -50%; width: 3.4rem; height: 3.4rem; border-radius: 50%;
-    display: grid; place-items: center; background: var(--gold); color: var(--slate); box-shadow: var(--sc-e3), 0 0 0 4px rgb(251 246 236 / .55); pointer-events: none;
+  .compare__knob { position: absolute; top: 50%; left: var(--pos); translate: -50% -50%; width: 2.25rem; height: 2.25rem; border-radius: 50%;
+    display: grid; place-items: center; background: var(--gold); color: var(--slate); box-shadow: var(--sc-e2), 0 0 0 3px rgb(251 246 236 / .55); pointer-events: none;
     transition: transform 140ms var(--sc-ease-out); }
   .compare.is-dragging .compare__knob { transform: scale(1.08); }
   .compare__tag { position: absolute; top: 12px; z-index: 2; font: 600 var(--sc-t-xs)/1 var(--sc-font-text); letter-spacing: .14em; text-transform: uppercase;
@@ -315,13 +390,11 @@
   input[type="file"] { font: 400 var(--sc-t-sm)/1.4 var(--sc-font-text); color: var(--sc-ink-soft); }
   input[type="file"]::file-selector-button { font: 500 var(--sc-t-sm)/1 var(--sc-font-text); padding: .75em 1em; margin-right: 1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--gold-deep) 55%, transparent); background: transparent; color: var(--gold-deep); cursor: pointer; }
   /* Service picker: the client's own photos, click to choose. */
-  .pick { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sc-5); }
+  .pick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sc-5); max-width: 52rem; }
   .pick__card { position: relative; display: grid; gap: var(--sc-3); align-content: start; cursor: pointer; min-width: 0; }
   .pick__card input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; margin: 0; }
   .pick__ph { position: relative; display: block; aspect-ratio: 3 / 4; max-width: 100%; overflow: hidden; border-radius: 1.25rem; box-shadow: var(--sc-e2); outline: 3px solid transparent; outline-offset: 4px; transition: outline-color 160ms var(--sc-ease-out), box-shadow 160ms var(--sc-ease-out); }
   .pick__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 420ms var(--sc-ease-out), filter 200ms var(--sc-ease-out); }
-  .pick__tick { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgb(255 255 255 / .86); box-shadow: var(--sc-e1); display: grid; place-items: center; transition: background-color 160ms var(--sc-ease-out), transform 160ms var(--sc-ease-out); }
-  .pick__tick::after { content: ""; width: 12px; height: 7px; border: 2.5px solid var(--on-porc-soft); border-top: 0; border-right: 0; transform: translateY(-2px) rotate(-45deg); opacity: .35; }
   .pick__txt { display: grid; gap: 2px; }
   .pick__txt b { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); letter-spacing: -0.01em; line-height: 1.15; }
   .pick__txt small { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); line-height: 1.4; }
@@ -329,8 +402,6 @@
   .pick__state::before { content: "Cliquer pour choisir"; color: var(--sc-ink-soft); font-weight: 400; letter-spacing: .04em; text-transform: none; }
   .pick__card input:checked ~ .pick__txt .pick__state::before { content: "Choisi"; color: var(--gold-deep); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
   .pick__card input:checked ~ .pick__ph { outline-color: var(--gold-deep); box-shadow: var(--sc-e3); }
-  .pick__card input:checked ~ .pick__ph .pick__tick { background: var(--gold-deep); transform: scale(1.06); }
-  .pick__card input:checked ~ .pick__ph .pick__tick::after { border-color: #fbf6ec; opacity: 1; }
   .pick__card input:focus-visible ~ .pick__ph { outline: 3px dashed var(--gold-deep); }
   .pick__card:active .pick__ph { transform: scale(.985); }
   @media (hover: hover) and (pointer: fine) { .pick__card:hover .pick__ph img { transform: scale(1.035); } }
@@ -375,10 +446,10 @@
      in the italic serif, also in capitals, a touch larger so it stands as tall.
      Introductions read in the italic serif. Labels, buttons, the form and the
      small print stay in the grotesque so they stay easy to read. */
-  .disp, .mark, .card__name, .rail__end h3 { font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; letter-spacing: -0.01em; }
+  .disp, .mark, .card__name, .rail__end h3, .prod__name { font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; letter-spacing: -0.01em; }
   .disp { line-height: .98; }
   .steps h3, legend, .deposit h3, .done h3, .pick__txt b, .foot b { font-family: var(--sc-font-display); font-weight: 300; text-transform: uppercase; letter-spacing: .01em; }
-  .disp em, .card__name em, .rail__end h3 em, .mark em {
+  .disp em, .card__name em, .rail__end h3 em, .mark em, .prod__name em {
     font-family: var(--font-italic); font-style: italic; font-weight: 400; font-size: 1.1em; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
   .mark { font-size: clamp(4rem, 11.5vw, 12rem); line-height: .9; letter-spacing: -0.02em; }
   .rail__intro > p:not(.label), .ba__head > p:not(.label), .book__head > p:not(.label), .rail__end p {
@@ -435,9 +506,7 @@
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
     .hero { align-content: end; }
-    .hero__title { font-size: 13vw; }
-    .hero__bg img { object-position: 50% 30%; }
-    .hero::before { background: linear-gradient(to bottom, rgb(18 14 9 / .55) 0%, rgb(18 14 9 / .5) 35%, rgb(18 14 9 / .88) 68%, var(--slate) 100%); }
+    .hero__bg img { object-position: 82% 30%; }
 
     .phones { gap: 1rem; }
     .phone { width: min(44vw, calc((100svh - var(--bar-h) - 4rem) * 9 / 19.5)); padding: .4rem; border-radius: 1.7rem; --tilt: -3deg; }
@@ -450,7 +519,7 @@
     .rail { padding-top: 0; gap: var(--sc-5); }
     .rail__intro { width: 80vw; }
     .rail__intro p { font-size: var(--sc-t-base); }
-    .card, .rail__end { width: min(72vw, calc((100svh - var(--bar-h) - 17rem) * .8)); }
+    .card, .rail__end { width: max(12rem, min(78vw, calc((100svh - var(--bar-h) - 21rem) * .88))); }
     .rail__end { width: 72vw; }
     .card__arch { aspect-ratio: 4 / 5; }
 
@@ -470,7 +539,6 @@
     .booker { grid-template-columns: 1fr; }
     .cal { padding: var(--sc-4); }
     .pick { grid-template-columns: 1fr 1fr; gap: var(--sc-5) var(--sc-4); }
-    .pick__tick { top: 8px; right: 8px; }
     form { gap: var(--sc-7); }
     .book__head { margin-bottom: var(--sc-7); }
   }
@@ -483,27 +551,20 @@
     box-shadow: 0 18px 40px -22px rgb(57 36 13 / .45), inset 0 1px 0 rgb(255 255 255 / .5); }
   .bar__nav a[data-tab] { color: #4d3720; }
   .bar__logo img { filter: drop-shadow(0 3px 8px rgb(57 36 13 / .25)); }
-  @media (max-width: 1350px) { .bar__nav { background: #f5ede1; border-color: rgb(57 36 13 / .14); box-shadow: 0 24px 50px -24px rgb(57 36 13 / .45); } }
-  /* La photo du salon reste visible : le voile beige ne couvre que la zone
-     du texte (à gauche sur ordinateur, en bas sur téléphone). */
-  .hero::before { background: radial-gradient(ellipse 36% 42% at 23% 55%, rgb(238 225 206 / .86) 0%, rgb(238 225 206 / .72) 45%, rgb(238 225 206 / 0) 100%),
-                              linear-gradient(90deg, rgb(222 202 175 / .3) 0%, transparent 50%),
-                              linear-gradient(to bottom, transparent 0%, transparent 80%, var(--slate) 100%); }
-  .hero__title, .hero__kicker { text-shadow: 0 0 2px rgb(245 237 225 / .6), 0 1px 24px rgb(245 237 225 / .75); }
-  /* Phones look like the larger screens: the photo in full colour, the motto
-     in the middle with a cream glow that follows the text block. */
-  @media (max-width: 760px) {
-    .hero { align-content: center; }
-    .hero::before { background: linear-gradient(to bottom, transparent 0%, transparent 84%, var(--slate) 100%); }
-    .hero__copy { position: relative; }
-    .hero__copy::before { content: ""; position: absolute; inset: -22% -14%; z-index: -1; pointer-events: none;
-      background: radial-gradient(closest-side, rgb(238 225 206 / .92), rgb(238 225 206 / .8) 60%, rgb(238 225 206 / 0)); }
-  }
+  @media (max-width: 1240px) { .bar__nav { background: #f5ede1; border-color: rgb(57 36 13 / .14); box-shadow: 0 24px 50px -24px rgb(57 36 13 / .45); } }
+  /* The salon photo in full colour, with only a short fade into the beige
+     at the very bottom, on every screen. */
+  /* The photo is darkened and muted, like the owner's reference: a deep
+     grey-green veil over a dimmed, desaturated image. */
+  /* The salon's logo, large on the empty left side of the photo. */
+  .hero__logo { position: relative; justify-self: start; width: clamp(15rem, 30vw, 30rem); height: auto; margin-left: clamp(0rem, 3vw, 3rem);
+    filter: drop-shadow(0 18px 40px rgb(0 0 0 / .5)); }
+  @media (max-width: 760px) { .hero { align-content: end; } .hero__logo { justify-self: center; width: min(72vw, 18rem); margin: 0 0 12svh; } }
+  .hero::before { background: none; }
   .rail-stage { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, var(--slate) 72%); }
   .curls { background: radial-gradient(55% 60% at 50% 72%, #e3cfb5, var(--slate) 70%); }
   .card__img { box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
   .card[aria-pressed="true"] .card__img { box-shadow: 0 0 0 5px var(--slate), 0 0 0 6.5px var(--gold), 0 26px 44px -26px rgb(57 36 13 / .5); }
-  .card[aria-pressed="true"] .card__tick::after { border-color: #fbf6ec; }
   .card[aria-pressed="true"] .card__state { color: #fbf6ec; }
   .tiktok { background: rgb(245 237 225 / .6); }
   @media (hover: hover) and (pointer: fine) { .tiktok:hover { background: rgb(245 237 225 / .92); } }
@@ -514,6 +575,57 @@
   .card, .rail__end { opacity: 1; }
   .curls__copy > p:not(.label) { font-weight: 600; }
   .card__desc, .pick__txt small { font-weight: 500; }
+  /* A white band between every section, as in the owner's reference. */
+  /* The beige also shows around the welcome card; the white bands are now
+     drawn as a top border on each later section. */
+  body { background: #dbc3a6; }
+  main > section + section { border-top: clamp(1.25rem, 3vw, 2.75rem) solid #fff; }
+  /* Bigger frames: the text under each service card is kept compact so the
+     photos can grow and the buttons stay clear of the white band. */
+  .card__name { margin-top: var(--sc-4); }
+  .card__desc { margin-top: var(--sc-2); font-size: var(--sc-t-sm); line-height: 1.45; }
+  .card__foot { margin-top: var(--sc-3); gap: var(--sc-2); }
+  .card__foot::before { display: none; }
+  /* Short screens: tighter card text so the "Choisir" button stays clear of
+     the white band under the services. */
+  @media (max-height: 800px) {
+    .card__name { margin-top: var(--sc-3); font-size: clamp(1.25rem, 2vw, 1.6rem); }
+    .card__desc { font-size: var(--sc-t-sm); line-height: 1.4; }
+    .card__foot { margin-top: var(--sc-2); gap: var(--sc-2); }
+    .card__foot::before { display: none; }
+  }
+  /* Welcome frame like the owner's reference: a dark card with big rounded
+     corners, set in from the edges, crossed by a fine grid of light lines. */
+  .hero { background: #c9a98a; margin: clamp(.5rem, 1.2vw, 1rem); min-height: calc(100svh - 2 * clamp(.5rem, 1.2vw, 1rem)); border-radius: clamp(1.5rem, 3vw, 2.75rem); }
+  /* Every section shares the warm beige of the services, as the owner asked;
+     only the welcome card keeps its dark photo. */
+  main > section:not(.hero), .rail-stage, .curls { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, #d3ba9c 72%); }
+  .deposit { background: #c9ad8b; }
+  /* Smaller welcome card: about three quarters of the screen, set below the
+     menu with a wider beige margin around it. */
+  .hero { margin: calc(var(--bar-h) + .25rem) clamp(1rem, 5vw, 5rem) 0; min-height: calc(75svh - var(--bar-h));
+    padding: clamp(1.5rem, 4svh, 3rem) clamp(1.5rem, 4vw, 3.5rem); }
+  #services { margin-top: clamp(1rem, 3vw, 2.5rem); }
+  @media (max-width: 760px) {
+    .hero { margin: calc(var(--bar-h) + .25rem) .75rem 0; min-height: calc(75svh - var(--bar-h)); padding: 1.5rem 1rem; }
+    .hero__logo { margin-bottom: 2rem; }
+  }
+  /* The welcome photo is small (626 x 351): the card takes the photo's own
+     shape and a capped width, so it is no longer cropped and blown up. */
+  .hero { width: min(calc(100% - 2 * clamp(1rem, 5vw, 5rem)), 60rem); margin-inline: auto; min-height: 0; aspect-ratio: 626 / 351; }
+  .hero__bg { inset: 0; }
+  .hero__logo { width: clamp(12rem, 24vw, 22rem); }
+  @media (max-width: 760px) {
+    .hero { width: calc(100% - 1.5rem); aspect-ratio: auto; min-height: 52svh; }
+    .hero__logo { width: min(64vw, 15rem); margin-bottom: 1.25rem; }
+  }
+  /* Menu bar: the logo on the left, then every section of the page. */
+  .bar__logo { position: static; translate: none; flex: none; height: calc(var(--pill-h) - 1rem); }
+  .bar { gap: clamp(.75rem, 1.5vw, 1.5rem); }
+  .bar__nav a[data-tab] { padding-inline: clamp(.45em, .7vw, .8em); font-size: clamp(.8rem, .5rem + .4vw, .95rem); white-space: nowrap; }
+  .bar__nav a[data-tab]::after { left: clamp(.45em, .7vw, .8em); right: clamp(.45em, .7vw, .8em); }
+  .bar__cta { white-space: nowrap; }
+  @media (max-width: 1240px) { .bar__nav a[data-tab] { font-size: var(--sc-t-lg); padding: 1em 0; } .bar__nav a[data-tab]::after { left: auto; right: 0; } }
 </style>
 </head>
 <body>
@@ -527,6 +639,8 @@
       <a href="#top" data-tab="top">Accueil</a>
       <a href="#services" data-tab="services">Services</a>
       <a href="#avant-apres" data-tab="avant-apres">Avant / Après</a>
+      <a href="#produits" data-tab="produits">Soins</a>
+      <a href="#boucles" data-tab="boucles">Tendances</a>
       <a href="#proprietaire" data-tab="proprietaire">La propriétaire</a>
       <a href="#comment" data-tab="comment">Comment ça marche</a>
     </div>
@@ -542,12 +656,10 @@
 
   <!-- 1 · HERO: flow. The salon itself, darkened, as the background of the first screen. -->
   <section id="accueil" class="hero on-slate" data-sc-act="flow">
-    <div class="hero__copy" data-sc-in data-sc-stagger="70">
-      <p class="label hero__kicker">Salon de coiffure · Montréal</p>
-      <h1 class="disp hero__title"><span class="sr">Salon de coiffure Mechi : </span>Une beauté <em>qui vous ressemble</em>.</h1>
-    </div>
-    <div class="hero__bg" data-sc-parallax="1.2" aria-hidden="true">
-      <picture><source media="(max-width: 760px)" srcset="assets/salon-m.webp"><img src="assets/salon.webp" width="1920" height="1440" fetchpriority="high" alt=""></picture>
+    <h1 class="sr">Salon de coiffure Mechi, à Montréal : une beauté qui vous ressemble.</h1>
+    <img class="hero__logo" src="assets/logo-m.webp" width="760" height="393" alt="" aria-hidden="true">
+    <div class="hero__bg" aria-hidden="true">
+      <picture><img src="assets/accueil.webp" width="626" height="351" fetchpriority="high" alt=""></picture>
     </div>
   </section>
 
@@ -561,27 +673,41 @@
           <h2 id="rail-title" class="disp">Choisis ce qui <em>te ressemble</em>.</h2>
         </div>
         <button class="card" type="button" data-add="silkpress" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."></span></span>
           <span class="card__name"><em>Silk press</em></span>
           <span class="card__desc">Pour les cheveux qui frisent ou gonflent à la moindre humidité : lisses, brillants, et qui bougent encore.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="permanente" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."></span></span>
           <span class="card__name"><em>Permanente</em></span>
           <span class="card__desc">Une permanente pour des boucles bien définies, qui tiennent jour après jour.</span>
-          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+          <span class="card__opts" data-opts-chosen="permanente"></span>
+          <span class="card__foot"><span>À partir de <b>150&nbsp;$</b></span><span class="card__state" data-state>Voir les options</span></span>
         </button>
         <button class="card" type="button" data-add="teinture" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/couleur.webp" width="1200" height="1600" loading="lazy" alt="Teinture : cheveux brun foncé aux reflets rouges, longueurs ondulées et brillantes, vus de dos."></span></span>
           <span class="card__name"><em>Teinture</em></span>
           <span class="card__desc">Une teinture aux reflets éclatants, posée avec un soin qui garde la fibre brillante.</span>
-          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+          <span class="card__opts" data-opts-chosen="teinture"></span>
+          <span class="card__foot"><span>À partir de <b>150&nbsp;$</b></span><span class="card__state" data-state>Voir les options</span></span>
         </button>
         <button class="card" type="button" data-add="keratine" aria-pressed="false">
-          <span class="card__img"><span class="card__arch"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."></span><span class="card__tick" aria-hidden="true"></span></span>
+          <span class="card__img"><span class="card__arch"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."></span></span>
           <span class="card__name"><em>Kératine</em></span>
           <span class="card__desc">Un traitement à la kératine qui discipline les frisottis, pour des longueurs lisses, brillantes et faciles à coiffer.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <button class="card" type="button" data-add="shampoing" aria-pressed="false">
+          <span class="card__img"><span class="card__arch"><img src="assets/shampoing.webp" width="736" height="981" loading="lazy" alt="Shampoing traitant : longs cheveux bruns rincés au bac, la tête renversée."></span></span>
+          <span class="card__name"><em>Shampoing traitant</em></span>
+          <span class="card__desc">Un shampoing qui nourrit la fibre et apaise le cuir chevelu, pour des cheveux propres, doux et légers.</span>
+          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+        </button>
+        <button class="card" type="button" data-add="botox" aria-pressed="false">
+          <span class="card__img"><span class="card__arch"><img src="assets/botox.webp" width="1200" height="1600" loading="lazy" alt="Botox capillaire : cheveux noirs mi-longs, lisses et brillants, vus de dos."></span></span>
+          <span class="card__name"><em>Botox capillaire</em></span>
+          <span class="card__desc">Un soin qui gaine et répare la fibre, pour des cheveux lisses, brillants et doux, sans frisottis.</span>
           <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <div class="rail__end">
@@ -600,10 +726,9 @@
       <div class="ba__head" data-sc-in data-sc-stagger="60">
         <p class="label">Avant / Après</p>
         <h2 id="ba-h" class="disp">Glisse pour voir <em>la différence</em>.</h2>
-        <p data-ba-caption aria-live="polite">Des cheveux naturels crépus, transformés par un silk press : lisses, brillants et pleins de mouvement.</p>
         <div class="ba__tabs" role="tablist" aria-label="Choisir la transformation">
-          <button type="button" role="tab" id="tab-silk" aria-controls="ba-silk" aria-selected="true" data-caption="Des cheveux naturels crépus, transformés par un silk press : lisses, brillants et pleins de mouvement.">Silk press</button>
-          <button type="button" role="tab" id="tab-dos" aria-controls="ba-dos" aria-selected="false" tabindex="-1" data-caption="Du gris terne au blond lumineux : des mèches blondes, une coupe dégradée et un brushing.">Blond lumineux</button>
+          <button type="button" role="tab" id="tab-silk" aria-controls="ba-silk" aria-selected="true">Silk press</button>
+          <button type="button" role="tab" id="tab-dos" aria-controls="ba-dos" aria-selected="false" tabindex="-1">Blond lumineux</button>
         </div>
         <a class="cta" href="#soumission">Demander une soumission</a>
       </div>
@@ -615,7 +740,7 @@
             <span class="compare__tag compare__tag--before" aria-hidden="true">Avant</span>
             <span class="compare__tag compare__tag--after" aria-hidden="true">Après</span>
             <span class="compare__line" aria-hidden="true"></span>
-            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
             <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Comparer l'avant et l'après : vers la gauche pour voir l'après, vers la droite pour voir l'avant">
           </div>
         </div>
@@ -626,12 +751,64 @@
             <span class="compare__tag compare__tag--before" aria-hidden="true">Avant</span>
             <span class="compare__tag compare__tag--after" aria-hidden="true">Après</span>
             <span class="compare__line" aria-hidden="true"></span>
-            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+            <span class="compare__knob" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
             <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Comparer l'avant et l'après : vers la gauche pour voir l'après, vers la droite pour voir l'avant">
           </div>
         </div>
         <p class="ba__hint" aria-hidden="true">← Glisse pour comparer →</p>
       </div>
+    </div>
+  </section>
+
+  <!-- 2b+ · PRODUCTS: flow. What the salon sells, the Moroccanoil stylist set
+       first, each card framed like a service. Prices: to confirm with the owner. -->
+  <section id="produits" class="shop on-porc" data-sc-act="flow" aria-labelledby="shop-h">
+    <div class="sc-wrap shop__head" data-sc-in data-sc-stagger="70">
+      <p class="label">En vente au salon</p>
+      <h2 id="shop-h" class="disp">Tes soins, <em>à la maison</em>.</h2>
+      <p class="shop__lead">Des soins Moroccanoil et des mèches, en vente au salon : de quoi prendre soin de tes cheveux entre deux rendez-vous.</p>
+      <p class="shop__note">Pour le prix et les produits disponibles, demande au salon.</p>
+      <a class="cta" href="tel:+14383772535">Appeler le salon</a>
+    </div>
+    <div class="sc-wrap shop__more" data-sc-in data-sc-stagger="70">
+      <ul class="prods">
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-coffret.webp" width="600" height="750" loading="lazy" alt="Le coffret Styliste Moroccanoil sur le comptoir du salon : un grand sac noir et des produits turquoise."></span>
+          <span class="prod__name"><em>Coffret Styliste</em></span>
+          <span class="prod__desc">Le Traitement, la Brume Ultra‑Light, le Masque Gloss Ultra‑Brillant, la Poudre Texture et Volume et la Crème Sculptante.</span>
+          <span class="prod__foot">Prix en salon</span>
+        </li>
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-hydratant.webp" width="570" height="712" loading="lazy" alt="Shampooing Hydratant Moroccanoil, grande bouteille turquoise à pompe."></span>
+          <span class="prod__name"><em>Shampooing hydratant</em></span>
+          <span class="prod__desc">Hydrate et adoucit tous les types de cheveux, en respectant la couleur.</span>
+          <span class="prod__foot">1&nbsp;L · Prix en salon</span>
+        </li>
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-volume.webp" width="600" height="750" loading="lazy" alt="Shampooing et après-shampooing Extra Volume Moroccanoil, deux grandes bouteilles à pompe, turquoise et blanche."></span>
+          <span class="prod__name"><em>Duo Extra Volume</em></span>
+          <span class="prod__desc">Shampooing et après-shampooing : du volume et de la légèreté pour les cheveux fins à moyens.</span>
+          <span class="prod__foot">1&nbsp;L chacun · Prix en salon</span>
+        </li>
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-traitement.webp" width="399" height="499" loading="lazy" alt="Traitement Moroccanoil, flacon d'huile ambré à l'étiquette turquoise."></span>
+          <span class="prod__name"><em>Traitement Moroccanoil</em></span>
+          <span class="prod__desc">L'huile originale de Moroccanoil, pour des cheveux brillants et doux.</span>
+          <span class="prod__foot">Prix en salon</span>
+        </li>
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-sans-rincage.webp" width="600" height="750" loading="lazy" alt="Revitalisant sans rinçage Tout-en-un Moroccanoil, vaporisateur turquoise."></span>
+          <span class="prod__name"><em>Revitalisant sans rinçage</em></span>
+          <span class="prod__desc">Tout-en-un : démêle instantanément et garde les cheveux doux jusqu'à 72&nbsp;heures.</span>
+          <span class="prod__foot">160&nbsp;ml · Prix en salon</span>
+        </li>
+        <li class="prod">
+          <span class="prod__img"><img src="assets/prod-meches.webp" width="600" height="750" loading="lazy" alt="Deux paquets de mèches ondulées noires dans leur sachet, étiquette « Style R-BW 18 po, couleur naturelle »."></span>
+          <span class="prod__name"><em>Mèches ondulées</em></span>
+          <span class="prod__desc">Paquets de cheveux ondulés (body wave), couleur naturelle.</span>
+          <span class="prod__foot">18&nbsp;po · Prix en salon</span>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -641,8 +818,7 @@
     <div class="sc-wrap">
       <div class="curls__copy" data-sc-in data-sc-stagger="60">
         <p class="label">Sur TikTok</p>
-        <h2 id="curls-h" class="disp">Les coulisses <em>de Mechi</em>.</h2>
-        <p>Des boucles qui rebondissent, des silk press qui brillent, des couleurs qui changent tout. Abonne-toi pour voir les prochaines transformations en premier.</p>
+        <h2 id="curls-h" class="disp">Les tendances <em>de Mechi</em>.</h2>
         <div class="curls__acts">
           <a class="tiktok" href="https://www.tiktok.com/@salondecoiffuremechi" target="_blank" rel="noopener">
             <span class="tiktok__ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
@@ -669,7 +845,7 @@
        reads how to book. Only facts the client gave (name, flyer). -->
   <section id="proprietaire" class="owner on-porc" data-sc-act="flow" aria-labelledby="owner-h">
     <div class="sc-wrap owner__grid">
-      <figure class="owner__ph" data-sc-reveal="up" data-sc-reveal-at="0.1 0.4">
+      <figure class="owner__ph" data-sc-in>
         <picture><source media="(max-width: 760px)" srcset="assets/mercedes-m.webp"><img src="assets/mercedes.webp" width="896" height="1342" loading="lazy" alt="Mercedes, propriétaire du Salon de coiffure Mechi, en tailleur noir et chemise blanche."></picture>
       </figure>
       <div class="owner__text" data-sc-in data-sc-stagger="70">
@@ -696,7 +872,7 @@
       <ol class="steps" data-sc-in data-sc-stagger="80">
         <li><span class="n">1</span><h3>Ta demande</h3><p>Tu choisis tes services, tu décris tes cheveux et ce que tu aimerais, et tu choisis le jour et l'heure.</p></li>
         <li><span class="n">2</span><h3>Notre réponse</h3><p>On te répond avec le service conseillé, la durée et le prix, et on confirme l'heure.</p></li>
-        <li><span class="n">3</span><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
+        <li><span class="n">3</span><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac<span data-interac-how></span>. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
       </ol>
     </div>
   </section>
@@ -714,17 +890,23 @@
           <legend class="sr">Choisis tes services</legend>
           <div class="pick">
             <label class="pick__card" for="svc-silkpress"><input type="checkbox" id="svc-silkpress" name="services" value="silkpress">
-              <span class="pick__ph"><img src="assets/lissage-m.webp" width="600" height="800" alt="Silk press sur carré noir, lisse et brillant."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__ph"><img src="assets/lissage-m.webp" width="600" height="800" alt="Silk press sur carré noir, lisse et brillant."></span>
               <span class="pick__txt"><b>Silk press</b><small>Frisottis, cheveux qui gonflent.</small><span class="pick__state" aria-hidden="true"></span></span></label>
-            <label class="pick__card" for="svc-permanente"><input type="checkbox" id="svc-permanente" name="services" value="permanente">
-              <span class="pick__ph"><img src="assets/boucles-coupe-m.webp" width="600" height="800" alt="Permanente : boucles châtaines bien définies."><span class="pick__tick" aria-hidden="true"></span></span>
-              <span class="pick__txt"><b>Permanente</b><small>Boucles définies et durables.</small><span class="pick__state" aria-hidden="true"></span></span></label>
-            <label class="pick__card" for="svc-teinture"><input type="checkbox" id="svc-teinture" name="services" value="teinture">
-              <span class="pick__ph"><img src="assets/couleur-m.webp" width="600" height="800" alt="Teinture : cheveux brun foncé aux reflets rouges."><span class="pick__tick" aria-hidden="true"></span></span>
-              <span class="pick__txt"><b>Teinture</b><small>Couleur complète, reflets.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card pick__card--opts" for="svc-permanente"><input type="checkbox" id="svc-permanente" name="services" value="permanente">
+              <span class="pick__ph"><img src="assets/boucles-coupe-m.webp" width="600" height="800" alt="Permanente : boucles châtaines bien définies."></span>
+              <span class="pick__txt"><b>Permanente</b><small>Boucles définies et durables.</small><small class="pick__opts" data-opts-chosen="permanente"></small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card pick__card--opts" for="svc-teinture"><input type="checkbox" id="svc-teinture" name="services" value="teinture">
+              <span class="pick__ph"><img src="assets/couleur-m.webp" width="600" height="800" alt="Teinture : cheveux brun foncé aux reflets rouges."></span>
+              <span class="pick__txt"><b>Teinture</b><small>Couleur complète, reflets.</small><small class="pick__opts" data-opts-chosen="teinture"></small><span class="pick__state" aria-hidden="true"></span></span></label>
             <label class="pick__card" for="svc-keratine"><input type="checkbox" id="svc-keratine" name="services" value="keratine">
-              <span class="pick__ph"><img src="assets/apres-m.webp" width="600" height="800" alt="Kératine : cheveux longs bruns, lisses et brillants."><span class="pick__tick" aria-hidden="true"></span></span>
+              <span class="pick__ph"><img src="assets/apres-m.webp" width="600" height="800" alt="Kératine : cheveux longs bruns, lisses et brillants."></span>
               <span class="pick__txt"><b>Kératine</b><small>Frisottis, cheveux difficiles à coiffer.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-shampoing"><input type="checkbox" id="svc-shampoing" name="services" value="shampoing">
+              <span class="pick__ph"><img src="assets/shampoing-m.webp" width="600" height="800" alt="Shampoing traitant : longs cheveux bruns rincés au bac."></span>
+              <span class="pick__txt"><b>Shampoing traitant</b><small>Cuir chevelu apaisé, cheveux doux.</small><span class="pick__state" aria-hidden="true"></span></span></label>
+            <label class="pick__card" for="svc-botox"><input type="checkbox" id="svc-botox" name="services" value="botox">
+              <span class="pick__ph"><img src="assets/botox-m.webp" width="600" height="800" alt="Botox capillaire : cheveux noirs lisses et brillants."></span>
+              <span class="pick__txt"><b>Botox capillaire</b><small>Cheveux lisses, brillants, sans frisottis.</small><span class="pick__state" aria-hidden="true"></span></span></label>
           </div>
         </fieldset>
 
@@ -803,6 +985,25 @@
   </section>
 
 </main>
+
+<!-- Options of a service (Teinture). The list is built by salon.js from
+     OPTIONS, where the prices live. -->
+<dialog class="opts" data-opts aria-labelledby="opts-h">
+  <div class="opts__box">
+    <div class="opts__main">
+      <p class="label" data-opts-service>Teinture</p>
+      <h3 id="opts-h" class="opts__h">Choisis <em>tes options</em></h3>
+      <p class="opts__hint">Choisis une option.</p>
+      <ul class="opts__list" data-opts-list></ul>
+      <div class="opts__acts">
+        <button type="button" class="cta" data-opts-ok>Ajouter à ma soumission</button>
+        <button type="button" class="opts__cancel" data-opts-cancel>Annuler</button>
+      </div>
+    </div>
+    <figure class="opts__ph" aria-hidden="true"><img data-opts-img src="assets/couleur-m.webp" width="600" height="800" alt=""><figcaption data-opts-cap></figcaption></figure>
+    <button type="button" class="opts__x" data-opts-cancel aria-label="Fermer">×</button>
+  </div>
+</dialog>
 
 <script src="scrollcraft.js"></script>
 <script>ScrollCraft.mount(document.body);</script>
