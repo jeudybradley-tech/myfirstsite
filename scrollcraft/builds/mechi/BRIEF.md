@@ -192,3 +192,8 @@ Not verified: a real phone, a real form endpoint.
   - To fit six links beside the centred logo: the compact link padding now applies up to 1720 px, and the Menu button takes over below 1500 px (was 1350). Checked at 1500, 1501, 1560, 1640, 1720, 1721 and 1920: links never reach the logo.
   - Product cards on a mouse hover: the frame rises 12 px and grows 2 %, gains a warm golden glow ring, and the photo brightens. Hover-capable pointers only; no lift under reduced motion.
 - New hero image, "mets cette image comme nouvelle page d'accueil": a 1920x1080 photo of long straight black hair from the back in a beige salon, with empty wall on the left. accueil.webp (full) and accueil-m.webp (a 670x1080 crop on the woman for phones) replace salon.webp and salon-m.webp, which are deleted. object-position 72% 40% keeps her in frame on narrower screens. Still no text on the hero. Checked at 1440, 713 and 390.
+- Hero again: "utilise cette photo… rends-la sombre comme la deuxième photo" (a stock-looking portrait of a woman with long flowing brown hair; reference: a dark muted photo with a large title on the left), then "le logo… à côté".
+  - accueil.webp is now that photo, only 626x351, so it is soft at full width (README asks for a larger file and to check the rights). The phone crop file is dropped: the same image is framed at 82 % on phones.
+  - Darkened in CSS (brightness .62, saturate .55, contrast 1.05) under a grey-green veil (rgb 28 32 28 / .42).
+  - The logo (logo-m.webp) sits large on the empty left, clamp(15rem, 30vw, 30rem), with a drop shadow; on phones it is centred near the bottom.
+  - Checked at 1440, 713 and 390.

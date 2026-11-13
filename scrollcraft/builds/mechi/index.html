@@ -132,7 +132,7 @@
     min-height: 100svh; padding: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)) var(--sc-gutter) clamp(2rem, 6svh, 4rem);
     background: var(--slate); overflow: clip; isolation: isolate; }
   .hero__bg { position: absolute; inset: -6% 0; z-index: -2; }
-  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 72% 40%; }
+  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 30%; }
   .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background: linear-gradient(90deg, rgb(18 14 9 / .9) 0%, rgb(18 14 9 / .72) 42%, rgb(18 14 9 / .55) 100%),
                 linear-gradient(to bottom, rgb(18 14 9 / .35) 0%, transparent 30%, transparent 70%, var(--slate) 100%); }
@@ -506,7 +506,7 @@
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
     .hero { align-content: end; }
-    .hero__bg img { object-position: 50% 35%; }
+    .hero__bg img { object-position: 82% 30%; }
 
     .phones { gap: 1rem; }
     .phone { width: min(44vw, calc((100svh - var(--bar-h) - 4rem) * 9 / 19.5)); padding: .4rem; border-radius: 1.7rem; --tilt: -3deg; }
@@ -554,7 +554,15 @@
   @media (max-width: 1500px) { .bar__nav { background: #f5ede1; border-color: rgb(57 36 13 / .14); box-shadow: 0 24px 50px -24px rgb(57 36 13 / .45); } }
   /* The salon photo in full colour, with only a short fade into the beige
      at the very bottom, on every screen. */
-  .hero::before { background: linear-gradient(to bottom, transparent 0%, transparent 84%, var(--slate) 100%); }
+  /* The photo is darkened and muted, like the owner's reference: a deep
+     grey-green veil over a dimmed, desaturated image. */
+  .hero__bg img { filter: brightness(.62) saturate(.55) contrast(1.05); }
+  /* The salon's logo, large on the empty left side of the photo. */
+  .hero__logo { position: relative; justify-self: start; width: clamp(15rem, 30vw, 30rem); height: auto; margin-left: clamp(0rem, 3vw, 3rem);
+    filter: drop-shadow(0 18px 40px rgb(0 0 0 / .5)); }
+  @media (max-width: 760px) { .hero { align-content: end; } .hero__logo { justify-self: center; width: min(72vw, 18rem); margin: 0 0 12svh; } }
+  .hero::before { background: linear-gradient(rgb(28 32 28 / .42), rgb(28 32 28 / .42)),
+                              linear-gradient(to bottom, transparent 0%, transparent 84%, var(--slate) 100%); }
   .rail-stage { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, var(--slate) 72%); }
   .curls { background: radial-gradient(55% 60% at 50% 72%, #e3cfb5, var(--slate) 70%); }
   .card__img { box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
@@ -599,8 +607,9 @@
   <!-- 1 · HERO: flow. The salon itself, darkened, as the background of the first screen. -->
   <section id="accueil" class="hero on-slate" data-sc-act="flow">
     <h1 class="sr">Salon de coiffure Mechi, à Montréal : une beauté qui vous ressemble.</h1>
+    <img class="hero__logo" src="assets/logo-m.webp" width="760" height="393" alt="" aria-hidden="true">
     <div class="hero__bg" data-sc-parallax="1.2" aria-hidden="true">
-      <picture><source media="(max-width: 760px)" srcset="assets/accueil-m.webp"><img src="assets/accueil.webp" width="1920" height="1080" fetchpriority="high" alt=""></picture>
+      <picture><img src="assets/accueil.webp" width="626" height="351" fetchpriority="high" alt=""></picture>
     </div>
   </section>
 
