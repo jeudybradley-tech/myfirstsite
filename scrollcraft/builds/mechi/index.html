@@ -132,7 +132,7 @@
     min-height: 100svh; padding: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)) var(--sc-gutter) clamp(2rem, 6svh, 4rem);
     background: var(--slate); overflow: clip; isolation: isolate; }
   .hero__bg { position: absolute; inset: -6% 0; z-index: -2; }
-  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+  .hero__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 72% 40%; }
   .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
     background: linear-gradient(90deg, rgb(18 14 9 / .9) 0%, rgb(18 14 9 / .72) 42%, rgb(18 14 9 / .55) 100%),
                 linear-gradient(to bottom, rgb(18 14 9 / .35) 0%, transparent 30%, transparent 70%, var(--slate) 100%); }
@@ -506,7 +506,7 @@
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
     .hero { align-content: end; }
-    .hero__bg img { object-position: 50% 30%; }
+    .hero__bg img { object-position: 50% 35%; }
 
     .phones { gap: 1rem; }
     .phone { width: min(44vw, calc((100svh - var(--bar-h) - 4rem) * 9 / 19.5)); padding: .4rem; border-radius: 1.7rem; --tilt: -3deg; }
@@ -600,7 +600,7 @@
   <section id="accueil" class="hero on-slate" data-sc-act="flow">
     <h1 class="sr">Salon de coiffure Mechi, à Montréal : une beauté qui vous ressemble.</h1>
     <div class="hero__bg" data-sc-parallax="1.2" aria-hidden="true">
-      <picture><source media="(max-width: 760px)" srcset="assets/salon-m.webp"><img src="assets/salon.webp" width="1920" height="1440" fetchpriority="high" alt=""></picture>
+      <picture><source media="(max-width: 760px)" srcset="assets/accueil-m.webp"><img src="assets/accueil.webp" width="1920" height="1080" fetchpriority="high" alt=""></picture>
     </div>
   </section>
 
