@@ -556,12 +556,11 @@
      at the very bottom, on every screen. */
   /* The photo is darkened and muted, like the owner's reference: a deep
      grey-green veil over a dimmed, desaturated image. */
-  .hero__bg img { filter: brightness(.62) saturate(.55) contrast(1.05); }
   /* The salon's logo, large on the empty left side of the photo. */
   .hero__logo { position: relative; justify-self: start; width: clamp(15rem, 30vw, 30rem); height: auto; margin-left: clamp(0rem, 3vw, 3rem);
     filter: drop-shadow(0 18px 40px rgb(0 0 0 / .5)); }
   @media (max-width: 760px) { .hero { align-content: end; } .hero__logo { justify-self: center; width: min(72vw, 18rem); margin: 0 0 12svh; } }
-  .hero::before { background: linear-gradient(rgb(28 32 28 / .42), rgb(28 32 28 / .42)); }
+  .hero::before { background: none; }
   .rail-stage { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, var(--slate) 72%); }
   .curls { background: radial-gradient(55% 60% at 50% 72%, #e3cfb5, var(--slate) 70%); }
   .card__img { box-shadow: 0 26px 44px -26px rgb(57 36 13 / .5); }
@@ -597,10 +596,10 @@
   }
   /* Welcome frame like the owner's reference: a dark card with big rounded
      corners, set in from the edges, crossed by a fine grid of light lines. */
-  .hero { background: #1c201c; margin: clamp(.5rem, 1.2vw, 1rem); min-height: calc(100svh - 2 * clamp(.5rem, 1.2vw, 1rem)); border-radius: clamp(1.5rem, 3vw, 2.75rem); }
+  .hero { background: #c9a98a; margin: clamp(.5rem, 1.2vw, 1rem); min-height: calc(100svh - 2 * clamp(.5rem, 1.2vw, 1rem)); border-radius: clamp(1.5rem, 3vw, 2.75rem); }
   .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-    background-image: linear-gradient(to right, rgb(245 237 225 / .13) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgb(245 237 225 / .13) 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgb(255 250 242 / .3) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgb(255 250 242 / .3) 1px, transparent 1px);
     background-size: calc(100% / 8) calc(100% / 4); background-position: -1px -1px; }
   @media (max-width: 760px) { .hero::after { background-size: calc(100% / 4) calc(100% / 6); } }
   /* Every section shares the warm beige of the services, as the owner asked;
