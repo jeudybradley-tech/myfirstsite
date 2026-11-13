@@ -577,8 +577,10 @@
   .curls__copy > p:not(.label) { font-weight: 600; }
   .card__desc, .pick__txt small { font-weight: 500; }
   /* A white band between every section, as in the owner's reference. */
-  body { background: #fff; }
-  main > section + section { margin-top: clamp(1.25rem, 3vw, 2.75rem); }
+  /* The beige also shows around the welcome card; the white bands are now
+     drawn as a top border on each later section. */
+  body { background: #dbc3a6; }
+  main > section + section { border-top: clamp(1.25rem, 3vw, 2.75rem) solid #fff; }
   /* Bigger frames: the text under each service card is kept compact so the
      photos can grow and the buttons stay clear of the white band. */
   .card__name { margin-top: var(--sc-4); }
