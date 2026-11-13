@@ -95,7 +95,7 @@
     padding: .75em 1.1em; border-radius: var(--sc-r-pill); border: 1px solid color-mix(in oklab, var(--on-slate) 28%, transparent); }
   .bar__toggle i { position: relative; width: 16px; height: 10px; border-block: 1.5px solid currentColor; transition: transform 200ms var(--sc-ease-out); }
   .bar.is-open .bar__toggle i { transform: scaleY(.15); }
-  @media (max-width: 1500px) {
+  @media (max-width: 1240px) {
     :root { --pill-h: 4.25rem; --pill-top: .6rem; }
     .bar { padding: 0 .5rem 0 1rem; }
     .bar__toggle { display: inline-flex; margin-left: auto; }
@@ -551,7 +551,7 @@
     box-shadow: 0 18px 40px -22px rgb(57 36 13 / .45), inset 0 1px 0 rgb(255 255 255 / .5); }
   .bar__nav a[data-tab] { color: #4d3720; }
   .bar__logo img { filter: drop-shadow(0 3px 8px rgb(57 36 13 / .25)); }
-  @media (max-width: 1500px) { .bar__nav { background: #f5ede1; border-color: rgb(57 36 13 / .14); box-shadow: 0 24px 50px -24px rgb(57 36 13 / .45); } }
+  @media (max-width: 1240px) { .bar__nav { background: #f5ede1; border-color: rgb(57 36 13 / .14); box-shadow: 0 24px 50px -24px rgb(57 36 13 / .45); } }
   /* The salon photo in full colour, with only a short fade into the beige
      at the very bottom, on every screen. */
   /* The photo is darkened and muted, like the owner's reference: a deep
@@ -619,6 +619,13 @@
     .hero { width: calc(100% - 1.5rem); aspect-ratio: auto; min-height: 52svh; }
     .hero__logo { width: min(64vw, 15rem); margin-bottom: 1.25rem; }
   }
+  /* Menu bar: the logo on the left, then every section of the page. */
+  .bar__logo { position: static; translate: none; flex: none; height: calc(var(--pill-h) - 1rem); }
+  .bar { gap: clamp(.75rem, 1.5vw, 1.5rem); }
+  .bar__nav a[data-tab] { padding-inline: clamp(.45em, .7vw, .8em); font-size: clamp(.8rem, .5rem + .4vw, .95rem); white-space: nowrap; }
+  .bar__nav a[data-tab]::after { left: clamp(.45em, .7vw, .8em); right: clamp(.45em, .7vw, .8em); }
+  .bar__cta { white-space: nowrap; }
+  @media (max-width: 1240px) { .bar__nav a[data-tab] { font-size: var(--sc-t-lg); padding: 1em 0; } .bar__nav a[data-tab]::after { left: auto; right: 0; } }
 </style>
 </head>
 <body>
@@ -633,6 +640,7 @@
       <a href="#services" data-tab="services">Services</a>
       <a href="#avant-apres" data-tab="avant-apres">Avant / Après</a>
       <a href="#produits" data-tab="produits">Soins</a>
+      <a href="#boucles" data-tab="boucles">Tendances</a>
       <a href="#proprietaire" data-tab="proprietaire">La propriétaire</a>
       <a href="#comment" data-tab="comment">Comment ça marche</a>
     </div>

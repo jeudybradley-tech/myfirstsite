@@ -220,3 +220,8 @@ Not verified: a real phone, a real form endpoint.
   - The grid lines are removed. So is the hero parallax, which left a sliver above the photo.
   - The logo is a little smaller to suit the card.
   - A bigger source photo is still the real fix for sharpness (README).
+- "sur la barre d'onglets mets le logo à gauche et ajoute les sections qui se retrouvent sur la page".
+  - The logo leaves the centre of the pill and sits on the left (static, in the flow).
+  - The links follow it: Accueil, Services, Avant / Après, Soins, Tendances (new, #boucles, added to the scroll spy), La propriétaire and Comment ça marche, with the CTA on the right.
+  - With the logo out of the middle, everything fits on one line down to 1241 px. The Menu button now takes over at 1240 px and below (was 1500). Link size and padding scale with the width.
+  - Checked at 1241, 1300, 1366, 1440, 1600 and 1920 (no overlap, nothing outside the pill), and at 1240 and 390 (Menu button).
