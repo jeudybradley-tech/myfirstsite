@@ -597,11 +597,6 @@
   /* Welcome frame like the owner's reference: a dark card with big rounded
      corners, set in from the edges, crossed by a fine grid of light lines. */
   .hero { background: #c9a98a; margin: clamp(.5rem, 1.2vw, 1rem); min-height: calc(100svh - 2 * clamp(.5rem, 1.2vw, 1rem)); border-radius: clamp(1.5rem, 3vw, 2.75rem); }
-  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-    background-image: linear-gradient(to right, rgb(255 250 242 / .3) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgb(255 250 242 / .3) 1px, transparent 1px);
-    background-size: calc(100% / 8) calc(100% / 4); background-position: -1px -1px; }
-  @media (max-width: 760px) { .hero::after { background-size: calc(100% / 4) calc(100% / 6); } }
   /* Every section shares the warm beige of the services, as the owner asked;
      only the welcome card keeps its dark photo. */
   main > section:not(.hero), .rail-stage, .curls { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, #d3ba9c 72%); }
@@ -614,6 +609,15 @@
   @media (max-width: 760px) {
     .hero { margin: calc(var(--bar-h) + .25rem) .75rem 0; min-height: calc(75svh - var(--bar-h)); padding: 1.5rem 1rem; }
     .hero__logo { margin-bottom: 2rem; }
+  }
+  /* The welcome photo is small (626 x 351): the card takes the photo's own
+     shape and a capped width, so it is no longer cropped and blown up. */
+  .hero { width: min(calc(100% - 2 * clamp(1rem, 5vw, 5rem)), 60rem); margin-inline: auto; min-height: 0; aspect-ratio: 626 / 351; }
+  .hero__bg { inset: 0; }
+  .hero__logo { width: clamp(12rem, 24vw, 22rem); }
+  @media (max-width: 760px) {
+    .hero { width: calc(100% - 1.5rem); aspect-ratio: auto; min-height: 52svh; }
+    .hero__logo { width: min(64vw, 15rem); margin-bottom: 1.25rem; }
   }
 </style>
 </head>
@@ -646,7 +650,7 @@
   <section id="accueil" class="hero on-slate" data-sc-act="flow">
     <h1 class="sr">Salon de coiffure Mechi, à Montréal : une beauté qui vous ressemble.</h1>
     <img class="hero__logo" src="assets/logo-m.webp" width="760" height="393" alt="" aria-hidden="true">
-    <div class="hero__bg" data-sc-parallax="1.2" aria-hidden="true">
+    <div class="hero__bg" aria-hidden="true">
       <picture><img src="assets/accueil.webp" width="626" height="351" fetchpriority="high" alt=""></picture>
     </div>
   </section>

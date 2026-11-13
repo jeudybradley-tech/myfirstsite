@@ -214,3 +214,9 @@ Not verified: a real phone, a real form endpoint.
   - Side margins are clamp(1rem, 5vw, 5rem) (.75rem on phones), with lighter inner padding.
   - Services gets a little beige space above its white band.
   - Checked at 1440, 713 and 390: no overflow, no console errors.
+- "la photo est trop zoomée dans le cadre, elle est floue" and "enlève aussi les lignes".
+  - The photo is only 626x351, so the card now takes the photo's own ratio (aspect-ratio 626/351) at most 60rem wide and centred. At 1440 that is about 960 px, versus the full-width, cropped cover before.
+  - Phones keep a cover crop at 52svh.
+  - The grid lines are removed. So is the hero parallax, which left a sliver above the photo.
+  - The logo is a little smaller to suit the card.
+  - A bigger source photo is still the real fix for sharpness (README).
