@@ -144,12 +144,12 @@
   .rail-stage { display: flex; align-items: center; overflow: hidden;
     background: radial-gradient(70% 80% at 22% 38%, #2a2014, var(--slate) 72%); }
   .rail { display: flex; align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); padding: 0 var(--sc-gutter); }
-  .rail-stage { padding-top: var(--bar-h); }
+  .rail-stage { padding-top: var(--bar-h); padding-bottom: clamp(1.5rem, 4svh, 2.5rem); }
   @media (max-height: 780px) { .card__name { margin-top: var(--sc-5); } .card__desc { font-size: var(--sc-t-sm); } .card__foot { margin-top: var(--sc-3); gap: var(--sc-2); } }
   .rail__intro { flex: 0 0 auto; width: min(30rem, 34vw); }
   .rail__intro h2 { font-size: clamp(2.8rem, 5vw, 5rem); margin: var(--sc-3) 0 0; }
   .rail__intro p { margin: var(--sc-5) 0 0; color: var(--on-slate-soft); font-size: var(--sc-t-lg); line-height: 1.55; max-width: 28ch; }
-  .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(13rem, min(22vw, calc((100svh - var(--bar-h) - 19rem) * .72)), 21rem);
+  .card, .rail__end { --k: 1; flex: 0 0 auto; width: clamp(10rem, min(22vw, calc((100svh - var(--bar-h) - 29rem) * .72)), 21rem);
     opacity: calc(.55 + .45 * var(--k)); translate: 0 calc((1 - var(--k)) * 3rem); }
   /* Arch frames: each photo in a salon-mirror arch, a fine gold filet set
      off around it, the text centred under it. */
@@ -519,7 +519,7 @@
     .rail { padding-top: 0; gap: var(--sc-5); }
     .rail__intro { width: 80vw; }
     .rail__intro p { font-size: var(--sc-t-base); }
-    .card, .rail__end { width: min(72vw, calc((100svh - var(--bar-h) - 17rem) * .8)); }
+    .card, .rail__end { width: max(10rem, min(68vw, calc((100svh - var(--bar-h) - 27rem) * .8))); }
     .rail__end { width: 72vw; }
     .card__arch { aspect-ratio: 4 / 5; }
 
@@ -580,6 +580,14 @@
   /* A white band between every section, as in the owner's reference. */
   body { background: #fff; }
   main > section + section { margin-top: clamp(1.25rem, 3vw, 2.75rem); }
+  /* Short screens: tighter card text so the "Choisir" button stays clear of
+     the white band under the services. */
+  @media (max-height: 740px) {
+    .card__name { margin-top: var(--sc-4); font-size: clamp(1.25rem, 2vw, 1.6rem); }
+    .card__desc { font-size: var(--sc-t-sm); line-height: 1.4; }
+    .card__foot { margin-top: var(--sc-2); gap: var(--sc-2); }
+    .card__foot::before { display: none; }
+  }
 </style>
 </head>
 <body>

@@ -198,3 +198,8 @@ Not verified: a real phone, a real form endpoint.
   - The logo (logo-m.webp) sits large on the empty left, clamp(15rem, 30vw, 30rem), with a drop shadow; on phones it is centred near the bottom.
   - Checked at 1440, 713 and 390.
 - "je veux des espaces comme ça dans chaque catégorie, du blanc entre" (reference: cream bands parted by white). The body is now white, and every section after the first gets a top margin of clamp(1.25rem, 3vw, 2.75rem): 43 px at 1440, 20 px at 390. The pinned services rail still works; no overflow, no console errors.
+- "je veux que le mot « choisir » soit visible, éloigné de la craque blanche": in the services rail the lowest Choisir pill touched or went under the stage foot (and so the new white band). Fixes:
+  - Card width now subtracts 29rem (desktop) and 27rem (phone) from the viewport height, with a 10rem floor.
+  - The stage has bottom padding.
+  - Under 740 px of height, the card text is tighter (smaller name and description, no rule above the price).
+  - Measured gap between the lowest pill and the stage foot: 45 px at 1440x900, 28 at 1440x760, 72 at 1280x720, 91 at 1920x1080, 17 at 1024x768, 34 at 390x844, 33 at 375x667.
