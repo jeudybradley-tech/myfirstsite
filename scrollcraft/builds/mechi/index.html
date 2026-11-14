@@ -626,6 +626,31 @@
   .bar__nav a[data-tab]::after { left: clamp(.45em, .7vw, .8em); right: clamp(.45em, .7vw, .8em); }
   .bar__cta { white-space: nowrap; }
   @media (max-width: 1240px) { .bar__nav a[data-tab] { font-size: var(--sc-t-lg); padding: 1em 0; } .bar__nav a[data-tab]::after { left: auto; right: 0; } }
+  /* How it works, like the owner's reference: the section holds while the
+     reader scrolls; a big pale number rolls from 01 to 03 and each step
+     takes its turn, the others hidden. */
+  .how { padding-block: 0; }
+  .how__stage { height: 100svh; display: grid; align-items: center; padding: var(--bar-h) 0 clamp(1rem, 4svh, 3rem); }
+  .how__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+  .how__head { margin: 0; }
+  .how__steps { position: relative; }
+  .how__num { display: flex; height: 1em; overflow: hidden; margin-bottom: clamp(1rem, 3svh, 2rem);
+    font-family: var(--sc-font-display); font-weight: 200; font-size: clamp(6rem, 15vw, 14rem); line-height: 1; letter-spacing: -0.04em; color: rgb(47 37 25 / .2); }
+  .how__roll { display: flex; flex-direction: column; transform: translateY(calc(var(--k, 0) * -1em)); transition: transform 650ms cubic-bezier(.65, 0, .25, 1); }
+  .how__roll span { display: block; height: 1em; }
+  .how .steps { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .how .steps li { grid-area: 1 / 1; border-top: 0; padding-top: 0; gap: var(--sc-3); opacity: 0; transform: translateY(1.25rem); visibility: hidden;
+    transition: opacity 450ms var(--sc-ease-out), transform 450ms var(--sc-ease-out), visibility 0s linear 450ms; }
+  .how .steps li.is-on { opacity: 1; transform: none; visibility: visible; transition: opacity 450ms var(--sc-ease-out) 120ms, transform 450ms var(--sc-ease-out) 120ms, visibility 0s; }
+  .how__tag { margin: 0; font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--on-porc-soft); }
+  .how .steps h3 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+  .how .steps p:not(.how__tag) { font-size: var(--sc-t-lg); max-width: 36ch; }
+  @media (max-width: 760px) {
+    .how__grid { grid-template-columns: 1fr; gap: var(--sc-5); align-content: center; }
+    .how__num { font-size: 38vw; margin-bottom: var(--sc-3); }
+    .how .steps p:not(.how__tag) { font-size: var(--sc-t-base); }
+  }
+  @media (prefers-reduced-motion: reduce) { .how__roll, .how .steps li, .how .steps li.is-on { transition: none; } }
 </style>
 </head>
 <body>
@@ -862,17 +887,22 @@
   </section>
 
   <!-- 3 · HOW: flow. A real sequence, so the steps carry their numbers. -->
-  <section id="comment" class="how on-porc" data-sc-act="flow" aria-labelledby="how-h">
-    <div class="sc-wrap">
-      <div class="how__head" data-sc-in data-sc-stagger="60">
-        <p class="label">Comment ça marche</p>
-        <h2 id="how-h" class="disp">Une soumission <em>avant</em> les ciseaux.</h2>
+  <section id="comment" class="how on-porc" data-sc-act="pin" data-sc-span="2.6" aria-labelledby="how-h">
+    <div class="how__stage" data-sc-stage>
+      <div class="sc-wrap how__grid">
+        <div class="how__head">
+          <p class="label">Comment ça marche</p>
+          <h2 id="how-h" class="disp">Une soumission <em>avant</em> les ciseaux.</h2>
+        </div>
+        <div class="how__steps">
+          <div class="how__num" aria-hidden="true"><span>0</span><span class="how__roll" data-how-roll><span>1</span><span>2</span><span>3</span></span></div>
+          <ol class="steps" data-how-steps>
+            <li class="is-on"><p class="how__tag">Étape — 01</p><h3>Ta demande</h3><p>Tu choisis tes services, tu décris tes cheveux et ce que tu aimerais, et tu choisis le jour et l'heure.</p></li>
+            <li><p class="how__tag">Étape — 02</p><h3>Notre réponse</h3><p>On te répond avec le service conseillé, la durée et le prix, et on confirme l'heure.</p></li>
+            <li><p class="how__tag">Étape — 03</p><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac<span data-interac-how></span>. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
+          </ol>
+        </div>
       </div>
-      <ol class="steps" data-sc-in data-sc-stagger="80">
-        <li><span class="n">1</span><h3>Ta demande</h3><p>Tu choisis tes services, tu décris tes cheveux et ce que tu aimerais, et tu choisis le jour et l'heure.</p></li>
-        <li><span class="n">2</span><h3>Notre réponse</h3><p>On te répond avec le service conseillé, la durée et le prix, et on confirme l'heure.</p></li>
-        <li><span class="n">3</span><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac<span data-interac-how></span>. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
-      </ol>
     </div>
   </section>
 

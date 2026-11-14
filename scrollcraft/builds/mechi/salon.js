@@ -83,6 +83,9 @@
 
   // ------------------------------------------------------------ per frame --
   var lastForm = null, lastTab = null;
+  var howEl = document.getElementById('comment'), howRoll = document.querySelector('[data-how-roll]'), lastHow = -1;
+  var howSteps = Array.prototype.slice.call(document.querySelectorAll('[data-how-steps] > li'));
+  if (!howRoll || !howSteps.length) howEl = null;
   function frame() {
     // Services rail: each card settles as it comes in from the right edge.
     var sr = svc.getBoundingClientRect();
@@ -90,6 +93,16 @@
       for (var i = 0; i < railItems.length; i++) {
         var r = railItems[i].getBoundingClientRect();
         railItems[i].style.setProperty('--k', clamp01((innerWidth - r.left) / (r.width * 0.85)).toFixed(3));
+      }
+    }
+
+    // How it works: the pinned act's progress picks the step on show.
+    if (howEl) {
+      var hk = Math.max(0, Math.min(2, Math.floor(prog(howEl) * 3)));
+      if (hk !== lastHow) {
+        howRoll.style.setProperty('--k', hk);
+        howSteps.forEach(function (li, j) { li.classList.toggle('is-on', j === hk); });
+        lastHow = hk;
       }
     }
 

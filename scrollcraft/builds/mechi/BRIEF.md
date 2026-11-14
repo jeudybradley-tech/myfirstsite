@@ -226,3 +226,9 @@ Not verified: a real phone, a real form endpoint.
   - With the logo out of the middle, everything fits on one line down to 1241 px. The Menu button now takes over at 1240 px and below (was 1500). Link size and padding scale with the width.
   - Checked at 1241, 1300, 1366, 1440, 1600 and 1920 (no overlap, nothing outside the pill), and at 1240 and 390 (Menu button).
 - "enlève le logo dans la fenêtre d'accueil": the large logo on the welcome photo is removed; the logo stays in the menu bar. The .hero__logo rules are left unused-harmless. Checked at 1440 and 390.
+- "je veux que la section « soumission avant les ciseaux » ait ce modèle" (a screen recording: a big pale number that rolls 01 → 02 → 03 while the step label, title and text change as you scroll).
+  - #comment is now a pinned act (data-sc-act="pin", span 2.6) with a sticky .how__stage.
+  - Left: the label and title. Right: a large pale "0" with a rolling digit column (.how__roll, translateY by --k em), then "Étape — 0N", the step title and text.
+  - salon.js reads the act's --sc-p each frame and shows step floor(p * 3): it sets --k and toggles .is-on. Hidden steps are visibility:hidden.
+  - On phones the number sits under the title. No motion under reduced motion; the steps still change.
+  - Tested at 1440 and 390 at 10, 50 and 90 % of the act: steps 1, 2, 3 in order, the stage stuck at the top, no console warnings or errors. The Interac address still shows in step 3.
