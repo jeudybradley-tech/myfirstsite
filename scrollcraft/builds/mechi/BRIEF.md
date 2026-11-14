@@ -225,3 +225,4 @@ Not verified: a real phone, a real form endpoint.
   - The links follow it: Accueil, Services, Avant / Après, Soins, Tendances (new, #boucles, added to the scroll spy), La propriétaire and Comment ça marche, with the CTA on the right.
   - With the logo out of the middle, everything fits on one line down to 1241 px. The Menu button now takes over at 1240 px and below (was 1500). Link size and padding scale with the width.
   - Checked at 1241, 1300, 1366, 1440, 1600 and 1920 (no overlap, nothing outside the pill), and at 1240 and 390 (Menu button).
+- "enlève le logo dans la fenêtre d'accueil": the large logo on the welcome photo is removed; the logo stays in the menu bar. The .hero__logo rules are left unused-harmless. Checked at 1440 and 390.
