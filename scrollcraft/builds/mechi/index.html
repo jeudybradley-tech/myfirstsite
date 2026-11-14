@@ -673,6 +673,11 @@
   /* Products rise into place one after another as the reader reaches them. */
   .prods.is-cascade .prod { opacity: 0; transform: translateY(2.5rem); transition: opacity 700ms var(--sc-ease-out) var(--d, 0ms), transform 700ms var(--sc-ease-out) var(--d, 0ms); }
   .prods.is-cascade .prod.is-in { opacity: 1; transform: none; }
+  /* On a touch screen, a finger on a product lifts it and lights it up too. */
+  .prod.is-lit .prod__img { transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 0 0 2px rgb(255 240 210 / .9), 0 0 46px 10px rgb(255 214 140 / .6), 0 44px 64px -26px rgb(57 36 13 / .6); }
+  .prod.is-lit .prod__img img { filter: brightness(1.12) saturate(1.08); }
+  @media (prefers-reduced-motion: reduce) { .prod.is-lit .prod__img { transform: none; } }
 </style>
 </head>
 <body>

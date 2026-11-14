@@ -256,6 +256,17 @@
     items.forEach(function (it) { io.observe(it); });
   })();
 
+  // Touch screens have no hover: a finger on a product lifts and lights it,
+  // and it settles back a moment after the finger leaves.
+  Array.prototype.forEach.call(document.querySelectorAll('.prod'), function (p) {
+    var t = 0;
+    function on() { clearTimeout(t); document.querySelectorAll('.prod.is-lit').forEach(function (q) { if (q !== p) q.classList.remove('is-lit'); }); p.classList.add('is-lit'); }
+    function off() { clearTimeout(t); t = setTimeout(function () { p.classList.remove('is-lit'); }, 900); }
+    p.addEventListener('touchstart', on, { passive: true });
+    p.addEventListener('touchend', off, { passive: true });
+    p.addEventListener('touchcancel', off, { passive: true });
+  });
+
   // ------------------------------------------------- choosing services --
   var picks = [];
   var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="services"]'));
