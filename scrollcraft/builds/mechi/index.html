@@ -764,12 +764,14 @@
   .svcs__item:focus-visible { outline: 2px dashed var(--gold-deep); outline-offset: 3px; }
   .opts__h:focus { outline: none; }
   /* The request form waits BEHIND the steps. Once step 3 has been read, the
-     steps lift away like a curtain and the form is already there under them. */
+     steps fade softly away and the form is already there under them. */
   @media (prefers-reduced-motion: no-preference) {
     main > section#comment { background: none; position: relative; z-index: 2; }
-    #comment .how__stage { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, #d3ba9c 72%);
-      transform: translate3d(0, calc(var(--lift, 0) * -100%), 0); will-change: transform;
-      box-shadow: 0 1.5rem 3rem -.5rem rgb(47 30 12 / .35); }
+    /* Two beats, so the two texts never sit on top of each other: first the
+       steps fade out on their own background, then that background clears. */
+    #comment .how__stage { background: radial-gradient(70% 80% at 22% 38%, rgb(227 207 181 / calc(1 - var(--clear, 0))), rgb(211 186 156 / calc(1 - var(--clear, 0))) 72%); }
+    #comment .how__grid { opacity: calc(1 - var(--fade, 0)); }
+    #comment.is-lifted .how__stage { pointer-events: none; }
     main > #comment + #soumission { position: relative; z-index: 1; margin-top: -100svh; border-top: 0;
       padding-top: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)); scroll-margin-top: 0; }
   }

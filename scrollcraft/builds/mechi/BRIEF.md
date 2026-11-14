@@ -327,6 +327,7 @@ Not verified: a real phone, a real form endpoint.
 - « Dis-nous ce que tu veux » est placé DERRIÈRE « Avant les ciseaux » (marge
   négative de 100svh, z-index plus bas, plus de bande blanche).
 - Les 3 étapes occupent les trois premiers quarts du défilement épinglé
-  (span 3,8) ; ensuite les étapes montent comme un rideau (--lift, 0,8 → 1)
-  et le formulaire apparaît dessous.
-- « Réduire les animations » : pas de rideau, la page reste comme avant.
+  (span 3,8) ; ensuite un fondu doux en deux temps (0,8 → 1) : les étapes
+  s'effacent (--fade), puis leur fond s'éclaircit (--clear) et le formulaire
+  apparaît dessous, sans jamais deux textes l'un sur l'autre.
+- « Réduire les animations » : pas de fondu, la page reste comme avant.

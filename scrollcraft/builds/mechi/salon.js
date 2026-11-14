@@ -192,12 +192,16 @@
     }
 
     if (howEl) {
-      // The three steps share the first three quarters; then the steps lift
-      // away and the request form behind them shows.
+      // The three steps share the first three quarters; then the steps fade
+      // softly away and the request form behind them shows.
       var hp = prog(howEl), want = Math.max(0, Math.min(howSteps.length - 1, Math.floor(hp / 0.75 * howSteps.length)));
       var lift = reduce ? 0 : clamp01((hp - 0.8) / 0.2);
       lift = lift * lift * (3 - 2 * lift);
-      if (lift !== lastLift) { howEl.style.setProperty('--lift', lift.toFixed(4)); lastLift = lift; }
+      if (lift !== lastLift) {
+        howEl.style.setProperty('--fade', clamp01(lift / 0.45).toFixed(4));
+        howEl.style.setProperty('--clear', clamp01((lift - 0.45) / 0.55).toFixed(4));
+        howEl.classList.toggle('is-lifted', lift > 0.5); lastLift = lift;
+      }
       // Never skip a step: move one step at a time, and keep each step on
       // screen at least HOW_HOLD ms, even after a fast flick.
       var hk = lastHow < 0 ? want : lastHow;
