@@ -282,6 +282,8 @@
       e.preventDefault();
       stayPut = true; svcsY = scrollY; renderSvcs();
       if (typeof svcsDlg.showModal === 'function') svcsDlg.showModal(); else svcsDlg.setAttribute('open', '');
+      // Focus the title, not the first service: a focused service looked chosen.
+      var h = svcsDlg.querySelector('#svcs-h'); if (h) h.focus({ preventScroll: true });
     });
   }
 

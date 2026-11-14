@@ -298,3 +298,7 @@ Not verified: a real phone, a real form endpoint.
   - While it is open, stayPut stops goSteps() from scrolling to the steps.
   - On close, the scroll position from before opening is restored, so scroll anchoring does not shift the page as the summary grows. Focus returns to the link.
   - Tested at 1440 and on an iPhone 13: add Silk press, add Teinture > Balayage, Terminé; scrollY identical before and after; the summary reads Silk press + Teinture (Balayage); no errors. Choosing from the services row still goes to the steps.
+- Services window fixes from the owner's phone.
+  - "Silk press is outlined though I didn't pick it": showModal focused the first tile, and its focus ring looked like the chosen border. Focus now goes to the window title (tabindex -1, no outline), and a tile's keyboard ring is dashed, so it can't be mistaken for a choice.
+  - "Text should fit the frame": names overflowed two narrow columns on large phones. Tiles stack in one column up to 520 px, the text block has min-width 0 with overflow-wrap and hyphens, and the name size is clamped.
+  - Checked on iPhone 14 Pro Max and iPhone 13: focus on the title, no tile overflowing.
