@@ -307,14 +307,23 @@
       if (st) st.textContent = on ? 'Choisi' : (OPTIONS[b.getAttribute('data-add')] ? 'Voir les options' : 'Choisir');
     });
     boxes.forEach(function (bx) { if (SERVICES[bx.value]) bx.checked = picks.indexOf(bx.value) > -1; });
+    // The form's summary: a photo and a name for each chosen service (the
+    // chosen option's photo when it has one), then a link back to change it.
     var line = document.querySelector('[data-chosen]');
     if (line) {
       line.textContent = '';
       if (picks.length) {
-        line.append('Tes services : ');
-        var b = document.createElement('b');
-        b.textContent = picks.map(function (id) { var o = OPTIONS[id] ? optNames(id) : []; return SERVICES[id].name + (o.length ? ' (' + o.join(', ') + ')' : ''); }).join(', ');
-        line.appendChild(b); line.append('. ');
+        var list = document.createElement('ul'); list.className = 'chosen__list';
+        picks.forEach(function (id) {
+          var opts = OPTIONS[id] ? (chosenOpts[id] || []) : [];
+          var o = opts.length ? OPTIONS[id].filter(function (x) { return x.id === opts[0]; })[0] : null;
+          var li = document.createElement('li'), im = document.createElement('img'), tx = document.createElement('span');
+          im.src = (o && o.img) || SERVICES[id].img; im.alt = ''; im.width = 120; im.height = 150;
+          var b = document.createElement('b'); b.textContent = SERVICES[id].name; tx.appendChild(b);
+          if (o) { var sm = document.createElement('small'); sm.textContent = o.name; tx.appendChild(sm); }
+          li.appendChild(im); li.appendChild(tx); list.appendChild(li);
+        });
+        line.appendChild(list);
       } else line.append('Aucun service choisi. ');
       var a = document.createElement('a'); a.href = '#services'; a.textContent = picks.length ? 'Modifier' : 'Choisir un service'; line.appendChild(a);
     }
