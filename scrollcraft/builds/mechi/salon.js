@@ -221,8 +221,10 @@
   });
 
   // ---------------------------------------------- how it works: steps --
-  // The reader moves through the steps herself: arrows, dots, a swipe or
-  // the arrow keys. The big number rolls to the step shown.
+  // The steps play by themselves, one every few seconds, while the section is
+  // on screen, looping back to 1. The reader can still use the arrows, a
+  // swipe or the arrow keys; touching them pauses the play for a while.
+  // Nothing plays by itself under reduced motion.
   (function () {
     var roll = document.querySelector('[data-how-roll]');
     var steps = Array.prototype.slice.call(document.querySelectorAll('[data-how-steps] > li'));
@@ -235,21 +237,31 @@
       roll.style.setProperty('--k', k);
       steps.forEach(function (li, j) { li.classList.toggle('is-on', j === k); });
       dots.forEach(function (d, j) { d.classList.toggle('is-on', j === k); });
-      prev.disabled = k === 0; next.disabled = k === steps.length - 1;
+      prev.disabled = false; next.disabled = false;
       announce.textContent = 'Étape ' + (k + 1) + ' sur ' + steps.length + ' : ' + steps[k].querySelector('h3').textContent + '.';
     }
-    prev.addEventListener('click', function () { show(k - 1); });
-    next.addEventListener('click', function () { show(k + 1); });
+    var n = steps.length, STEP_MS = 4500, PAUSE_MS = 9000, held = 0, seen = false;
+    function go(i) { show(((i % n) + n) % n); }
+    function hold() { held = Date.now(); }
+    prev.addEventListener('click', function () { hold(); go(k - 1); });
+    next.addEventListener('click', function () { hold(); go(k + 1); });
+    if (!reduce && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { seen = en[0].isIntersecting; }, { threshold: 0.5 }).observe(document.querySelector('.how__steps'));
+      setInterval(function () {
+        if (!seen || document.hidden || Date.now() - held < PAUSE_MS) return;
+        go(k + 1);
+      }, STEP_MS);
+    }
     var box = document.querySelector('.how__steps');
     box.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); show(k + 1); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); show(k - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); hold(); go(k + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); hold(); go(k - 1); }
     });
     var x0 = null;
     box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
     box.addEventListener('touchend', function (e) {
       if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null;
-      if (Math.abs(dx) > 40) show(k + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 40) { hold(); go(k + (dx < 0 ? 1 : -1)); }
     });
   })();
 

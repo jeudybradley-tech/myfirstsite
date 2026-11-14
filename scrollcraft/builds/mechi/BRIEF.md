@@ -237,3 +237,4 @@ Not verified: a real phone, a real form endpoint.
   - Under the step: a ← button, three dots and a → button. A swipe on the steps (40 px) or the arrow keys inside them also changes the step. The big number still rolls to the step shown.
   - The buttons disable at the ends, and each change is announced to screen readers.
   - Tested at 1440 and on an iPhone 13: scrolling leaves the step alone; →, → reach step 3 (→ then disabled); ← goes back; no console errors.
+- "je veux que ça défile automatiquement" (after asking for reader control): the steps now autoplay, not tied to scrolling. Every 4.5 s, while at least half of the steps box is on screen and the tab is visible, the step advances and loops 3 → 1. The arrows wrap around too and are never disabled. An arrow, swipe or key pauses the autoplay for 9 s. No autoplay under reduced motion. Tested: 1 → 2 → 3 → 1 → 2 on its own; after ←, the step held for 5 s; no console errors.
