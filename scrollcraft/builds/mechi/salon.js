@@ -307,6 +307,17 @@
       if (st) st.textContent = on ? 'Choisi' : (OPTIONS[b.getAttribute('data-add')] ? 'Voir les options' : 'Choisir');
     });
     boxes.forEach(function (bx) { if (SERVICES[bx.value]) bx.checked = picks.indexOf(bx.value) > -1; });
+    var line = document.querySelector('[data-chosen]');
+    if (line) {
+      line.textContent = '';
+      if (picks.length) {
+        line.append('Tes services : ');
+        var b = document.createElement('b');
+        b.textContent = picks.map(function (id) { var o = OPTIONS[id] ? optNames(id) : []; return SERVICES[id].name + (o.length ? ' (' + o.join(', ') + ')' : ''); }).join(', ');
+        line.appendChild(b); line.append('. ');
+      } else line.append('Aucun service choisi. ');
+      var a = document.createElement('a'); a.href = '#services'; a.textContent = picks.length ? 'Modifier' : 'Choisir un service'; line.appendChild(a);
+    }
     document.querySelectorAll('[data-opts-chosen]').forEach(function (n) {
       var id = n.getAttribute('data-opts-chosen');
       n.textContent = picks.indexOf(id) > -1 ? optNames(id).join(', ') : '';
@@ -344,6 +355,12 @@
     render();
     fly(fromEl, SERVICES[id].img, bump);
     announce.textContent = SERVICES[id].name + ' ajouté à ta soumission.';
+    goSteps();
+  }
+  // Once a service is chosen, take the visitor on to the steps.
+  function goSteps() {
+    var steps = document.getElementById('comment'); if (!steps) return;
+    setTimeout(function () { steps.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 750);
   }
   function remove(id) {
     var i = picks.indexOf(id); if (i < 0) return;
