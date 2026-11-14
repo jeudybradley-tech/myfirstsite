@@ -274,3 +274,4 @@ Not verified: a real phone, a real form endpoint.
   - A tight 2-3 px contact drop-shadow under the frames makes their edges read clearly on the beige; the soft wide shadows stay.
   - Checked at 1440; no console errors.
 - "Plus sharp": the frame line is now a solid 2 px near-black brown (rgb 38 22 6 / .92), with no cream inner line, and the contact shadow gains a crisp 1 px dark edge under a 3-4 px shadow.
+- "je veux que les contours soient comme ça" (a screenshot of the first, softer edge): back to the 1.5 px brown line at .55 with the faint cream inner line and the 2-3 px contact shadow.
