@@ -259,3 +259,7 @@ Not verified: a real phone, a real form endpoint.
   - It also tames the type sized in vw: the TikTok title and the big step number.
   - The how-it-works stage goes two columns (title | number and step), so the pinned stage fits in about 340 px of height. The owner photo is capped at 20rem and the phone mockups shrink.
   - Checked every section on an iPhone 13 in landscape (750x342): no overflow, no errors. Portrait is unchanged.
+- Landscape, "le cadre avant/après comme à la verticale, et les prix des services visibles".
+  - The compare frame's width came from the viewport height, so it was about 108 px wide in landscape. It now uses min(100%, 21rem): 336 px, as when the phone is upright. The reader scrolls past it as in portrait.
+  - Service cards lie on their side in landscape: an 8rem photo (4:5) on the left; name, description, price and button on the right; card width 23rem. The price and button now sit inside the pinned stage: the lowest button is at least 5 px above the screen foot across the whole pan.
+  - Checked on an iPhone 13 in landscape. Portrait is unchanged.

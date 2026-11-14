@@ -691,6 +691,18 @@
     .how .steps h3 { font-size: 1.4rem; }
     .owner__ph { max-width: 20rem; justify-self: center; }
     .phone { width: min(30vw, 12rem); }
+    /* The before/after frame keeps its upright size, as on a phone held up. */
+    .compare { width: min(100%, 21rem); }
+    /* Service cards lie on their side: photo on the left, name, text, price
+       and button on the right, so everything fits the short screen. */
+    .card, .rail__end { width: 23rem; }
+    .card { grid-template-columns: 8rem minmax(0, 1fr); column-gap: var(--sc-4); align-items: center; justify-items: start; text-align: left; }
+    .card__img { grid-row: 1 / span 3; width: 8rem; }
+    .card__arch { aspect-ratio: 4 / 5; }
+    .card__name { margin-top: 0; font-size: 1.35rem; }
+    .card__desc { margin-top: var(--sc-1); font-size: var(--sc-t-sm); max-width: none; }
+    .card__foot { margin-top: var(--sc-2); justify-items: start; }
+    .card__opts { max-width: none; }
   }
 </style>
 </head>
