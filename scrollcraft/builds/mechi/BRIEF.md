@@ -243,3 +243,11 @@ Not verified: a real phone, a real form endpoint.
 - "sur le téléphone je veux que le bouton soumission soit en bas du cadre de glissement": a second CTA (.ba__cta-m) after the compare frame shows only at 760 px and below, centred under the "Glisse pour comparer" hint; the one in the header hides there. Desktop unchanged. Checked at 1440 and on an iPhone 13.
 - "sous les numéros qui roulent, enlève « étape 1, 2 et 3 »": the "Étape — 0N" tags are removed; the rolling number is followed directly by the step title.
 - "Enlève" (screenshot of the hours hint above the calendar): the line "Le salon est ouvert du mercredi au vendredi, de 9 h 30 à 16 h 30. Choisis le jour, puis l'heure…" is removed. The hours remain in the footer, and the calendar only offers Wednesday to Friday.
+- "je veux que la page soit facile à lire pour le client, pas de texte de trop ni inutile". A pass over every visible line:
+  - Services: each description cut to one short line (Silk press "Lisses, brillants et pleins de mouvement."; Permanente "Des boucles définies qui tiennent."; Teinture "Une couleur éclatante et brillante."; Kératine "Fini les frisottis, cheveux faciles à coiffer."; Shampoing traitant "Cuir chevelu apaisé, cheveux doux."; Botox "Cheveux réparés, lisses et brillants.").
+  - Products: the lead and the price note go; each product gets a few words.
+  - TikTok: the @handle tags on both phones go (the TikTok button keeps it).
+  - Owner: the bio is one line; the Expérience and Textures facts (repeats of the bio) and "La devise du salon" go; the specialities are shortened.
+  - How it works: one short line per step.
+  - Deposit: four bullets become two; the checkbox reads "J'accepte la règle du dépôt." The done panel is shorter. The deposit line in the footer goes (already in the form).
+  - Kept: prices, address, phone, hours, the Interac address, the photo hint, and the calendar legend.

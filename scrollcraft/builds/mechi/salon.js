@@ -541,7 +541,7 @@
     span.textContent = 'à ';
     var strong = document.createElement('strong'); strong.textContent = INTERAC_EMAIL; span.appendChild(strong);
     form.querySelector('[data-done-depot]').textContent =
-      'Pour confirmer ta place, envoie ensuite 20 $ par virement Interac à ' + INTERAC_EMAIL + ', avec ton nom et la date dans le message.';
+      'Pour réserver ta place, envoie 20 $ par Interac à ' + INTERAC_EMAIL + ' après notre confirmation.';
     Array.prototype.forEach.call(document.querySelectorAll('[data-interac-how]'), function (n) {
       n.textContent = ' à ';
       var b = document.createElement('strong'); b.textContent = INTERAC_EMAIL; n.appendChild(b);
