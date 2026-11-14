@@ -630,7 +630,7 @@
      reader scrolls; a big pale number rolls from 01 to 03 and each step
      takes its turn, the others hidden. */
   .how { padding-block: 0; }
-  .how__stage { display: grid; align-items: center; padding: clamp(4rem, 9vw, 7rem) 0; }
+  .how__stage { height: 100svh; display: grid; align-items: center; padding: var(--bar-h) 0 clamp(1rem, 4svh, 3rem); }
   .how__nav { display: flex; align-items: center; gap: var(--sc-4); margin-top: clamp(1.5rem, 4svh, 2.5rem); }
   .how__btn { width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; cursor: pointer; font: 400 1.25rem/1 var(--sc-font-text);
     color: var(--on-porc); background: rgb(255 250 242 / .55); border: 1px solid color-mix(in oklab, var(--on-porc) 30%, transparent);
@@ -898,8 +898,8 @@
   </section>
 
   <!-- 3 · HOW: flow. A real sequence, so the steps carry their numbers. -->
-  <section id="comment" class="how on-porc" data-sc-act="flow" aria-labelledby="how-h">
-    <div class="how__stage">
+  <section id="comment" class="how on-porc" data-sc-act="pin" data-sc-span="2.2" aria-labelledby="how-h">
+    <div class="how__stage" data-sc-stage>
       <div class="sc-wrap how__grid">
         <div class="how__head">
           <p class="label">Comment ça marche</p>
@@ -913,9 +913,7 @@
             <li><p class="how__tag">Étape — 03</p><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac<span data-interac-how></span>. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
           </ol>
           <div class="how__nav">
-            <button type="button" class="how__btn" data-how-prev aria-label="Étape précédente">←</button>
             <span class="how__dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i></span>
-            <button type="button" class="how__btn" data-how-next aria-label="Étape suivante">→</button>
           </div>
         </div>
       </div>
