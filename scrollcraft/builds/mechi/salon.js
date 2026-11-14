@@ -177,7 +177,7 @@
   var lastForm = null, lastTab = null;
   // How it works: the pinned act's scroll progress picks the step shown.
   var howEl = document.getElementById('comment'), howRoll = document.querySelector('[data-how-roll]'), lastHow = -1;
-  var howAt = 0, HOW_HOLD = 900;
+  var howAt = 0, HOW_HOLD = 900, HOW_AT = [0, 0.42, 0.8];
   var howSteps = Array.prototype.slice.call(document.querySelectorAll('[data-how-steps] > li'));
   var howDots = Array.prototype.slice.call(document.querySelectorAll('.how__dots i'));
   if (!howRoll || !howSteps.length) howEl = null;
@@ -192,7 +192,9 @@
     }
 
     if (howEl) {
-      var want = Math.max(0, Math.min(howSteps.length - 1, Math.floor(prog(howEl) * howSteps.length)));
+      // Step 3 comes late, so once it is read the pin lets go and the request
+      // form ("Dis-nous ce que tu veux") rises straight in under it.
+      var hp = prog(howEl), want = hp < HOW_AT[1] ? 0 : hp < HOW_AT[2] ? 1 : 2;
       // Never skip a step: move one step at a time, and keep each step on
       // screen at least HOW_HOLD ms, even after a fast flick.
       var hk = lastHow < 0 ? want : lastHow;

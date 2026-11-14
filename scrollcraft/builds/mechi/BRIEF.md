@@ -318,3 +318,10 @@ Not verified: a real phone, a real form endpoint.
 - Les touches de défilement glissent aussi : flèches haut/bas, Espace
   (Maj+Espace pour remonter), Page suivante/précédente, Début et Fin. Dans
   le formulaire, les touches gardent leur rôle normal (taper une espace, etc.).
+
+## Étapes et « Dis-nous ce que tu veux » ensemble
+- Plus de bande blanche entre « Comment ça marche » et le formulaire : les deux
+  fonds se fondent l'un dans l'autre et se lisent comme une seule section.
+- L'étape 3 arrive plus tard dans le défilement épinglé (seuils 0 / 0,42 / 0,8)
+  : une fois lue, la section se libère et « Dis-nous ce que tu veux » monte
+  tout de suite juste en dessous.

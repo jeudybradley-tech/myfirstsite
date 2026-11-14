@@ -580,6 +580,11 @@
      drawn as a top border on each later section. */
   body { background: #dbc3a6; }
   main > section + section { border-top: clamp(1.25rem, 3vw, 2.75rem) solid #fff; }
+  /* The steps and the request read as one section: no white band between
+     them, and the request's title sits right under the pinned steps. */
+  main > #comment + #soumission { border-top: 0; padding-top: clamp(1.5rem, 2vw, 1.75rem); }
+  main > section#comment { background: linear-gradient(to bottom, transparent calc(100% - 60vh), #d3ba9c), radial-gradient(70% 80% at 22% 38%, #e3cfb5, #d3ba9c 72%); }
+  main > section#soumission { background: linear-gradient(to bottom, #d3ba9c, transparent 60vh), radial-gradient(70% 80% at 22% 38%, #e3cfb5, #d3ba9c 72%); }
   /* Bigger frames: the text under each service card is kept compact so the
      photos can grow and the buttons stay clear of the white band. */
   .card__name { margin-top: var(--sc-4); }
