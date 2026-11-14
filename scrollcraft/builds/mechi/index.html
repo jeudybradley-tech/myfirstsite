@@ -734,6 +734,7 @@
   .chosen__list small { font-size: var(--sc-t-sm); color: var(--on-porc-soft); }
   .chosen a { justify-self: start; }
   .chosen a { color: var(--gold-deep); font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }
+  .slots__title:empty { display: none; }
 </style>
 </head>
 <body>
@@ -1047,7 +1048,7 @@
               <p class="cal__legend"><i aria-hidden="true"></i>Jour fermé ou déjà passé</p>
             </div>
             <div class="slots">
-              <p class="slots__title" data-slots-title>Choisis d'abord un jour.</p>
+              <p class="slots__title" data-slots-title></p>
               <div class="slots__grid" data-slots role="radiogroup" aria-label="Choisir l'heure"></div>
               <p class="slots__pick" data-pick aria-live="polite"></p>
             </div>

@@ -542,7 +542,7 @@
 
   function renderSlots() {
     slotsEl.textContent = '';
-    if (!chosenDay) { slotsTitle.textContent = 'Choisis d\'abord un jour.'; return; }
+    if (!chosenDay) { slotsTitle.textContent = ''; return; }
     slotsTitle.innerHTML = '';
     slotsTitle.append('Heures du ');
     var em = document.createElement('em'); em.textContent = longDay(chosenDay); slotsTitle.appendChild(em);

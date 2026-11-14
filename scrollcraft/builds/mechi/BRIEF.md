@@ -291,3 +291,4 @@ Not verified: a real phone, a real form endpoint.
   - The pinned span was short (2.2 viewports), so a flick jumped from step 1 to 3.
   - Now the span is 3.2. The frame code moves the shown step only one at a time toward the scroll position, and keeps each step at least 900 ms (HOW_HOLD), so step 2 always shows, even after a jump to the end.
   - Tested with a one-shot jump from step 1 to 95 % of the act at 1440 and on an iPhone 13: Ta demande > Notre réponse > Ton dépôt. Normal scrolling still gives 1, 2, 3 at 10, 50 and 90 %.
+- "Enlève" ("Choisis d'abord un jour." above the time slots): the slots title is empty, and hidden, until a day is chosen; then it shows the day as before.
