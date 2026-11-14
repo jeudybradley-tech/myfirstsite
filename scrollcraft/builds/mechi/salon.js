@@ -117,7 +117,31 @@
     return el.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
   }
   addEventListener('scroll', function () { if (!sRaf) sCur = sTarget = scrollY; }, { passive: true });
-  ['keydown', 'mousedown', 'touchstart'].forEach(function (ev) { addEventListener(ev, sStop, { passive: true }); });
+  ['mousedown', 'touchstart'].forEach(function (ev) { addEventListener(ev, sStop, { passive: true }); });
+
+  // The scroll keys glide too: arrows, Space, Page up/down, Home and End.
+  addEventListener('keydown', function (e) {
+    if (reduce || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || document.querySelector('dialog[open]')) { sStop(); return; }
+    var t = e.target, tag = t && t.tagName;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT|BUTTON|SUMMARY|A|AUDIO|VIDEO)$/.test(tag) && (e.key === ' ' || tag !== 'A' && tag !== 'BUTTON'))) { sStop(); return; }
+    if (t && t.closest && t.closest('[role="slider"], [role="listbox"], [role="grid"], [role="tablist"], [role="radiogroup"]')) { sStop(); return; }
+    var page = innerHeight * 0.85, d = null;
+    switch (e.key) {
+      case 'ArrowDown': d = 140; break;
+      case 'ArrowUp': d = -140; break;
+      case 'PageDown': d = page; break;
+      case 'PageUp': d = -page; break;
+      case ' ': d = e.shiftKey ? -page : page; break;
+      case 'Home': e.preventDefault(); glideTo(0); return;
+      case 'End': e.preventDefault(); glideTo(maxY()); return;
+      default: sStop(); return;
+    }
+    e.preventDefault();
+    if (glide) { glide = null; sTarget = sCur; }
+    if (!sRaf) sCur = sTarget = scrollY;
+    sTarget = Math.max(0, Math.min(maxY(), sTarget + d));
+    if (!sRaf) sRaf = requestAnimationFrame(sTick);
+  });
 
   if (fineWheel && !reduce) {
     addEventListener('wheel', function (e) {

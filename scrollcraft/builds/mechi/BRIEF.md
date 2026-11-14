@@ -315,3 +315,6 @@ Not verified: a real phone, a real form endpoint.
 - Le défilement reste celui du navigateur : les sections épinglées (services,
   étapes) marchent comme avant. Au doigt, le téléphone garde son élan naturel ;
   « réduire les animations » garde des sauts simples.
+- Les touches de défilement glissent aussi : flèches haut/bas, Espace
+  (Maj+Espace pour remonter), Page suivante/précédente, Début et Fin. Dans
+  le formulaire, les touches gardent leur rôle normal (taper une espace, etc.).
