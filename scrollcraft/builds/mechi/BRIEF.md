@@ -263,3 +263,4 @@ Not verified: a real phone, a real form endpoint.
   - The compare frame's width came from the viewport height, so it was about 108 px wide in landscape. It now uses min(100%, 21rem): 336 px, as when the phone is upright. The reader scrolls past it as in portrait.
   - Service cards lie on their side in landscape: an 8rem photo (4:5) on the left; name, description, price and button on the right; card width 23rem. The price and button now sit inside the pinned stage: the lowest button is at least 5 px above the screen foot across the whole pan.
   - Checked on an iPhone 13 in landscape. Portrait is unchanged.
+- "pas si gros mais bien ajusté": in landscape the compare frame is now min(100%, 21rem, (100svh - bar - 1.5rem) * .75), so the whole frame fits between the bar and the screen foot: 173x231 on iPhone 13, 157x209 on iPhone SE, 187x249 on Pixel 7 (landscape).
