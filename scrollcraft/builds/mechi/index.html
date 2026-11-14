@@ -763,6 +763,16 @@
   .svcs__item:focus { outline: none; }
   .svcs__item:focus-visible { outline: 2px dashed var(--gold-deep); outline-offset: 3px; }
   .opts__h:focus { outline: none; }
+  /* The request form waits BEHIND the steps. Once step 3 has been read, the
+     steps lift away like a curtain and the form is already there under them. */
+  @media (prefers-reduced-motion: no-preference) {
+    main > section#comment { background: none; position: relative; z-index: 2; }
+    #comment .how__stage { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, #d3ba9c 72%);
+      transform: translate3d(0, calc(var(--lift, 0) * -100%), 0); will-change: transform;
+      box-shadow: 0 1.5rem 3rem -.5rem rgb(47 30 12 / .35); }
+    main > #comment + #soumission { position: relative; z-index: 1; margin-top: -100svh; border-top: 0;
+      padding-top: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)); scroll-margin-top: 0; }
+  }
 </style>
 </head>
 <body>
@@ -994,7 +1004,7 @@
   </section>
 
   <!-- 3 · HOW: flow. A real sequence, so the steps carry their numbers. -->
-  <section id="comment" class="how on-porc" data-sc-act="pin" data-sc-span="3.2" aria-labelledby="how-h">
+  <section id="comment" class="how on-porc" data-sc-act="pin" data-sc-span="3.8" aria-labelledby="how-h">
     <div class="how__stage" data-sc-stage>
       <div class="sc-wrap how__grid">
         <div class="how__head">

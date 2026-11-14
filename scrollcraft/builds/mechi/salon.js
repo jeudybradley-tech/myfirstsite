@@ -177,7 +177,7 @@
   var lastForm = null, lastTab = null;
   // How it works: the pinned act's scroll progress picks the step shown.
   var howEl = document.getElementById('comment'), howRoll = document.querySelector('[data-how-roll]'), lastHow = -1;
-  var howAt = 0, HOW_HOLD = 900;
+  var howAt = 0, HOW_HOLD = 900, lastLift = -1;
   var howSteps = Array.prototype.slice.call(document.querySelectorAll('[data-how-steps] > li'));
   var howDots = Array.prototype.slice.call(document.querySelectorAll('.how__dots i'));
   if (!howRoll || !howSteps.length) howEl = null;
@@ -192,7 +192,12 @@
     }
 
     if (howEl) {
-      var want = Math.max(0, Math.min(howSteps.length - 1, Math.floor(prog(howEl) * howSteps.length)));
+      // The three steps share the first three quarters; then the steps lift
+      // away and the request form behind them shows.
+      var hp = prog(howEl), want = Math.max(0, Math.min(howSteps.length - 1, Math.floor(hp / 0.75 * howSteps.length)));
+      var lift = reduce ? 0 : clamp01((hp - 0.8) / 0.2);
+      lift = lift * lift * (3 - 2 * lift);
+      if (lift !== lastLift) { howEl.style.setProperty('--lift', lift.toFixed(4)); lastLift = lift; }
       // Never skip a step: move one step at a time, and keep each step on
       // screen at least HOW_HOLD ms, even after a fast flick.
       var hk = lastHow < 0 ? want : lastHow;

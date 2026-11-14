@@ -322,3 +322,11 @@ Not verified: a real phone, a real form endpoint.
 ## Titre des étapes
 - Petit libellé « Comment ça marche » retiré de la section ; le titre devient
   « *Avant* les ciseaux. » (l'onglet du menu garde « Comment ça marche »).
+
+## Le formulaire attend derrière les étapes
+- « Dis-nous ce que tu veux » est placé DERRIÈRE « Avant les ciseaux » (marge
+  négative de 100svh, z-index plus bas, plus de bande blanche).
+- Les 3 étapes occupent les trois premiers quarts du défilement épinglé
+  (span 3,8) ; ensuite les étapes montent comme un rideau (--lift, 0,8 → 1)
+  et le formulaire apparaît dessous.
+- « Réduire les animations » : pas de rideau, la page reste comme avant.
