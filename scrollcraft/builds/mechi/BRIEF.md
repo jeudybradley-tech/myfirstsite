@@ -331,3 +331,8 @@ Not verified: a real phone, a real form endpoint.
   s'effacent (--fade), puis leur fond s'éclaircit (--clear) et le formulaire
   apparaît dessous, sans jamais deux textes l'un sur l'autre.
 - « Réduire les animations » : pas de fondu, la page reste comme avant.
+- Correctifs du fondu : le formulaire commence 56vh plus haut (--fade-run) pour
+  que son fond remplisse déjà l'écran pendant le fondu (plus de bande en haut) ;
+  « Demander une soumission » atterrit à la fin du fondu (scroll-margin
+  négatif) ; l'onglet du menu et la pastille suivent le titre et le formulaire
+  plutôt que le haut de la section.

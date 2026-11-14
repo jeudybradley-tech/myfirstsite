@@ -772,8 +772,15 @@
     #comment .how__stage { background: radial-gradient(70% 80% at 22% 38%, rgb(227 207 181 / calc(1 - var(--clear, 0))), rgb(211 186 156 / calc(1 - var(--clear, 0))) 72%); }
     #comment .how__grid { opacity: calc(1 - var(--fade, 0)); }
     #comment.is-lifted .how__stage { pointer-events: none; }
-    main > #comment + #soumission { position: relative; z-index: 1; margin-top: -100svh; border-top: 0;
-      padding-top: calc(var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem)); scroll-margin-top: 0; }
+    /* --fade-run is the scroll the fade takes: the last 20% of the pinned
+       travel, (3.8 - 1) x 0.2 = 56vh. The form starts that much higher, so its
+       background already fills the screen when the fade begins (no band at
+       the top), and its title still lands where it did. A link to the form
+       lands at the end of the fade, where the form is fully shown. */
+    main > #comment + #soumission { --fade-run: 56vh; position: relative; z-index: 1; border-top: 0;
+      margin-top: calc(-100svh - var(--fade-run));
+      padding-top: calc(var(--fade-run) + var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem));
+      scroll-margin-top: calc(-1 * var(--fade-run)); }
   }
 </style>
 </head>
