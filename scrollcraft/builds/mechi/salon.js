@@ -81,6 +81,74 @@
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
+  // ------------------------------------------------------ smooth scroll --
+  // The same feel as the immersive site: the page never jumps, it glides.
+  // A mouse wheel only moves a target and the page eases toward it (a lerp
+  // each frame). Menu links and "go to the steps" take a slow eased glide.
+  // The page keeps its native scroll, so the engine's pinned acts still work.
+  // Touch screens keep their own momentum; reduced motion keeps plain jumps.
+  var fineWheel = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var sTarget = scrollY, sCur = scrollY, sRaf = 0, glide = null, SMOOTH = 0.09;
+  function maxY() { return docEl.scrollHeight - innerHeight; }
+  function sTick(now) {
+    sRaf = 0;
+    if (glide) {
+      var t = Math.min(1, (now - glide.t0) / glide.d);
+      var e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      sCur = glide.from + (glide.to - glide.from) * e;
+      if (t >= 1) { glide = null; sTarget = sCur; }
+    } else {
+      sCur += (sTarget - sCur) * SMOOTH;
+      if (Math.abs(sTarget - sCur) < 0.5) sCur = sTarget;
+    }
+    scrollTo({ top: sCur, behavior: 'instant' });
+    if (glide || sCur !== sTarget) sRaf = requestAnimationFrame(sTick);
+  }
+  function sStop() { if (sRaf) cancelAnimationFrame(sRaf); sRaf = 0; glide = null; sCur = sTarget = scrollY; }
+  function glideTo(y) {
+    y = Math.max(0, Math.min(maxY(), y));
+    if (reduce) { scrollTo({ top: y, behavior: 'instant' }); return; }
+    sStop();
+    var dist = Math.abs(y - scrollY);
+    glide = { from: scrollY, to: y, t0: performance.now(), d: Math.min(1700, 700 + dist * 0.18) };
+    sRaf = requestAnimationFrame(sTick);
+  }
+  function topOf(el) {
+    return el.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
+  }
+  addEventListener('scroll', function () { if (!sRaf) sCur = sTarget = scrollY; }, { passive: true });
+  ['keydown', 'mousedown', 'touchstart'].forEach(function (ev) { addEventListener(ev, sStop, { passive: true }); });
+
+  if (fineWheel && !reduce) {
+    addEventListener('wheel', function (e) {
+      if (e.ctrlKey || e.defaultPrevented || document.querySelector('dialog[open]')) return;
+      // A box that scrolls on its own keeps the wheel.
+      for (var n = e.target; n && n.nodeType === 1 && n !== document.body; n = n.parentElement) {
+        if (n.scrollHeight > n.clientHeight + 1 && /auto|scroll/.test(getComputedStyle(n).overflowY)) return;
+      }
+      var dy = e.deltaY * (e.deltaMode === 1 ? 40 : e.deltaMode === 2 ? innerHeight : 1);
+      if (!dy || Math.abs(e.deltaX) > Math.abs(dy)) return;
+      e.preventDefault();
+      if (glide) { glide = null; sTarget = sCur; }
+      if (!sRaf) sCur = sTarget = scrollY;
+      sTarget = Math.max(0, Math.min(maxY(), sTarget + dy));
+      if (!sRaf) sRaf = requestAnimationFrame(sTick);
+    }, { passive: false });
+  }
+
+  // In-page links glide to their section instead of jumping.
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.closest('dialog')) return;
+    var id = a.getAttribute('href').slice(1);
+    var el = id ? document.getElementById(id) : null;
+    if (!el) return;
+    e.preventDefault();
+    glideTo(topOf(el));
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  });
+
   // ------------------------------------------------------------ per frame --
   var lastForm = null, lastTab = null;
   // How it works: the pinned act's scroll progress picks the step shown.
@@ -423,7 +491,7 @@
   var stayPut = false;   // true while the services are edited from the form
   function goSteps() {
     var steps = document.getElementById('comment'); if (!steps || stayPut) return;
-    setTimeout(function () { steps.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 750);
+    setTimeout(function () { glideTo(topOf(steps)); }, reduce ? 0 : 750);
   }
   function remove(id) {
     var i = picks.indexOf(id); if (i < 0) return;

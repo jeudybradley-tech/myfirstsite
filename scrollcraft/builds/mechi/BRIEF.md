@@ -306,3 +306,12 @@ Not verified: a real phone, a real form endpoint.
   - The rail's pan overshoot is set to 0 in the markup (data-sc-pan="0", was 0.04). That overshoot is what carried the last item past centre; the engine itself is untouched.
   - On phones the rail gets --cw (the card width) and padding-right: max(gutter, (100vw - --cw) / 2), so the travel ends with the last card (Botox capillaire) centred.
   - Measured left/right gaps at the end: iPhone 14 Pro Max 75/78, iPhone 13 89/90, iPhone SE 64/64, Pixel 7 45/48. Desktop still ends on the "Pas sûre…" block at the gutter.
+
+## Défilement doux (comme le site immersif)
+- À la molette, la page ne saute plus : elle glisse vers sa cible avec un léger
+  amorti (lerp 0,09 par image), comme le site immersif.
+- Les liens du menu et le passage automatique vers « Comment ça marche » font
+  un long glissé adouci (1 à 1,7 s selon la distance).
+- Le défilement reste celui du navigateur : les sections épinglées (services,
+  étapes) marchent comme avant. Au doigt, le téléphone garde son élan naturel ;
+  « réduire les animations » garde des sauts simples.
