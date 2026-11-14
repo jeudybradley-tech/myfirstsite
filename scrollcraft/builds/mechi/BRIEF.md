@@ -275,3 +275,7 @@ Not verified: a real phone, a real form endpoint.
   - Checked at 1440; no console errors.
 - "Plus sharp": the frame line is now a solid 2 px near-black brown (rgb 38 22 6 / .92), with no cream inner line, and the contact shadow gains a crisp 1 px dark edge under a 3-4 px shadow.
 - "je veux que les contours soient comme ça" (a screenshot of the first, softer edge): back to the 1.5 px brown line at .55 with the faint cream inner line and the 2-3 px contact shadow.
+- "je veux qu'il soit centré quand on scrolle vers le bas sur téléphone" (the rail's closing "Pas sûre de ce qu'il te faut ?" block, which ended off to the left).
+  - Centring it inside the pan proved unreliable. The engine's travel is scrollWidth - vw plus a 4 % overshoot, and any visual shift of the block widens scrollWidth, so a measured correction diverges. That attempt is removed.
+  - On phones (portrait and landscape) .rail__end is now hidden, and a phone-only <section class="unsure"> right after #services shows the same title and CTA, centred, in its own beige band between white bands. It is hidden on desktop.
+  - Checked: centred on iPhone 13, iPhone SE, Pixel 7 and iPhone 13 landscape (equal left/right gaps); hidden at 1440; no overflow or errors.
