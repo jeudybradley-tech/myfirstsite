@@ -241,6 +241,50 @@
     });
   });
 
+  // ------------------------------------- services window from the form --
+  // "Modifier" in the form opens a window with every service, so the visitor
+  // changes her choice without leaving the form. Services with options open
+  // their options window on top. The page does not move.
+  var svcsDlg = document.querySelector('[data-svcs]'), svcsList = svcsDlg && svcsDlg.querySelector('[data-svcs-list]');
+  function renderSvcs() {
+    if (!svcsList) return;
+    svcsList.textContent = '';
+    Object.keys(SERVICES).forEach(function (id) {
+      var on = picks.indexOf(id) > -1, li = document.createElement('li'), bt = document.createElement('button');
+      bt.type = 'button'; bt.className = 'svcs__item'; bt.setAttribute('data-id', id); bt.setAttribute('aria-pressed', String(on));
+      var im = document.createElement('img'); im.src = SERVICES[id].img; im.alt = '';
+      var tx = document.createElement('span'), b = document.createElement('b'), sm = document.createElement('small');
+      b.textContent = SERVICES[id].name;
+      sm.textContent = on ? (OPTIONS[id] && optNames(id).length ? optNames(id).join(', ') : 'Choisi') : (OPTIONS[id] ? 'Voir les options' : 'Ajouter');
+      tx.appendChild(b); tx.appendChild(sm); bt.appendChild(im); bt.appendChild(tx); li.appendChild(bt); svcsList.appendChild(li);
+    });
+  }
+  if (svcsDlg) {
+    svcsList.addEventListener('click', function (e) {
+      var bt = e.target.closest('.svcs__item'); if (!bt) return;
+      var id = bt.getAttribute('data-id');
+      if (OPTIONS[id]) { openOpts(id, null, bt); return; }
+      if (picks.indexOf(id) > -1) remove(id); else add(id, null);
+    });
+    function closeSvcs() { if (typeof svcsDlg.close === 'function') svcsDlg.close(); else svcsDlg.removeAttribute('open'); }
+    svcsDlg.querySelectorAll('[data-svcs-done], [data-svcs-close]').forEach(function (b) { b.addEventListener('click', closeSvcs); });
+    svcsDlg.addEventListener('click', function (e) { if (e.target === svcsDlg) closeSvcs(); });
+    // Keep the summary exactly where it was: the browser's scroll anchoring
+    // would otherwise shift the page as the summary grows or shrinks.
+    var svcsY = 0;
+    svcsDlg.addEventListener('close', function () {
+      stayPut = false; scrollTo(0, svcsY);
+      var l = document.querySelector('[data-chosen] a'); if (l) l.focus({ preventScroll: true });
+    });
+    var chosenLine = document.querySelector('[data-chosen]');
+    if (chosenLine) chosenLine.addEventListener('click', function (e) {
+      if (!e.target.closest('a')) return;
+      e.preventDefault();
+      stayPut = true; svcsY = scrollY; renderSvcs();
+      if (typeof svcsDlg.showModal === 'function') svcsDlg.showModal(); else svcsDlg.setAttribute('open', '');
+    });
+  }
+
   // ------------------------------------------- products: rising cascade --
   // Each product rises and fades in when it reaches the screen; the ones on
   // the same row follow each other by a short delay. Nothing moves under
@@ -333,6 +377,7 @@
       } else line.append('Aucun service choisi. ');
       var a = document.createElement('a'); a.href = '#services'; a.textContent = picks.length ? 'Modifier' : 'Choisir un service'; line.appendChild(a);
     }
+    if (typeof renderSvcs === 'function') renderSvcs();
     document.querySelectorAll('[data-opts-chosen]').forEach(function (n) {
       var id = n.getAttribute('data-opts-chosen');
       n.textContent = picks.indexOf(id) > -1 ? optNames(id).join(', ') : '';
@@ -373,8 +418,9 @@
     goSteps();
   }
   // Once a service is chosen, take the visitor on to the steps.
+  var stayPut = false;   // true while the services are edited from the form
   function goSteps() {
-    var steps = document.getElementById('comment'); if (!steps) return;
+    var steps = document.getElementById('comment'); if (!steps || stayPut) return;
     setTimeout(function () { steps.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); }, reduce ? 0 : 750);
   }
   function remove(id) {

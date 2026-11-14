@@ -293,3 +293,8 @@ Not verified: a real phone, a real form endpoint.
   - Tested with a one-shot jump from step 1 to 95 % of the act at 1440 and on an iPhone 13: Ta demande > Notre réponse > Ton dépôt. Normal scrolling still gives 1, 2, 3 at 10, 50 and 90 %.
 - "Enlève" ("Choisis d'abord un jour." above the time slots): the slots title is empty, and hidden, until a day is chosen; then it shows the day as before.
 - "je veux que les phrases des étapes soient plus visibles": step sentences are now clamp(1.2rem, 1rem + .8vw, 1.6rem), weight 500, full ink colour (--on-porc), line-height 1.45, max 30ch (1.05rem in landscape phones). Checked at 1440 and 390.
+- "quand le client modifie le service, je ne veux pas que ça le mène en haut" (asked: owner chose "Fenêtre sur place").
+  - The form's "Modifier" / "Choisir un service" link now opens a services window (<dialog class="opts svcs">) instead of jumping to #services. It lists all six services as photo + name + state (Choisi, the chosen option, Voir les options, Ajouter); a tap adds or removes, and Teinture and Permanente open their options window on top.
+  - While it is open, stayPut stops goSteps() from scrolling to the steps.
+  - On close, the scroll position from before opening is restored, so scroll anchoring does not shift the page as the summary grows. Focus returns to the link.
+  - Tested at 1440 and on an iPhone 13: add Silk press, add Teinture > Balayage, Terminé; scrollY identical before and after; the summary reads Silk press + Teinture (Balayage); no errors. Choosing from the services row still goes to the steps.
