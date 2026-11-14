@@ -273,3 +273,4 @@ Not verified: a real phone, a real form endpoint.
   - Every rounded photo frame gets an ::after overlay (inherit radius) with a 1.5 px dark-brown inner line (rgb 47 30 12 / .55) and a faint cream line inside it. This covers service cards, product cards, form photos, the owner photo, the before/after frame, the option photo and the welcome card.
   - A tight 2-3 px contact drop-shadow under the frames makes their edges read clearly on the beige; the soft wide shadows stay.
   - Checked at 1440; no console errors.
+- "Plus sharp": the frame line is now a solid 2 px near-black brown (rgb 38 22 6 / .92), with no cream inner line, and the contact shadow gains a crisp 1 px dark edge under a 3-4 px shadow.
