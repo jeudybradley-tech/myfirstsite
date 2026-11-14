@@ -232,3 +232,8 @@ Not verified: a real phone, a real form endpoint.
   - salon.js reads the act's --sc-p each frame and shows step floor(p * 3): it sets --k and toggles .is-on. Hidden steps are visibility:hidden.
   - On phones the number sits under the title. No motion under reduced motion; the steps still change.
   - Tested at 1440 and 390 at 10, 50 and 90 % of the act: steps 1, 2, 3 in order, the stage stuck at the top, no console warnings or errors. The Interac address still shows in step 3.
+- "dans les étapes je veux que ce soit le client qui les fasse défiler lui-même, pas automatiquement".
+  - #comment is back to a plain flow act (no pin, no scroll-driven step).
+  - Under the step: a ← button, three dots and a → button. A swipe on the steps (40 px) or the arrow keys inside them also changes the step. The big number still rolls to the step shown.
+  - The buttons disable at the ends, and each change is announced to screen readers.
+  - Tested at 1440 and on an iPhone 13: scrolling leaves the step alone; →, → reach step 3 (→ then disabled); ← goes back; no console errors.

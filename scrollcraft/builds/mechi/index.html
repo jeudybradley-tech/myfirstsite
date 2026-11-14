@@ -630,7 +630,18 @@
      reader scrolls; a big pale number rolls from 01 to 03 and each step
      takes its turn, the others hidden. */
   .how { padding-block: 0; }
-  .how__stage { height: 100svh; display: grid; align-items: center; padding: var(--bar-h) 0 clamp(1rem, 4svh, 3rem); }
+  .how__stage { display: grid; align-items: center; padding: clamp(4rem, 9vw, 7rem) 0; }
+  .how__nav { display: flex; align-items: center; gap: var(--sc-4); margin-top: clamp(1.5rem, 4svh, 2.5rem); }
+  .how__btn { width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; cursor: pointer; font: 400 1.25rem/1 var(--sc-font-text);
+    color: var(--on-porc); background: rgb(255 250 242 / .55); border: 1px solid color-mix(in oklab, var(--on-porc) 30%, transparent);
+    transition: background-color 160ms var(--sc-ease-out), opacity 160ms var(--sc-ease-out); }
+  .how__btn:disabled { opacity: .3; cursor: default; }
+  @media (hover: hover) and (pointer: fine) { .how__btn:not(:disabled):hover { background: var(--gold-deep); color: #fbf6ec; border-color: var(--gold-deep); } }
+  .how__btn:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
+  .how__dots { display: flex; gap: .5rem; }
+  .how__dots i { width: .55rem; height: .55rem; border-radius: 50%; background: color-mix(in oklab, var(--on-porc) 25%, transparent); transition: background-color 200ms, transform 200ms; }
+  .how__dots i.is-on { background: var(--gold-deep); transform: scale(1.25); }
+  .how .steps { touch-action: pan-y; }
   .how__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
   .how__head { margin: 0; }
   .how__steps { position: relative; }
@@ -887,8 +898,8 @@
   </section>
 
   <!-- 3 · HOW: flow. A real sequence, so the steps carry their numbers. -->
-  <section id="comment" class="how on-porc" data-sc-act="pin" data-sc-span="2.6" aria-labelledby="how-h">
-    <div class="how__stage" data-sc-stage>
+  <section id="comment" class="how on-porc" data-sc-act="flow" aria-labelledby="how-h">
+    <div class="how__stage">
       <div class="sc-wrap how__grid">
         <div class="how__head">
           <p class="label">Comment ça marche</p>
@@ -901,6 +912,11 @@
             <li><p class="how__tag">Étape — 02</p><h3>Notre réponse</h3><p>On te répond avec le service conseillé, la durée et le prix, et on confirme l'heure.</p></li>
             <li><p class="how__tag">Étape — 03</p><h3>Ton dépôt</h3><p>Tu envoies 20&nbsp;$ par virement Interac<span data-interac-how></span>. Ta place est gardée et les 20&nbsp;$ sont déduits de ta facture.</p></li>
           </ol>
+          <div class="how__nav">
+            <button type="button" class="how__btn" data-how-prev aria-label="Étape précédente" disabled>←</button>
+            <span class="how__dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i></span>
+            <button type="button" class="how__btn" data-how-next aria-label="Étape suivante">→</button>
+          </div>
         </div>
       </div>
     </div>

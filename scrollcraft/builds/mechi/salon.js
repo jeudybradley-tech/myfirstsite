@@ -83,9 +83,6 @@
 
   // ------------------------------------------------------------ per frame --
   var lastForm = null, lastTab = null;
-  var howEl = document.getElementById('comment'), howRoll = document.querySelector('[data-how-roll]'), lastHow = -1;
-  var howSteps = Array.prototype.slice.call(document.querySelectorAll('[data-how-steps] > li'));
-  if (!howRoll || !howSteps.length) howEl = null;
   function frame() {
     // Services rail: each card settles as it comes in from the right edge.
     var sr = svc.getBoundingClientRect();
@@ -93,16 +90,6 @@
       for (var i = 0; i < railItems.length; i++) {
         var r = railItems[i].getBoundingClientRect();
         railItems[i].style.setProperty('--k', clamp01((innerWidth - r.left) / (r.width * 0.85)).toFixed(3));
-      }
-    }
-
-    // How it works: the pinned act's progress picks the step on show.
-    if (howEl) {
-      var hk = Math.max(0, Math.min(2, Math.floor(prog(howEl) * 3)));
-      if (hk !== lastHow) {
-        howRoll.style.setProperty('--k', hk);
-        howSteps.forEach(function (li, j) { li.classList.toggle('is-on', j === hk); });
-        lastHow = hk;
       }
     }
 
@@ -232,6 +219,39 @@
       showView(baTabs[(i + (e.key === 'ArrowRight' ? 1 : baTabs.length - 1)) % baTabs.length], true);
     });
   });
+
+  // ---------------------------------------------- how it works: steps --
+  // The reader moves through the steps herself: arrows, dots, a swipe or
+  // the arrow keys. The big number rolls to the step shown.
+  (function () {
+    var roll = document.querySelector('[data-how-roll]');
+    var steps = Array.prototype.slice.call(document.querySelectorAll('[data-how-steps] > li'));
+    var prev = document.querySelector('[data-how-prev]'), next = document.querySelector('[data-how-next]');
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.how__dots i'));
+    if (!roll || !steps.length || !prev || !next) return;
+    var k = 0;
+    function show(i) {
+      k = Math.max(0, Math.min(steps.length - 1, i));
+      roll.style.setProperty('--k', k);
+      steps.forEach(function (li, j) { li.classList.toggle('is-on', j === k); });
+      dots.forEach(function (d, j) { d.classList.toggle('is-on', j === k); });
+      prev.disabled = k === 0; next.disabled = k === steps.length - 1;
+      announce.textContent = 'Étape ' + (k + 1) + ' sur ' + steps.length + ' : ' + steps[k].querySelector('h3').textContent + '.';
+    }
+    prev.addEventListener('click', function () { show(k - 1); });
+    next.addEventListener('click', function () { show(k + 1); });
+    var box = document.querySelector('.how__steps');
+    box.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(k + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(k - 1); }
+    });
+    var x0 = null;
+    box.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    box.addEventListener('touchend', function (e) {
+      if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 40) show(k + (dx < 0 ? 1 : -1));
+    });
+  })();
 
   // ------------------------------------------------- choosing services --
   var picks = [];
