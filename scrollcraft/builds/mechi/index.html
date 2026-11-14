@@ -766,7 +766,10 @@
   /* The request form waits BEHIND the steps. Once step 3 has been read, the
      steps fade softly away and the form is already there under them. */
   @media (prefers-reduced-motion: no-preference) {
-    main > section#comment { background: none; position: relative; z-index: 2; }
+    /* The section box overlaps the form, so it lets clicks through; only the
+       steps themselves catch them, and not once they have faded away. */
+    main > section#comment { background: none; position: relative; z-index: 2; pointer-events: none; }
+    #comment .how__stage { pointer-events: auto; }
     /* Two beats, so the two texts never sit on top of each other: first the
        steps fade out on their own background, then that background clears. */
     #comment .how__stage { background: radial-gradient(70% 80% at 22% 38%, rgb(227 207 181 / calc(1 - var(--clear, 0))), rgb(211 186 156 / calc(1 - var(--clear, 0))) 72%); }

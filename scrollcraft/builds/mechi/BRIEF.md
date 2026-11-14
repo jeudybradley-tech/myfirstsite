@@ -336,3 +336,7 @@ Not verified: a real phone, a real form endpoint.
   « Demander une soumission » atterrit à la fin du fondu (scroll-margin
   négatif) ; l'onglet du menu et la pastille suivent le titre et le formulaire
   plutôt que le haut de la section.
+- Correctif : la boîte de la section des étapes recouvrait le haut du
+  formulaire et bloquait les clics (impossible d'écrire dans « Tes cheveux »).
+  La section laisse maintenant passer les clics (pointer-events: none) ; seules
+  les étapes visibles les attrapent.
