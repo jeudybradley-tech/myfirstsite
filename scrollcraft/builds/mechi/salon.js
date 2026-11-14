@@ -127,7 +127,7 @@
   // Plays on a loop, muted, only while it is on screen; never under reduced
   // motion, where its poster stays.
   var loops = Array.prototype.slice.call(document.querySelectorAll('video.loop'));
-  var phoneMq = matchMedia('(max-width: 760px)');
+  var phoneMq = matchMedia('(max-width: 760px), (max-height: 500px) and (orientation: landscape)');
   if (!reduce && 'IntersectionObserver' in window) {
     var lio = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {

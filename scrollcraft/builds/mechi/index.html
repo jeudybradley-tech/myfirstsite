@@ -204,7 +204,7 @@
   .prod__name em { color: var(--gold-deep); }
   .prod__desc { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-sm); font-weight: 500; line-height: 1.5; color: var(--on-porc); max-width: 28ch; }
   .prod__foot { display: block; margin-top: var(--sc-3); font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep); }
-  @media (max-width: 760px) {
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
     .prods { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sc-6) var(--sc-4); }
     .prod__img { border-radius: 1.25rem; }
     .prod__desc { font-size: var(--sc-t-xs); }
@@ -240,7 +240,7 @@
   .opts__ph figcaption { position: absolute; left: .85rem; bottom: .85rem; max-width: calc(100% - 1.7rem); padding: .55em .95em; border-radius: var(--sc-r-pill);
     background: rgb(245 237 225 / .92); color: var(--on-porc); font-size: var(--sc-t-xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
   @keyframes opts-in { from { opacity: 0; transform: scale(1.03); } }
-  @media (max-width: 760px) {
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
     .opts__box:has(.opts__list input:checked) { grid-template-columns: 1fr; }
     .opts__ph { position: relative; order: -1; aspect-ratio: 4 / 3; }
   }
@@ -434,7 +434,7 @@
   .foot__info span:first-child, .foot__info span:nth-child(2) { color: var(--on-porc); font-weight: 500; }
   .foot__tel { color: var(--gold-deep); font-weight: 600; text-decoration: underline; text-underline-offset: .25em; text-decoration-thickness: 1px; }
   .foot__tel:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 2px; }
-  @media (max-width: 760px) { .foot__info { text-align: left; } }
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) { .foot__info { text-align: left; } }
   .foot b { font-family: var(--sc-font-display); font-weight: 500; font-size: var(--sc-t-lg); color: var(--on-porc); }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
@@ -503,7 +503,7 @@
   @media (prefers-reduced-motion: reduce) { .slip.is-bump { animation: none; } }
 
   /* ------------------------------------------------------------- phone -- */
-  @media (max-width: 760px) {
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
     .hero { grid-template-columns: 1fr; align-content: start; gap: var(--sc-7); padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px) + 2rem); }
     .hero { align-content: end; }
     .hero__bg img { object-position: 82% 30%; }
@@ -559,7 +559,7 @@
   /* The salon's logo, large on the empty left side of the photo. */
   .hero__logo { position: relative; justify-self: start; width: clamp(15rem, 30vw, 30rem); height: auto; margin-left: clamp(0rem, 3vw, 3rem);
     filter: drop-shadow(0 18px 40px rgb(0 0 0 / .5)); }
-  @media (max-width: 760px) { .hero { align-content: end; } .hero__logo { justify-self: center; width: min(72vw, 18rem); margin: 0 0 12svh; } }
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) { .hero { align-content: end; } .hero__logo { justify-self: center; width: min(72vw, 18rem); margin: 0 0 12svh; } }
   .hero::before { background: none; }
   .rail-stage { background: radial-gradient(70% 80% at 22% 38%, #e3cfb5, var(--slate) 72%); }
   .curls { background: radial-gradient(55% 60% at 50% 72%, #e3cfb5, var(--slate) 70%); }
@@ -606,7 +606,7 @@
   .hero { margin: calc(var(--bar-h) + .25rem) clamp(1rem, 5vw, 5rem) 0; min-height: calc(75svh - var(--bar-h));
     padding: clamp(1.5rem, 4svh, 3rem) clamp(1.5rem, 4vw, 3.5rem); }
   #services { margin-top: clamp(1rem, 3vw, 2.5rem); }
-  @media (max-width: 760px) {
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
     .hero { margin: calc(var(--bar-h) + .25rem) .75rem 0; min-height: calc(75svh - var(--bar-h)); padding: 1.5rem 1rem; }
     .hero__logo { margin-bottom: 2rem; }
   }
@@ -615,7 +615,7 @@
   .hero { width: min(calc(100% - 2 * clamp(1rem, 5vw, 5rem)), 60rem); margin-inline: auto; min-height: 0; aspect-ratio: 626 / 351; }
   .hero__bg { inset: 0; }
   .hero__logo { width: clamp(12rem, 24vw, 22rem); }
-  @media (max-width: 760px) {
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
     .hero { width: calc(100% - 1.5rem); aspect-ratio: auto; min-height: 52svh; }
     .hero__logo { width: min(64vw, 15rem); margin-bottom: 1.25rem; }
   }
@@ -656,7 +656,7 @@
   .how__tag { margin: 0; font-size: var(--sc-t-xs); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--on-porc-soft); }
   .how .steps h3 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
   .how .steps p:not(.how__tag) { font-size: var(--sc-t-lg); max-width: 36ch; }
-  @media (max-width: 760px) {
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
     .how__grid { grid-template-columns: 1fr; gap: var(--sc-5); align-content: center; }
     .how__num { font-size: 38vw; margin-bottom: var(--sc-3); }
     .how .steps p:not(.how__tag) { font-size: var(--sc-t-base); }
@@ -666,7 +666,7 @@
   .ba__head .ba__tabs, .ba__head .cta { justify-self: center; }
   /* On a phone the request button sits under the before/after frame. */
   .ba__cta-m { display: none; }
-  @media (max-width: 760px) {
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
     .ba__head .cta { display: none; }
     .ba__cta-m { display: inline-flex; justify-self: center; margin-top: calc(-1 * var(--sc-4)); }
   }
@@ -678,6 +678,20 @@
     box-shadow: 0 0 0 2px rgb(255 240 210 / .9), 0 0 46px 10px rgb(255 214 140 / .6), 0 44px 64px -26px rgb(57 36 13 / .6); }
   .prod.is-lit .prod__img img { filter: brightness(1.12) saturate(1.08); }
   @media (prefers-reduced-motion: reduce) { .prod.is-lit .prod__img { transform: none; } }
+  /* A phone turned sideways keeps the phone layout (the phone rules above
+     also apply here), in a column about as wide as the phone held upright,
+     so nothing stretches across the wide screen. */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .sc-wrap { max-width: 34rem; }
+    .hero { width: min(calc(100% - 1.5rem), 27rem); aspect-ratio: 626 / 351; min-height: 0; }
+    .curls__copy h2 { font-size: 2.6rem; }
+    .how__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sc-5); max-width: 44rem; }
+    .how__head h2 { font-size: 1.9rem; }
+    .how__num { font-size: 5.5rem; margin-bottom: var(--sc-2); }
+    .how .steps h3 { font-size: 1.4rem; }
+    .owner__ph { max-width: 20rem; justify-self: center; }
+    .phone { width: min(30vw, 12rem); }
+  }
 </style>
 </head>
 <body>
