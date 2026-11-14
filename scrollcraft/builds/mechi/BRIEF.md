@@ -269,3 +269,7 @@ Not verified: a real phone, a real form endpoint.
   - The titles' observer no longer unobserves. A title sharpens at 35 % visible.
   - When a title leaves through the bottom edge (the reader scrolled back up past it), it blurs again, so the effect replays on the next way down. When it leaves through the top (scrolled down past), it stays sharp, so scrolling up shows sharp titles.
   - Tested: sharp going down, stays sharp after passing and on the way back up onto it, resets once above it, sharp again going down.
+- "je veux que le contraste des contours des cadres soit plus net".
+  - Every rounded photo frame gets an ::after overlay (inherit radius) with a 1.5 px dark-brown inner line (rgb 47 30 12 / .55) and a faint cream line inside it. This covers service cards, product cards, form photos, the owner photo, the before/after frame, the option photo and the welcome card.
+  - A tight 2-3 px contact drop-shadow under the frames makes their edges read clearly on the beige; the soft wide shadows stay.
+  - Checked at 1440; no console errors.
