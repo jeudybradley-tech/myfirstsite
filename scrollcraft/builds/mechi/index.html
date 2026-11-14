@@ -670,6 +670,9 @@
     .ba__head .cta { display: none; }
     .ba__cta-m { display: inline-flex; justify-self: center; margin-top: calc(-1 * var(--sc-4)); }
   }
+  /* Products rise into place one after another as the reader reaches them. */
+  .prods.is-cascade .prod { opacity: 0; transform: translateY(2.5rem); transition: opacity 700ms var(--sc-ease-out) var(--d, 0ms), transform 700ms var(--sc-ease-out) var(--d, 0ms); }
+  .prods.is-cascade .prod.is-in { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
@@ -812,7 +815,7 @@
       <h2 id="shop-h" class="disp">Tes soins, <em>à la maison</em>.</h2>
       <a class="cta" href="tel:+14383772535">Appeler le salon</a>
     </div>
-    <div class="sc-wrap shop__more" data-sc-in data-sc-stagger="70">
+    <div class="sc-wrap shop__more">
       <ul class="prods">
         <li class="prod">
           <span class="prod__img"><img src="assets/prod-coffret.webp" width="600" height="750" loading="lazy" alt="Le coffret Styliste Moroccanoil sur le comptoir du salon : un grand sac noir et des produits turquoise."></span>

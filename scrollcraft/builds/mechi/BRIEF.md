@@ -251,3 +251,4 @@ Not verified: a real phone, a real form endpoint.
   - How it works: one short line per step.
   - Deposit: four bullets become two; the checkbox reads "J'accepte la règle du dépôt." The done panel is shorter. The deposit line in the footer goes (already in the form).
   - Kept: prices, address, phone, hours, the Interac address, the photo hint, and the calendar legend.
+- Products cascade (asked: models offered, owner chose "Montée en cascade" with "Montée et fondu"). salon.js puts .is-cascade on .prods and observes each .prod (threshold .2, bottom margin -8 %). Products entering together get staggered delays (140 ms apart, top-to-bottom then left-to-right), then rise 2.5rem and fade in over 700 ms. No effect under reduced motion or without the script. The old data-sc-in on the wrapper is removed so the two don't fight. Tested at 1440 and on an iPhone 13: hidden before, the first row in first, all six visible at the end; no errors.

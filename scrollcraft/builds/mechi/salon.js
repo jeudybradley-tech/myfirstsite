@@ -235,6 +235,27 @@
     });
   });
 
+  // ------------------------------------------- products: rising cascade --
+  // Each product rises and fades in when it reaches the screen; the ones on
+  // the same row follow each other by a short delay. Nothing moves under
+  // reduced motion, and without this script the products simply show.
+  (function () {
+    var list = document.querySelector('.prods');
+    if (!list || reduce || !('IntersectionObserver' in window)) return;
+    var items = Array.prototype.slice.call(list.children);
+    list.classList.add('is-cascade');
+    var io = new IntersectionObserver(function (entries) {
+      var row = entries.filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left; });
+      row.forEach(function (e, i) {
+        e.target.style.setProperty('--d', (i * 140) + 'ms');
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (it) { io.observe(it); });
+  })();
+
   // ------------------------------------------------- choosing services --
   var picks = [];
   var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="services"]'));
