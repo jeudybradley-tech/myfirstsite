@@ -279,3 +279,4 @@ Not verified: a real phone, a real form endpoint.
   - Centring it inside the pan proved unreliable. The engine's travel is scrollWidth - vw plus a 4 % overshoot, and any visual shift of the block widens scrollWidth, so a measured correction diverges. That attempt is removed.
   - On phones (portrait and landscape) .rail__end is now hidden, and a phone-only <section class="unsure"> right after #services shows the same title and CTA, centred, in its own beige band between white bands. It is hidden on desktop.
   - Checked: centred on iPhone 13, iPhone SE, Pixel 7 and iPhone 13 landscape (equal left/right gaps); hidden at 1440; no overflow or errors.
+- "Enlève cette section" (the phone-only "Pas sûre…" band): removed. On phones the services row now ends on Botox capillaire with no closing block; desktop keeps .rail__end at the end of the rail.

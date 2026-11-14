@@ -718,15 +718,9 @@
     box-shadow: inset 0 0 0 1.5px rgb(47 30 12 / .55), inset 0 0 0 2.5px rgb(255 248 236 / .35); }
   .hero::after { z-index: 1; }
   .card__img, .prod__img, .pick__ph, .owner__ph, .compare { filter: drop-shadow(0 2px 3px rgb(47 30 12 / .35)); }
-  /* Phones: the closing "Pas sûre…" block leaves the sliding row and gets
-     its own short band right after the services, centred. */
-  .unsure { display: none; }
-  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
-    .rail__end { display: none; }
-    .unsure { display: grid; justify-items: center; gap: var(--sc-5); text-align: center; padding: clamp(3rem, 12vw, 4.5rem) var(--sc-gutter); }
-    .unsure h3 { margin: 0; font-family: var(--sc-font-display); font-weight: 200; text-transform: uppercase; font-size: clamp(1.6rem, 7.5vw, 2.2rem); line-height: 1.05; color: var(--on-slate); text-wrap: balance; }
-    .unsure h3 em { font-family: var(--font-italic); font-style: italic; font-weight: 400; color: var(--gold); }
-  }
+  /* Phones: the services row ends on the last service, without the
+     closing "Pas sûre…" block. */
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) { .rail__end { display: none; } }
 </style>
 </head>
 <body>
@@ -816,12 +810,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Phones only: the services' closing call, centred in its own band. -->
-  <section class="unsure" aria-label="Besoin d'aide pour choisir">
-    <h3>Pas sûre de ce <em>qu'il te faut ?</em></h3>
-    <a class="cta" href="#soumission">Demander une soumission</a>
   </section>
 
   <!-- 2b · BEFORE / AFTER: flow. One frame per transformation, the before on
