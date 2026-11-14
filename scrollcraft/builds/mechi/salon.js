@@ -85,6 +85,7 @@
   var lastForm = null, lastTab = null;
   // How it works: the pinned act's scroll progress picks the step shown.
   var howEl = document.getElementById('comment'), howRoll = document.querySelector('[data-how-roll]'), lastHow = -1;
+  var howAt = 0, HOW_HOLD = 900;
   var howSteps = Array.prototype.slice.call(document.querySelectorAll('[data-how-steps] > li'));
   var howDots = Array.prototype.slice.call(document.querySelectorAll('.how__dots i'));
   if (!howRoll || !howSteps.length) howEl = null;
@@ -99,8 +100,13 @@
     }
 
     if (howEl) {
-      var hk = Math.max(0, Math.min(howSteps.length - 1, Math.floor(prog(howEl) * howSteps.length)));
+      var want = Math.max(0, Math.min(howSteps.length - 1, Math.floor(prog(howEl) * howSteps.length)));
+      // Never skip a step: move one step at a time, and keep each step on
+      // screen at least HOW_HOLD ms, even after a fast flick.
+      var hk = lastHow < 0 ? want : lastHow;
+      if (want !== lastHow && lastHow >= 0 && performance.now() - howAt >= HOW_HOLD) hk = lastHow + (want > lastHow ? 1 : -1);
       if (hk !== lastHow) {
+        howAt = performance.now();
         howRoll.style.setProperty('--k', hk);
         howSteps.forEach(function (li, j) { li.classList.toggle('is-on', j === hk); });
         howDots.forEach(function (d, j) { d.classList.toggle('is-on', j === hk); });

@@ -287,3 +287,7 @@ Not verified: a real phone, a real form endpoint.
   - Tested at 1440 and on an iPhone 13: a click on Silk press lands on the steps (the section top about 100 px from the viewport top); the form line reads "Tes services : Silk press."; the email still carries "Services=Silk press"; no errors.
 - "je veux que la photo apparaisse dans le cadre" (the form's "Tes services" box): it now lists each chosen service as a rounded 4.5x5.6rem photo with a fine edge, the name in caps, and the chosen option under it. The photo is the option's own when it has one (e.g. Permanente bouclée), else the service's. "Modifier" follows. Tested on an iPhone 13 with Permanente bouclée + Kératine; no errors.
 - "Enlève « Demande de soumission »": the small label above "Dis-nous ce que tu veux." is removed.
+- Bug: "quand je scrolle du 1 vers le 3, il ne me laisse pas lire le 2, ça va directement au 3".
+  - The pinned span was short (2.2 viewports), so a flick jumped from step 1 to 3.
+  - Now the span is 3.2. The frame code moves the shown step only one at a time toward the scroll position, and keeps each step at least 900 ms (HOW_HOLD), so step 2 always shows, even after a jump to the end.
+  - Tested with a one-shot jump from step 1 to 95 % of the act at 1440 and on an iPhone 13: Ta demande > Notre réponse > Ton dépôt. Normal scrolling still gives 1, 2, 3 at 10, 50 and 90 %.
