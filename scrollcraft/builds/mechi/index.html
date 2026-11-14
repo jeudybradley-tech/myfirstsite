@@ -735,6 +735,10 @@
   .chosen a { justify-self: start; }
   .chosen a { color: var(--gold-deep); font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }
   .slots__title:empty { display: none; }
+  /* The step sentences, bigger, darker and a little bolder. */
+  .how .steps p:not(.how__tag) { font-size: clamp(1.2rem, 1rem + .8vw, 1.6rem); font-weight: 500; line-height: 1.45; color: var(--on-porc); max-width: 30ch; }
+  .how .steps p strong { font-weight: 700; }
+  @media (max-height: 500px) and (orientation: landscape) { .how .steps p:not(.how__tag) { font-size: 1.05rem; } }
 </style>
 </head>
 <body>

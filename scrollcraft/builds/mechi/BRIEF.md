@@ -292,3 +292,4 @@ Not verified: a real phone, a real form endpoint.
   - Now the span is 3.2. The frame code moves the shown step only one at a time toward the scroll position, and keeps each step at least 900 ms (HOW_HOLD), so step 2 always shows, even after a jump to the end.
   - Tested with a one-shot jump from step 1 to 95 % of the act at 1440 and on an iPhone 13: Ta demande > Notre réponse > Ton dépôt. Normal scrolling still gives 1, 2, 3 at 10, 50 and 90 %.
 - "Enlève" ("Choisis d'abord un jour." above the time slots): the slots title is empty, and hidden, until a day is chosen; then it shows the day as before.
+- "je veux que les phrases des étapes soient plus visibles": step sentences are now clamp(1.2rem, 1rem + .8vw, 1.6rem), weight 500, full ink colour (--on-porc), line-height 1.45, max 30ch (1.05rem in landscape phones). Checked at 1440 and 390.
