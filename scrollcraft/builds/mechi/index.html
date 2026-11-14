@@ -721,6 +721,12 @@
   /* Phones: the services row ends on the last service, without the
      closing "Pas sûre…" block. */
   @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) { .rail__end { display: none; } }
+  /* Phones: the row stops with its last card centred on screen. The trailing
+     space is half the screen minus half a card. */
+  @media (max-width: 760px) {
+    .rail { --cw: max(12rem, min(78vw, calc((100svh - var(--bar-h) - 21rem) * .88))); padding-right: max(var(--sc-gutter), calc((100vw - var(--cw)) / 2)); }
+    .card { width: var(--cw); }
+  }
   /* The form shows the chosen services in one line instead of the photos. */
   fieldset[hidden] { display: none !important; }
   .chosen { margin: 0; padding: var(--sc-4) var(--sc-5); border-radius: 1rem; background: rgb(255 250 242 / .6); border: 1px solid color-mix(in oklab, var(--on-porc) 16%, transparent); font-size: var(--sc-t-base); line-height: 1.5; }
@@ -797,7 +803,7 @@
        slide in from the right; a click on a card chooses the service. -->
   <section id="services" class="svc" data-sc-act="pan" data-sc-span="3.4" aria-labelledby="rail-title">
     <div data-sc-stage class="rail-stage on-slate">
-      <div class="rail" data-sc-pan="0.04">
+      <div class="rail" data-sc-pan="0">
         <div class="rail__intro">
           <p class="label">Nos services</p>
           <h2 id="rail-title" class="disp">Choisis ce qui <em>te ressemble</em>.</h2>

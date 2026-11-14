@@ -302,3 +302,7 @@ Not verified: a real phone, a real form endpoint.
   - "Silk press is outlined though I didn't pick it": showModal focused the first tile, and its focus ring looked like the chosen border. Focus now goes to the window title (tabindex -1, no outline), and a tile's keyboard ring is dashed, so it can't be mistaken for a choice.
   - "Text should fit the frame": names overflowed two narrow columns on large phones. Tiles stack in one column up to 520 px, the text block has min-width 0 with overflow-wrap and hyphens, and the name size is clamped.
   - Checked on iPhone 14 Pro Max and iPhone 13: focus on the title, no tile overflowing.
+- "quand le client scrolle, le dernier cadre doit rester fixé au centre, pas continuer complètement à gauche".
+  - The rail's pan overshoot is set to 0 in the markup (data-sc-pan="0", was 0.04). That overshoot is what carried the last item past centre; the engine itself is untouched.
+  - On phones the rail gets --cw (the card width) and padding-right: max(gutter, (100vw - --cw) / 2), so the travel ends with the last card (Botox capillaire) centred.
+  - Measured left/right gaps at the end: iPhone 14 Pro Max 75/78, iPhone 13 89/90, iPhone SE 64/64, Pixel 7 45/48. Desktop still ends on the "Pas sûre…" block at the gutter.
