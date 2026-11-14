@@ -704,6 +704,12 @@
     .card__foot { margin-top: var(--sc-2); justify-items: start; }
     .card__opts { max-width: none; }
   }
+  /* Section titles come into focus: blurred, a little larger and faint,
+     then sharp, the first time they reach the screen. */
+  .title-focus main h2.disp { opacity: 0; filter: blur(14px); transform: scale(1.06); transform-origin: 0 50%;
+    transition: opacity 900ms var(--sc-ease-out), filter 1100ms var(--sc-ease-out), transform 1100ms var(--sc-ease-out); }
+  .title-focus main h2.disp.is-sharp { opacity: 1; filter: none; transform: none; }
+  .title-focus .shop__head h2.disp, .title-focus .curls__copy h2.disp { transform-origin: 50% 50%; }
 </style>
 </head>
 <body>

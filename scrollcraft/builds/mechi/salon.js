@@ -267,6 +267,23 @@
     p.addEventListener('touchcancel', off, { passive: true });
   });
 
+  // ------------------------------------------- titles come into focus --
+  // Each section title starts blurred and sharpens once, when it reaches the
+  // screen. Without the script, or under reduced motion, titles just show.
+  (function () {
+    var titles = Array.prototype.slice.call(document.querySelectorAll('main h2.disp'));
+    if (!titles.length || reduce || !('IntersectionObserver' in window)) return;
+    docEl.classList.add('title-focus');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-sharp');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
+    titles.forEach(function (t) { io.observe(t); });
+  })();
+
   // ------------------------------------------------- choosing services --
   var picks = [];
   var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="services"]'));
