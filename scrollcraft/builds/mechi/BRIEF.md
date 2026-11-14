@@ -265,3 +265,7 @@ Not verified: a real phone, a real form endpoint.
   - Checked on an iPhone 13 in landscape. Portrait is unchanged.
 - "Annuler": the height-fitted landscape compare frame is reverted; it is back to min(100%, 21rem), the upright size.
 - Section titles (asked: models offered; owner chose "Lettres floues qui s'éclaircissent", once). Every main h2.disp starts faint, blurred 14 px and at 106 %, and comes into focus once when it reaches the screen (IntersectionObserver, threshold .35, unobserved after). The transition is 0.9 to 1.1 s. Centred titles scale from their centre. The class title-focus on <html> is added only by the script and only without reduced motion, so titles show normally otherwise. Tested at 1440 and on an iPhone 13: all seven titles hidden on load, all sharp after a full scroll, no errors.
+- "je veux que quand on retourne vers la section le flou revienne, sauf quand on revient vers le début de la page".
+  - The titles' observer no longer unobserves. A title sharpens at 35 % visible.
+  - When a title leaves through the bottom edge (the reader scrolled back up past it), it blurs again, so the effect replays on the next way down. When it leaves through the top (scrolled down past), it stays sharp, so scrolling up shows sharp titles.
+  - Tested: sharp going down, stays sharp after passing and on the way back up onto it, resets once above it, sharp again going down.

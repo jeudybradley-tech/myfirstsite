@@ -268,19 +268,22 @@
   });
 
   // ------------------------------------------- titles come into focus --
-  // Each section title starts blurred and sharpens once, when it reaches the
-  // screen. Without the script, or under reduced motion, titles just show.
+  // Each section title starts blurred and sharpens when it comes up from the
+  // bottom of the screen (scrolling down). Scrolling back up toward the top
+  // keeps titles sharp; once a title drops back below the screen, it blurs
+  // again so the effect replays on the way down. Without the script, or under
+  // reduced motion, titles just show.
   (function () {
     var titles = Array.prototype.slice.call(document.querySelectorAll('main h2.disp'));
     if (!titles.length || reduce || !('IntersectionObserver' in window)) return;
     docEl.classList.add('title-focus');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('is-sharp');
-        io.unobserve(e.target);
+        if (e.isIntersecting) { if (e.intersectionRatio >= 0.35) e.target.classList.add('is-sharp'); return; }
+        // Left through the bottom edge (the reader went back up): reset.
+        if (e.boundingClientRect.top > (e.rootBounds ? e.rootBounds.bottom : innerHeight) - 1) e.target.classList.remove('is-sharp');
       });
-    }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
+    }, { threshold: [0, 0.35], rootMargin: '0px 0px -10% 0px' });
     titles.forEach(function (t) { io.observe(t); });
   })();
 
