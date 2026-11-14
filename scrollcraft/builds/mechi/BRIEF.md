@@ -318,3 +318,7 @@ Not verified: a real phone, a real form endpoint.
 - Les touches de défilement glissent aussi : flèches haut/bas, Espace
   (Maj+Espace pour remonter), Page suivante/précédente, Début et Fin. Dans
   le formulaire, les touches gardent leur rôle normal (taper une espace, etc.).
+
+## Titre des étapes
+- Petit libellé « Comment ça marche » retiré de la section ; le titre devient
+  « *Avant* les ciseaux. » (l'onglet du menu garde « Comment ça marche »).
