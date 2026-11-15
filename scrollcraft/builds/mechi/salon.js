@@ -82,6 +82,21 @@
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
+  // ------------------------------------------------------ welcome strip --
+  // The welcome strip sits at the very top of the page and scrolls away; the
+  // menu bar starts just under it and rises with it to its usual place.
+  var annEl = document.querySelector('.ann'), annTick = false;
+  function annShift() {
+    annTick = false;
+    var h = annEl.offsetHeight - (parseFloat(getComputedStyle(annEl).paddingTop) || 0);
+    docEl.style.setProperty('--ann-shift', Math.max(0, h - scrollY) + 'px');
+  }
+  if (annEl) {
+    annShift();
+    addEventListener('scroll', function () { if (!annTick) { annTick = true; requestAnimationFrame(annShift); } }, { passive: true });
+    addEventListener('resize', annShift);
+  }
+
   // ------------------------------------------------- owner fact lines --
   // The lines around "Spécialités" and "Le salon" draw themselves in, one
   // after the other, each time the reader comes down to it again. Like the

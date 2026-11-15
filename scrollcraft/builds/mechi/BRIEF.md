@@ -412,3 +412,8 @@ Not verified: a real phone, a real form endpoint.
   italique) : « Salon de coiffure Mechi vous souhaite la bienvenue ! ».
   Hauteur --ann-h (2,25rem) ; la barre du menu descend d'autant et --bar-h
   l'inclut, donc toutes les sections laissent la place automatiquement.
+- Changement : la bande n'apparaît qu'en haut, sur l'accueil. Elle est en
+  position absolue et part avec la page ; la barre du menu commence juste en
+  dessous et remonte avec elle (--ann-shift, mis à jour par salon.js au
+  défilement) jusqu'à sa place habituelle. --bar-h n'inclut plus la bande ;
+  seule la photo d'accueil a sa marge en plus.
