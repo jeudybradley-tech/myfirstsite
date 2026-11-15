@@ -428,3 +428,8 @@ Not verified: a real phone, a real form endpoint.
 - Les deux bandes brunes prennent l'écriture des titres (« RESSEMBLE. ») :
   capitales italiques fines (Cormorant Garamond 400), en blanc. La bande du
   haut reste sur une ligne (taille réduite sous 440 px de large).
+- Le bandeau qui défile remplace aussi toutes les autres bandes blanches de la
+  page (avant Avant/Après, Soins, Tendances, La propriétaire et « Avant les
+  ciseaux »). Ces copies sont décoratives (aria-hidden, lien non tabulable) :
+  seule la première est lue par les lecteurs d'écran. Plus aucune section ne
+  suit directement une autre, donc plus de bande blanche.

@@ -840,7 +840,7 @@
      lines scroll right to left in a loop: the set is written twice and the
      track slides by exactly one set. Hover pauses it; reduced motion keeps
      it still and centred. */
-  .info { margin: clamp(1.5rem, 4vw, 2.5rem) 0 0; overflow: hidden; background: var(--gold-deep); color: #fff;
+  .info { margin: 0; overflow: hidden; background: var(--gold-deep); color: #fff;
     font-family: var(--font-italic); font-style: italic; font-weight: 600; letter-spacing: .03em;
     font-size: clamp(.95rem, .8rem + .5vw, 1.2rem); line-height: 1.25; }
   .info__track { display: flex; width: max-content; animation: info-run 28s linear infinite; }
@@ -866,6 +866,7 @@
   .info { font-size: clamp(1.05rem, .85rem + .6vw, 1.4rem); }
   .ann { white-space: nowrap; }
   @media (max-width: 440px) { .ann { font-size: min(.9rem, 3.55vw); letter-spacing: 0; padding-inline: .5rem; } }
+  .hero + .info { margin-top: clamp(1.5rem, 4vw, 2.5rem); }
 </style>
 </head>
 <body>
@@ -975,6 +976,22 @@
     </div>
   </section>
 
+  <!-- Info strip in place of the white band (decorative copy). -->
+  <div class="info" aria-hidden="true">
+    <div class="info__track">
+      <ul class="info__set">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+      <ul class="info__set" aria-hidden="true">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- 2b · BEFORE / AFTER: flow. One frame per transformation, the before on
        the left and the after on the right; the reader drags the line. Tabs
        switch transformation. -->
@@ -1017,6 +1034,22 @@
       <a class="cta ba__cta-m" href="#soumission">Rendez-vous</a>
     </div>
   </section>
+
+  <!-- Info strip in place of the white band (decorative copy). -->
+  <div class="info" aria-hidden="true">
+    <div class="info__track">
+      <ul class="info__set">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+      <ul class="info__set" aria-hidden="true">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- 2b+ · PRODUCTS: flow. What the salon sells, the Moroccanoil stylist set
        first, each card framed like a service. Prices: to confirm with the owner. -->
@@ -1068,6 +1101,22 @@
     </div>
   </section>
 
+  <!-- Info strip in place of the white band (decorative copy). -->
+  <div class="info" aria-hidden="true">
+    <div class="info__track">
+      <ul class="info__set">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+      <ul class="info__set" aria-hidden="true">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- 2c · TIKTOK: flow. The two portrait clips in phones side by side,
        looping muted while on screen; title and buttons centred above. -->
   <section id="boucles" class="curls on-slate" data-sc-act="flow" aria-labelledby="curls-h">
@@ -1094,6 +1143,22 @@
     </div>
   </section>
 
+  <!-- Info strip in place of the white band (decorative copy). -->
+  <div class="info" aria-hidden="true">
+    <div class="info__track">
+      <ul class="info__set">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+      <ul class="info__set" aria-hidden="true">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- 2d · THE OWNER: flow. Placed right after the videos, at the client's
        request: the visitor has seen the work, now meets who does it, then
        reads how to book. Only facts the client gave (name, flyer). -->
@@ -1113,6 +1178,22 @@
       </div>
     </div>
   </section>
+
+  <!-- Info strip in place of the white band (decorative copy). -->
+  <div class="info" aria-hidden="true">
+    <div class="info__track">
+      <ul class="info__set">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+      <ul class="info__set" aria-hidden="true">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- 3 · HOW: flow. A real sequence, so the steps carry their numbers. -->
   <section id="comment" class="how on-porc" data-sc-act="pin" data-sc-span="3.8" aria-labelledby="how-h">
