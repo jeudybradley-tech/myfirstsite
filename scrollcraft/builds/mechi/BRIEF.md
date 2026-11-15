@@ -387,3 +387,11 @@ Not verified: a real phone, a real form endpoint.
   propre texte). Le cadre prend la forme 1366/768 partout, y compris sur
   téléphone (plus de recadrage en hauteur : le texte de l'affiche doit rester
   entier). Texte alternatif reprenant les mots de l'affiche.
+
+## Onglets du menu : arrivée en face
+- Les sections épinglées (Services, Comment ça marche) : la page s'arrête pile
+  sur le haut de la section, après sa bande blanche.
+- Les autres sections : la page cadre le contenu de la section (ce que couvrent
+  ses enfants, sans la bande blanche ni la marge vide) sous la barre du menu :
+  centré quand il tient dans l'écran (Avant/Après, La propriétaire), sinon
+  commencé juste sous la barre (Soins, Tendances).

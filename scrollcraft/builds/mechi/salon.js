@@ -137,6 +137,23 @@
     // steps sit square in the screen instead of a bar's height too low.
     // (past the white band above it, which is the section's top border).
     if (el.classList.contains('sc-act--pinned')) return y + el.clientTop;
+    // Any other section: frame its content square in the screen under the
+    // menu bar. The content is what its children cover (not the white band
+    // or the empty padding): centred when it fits, else started just under
+    // the bar.
+    if (el.tagName === 'SECTION' && el.children.length) {
+      var top = Infinity, bottom = -Infinity;
+      for (var i = 0; i < el.children.length; i++) {
+        var r = el.children[i].getBoundingClientRect();
+        if (!r.height) continue;
+        top = Math.min(top, r.top); bottom = Math.max(bottom, r.bottom);
+      }
+      if (top < Infinity) {
+        var barB = bar.getBoundingClientRect().bottom + 20;
+        var room = innerHeight - barB, h = bottom - top;
+        return top + scrollY - barB - (h < room ? (room - h) / 2 : 0);
+      }
+    }
     return y - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
   }
   addEventListener('scroll', function () { if (!sRaf) sCur = sTarget = scrollY; }, { passive: true });
