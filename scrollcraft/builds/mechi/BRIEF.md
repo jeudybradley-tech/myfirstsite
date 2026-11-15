@@ -395,3 +395,6 @@ Not verified: a real phone, a real form endpoint.
   ses enfants, sans la bande blanche ni la marge vide) sous la barre du menu :
   centré quand il tient dans l'écran (Avant/Après, La propriétaire), sinon
   commencé juste sous la barre (Soins, Tendances).
+- Correctif : en centrant une section, la page pouvait s'arrêter avant la fin
+  de sa bande blanche, visible en haut autour du menu. La cible ne remonte
+  jamais au-dessus du bas de cette bande.

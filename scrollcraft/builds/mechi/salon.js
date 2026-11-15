@@ -154,7 +154,9 @@
       if (top < Infinity) {
         var barB = bar.getBoundingClientRect().bottom + 20;
         var room = innerHeight - barB, h = bottom - top;
-        return top + scrollY - barB - (h < room ? (room - h) / 2 : 0);
+        // Never stop before the section's white band has gone fully above
+        // the screen: it would show at the top, around the menu bar.
+        return Math.max(y + el.clientTop, top + scrollY - barB - (h < room ? (room - h) / 2 : 0));
       }
     }
     return y - sm;
