@@ -813,6 +813,8 @@
      italic capitals in gold as the names on the service cards. */
   .chosen__list b, .svcs__item b { font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0; text-transform: uppercase; color: var(--gold); }
   .chosen__list b { font-size: clamp(1.3rem, 1.1rem + .6vw, 1.6rem); line-height: 1.05; }
+  /* No white band under the welcome photo. */
+  main > .hero + section { border-top: 0; }
 </style>
 </head>
 <body>

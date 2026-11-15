@@ -381,3 +381,8 @@ Not verified: a real phone, a real form endpoint.
 - Dans le résumé du formulaire (photo + nom) et dans la fenêtre « Modifier »,
   le nom du service prend la même typographie que sur les cartes : capitales
   en italique (--font-italic), couleur or.
+
+## Plus de bande blanche sous l'accueil
+- La bande blanche entre la photo d'accueil et « Nos services » est enlevée
+  (main > .hero + section { border-top: 0 }) : on ne la voit plus en ouvrant le
+  site. Les autres bandes blanches entre les sections restent.
