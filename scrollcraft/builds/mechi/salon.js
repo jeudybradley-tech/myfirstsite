@@ -83,15 +83,17 @@
 
   // ------------------------------------------------- owner fact lines --
   // The lines around "Spécialités" and "Le salon" draw themselves in, one
-  // after the other, each time the list comes back on screen: once it has
-  // left the screen completely, it is reset and draws again on the way back.
+  // after the other, each time the reader comes down to it again. Like the
+  // section titles: it resets only when it leaves through the bottom edge
+  // (the reader went back up the page), so scrolling back up onto it from
+  // below leaves it as it is.
   var facts = document.querySelector('.owner__facts');
   if (facts && !reduce && 'IntersectionObserver' in window) {
     facts.classList.add('will-draw');
     new IntersectionObserver(function (en) {
       var e = en[en.length - 1];
       if (e.intersectionRatio >= 0.4) facts.classList.add('is-drawn');
-      else if (!e.isIntersecting) facts.classList.remove('is-drawn');
+      else if (!e.isIntersecting && e.boundingClientRect.top > 0) facts.classList.remove('is-drawn');
     }, { threshold: [0, 0.4] }).observe(facts);
   }
 

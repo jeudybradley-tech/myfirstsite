@@ -344,7 +344,8 @@ Not verified: a real phone, a real form endpoint.
 ## Lignes de « Spécialités » et « Le salon »
 - Les trois lignes de la fiche de Mercedes se dessinent de gauche à droite, une
   après l'autre (0 / 0,45 / 0,9 s), et le texte sous chaque ligne apparaît
-  ensuite, chaque fois que la liste revient à l'écran (remise à zéro quand elle
-  sort complètement de l'écran, en haut ou en bas). Lignes en
+  ensuite, chaque fois qu'on redescend vers la liste. Comme les titres : remise
+  à zéro seulement quand elle sort par le bas de l'écran (on remonte la page) ;
+  en remontant vers le haut, elle reste tracée. Lignes en
   pseudo-éléments (scaleX) ; cachées sans transition, seul le dessin s'anime.
 - « Réduire les animations » : lignes et texte affichés tout de suite.
