@@ -141,7 +141,10 @@
     // menu bar. The content is what its children cover (not the white band
     // or the empty padding): centred when it fits, else started just under
     // the bar.
-    if (el.tagName === 'SECTION' && el.children.length) {
+    // (The request form keeps its own landing, set in CSS as a negative
+    // scroll margin: the end of the fade, where it is fully shown.)
+    var sm = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    if (el.tagName === 'SECTION' && el.children.length && sm >= 0) {
       var top = Infinity, bottom = -Infinity;
       for (var i = 0; i < el.children.length; i++) {
         var r = el.children[i].getBoundingClientRect();
@@ -154,7 +157,7 @@
         return top + scrollY - barB - (h < room ? (room - h) / 2 : 0);
       }
     }
-    return y - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
+    return y - sm;
   }
   addEventListener('scroll', function () { if (!sRaf) sCur = sTarget = scrollY; }, { passive: true });
   ['mousedown', 'touchstart'].forEach(function (ev) { addEventListener(ev, sStop, { passive: true }); });
