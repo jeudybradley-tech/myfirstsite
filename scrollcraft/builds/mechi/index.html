@@ -818,6 +818,10 @@
   @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
     .hero { aspect-ratio: 1366 / 768; min-height: 0; }
   }
+  /* Menu tabs: the same italic capitals as the service names, in the brown
+     of the Rendez-vous button. */
+  .bar__nav a[data-tab], .bar__nav a[data-tab][aria-current="true"], .bar__nav a[data-tab]:hover { font-family: var(--font-italic); font-style: italic; font-weight: 600; text-transform: uppercase; letter-spacing: .02em; color: var(--gold-deep); }
+  @media (min-width: 1241px) { .bar__nav a[data-tab] { font-size: clamp(.95rem, .6rem + .45vw, 1.1rem); } }
 </style>
 </head>
 <body>

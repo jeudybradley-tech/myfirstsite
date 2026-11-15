@@ -398,3 +398,8 @@ Not verified: a real phone, a real form endpoint.
 - Correctif : en centrant une section, la page pouvait s'arrêter avant la fin
   de sa bande blanche, visible en haut autour du menu. La cible ne remonte
   jamais au-dessus du bas de cette bande.
+
+## Menu en italique brun
+- Onglets du menu : capitales italiques (Cormorant Garamond, 600) comme les
+  noms des services, couleur brun du bouton Rendez-vous (--gold-deep), un peu
+  plus grands sur ordinateur. Aussi dans le menu du téléphone.
