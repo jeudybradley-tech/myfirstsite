@@ -354,3 +354,12 @@ Not verified: a real phone, a real form endpoint.
 - Nouvelle option dans la fenêtre de la permanente : « Permanente lissage »,
   150 $ à 400 $ (varie selon la longueur et la quantité), photo
   assets/opt-perm-lissage.webp (photo fournie par la propriétaire, recadrée 4:5).
+
+## Prix des services
+- Silk press, kératine, shampoing traitant et botox capillaire : « 150 $ à
+  400 $ » (au lieu de « Prix sur devis »). Le prix reste sur une ligne, sauf en
+  téléphone couché où il passe sur deux lignes si besoin.
+- Correctif téléphone couché : la règle de largeur des cartes pour téléphone
+  debout (--cw, centrage de la dernière carte) écrasait aussi les cartes
+  couchées à 12rem ; la photo suivante cachait le texte et le prix. En
+  téléphone couché, --cw vaut de nouveau 23rem.

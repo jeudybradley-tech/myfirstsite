@@ -802,6 +802,13 @@
   .owner__facts.will-draw.is-drawn li::before { transform: none; transition: transform 900ms cubic-bezier(.65, 0, .25, 1) var(--line, 0ms); }
   .owner__facts.will-draw.is-drawn li:last-child::after { transform: none; transition: transform 900ms cubic-bezier(.65, 0, .25, 1) 900ms; }
   .owner__facts.will-draw.is-drawn li > * { opacity: 1; transform: none; transition: opacity 600ms ease var(--words, 0ms), transform 600ms ease var(--words, 0ms); }
+  /* « 150 $ à 400 $ » stays on one line, except on a phone lying down,
+     where the card's text column is too narrow and it wraps to stay visible. */
+  @media not ((max-height: 500px) and (orientation: landscape)) { .card__foot b { white-space: nowrap; } }
+  /* Phone lying down: the cards lie on their side and need their full 23rem
+     (the upright phone width rule above would squeeze them to 12rem, and the
+     next photo would then cover the text and price). */
+  @media (max-height: 500px) and (orientation: landscape) { .rail { --cw: 23rem; } }
 </style>
 </head>
 <body>
@@ -851,7 +858,7 @@
           <span class="card__img"><span class="card__arch"><img src="assets/lissage.webp" width="1200" height="1600" loading="lazy" alt="Silk press sur carré noir : cheveux lisses, brillants et souples, vus de dos."></span></span>
           <span class="card__name"><em>Silk press</em></span>
           <span class="card__desc">Lisses, brillants et pleins de mouvement.</span>
-          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+          <span class="card__foot"><span><b>150&nbsp;$ à 400&nbsp;$</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="permanente" aria-pressed="false">
           <span class="card__img"><span class="card__arch"><img src="assets/boucles-coupe.webp" width="1200" height="1600" loading="lazy" alt="Permanente : cheveux châtains aux reflets cuivrés, boucles serrées et bien définies, vus de dos."></span></span>
@@ -871,19 +878,19 @@
           <span class="card__img"><span class="card__arch"><img src="assets/apres.webp" width="1200" height="1600" loading="lazy" alt="Kératine : cheveux longs bruns, lisses et brillants, pointes souples."></span></span>
           <span class="card__name"><em>Kératine</em></span>
           <span class="card__desc">Fini les frisottis, cheveux faciles à coiffer.</span>
-          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+          <span class="card__foot"><span><b>150&nbsp;$ à 400&nbsp;$</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="shampoing" aria-pressed="false">
           <span class="card__img"><span class="card__arch"><img src="assets/shampoing.webp" width="736" height="981" loading="lazy" alt="Shampoing traitant : longs cheveux bruns rincés au bac, la tête renversée."></span></span>
           <span class="card__name"><em>Shampoing traitant</em></span>
           <span class="card__desc">Cuir chevelu apaisé, cheveux doux.</span>
-          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+          <span class="card__foot"><span><b>150&nbsp;$ à 400&nbsp;$</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <button class="card" type="button" data-add="botox" aria-pressed="false">
           <span class="card__img"><span class="card__arch"><img src="assets/botox.webp" width="1200" height="1600" loading="lazy" alt="Botox capillaire : cheveux noirs mi-longs, lisses et brillants, vus de dos."></span></span>
           <span class="card__name"><em>Botox capillaire</em></span>
           <span class="card__desc">Cheveux réparés, lisses et brillants.</span>
-          <span class="card__foot"><span>Prix <b>sur devis</b></span><span class="card__state" data-state>Choisir</span></span>
+          <span class="card__foot"><span><b>150&nbsp;$ à 400&nbsp;$</b></span><span class="card__state" data-state>Choisir</span></span>
         </button>
         <div class="rail__end">
           <h3>Pas sûre de ce <em>qu'il te faut ?</em></h3>
