@@ -403,3 +403,5 @@ Not verified: a real phone, a real form endpoint.
 - Onglets du menu : capitales italiques (Cormorant Garamond, 600) comme les
   noms des services, couleur brun du bouton Rendez-vous (--gold-deep), un peu
   plus grands sur ordinateur. Aussi dans le menu du téléphone.
+- Boutons « Rendez-vous » (a.cta vers #soumission) : même écriture que le menu,
+  capitales italiques Cormorant Garamond, texte crème sur le brun.
