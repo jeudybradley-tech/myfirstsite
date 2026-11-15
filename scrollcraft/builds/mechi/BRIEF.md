@@ -371,3 +371,8 @@ Not verified: a real phone, a real form endpoint.
   glissait un peu trop bas : elle tenait compte de la marge du menu et de la
   bande blanche. Pour une section épinglée, la cible est maintenant le haut de
   la section après sa bande blanche : les étapes remplissent l'écran, en face.
+
+## Bouton « Rendez-vous »
+- Les cinq boutons « Demander une soumission » (barre du menu, services,
+  avant/après, fiche de Mercedes) s'appellent maintenant « Rendez-vous ». Ils
+  mènent toujours au formulaire.
