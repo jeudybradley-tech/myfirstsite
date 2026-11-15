@@ -406,3 +406,9 @@ Not verified: a real phone, a real form endpoint.
 - Boutons « Rendez-vous » (a.cta vers #soumission) : même écriture que le menu,
   capitales italiques Cormorant Garamond, texte crème sur le brun.
 - Bouton « Envoyer ma demande » : même écriture que les boutons Rendez-vous.
+
+## Bande de bienvenue
+- Bande fixe tout en haut (.ann, fond brun --gold-deep, texte blanc en
+  italique) : « Salon de coiffure Mechi vous souhaite la bienvenue ! ».
+  Hauteur --ann-h (2,25rem) ; la barre du menu descend d'autant et --bar-h
+  l'inclut, donc toutes les sections laissent la place automatiquement.
