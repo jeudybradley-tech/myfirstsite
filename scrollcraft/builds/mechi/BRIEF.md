@@ -363,3 +363,5 @@ Not verified: a real phone, a real form endpoint.
   debout (--cw, centrage de la dernière carte) écrasait aussi les cartes
   couchées à 12rem ; la photo suivante cachait le texte et le prix. En
   téléphone couché, --cw vaut de nouveau 23rem.
+- Changement : les six cartes affichent « À partir de 150 $ » (au lieu de
+  « 150 $ à 400 $ » sur silk press, kératine, shampoing et botox).
