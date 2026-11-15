@@ -376,3 +376,8 @@ Not verified: a real phone, a real form endpoint.
 - Les cinq boutons « Demander une soumission » (barre du menu, services,
   avant/après, fiche de Mercedes) s'appellent maintenant « Rendez-vous ». Ils
   mènent toujours au formulaire.
+
+## Noms des services en italique doré
+- Dans le résumé du formulaire (photo + nom) et dans la fenêtre « Modifier »,
+  le nom du service prend la même typographie que sur les cartes : capitales
+  en italique (--font-italic), couleur or.

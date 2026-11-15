@@ -809,6 +809,10 @@
      (the upright phone width rule above would squeeze them to 12rem, and the
      next photo would then cover the text and price). */
   @media (max-height: 500px) and (orientation: landscape) { .rail { --cw: 23rem; } }
+  /* Service names in the form's summary and in the services window: the same
+     italic capitals in gold as the names on the service cards. */
+  .chosen__list b, .svcs__item b { font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0; text-transform: uppercase; color: var(--gold); }
+  .chosen__list b { font-size: clamp(1.3rem, 1.1rem + .6vw, 1.6rem); line-height: 1.05; }
 </style>
 </head>
 <body>
