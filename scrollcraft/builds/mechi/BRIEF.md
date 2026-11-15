@@ -381,3 +381,9 @@ Not verified: a real phone, a real form endpoint.
 - Dans le résumé du formulaire (photo + nom) et dans la fenêtre « Modifier »,
   le nom du service prend la même typographie que sur les cartes : capitales
   en italique (--font-italic), couleur or.
+
+## Nouvelle photo d'accueil
+- assets/accueil.webp remplacée par l'affiche du salon (1366 × 768, avec son
+  propre texte). Le cadre prend la forme 1366/768 partout, y compris sur
+  téléphone (plus de recadrage en hauteur : le texte de l'affiche doit rester
+  entier). Texte alternatif reprenant les mots de l'affiche.

@@ -610,9 +610,9 @@
     .hero { margin: calc(var(--bar-h) + .25rem) .75rem 0; min-height: calc(75svh - var(--bar-h)); padding: 1.5rem 1rem; }
     .hero__logo { margin-bottom: 2rem; }
   }
-  /* The welcome photo is small (626 x 351): the card takes the photo's own
+  /* The welcome photo (1366 x 768, with its own lettering): the card takes the photo's own
      shape and a capped width, so it is no longer cropped and blown up. */
-  .hero { width: min(calc(100% - 2 * clamp(1rem, 5vw, 5rem)), 60rem); margin-inline: auto; min-height: 0; aspect-ratio: 626 / 351; }
+  .hero { width: min(calc(100% - 2 * clamp(1rem, 5vw, 5rem)), 60rem); margin-inline: auto; min-height: 0; aspect-ratio: 1366 / 768; }
   .hero__bg { inset: 0; }
   .hero__logo { width: clamp(12rem, 24vw, 22rem); }
   @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
@@ -683,7 +683,7 @@
      so nothing stretches across the wide screen. */
   @media (max-height: 500px) and (orientation: landscape) {
     .sc-wrap { max-width: 34rem; }
-    .hero { width: min(calc(100% - 1.5rem), 27rem); aspect-ratio: 626 / 351; min-height: 0; }
+    .hero { width: min(calc(100% - 1.5rem), 27rem); aspect-ratio: 1366 / 768; min-height: 0; }
     .curls__copy h2 { font-size: 2.6rem; }
     .how__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sc-5); max-width: 44rem; }
     .how__head h2 { font-size: 1.9rem; }
@@ -813,6 +813,11 @@
      italic capitals in gold as the names on the service cards. */
   .chosen__list b, .svcs__item b { font-family: var(--font-italic); font-style: italic; font-weight: 400; letter-spacing: 0; text-transform: uppercase; color: var(--gold); }
   .chosen__list b { font-size: clamp(1.3rem, 1.1rem + .6vw, 1.6rem); line-height: 1.05; }
+  /* The welcome photo carries its own lettering, so it is shown whole on
+     phones too: the card keeps the photo's shape instead of a taller crop. */
+  @media (max-width: 760px), (max-height: 500px) and (orientation: landscape) {
+    .hero { aspect-ratio: 1366 / 768; min-height: 0; }
+  }
 </style>
 </head>
 <body>
@@ -845,7 +850,7 @@
   <section id="accueil" class="hero on-slate" data-sc-act="flow">
     <h1 class="sr">Salon de coiffure Mechi, à Montréal : une beauté qui vous ressemble.</h1>
     <div class="hero__bg" aria-hidden="true">
-      <picture><img src="assets/accueil.webp" width="626" height="351" fetchpriority="high" alt=""></picture>
+      <picture><img src="assets/accueil.webp" width="1366" height="768" fetchpriority="high" alt="Salon de coiffure Mechi : beauté, élégance, confiance. Prenez soin de vos cheveux, révélez votre beauté ! Vous êtes belle chez Mechi."></picture>
     </div>
   </section>
 
