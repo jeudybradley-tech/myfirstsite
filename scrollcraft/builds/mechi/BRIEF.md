@@ -405,3 +405,4 @@ Not verified: a real phone, a real form endpoint.
   plus grands sur ordinateur. Aussi dans le menu du téléphone.
 - Boutons « Rendez-vous » (a.cta vers #soumission) : même écriture que le menu,
   capitales italiques Cormorant Garamond, texte crème sur le brun.
+- Bouton « Envoyer ma demande » : même écriture que les boutons Rendez-vous.
