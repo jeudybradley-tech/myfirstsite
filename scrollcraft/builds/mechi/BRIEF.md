@@ -417,3 +417,11 @@ Not verified: a real phone, a real form endpoint.
   dessous et remonte avec elle (--ann-shift, mis à jour par salon.js au
   défilement) jusqu'à sa place habituelle. --bar-h n'inclut plus la bande ;
   seule la photo d'accueil a sa marge en plus.
+
+## Bandeau d'informations sous l'accueil
+- À la place de la bande blanche sous la photo d'accueil : un bandeau brun
+  (même brun et même écriture que la bande du haut) qui défile en boucle de
+  droite à gauche : « 15 % de rabais sur votre premier service » ✦
+  « 438-377-2535 » (lien pour appeler) ✦ « 8025 Léonard de Vinci, Montréal,
+  QC ». Les trois sur une ligne, l'un à côté de l'autre. Pause au survol ;
+  immobile et centré si l'appareil réduit les animations.

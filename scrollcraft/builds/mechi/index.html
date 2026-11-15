@@ -835,6 +835,30 @@
     font-family: var(--font-italic); font-style: italic; font-weight: 600; letter-spacing: .03em;
     font-size: clamp(.82rem, .7rem + .5vw, 1.05rem); line-height: 1.15; }
   @media (max-width: 380px) { .ann { font-size: .78rem; letter-spacing: 0; } }
+  /* Info strip under the welcome photo (it takes the white band's place:
+     the services section now follows it, not another section). The three
+     lines scroll right to left in a loop: the set is written twice and the
+     track slides by exactly one set. Hover pauses it; reduced motion keeps
+     it still and centred. */
+  .info { margin: clamp(1.5rem, 4vw, 2.5rem) 0 0; overflow: hidden; background: var(--gold-deep); color: #fff;
+    font-family: var(--font-italic); font-style: italic; font-weight: 600; letter-spacing: .03em;
+    font-size: clamp(.95rem, .8rem + .5vw, 1.2rem); line-height: 1.25; }
+  .info__track { display: flex; width: max-content; animation: info-run 28s linear infinite; }
+  .info:hover .info__track, .info:focus-within .info__track { animation-play-state: paused; }
+  .info__set { list-style: none; margin: 0; padding: .75rem 0; display: flex; flex: none; }
+  .info__set li { padding: 0 clamp(1.5rem, 3vw, 2.75rem); white-space: nowrap; position: relative; }
+  .info__set li::after { content: "✦"; position: absolute; right: -.4em; top: 50%; translate: 0 -50%; font-size: .6em; opacity: .7; font-style: normal; }
+  .info a { color: inherit; text-decoration: none; }
+  .info a:hover, .info a:focus-visible { text-decoration: underline; text-underline-offset: .2em; }
+  .info a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; border-radius: 2px; }
+  @keyframes info-run { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .info__track { animation: none; width: auto; justify-content: center; }
+    .info__set { flex: 1 1 auto; flex-wrap: wrap; justify-content: center; gap: .3rem 0; text-align: center; }
+    .info__set li { white-space: normal; padding: 0 1rem; }
+    .info__set[aria-hidden] { display: none; }
+    .info__set li::after { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -871,6 +895,23 @@
       <picture><img src="assets/accueil.webp" width="1366" height="768" fetchpriority="high" alt="Salon de coiffure Mechi : beauté, élégance, confiance. Prenez soin de vos cheveux, révélez votre beauté ! Vous êtes belle chez Mechi."></picture>
     </div>
   </section>
+
+  <!-- Info strip under the welcome photo, in place of the white band: the
+       same brown and white as the welcome strip at the top. -->
+  <div class="info" role="region" aria-label="Le salon">
+    <div class="info__track">
+      <ul class="info__set">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+      <ul class="info__set" aria-hidden="true">
+        <li>15&nbsp;% de rabais sur votre premier service</li>
+        <li><a href="tel:+14383772535" tabindex="-1">438-377-2535</a></li>
+        <li>8025 Léonard de Vinci, Montréal, QC</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- 2 · DESIRE: pan, as on the Nitsy site. The page holds and the services
        slide in from the right; a click on a card chooses the service. -->
