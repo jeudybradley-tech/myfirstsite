@@ -785,6 +785,23 @@
       padding-top: calc(var(--fade-run) + var(--bar-h) + clamp(1.5rem, 5svh, 3.5rem));
       scroll-margin-top: calc(-1 * var(--fade-run)); }
   }
+  /* Owner facts: each line draws itself left to right, one after the other,
+     then the words under it fade in. Lines are pseudo-elements so they can
+     grow; .is-drawn is set by salon.js when the list comes on screen. */
+  .owner__facts li { position: relative; border-top: 0; }
+  .owner__facts li:last-child { border-bottom: 0; }
+  .owner__facts li::before, .owner__facts li:last-child::after { content: ""; position: absolute; left: 0; right: 0; height: 1px;
+    background: color-mix(in oklab, var(--on-porc) 28%, transparent); transform-origin: 0 50%; }
+  .owner__facts li::before { top: 0; }
+  .owner__facts li:last-child::after { bottom: 0; }
+  .owner__facts li:nth-child(1) { --line: 0ms; --words: 500ms; }
+  .owner__facts li:nth-child(2) { --line: 450ms; --words: 950ms; }
+  /* Hidden at once (no transition), so only the drawing-in is animated. */
+  .owner__facts.will-draw li::before, .owner__facts.will-draw li:last-child::after { transform: scaleX(0); }
+  .owner__facts.will-draw li > * { opacity: 0; transform: translateY(.5rem); }
+  .owner__facts.will-draw.is-drawn li::before { transform: none; transition: transform 900ms cubic-bezier(.65, 0, .25, 1) var(--line, 0ms); }
+  .owner__facts.will-draw.is-drawn li:last-child::after { transform: none; transition: transform 900ms cubic-bezier(.65, 0, .25, 1) 900ms; }
+  .owner__facts.will-draw.is-drawn li > * { opacity: 1; transform: none; transition: opacity 600ms ease var(--words, 0ms), transform 600ms ease var(--words, 0ms); }
 </style>
 </head>
 <body>

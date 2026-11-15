@@ -81,6 +81,19 @@
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
+  // ------------------------------------------------- owner fact lines --
+  // The lines around "Spécialités" and "Le salon" draw themselves in, one
+  // after the other, the first time the list comes on screen.
+  var facts = document.querySelector('.owner__facts');
+  if (facts && !reduce && 'IntersectionObserver' in window) {
+    facts.classList.add('will-draw');
+    var factsIo = new IntersectionObserver(function (en) {
+      if (!en[0].isIntersecting) return;
+      facts.classList.add('is-drawn'); factsIo.disconnect();
+    }, { threshold: 0.4 });
+    factsIo.observe(facts);
+  }
+
   // ------------------------------------------------------ smooth scroll --
   // The same feel as the immersive site: the page never jumps, it glides.
   // A mouse wheel only moves a target and the page eases toward it (a lerp

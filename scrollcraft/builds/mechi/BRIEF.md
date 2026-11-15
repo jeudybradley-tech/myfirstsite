@@ -340,3 +340,10 @@ Not verified: a real phone, a real form endpoint.
   formulaire et bloquait les clics (impossible d'écrire dans « Tes cheveux »).
   La section laisse maintenant passer les clics (pointer-events: none) ; seules
   les étapes visibles les attrapent.
+
+## Lignes de « Spécialités » et « Le salon »
+- Les trois lignes de la fiche de Mercedes se dessinent de gauche à droite, une
+  après l'autre (0 / 0,45 / 0,9 s), et le texte sous chaque ligne apparaît
+  ensuite. Une seule fois, quand la liste arrive à l'écran. Lignes en
+  pseudo-éléments (scaleX) ; cachées sans transition, seul le dessin s'anime.
+- « Réduire les animations » : lignes et texte affichés tout de suite.
