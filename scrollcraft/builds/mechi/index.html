@@ -859,6 +859,13 @@
     .info__set[aria-hidden] { display: none; }
     .info__set li::after { display: none; }
   }
+  /* Both brown strips: the italic capitals of the section titles
+     (« RESSEMBLE. »), light weight, white. */
+  .ann, .info { font-weight: 400; text-transform: uppercase; letter-spacing: .02em; }
+  .ann { font-size: clamp(.95rem, .8rem + .55vw, 1.25rem); }
+  .info { font-size: clamp(1.05rem, .85rem + .6vw, 1.4rem); }
+  .ann { white-space: nowrap; }
+  @media (max-width: 440px) { .ann { font-size: min(.9rem, 3.55vw); letter-spacing: 0; padding-inline: .5rem; } }
 </style>
 </head>
 <body>

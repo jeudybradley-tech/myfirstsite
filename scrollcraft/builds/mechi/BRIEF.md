@@ -425,3 +425,6 @@ Not verified: a real phone, a real form endpoint.
   « 438-377-2535 » (lien pour appeler) ✦ « 8025 Léonard de Vinci, Montréal,
   QC ». Les trois sur une ligne, l'un à côté de l'autre. Pause au survol ;
   immobile et centré si l'appareil réduit les animations.
+- Les deux bandes brunes prennent l'écriture des titres (« RESSEMBLE. ») :
+  capitales italiques fines (Cormorant Garamond 400), en blanc. La bande du
+  haut reste sur une ligne (taille réduite sous 440 px de large).
