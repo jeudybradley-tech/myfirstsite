@@ -349,3 +349,8 @@ Not verified: a real phone, a real form endpoint.
   en remontant vers le haut, elle reste tracée. Lignes en
   pseudo-éléments (scaleX) ; cachées sans transition, seul le dessin s'anime.
 - « Réduire les animations » : lignes et texte affichés tout de suite.
+
+## Permanente lissage
+- Nouvelle option dans la fenêtre de la permanente : « Permanente lissage »,
+  150 $ à 400 $ (varie selon la longueur et la quantité), photo
+  assets/opt-perm-lissage.webp (photo fournie par la propriétaire, recadrée 4:5).

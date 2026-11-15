@@ -53,7 +53,8 @@
   var OPTIONS = {
     permanente: [
       { id: 'bouclee',  name: 'Permanente bouclée',            price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-bouclee.webp' },
-      { id: 'souple',   name: 'Permanente ondulation souple',  price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-souple.webp' }
+      { id: 'souple',   name: 'Permanente ondulation souple',  price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-souple.webp' },
+      { id: 'lissage',  name: 'Permanente lissage',            price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-lissage.webp' }
     ],
     teinture: [
       { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ à 400 $, varie selon la longueur et la quantité' },
