@@ -365,3 +365,9 @@ Not verified: a real phone, a real form endpoint.
   téléphone couché, --cw vaut de nouveau 23rem.
 - Changement : les six cartes affichent « À partir de 150 $ » (au lieu de
   « 150 $ à 400 $ » sur silk press, kératine, shampoing et botox).
+
+## Arrivée pile sur « Avant les ciseaux »
+- Après le choix d'un service (et avec l'onglet « Comment ça marche »), la page
+  glissait un peu trop bas : elle tenait compte de la marge du menu et de la
+  bande blanche. Pour une section épinglée, la cible est maintenant le haut de
+  la section après sa bande blanche : les étapes remplissent l'écran, en face.

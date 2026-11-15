@@ -131,7 +131,13 @@
     sRaf = requestAnimationFrame(sTick);
   }
   function topOf(el) {
-    return el.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
+    var y = el.getBoundingClientRect().top + scrollY;
+    // A pinned act (the steps) is framed by its own full-screen stage, which
+    // already leaves room for the menu bar: land exactly on its top, so the
+    // steps sit square in the screen instead of a bar's height too low.
+    // (past the white band above it, which is the section's top border).
+    if (el.classList.contains('sc-act--pinned')) return y + el.clientTop;
+    return y - (parseFloat(getComputedStyle(el).scrollMarginTop) || 0);
   }
   addEventListener('scroll', function () { if (!sRaf) sCur = sTarget = scrollY; }, { passive: true });
   ['mousedown', 'touchstart'].forEach(function (ev) { addEventListener(ev, sStop, { passive: true }); });
