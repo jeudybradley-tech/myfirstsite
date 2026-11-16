@@ -456,3 +456,4 @@ Not verified: a real phone, a real form endpoint.
 - La petite phrase et le prix de chaque carte (« Des boucles définies qui
   tiennent. », « À partir de 150 $ ») prennent l'écriture des titres de
   section (« CHOISIS ») : capitales fines Inter Tight 300.
+- Plus de point à la fin des petites phrases des cartes de services.
