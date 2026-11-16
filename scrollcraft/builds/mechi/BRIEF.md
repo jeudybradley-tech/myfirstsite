@@ -448,3 +448,6 @@ Not verified: a real phone, a real form endpoint.
   titre est « LES OPTIONS ».
 - Boutons « Ajouter à ma soumission », « Annuler » (fenêtre des options) et
   « Terminé » (fenêtre des services) : même écriture que « Rendez-vous ».
+- Fenêtre des options : le bouton « Ajouter à ma soumission » s'appelle
+  « Rendez-vous » (dans index.html et salon.js). « Mettre à jour ma
+  soumission » et « Retirer de ma soumission » restent quand on modifie.

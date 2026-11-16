@@ -639,8 +639,8 @@
   var dlgFor = null, dlgFrom = null, dlgBack = null;
   function okLabel() {
     var n = dlgList.querySelectorAll('input:checked').length, inPicks = picks.indexOf(dlgFor) > -1;
-    dlgOk.textContent = n ? (inPicks ? 'Mettre à jour ma soumission' : 'Ajouter à ma soumission')
-                          : (inPicks ? 'Retirer de ma soumission' : 'Ajouter à ma soumission');
+    dlgOk.textContent = n ? (inPicks ? 'Mettre à jour ma soumission' : 'Rendez-vous')
+                          : (inPicks ? 'Retirer de ma soumission' : 'Rendez-vous');
     dlgOk.disabled = !n && !inPicks;
   }
   // The large photo beside the list shows the option just chosen.
