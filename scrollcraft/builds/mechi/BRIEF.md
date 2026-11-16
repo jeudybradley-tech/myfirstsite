@@ -461,4 +461,4 @@ Not verified: a real phone, a real form endpoint.
   capitales fines, sans point final.
 - Les mots en italique des titres de section (« te ressemble », « la
   différence », « à la maison », « de Mechi », « Avant », « tu veux ») sont en
-  brun (--gold).
+  brun du bandeau (--gold-deep).
