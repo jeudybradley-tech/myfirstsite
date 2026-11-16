@@ -462,3 +462,5 @@ Not verified: a real phone, a real form endpoint.
 - Les mots en italique des titres de section (« te ressemble », « la
   différence », « à la maison », « de Mechi », « Avant », « tu veux ») sont en
   brun du bandeau (--gold-deep).
+- Petit libellé « Avant / Après » au-dessus de « Glisse pour voir la
+  différence » enlevé (l'onglet du menu reste).
