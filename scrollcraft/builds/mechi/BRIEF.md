@@ -459,3 +459,6 @@ Not verified: a real phone, a real form endpoint.
 - Plus de point à la fin des petites phrases des cartes de services.
 - Produits (« Tes soins, à la maison ») : la petite phrase prend aussi les
   capitales fines, sans point final.
+- Les mots en italique des titres de section (« te ressemble », « la
+  différence », « à la maison », « de Mechi », « Avant », « tu veux ») sont en
+  brun (--gold).
