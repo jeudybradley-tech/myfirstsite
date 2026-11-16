@@ -440,3 +440,7 @@ Not verified: a real phone, a real form endpoint.
   2000 × 1124). Fondu doux de 1,4 s, une photo toutes les 5 s. En pause quand
   l'onglet est caché ou l'accueil hors écran ; « réduire les animations »
   garde la première photo.
+
+## Noms des options
+- Dans la fenêtre des options (teinture, permanente), le nom de chaque option
+  prend l'écriture de « TES OPTIONS » : capitales italiques fines, couleur or.
