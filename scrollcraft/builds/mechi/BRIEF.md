@@ -464,3 +464,5 @@ Not verified: a real phone, a real form endpoint.
   brun du bandeau (--gold-deep).
 - Petit libellé « Avant / Après » au-dessus de « Glisse pour voir la
   différence » enlevé (l'onglet du menu reste).
+- Troisième photo dans le diaporama d'accueil : « Produits Moroccanoil
+  disponibles au salon Mechi » (assets/accueil-3.webp, 1920 × 1080).
