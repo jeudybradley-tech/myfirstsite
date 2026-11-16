@@ -446,3 +446,5 @@ Not verified: a real phone, a real form endpoint.
   prend l'écriture de « TES OPTIONS » : capitales italiques fines, couleur or.
 - Fenêtre des options : « Choisis » et « Choisis une option. » enlevés ; le
   titre est « LES OPTIONS ».
+- Boutons « Ajouter à ma soumission », « Annuler » (fenêtre des options) et
+  « Terminé » (fenêtre des services) : même écriture que « Rendez-vous ».
