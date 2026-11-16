@@ -882,6 +882,11 @@
   .card__foot > span:first-child b { font-weight: 500; }
   /* The italic words of every section title, in brown. */
   .disp em { color: var(--gold-deep); }
+  /* Computer: the tabs spread out over the whole bar, from the logo to the
+     Rendez-vous button. */
+  @media (min-width: 1241px) {
+    .bar__nav > .bar__group:first-child { flex: 1; display: flex; align-items: center; justify-content: space-between; padding-inline: clamp(.5rem, 2vw, 2.5rem); }
+  }
 </style>
 </head>
 <body>

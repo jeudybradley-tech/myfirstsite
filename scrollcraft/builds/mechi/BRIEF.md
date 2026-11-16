@@ -466,3 +466,5 @@ Not verified: a real phone, a real form endpoint.
   différence » enlevé (l'onglet du menu reste).
 - Troisième photo dans le diaporama d'accueil : « Produits Moroccanoil
   disponibles au salon Mechi » (assets/accueil-3.webp, 1920 × 1080).
+- Barre du menu (ordinateur) : les onglets se répartissent sur toute la
+  largeur entre le logo et le bouton Rendez-vous (space-between).
