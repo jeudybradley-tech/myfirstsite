@@ -867,6 +867,11 @@
   .ann { white-space: nowrap; }
   @media (max-width: 440px) { .ann { font-size: min(.9rem, 3.55vw); letter-spacing: 0; padding-inline: .5rem; } }
   .hero + .info { margin-top: clamp(1.5rem, 4vw, 2.5rem); }
+  /* Welcome frame: the photos take turns, each fading softly into the
+     next (salon.js moves .is-on). Reduced motion keeps the first one. */
+  .hero__bg .hero__slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%;
+    opacity: 0; transition: opacity 1.4s ease; }
+  .hero__bg .hero__slide.is-on { opacity: 1; }
 </style>
 </head>
 <body>
@@ -900,7 +905,8 @@
   <section id="accueil" class="hero on-slate" data-sc-act="flow">
     <h1 class="sr">Salon de coiffure Mechi, à Montréal : une beauté qui vous ressemble.</h1>
     <div class="hero__bg" aria-hidden="true">
-      <picture><img src="assets/accueil.webp" width="1366" height="768" fetchpriority="high" alt="Salon de coiffure Mechi : beauté, élégance, confiance. Prenez soin de vos cheveux, révélez votre beauté ! Vous êtes belle chez Mechi."></picture>
+      <img class="hero__slide is-on" src="assets/accueil.webp" width="1366" height="768" fetchpriority="high" alt="Salon de coiffure Mechi : beauté, élégance, confiance. Prenez soin de vos cheveux, révélez votre beauté ! Vous êtes belle chez Mechi.">
+      <img class="hero__slide" src="assets/accueil-2.webp" width="2000" height="1124" loading="lazy" alt="Permanente bouclée : des boucles souples, pleines de volume. Réservez maintenant au 438-377-2535.">
     </div>
   </section>
 

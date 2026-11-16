@@ -433,3 +433,10 @@ Not verified: a real phone, a real form endpoint.
   ciseaux »). Ces copies sont décoratives (aria-hidden, lien non tabulable) :
   seule la première est lue par les lecteurs d'écran. Plus aucune section ne
   suit directement une autre, donc plus de bande blanche.
+
+## Diaporama d'accueil
+- Le cadre d'accueil montre deux photos à tour de rôle : l'affiche du salon
+  (assets/accueil.webp) puis « Permanente bouclée » (assets/accueil-2.webp,
+  2000 × 1124). Fondu doux de 1,4 s, une photo toutes les 5 s. En pause quand
+  l'onglet est caché ou l'accueil hors écran ; « réduire les animations »
+  garde la première photo.

@@ -82,6 +82,22 @@
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
+  // ----------------------------------------------------- welcome photos --
+  // The photos in the welcome frame take turns, one after the other, every
+  // few seconds. They wait while the tab is hidden or the frame is off
+  // screen; reduced motion keeps the first photo only.
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.hero__slide'));
+  if (slides.length > 1 && !reduce) {
+    var slideAt = 0, slideOn = true, SLIDE_MS = 5000;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { slideOn = en[0].isIntersecting; }).observe(slides[0].closest('.hero') || slides[0]);
+    setInterval(function () {
+      if (!slideOn || document.hidden) return;
+      slides[slideAt].classList.remove('is-on');
+      slideAt = (slideAt + 1) % slides.length;
+      slides[slideAt].classList.add('is-on');
+    }, SLIDE_MS);
+  }
+
   // ------------------------------------------------------ welcome strip --
   // The welcome strip sits at the very top of the page and scrolls away; the
   // menu bar starts just under it and rises with it to its usual place.
