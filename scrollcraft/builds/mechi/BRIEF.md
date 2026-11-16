@@ -457,3 +457,5 @@ Not verified: a real phone, a real form endpoint.
   tiennent. », « À partir de 150 $ ») prennent l'écriture des titres de
   section (« CHOISIS ») : capitales fines Inter Tight 300.
 - Plus de point à la fin des petites phrases des cartes de services.
+- Produits (« Tes soins, à la maison ») : la petite phrase prend aussi les
+  capitales fines, sans point final.
