@@ -445,4 +445,4 @@ Not verified: a real phone, a real form endpoint.
 - Dans la fenêtre des options (teinture, permanente), le nom de chaque option
   prend l'écriture de « TES OPTIONS » : capitales italiques fines, couleur or.
 - Fenêtre des options : « Choisis » et « Choisis une option. » enlevés ; le
-  titre est seulement « TES OPTIONS ».
+  titre est « LES OPTIONS ».
