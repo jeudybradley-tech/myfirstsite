@@ -451,3 +451,8 @@ Not verified: a real phone, a real form endpoint.
 - Fenêtre des options : le bouton « Ajouter à ma soumission » s'appelle
   « Rendez-vous » (dans index.html et salon.js). « Mettre à jour ma
   soumission » et « Retirer de ma soumission » restent quand on modifie.
+
+## Texte des cartes de services
+- La petite phrase et le prix de chaque carte (« Des boucles définies qui
+  tiennent. », « À partir de 150 $ ») prennent l'écriture des titres de
+  section (« CHOISIS ») : capitales fines Inter Tight 300.

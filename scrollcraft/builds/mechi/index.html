@@ -875,6 +875,11 @@
   /* Option names in the options window: the italic gold capitals of
      « TES OPTIONS ». */
   .opts__name { font-family: var(--font-italic); font-style: italic; font-weight: 400; text-transform: uppercase; letter-spacing: .01em; color: var(--gold); font-size: clamp(1.15rem, 1rem + .5vw, 1.4rem); line-height: 1.1; }
+  /* Service cards: the short line and the price in the thin capitals of
+     the section titles (« CHOISIS »). */
+  .card__desc, .card__foot > span:first-child { font-family: var(--sc-font-display); font-weight: 300; text-transform: uppercase; letter-spacing: .03em; color: var(--on-slate); }
+  .card__desc { max-width: 32ch; }
+  .card__foot > span:first-child b { font-weight: 500; }
 </style>
 </head>
 <body>
