@@ -17,7 +17,7 @@
   //   Tant que c'est vide, la page dit que l'adresse viendra avec la réponse.
   // ---------------------------------------------------------------------
   var FORM_ENDPOINT = 'https://formspree.io/f/mwllzzaw';
-  var INTERAC_EMAIL = '';
+  var INTERAC_EMAIL = 'jeudybradley@gmail.com';
   var PREVIEW = false;   // true only in the claude.ai preview copy, where nothing can be sent
   var FORMSPREE = /formspree\.io\//.test(FORM_ENDPOINT);
 
@@ -41,7 +41,28 @@
     silkpress:  { name: 'Silk press', img: 'assets/lissage-m.webp' },
     permanente: { name: 'Permanente', img: 'assets/boucles-coupe-m.webp' },
     teinture:   { name: 'Teinture',   img: 'assets/couleur-m.webp' },
-    keratine:   { name: 'Kératine',   img: 'assets/apres-m.webp' }
+    keratine:   { name: 'Kératine',   img: 'assets/apres-m.webp' },
+    shampoing:  { name: 'Shampoing traitant', img: 'assets/shampoing-m.webp' },
+    botox:      { name: 'Botox capillaire',   img: 'assets/botox-m.webp' }
+  };
+
+  // OPTIONS : un service qui a des options ouvre une fenêtre pour les choisir
+  // (une seule à la fois). Les prix affichés et envoyés dans la demande
+  // viennent d'ici. img : la photo qui apparaît à côté de l'option quand on
+  // la choisit ; sans img, c'est la photo du service.
+  var OPTIONS = {
+    permanente: [
+      { id: 'bouclee',  name: 'Permanente bouclée',            price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-bouclee.webp' },
+      { id: 'souple',   name: 'Permanente ondulation souple',  price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-souple.webp' },
+      { id: 'lissage',  name: 'Permanente lissage',            price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/opt-perm-lissage.webp' }
+    ],
+    teinture: [
+      { id: 'peroxyde',   name: 'Teinture au peroxyde',  price: '150 $ à 400 $, varie selon la longueur et la quantité' },
+      { id: 'couleur',    name: 'Teinture couleur',      price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/couleur-m.webp' },
+      { id: 'balayage',   name: 'Balayage',              price: '150 $ à 400 $, varie selon la longueur et la quantité' },
+      { id: 'meches',     name: 'Mèches',                price: '150 $ à 400 $, varie selon la longueur et la quantité', img: 'assets/ba-apres-dos-m.webp' },
+      { id: 'cellophane', name: 'Cellophane capillaire', price: '150 $ à 400 $, varie selon la longueur et la quantité' }
+    ]
   };
 
   var docEl = document.documentElement;
@@ -56,13 +77,186 @@
   var bar = document.querySelector('[data-bar]');
   var toggle = bar.querySelector('.bar__toggle'), toggleLabel = bar.querySelector('[data-toggle-label]');
   var tabs = Array.prototype.slice.call(bar.querySelectorAll('[data-tab]'));
-  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['avant-apres', document.getElementById('avant-apres')], ['proprietaire', document.getElementById('proprietaire')], ['comment', document.getElementById('comment')], ['soumission', book]];
+  var spy = [['top', document.getElementById('accueil')], ['services', svc], ['avant-apres', document.getElementById('avant-apres')], ['produits', document.getElementById('produits')], ['boucles', document.getElementById('boucles')], ['proprietaire', document.getElementById('proprietaire')], ['comment', document.getElementById('comment')], ['soumission', document.getElementById('book-h')]];
 
   function prog(el) { return parseFloat(getComputedStyle(el).getPropertyValue('--sc-p')) || 0; }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
+  // ----------------------------------------------------- welcome photos --
+  // The photos in the welcome frame take turns, one after the other, every
+  // few seconds. They wait while the tab is hidden or the frame is off
+  // screen; reduced motion keeps the first photo only.
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.hero__slide'));
+  if (slides.length > 1 && !reduce) {
+    var slideAt = 0, slideOn = true, SLIDE_MS = 5000;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { slideOn = en[0].isIntersecting; }).observe(slides[0].closest('.hero') || slides[0]);
+    setInterval(function () {
+      if (!slideOn || document.hidden) return;
+      slides[slideAt].classList.remove('is-on');
+      slideAt = (slideAt + 1) % slides.length;
+      slides[slideAt].classList.add('is-on');
+    }, SLIDE_MS);
+  }
+
+  // ------------------------------------------------------ welcome strip --
+  // The welcome strip sits at the very top of the page and scrolls away; the
+  // menu bar starts just under it and rises with it to its usual place.
+  var annEl = document.querySelector('.ann'), annTick = false;
+  function annShift() {
+    annTick = false;
+    var h = annEl.offsetHeight - (parseFloat(getComputedStyle(annEl).paddingTop) || 0);
+    docEl.style.setProperty('--ann-shift', Math.max(0, h - scrollY) + 'px');
+  }
+  if (annEl) {
+    annShift();
+    addEventListener('scroll', function () { if (!annTick) { annTick = true; requestAnimationFrame(annShift); } }, { passive: true });
+    addEventListener('resize', annShift);
+  }
+
+  // ------------------------------------------------- owner fact lines --
+  // The lines around "Spécialités" and "Le salon" draw themselves in, one
+  // after the other, each time the reader comes down to it again. Like the
+  // section titles: it resets only when it leaves through the bottom edge
+  // (the reader went back up the page), so scrolling back up onto it from
+  // below leaves it as it is.
+  var facts = document.querySelector('.owner__facts');
+  if (facts && !reduce && 'IntersectionObserver' in window) {
+    facts.classList.add('will-draw');
+    new IntersectionObserver(function (en) {
+      var e = en[en.length - 1];
+      if (e.intersectionRatio >= 0.4) facts.classList.add('is-drawn');
+      else if (!e.isIntersecting && e.boundingClientRect.top > 0) facts.classList.remove('is-drawn');
+    }, { threshold: [0, 0.4] }).observe(facts);
+  }
+
+  // ------------------------------------------------------ smooth scroll --
+  // The same feel as the immersive site: the page never jumps, it glides.
+  // A mouse wheel only moves a target and the page eases toward it (a lerp
+  // each frame). Menu links and "go to the steps" take a slow eased glide.
+  // The page keeps its native scroll, so the engine's pinned acts still work.
+  // Touch screens keep their own momentum; reduced motion keeps plain jumps.
+  var fineWheel = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var sTarget = scrollY, sCur = scrollY, sRaf = 0, glide = null, SMOOTH = 0.09;
+  function maxY() { return docEl.scrollHeight - innerHeight; }
+  function sTick(now) {
+    sRaf = 0;
+    if (glide) {
+      var t = Math.min(1, (now - glide.t0) / glide.d);
+      var e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      sCur = glide.from + (glide.to - glide.from) * e;
+      if (t >= 1) { glide = null; sTarget = sCur; }
+    } else {
+      sCur += (sTarget - sCur) * SMOOTH;
+      if (Math.abs(sTarget - sCur) < 0.5) sCur = sTarget;
+    }
+    scrollTo({ top: sCur, behavior: 'instant' });
+    if (glide || sCur !== sTarget) sRaf = requestAnimationFrame(sTick);
+  }
+  function sStop() { if (sRaf) cancelAnimationFrame(sRaf); sRaf = 0; glide = null; sCur = sTarget = scrollY; }
+  function glideTo(y) {
+    y = Math.max(0, Math.min(maxY(), y));
+    if (reduce) { scrollTo({ top: y, behavior: 'instant' }); return; }
+    sStop();
+    var dist = Math.abs(y - scrollY);
+    glide = { from: scrollY, to: y, t0: performance.now(), d: Math.min(1700, 700 + dist * 0.18) };
+    sRaf = requestAnimationFrame(sTick);
+  }
+  function topOf(el) {
+    var y = el.getBoundingClientRect().top + scrollY;
+    // A pinned act (the steps) is framed by its own full-screen stage, which
+    // already leaves room for the menu bar: land exactly on its top, so the
+    // steps sit square in the screen instead of a bar's height too low.
+    // (past the white band above it, which is the section's top border).
+    if (el.classList.contains('sc-act--pinned')) return y + el.clientTop;
+    // Any other section: frame its content square in the screen under the
+    // menu bar. The content is what its children cover (not the white band
+    // or the empty padding): centred when it fits, else started just under
+    // the bar.
+    // (The request form keeps its own landing, set in CSS as a negative
+    // scroll margin: the end of the fade, where it is fully shown.)
+    var sm = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    if (el.tagName === 'SECTION' && el.children.length && sm >= 0) {
+      var top = Infinity, bottom = -Infinity;
+      for (var i = 0; i < el.children.length; i++) {
+        var r = el.children[i].getBoundingClientRect();
+        if (!r.height) continue;
+        top = Math.min(top, r.top); bottom = Math.max(bottom, r.bottom);
+      }
+      if (top < Infinity) {
+        var barB = bar.getBoundingClientRect().bottom + 20;
+        var room = innerHeight - barB, h = bottom - top;
+        // Never stop before the section's white band has gone fully above
+        // the screen: it would show at the top, around the menu bar.
+        return Math.max(y + el.clientTop, top + scrollY - barB - (h < room ? (room - h) / 2 : 0));
+      }
+    }
+    return y - sm;
+  }
+  addEventListener('scroll', function () { if (!sRaf) sCur = sTarget = scrollY; }, { passive: true });
+  ['mousedown', 'touchstart'].forEach(function (ev) { addEventListener(ev, sStop, { passive: true }); });
+
+  // The scroll keys glide too: arrows, Space, Page up/down, Home and End.
+  addEventListener('keydown', function (e) {
+    if (reduce || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || document.querySelector('dialog[open]')) { sStop(); return; }
+    var t = e.target, tag = t && t.tagName;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT|BUTTON|SUMMARY|A|AUDIO|VIDEO)$/.test(tag) && (e.key === ' ' || tag !== 'A' && tag !== 'BUTTON'))) { sStop(); return; }
+    if (t && t.closest && t.closest('[role="slider"], [role="listbox"], [role="grid"], [role="tablist"], [role="radiogroup"]')) { sStop(); return; }
+    var page = innerHeight * 0.85, d = null;
+    switch (e.key) {
+      case 'ArrowDown': d = 140; break;
+      case 'ArrowUp': d = -140; break;
+      case 'PageDown': d = page; break;
+      case 'PageUp': d = -page; break;
+      case ' ': d = e.shiftKey ? -page : page; break;
+      case 'Home': e.preventDefault(); glideTo(0); return;
+      case 'End': e.preventDefault(); glideTo(maxY()); return;
+      default: sStop(); return;
+    }
+    e.preventDefault();
+    if (glide) { glide = null; sTarget = sCur; }
+    if (!sRaf) sCur = sTarget = scrollY;
+    sTarget = Math.max(0, Math.min(maxY(), sTarget + d));
+    if (!sRaf) sRaf = requestAnimationFrame(sTick);
+  });
+
+  if (fineWheel && !reduce) {
+    addEventListener('wheel', function (e) {
+      if (e.ctrlKey || e.defaultPrevented || document.querySelector('dialog[open]')) return;
+      // A box that scrolls on its own keeps the wheel.
+      for (var n = e.target; n && n.nodeType === 1 && n !== document.body; n = n.parentElement) {
+        if (n.scrollHeight > n.clientHeight + 1 && /auto|scroll/.test(getComputedStyle(n).overflowY)) return;
+      }
+      var dy = e.deltaY * (e.deltaMode === 1 ? 40 : e.deltaMode === 2 ? innerHeight : 1);
+      if (!dy || Math.abs(e.deltaX) > Math.abs(dy)) return;
+      e.preventDefault();
+      if (glide) { glide = null; sTarget = sCur; }
+      if (!sRaf) sCur = sTarget = scrollY;
+      sTarget = Math.max(0, Math.min(maxY(), sTarget + dy));
+      if (!sRaf) sRaf = requestAnimationFrame(sTick);
+    }, { passive: false });
+  }
+
+  // In-page links glide to their section instead of jumping.
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.closest('dialog')) return;
+    var id = a.getAttribute('href').slice(1);
+    var el = id ? document.getElementById(id) : null;
+    if (!el) return;
+    e.preventDefault();
+    glideTo(topOf(el));
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  });
+
   // ------------------------------------------------------------ per frame --
   var lastForm = null, lastTab = null;
+  // How it works: the pinned act's scroll progress picks the step shown.
+  var howEl = document.getElementById('comment'), howRoll = document.querySelector('[data-how-roll]'), lastHow = -1;
+  var howAt = 0, HOW_HOLD = 900, lastLift = -1;
+  var howSteps = Array.prototype.slice.call(document.querySelectorAll('[data-how-steps] > li'));
+  var howDots = Array.prototype.slice.call(document.querySelectorAll('.how__dots i'));
+  if (!howRoll || !howSteps.length) howEl = null;
   function frame() {
     // Services rail: each card settles as it comes in from the right edge.
     var sr = svc.getBoundingClientRect();
@@ -70,6 +264,30 @@
       for (var i = 0; i < railItems.length; i++) {
         var r = railItems[i].getBoundingClientRect();
         railItems[i].style.setProperty('--k', clamp01((innerWidth - r.left) / (r.width * 0.85)).toFixed(3));
+      }
+    }
+
+    if (howEl) {
+      // The three steps share the first three quarters; then the steps fade
+      // softly away and the request form behind them shows.
+      var hp = prog(howEl), want = Math.max(0, Math.min(howSteps.length - 1, Math.floor(hp / 0.75 * howSteps.length)));
+      var lift = reduce ? 0 : clamp01((hp - 0.8) / 0.2);
+      lift = lift * lift * (3 - 2 * lift);
+      if (lift !== lastLift) {
+        howEl.style.setProperty('--fade', clamp01(lift / 0.45).toFixed(4));
+        howEl.style.setProperty('--clear', clamp01((lift - 0.45) / 0.55).toFixed(4));
+        howEl.classList.toggle('is-lifted', lift > 0.5); lastLift = lift;
+      }
+      // Never skip a step: move one step at a time, and keep each step on
+      // screen at least HOW_HOLD ms, even after a fast flick.
+      var hk = lastHow < 0 ? want : lastHow;
+      if (want !== lastHow && lastHow >= 0 && performance.now() - howAt >= HOW_HOLD) hk = lastHow + (want > lastHow ? 1 : -1);
+      if (hk !== lastHow) {
+        howAt = performance.now();
+        howRoll.style.setProperty('--k', hk);
+        howSteps.forEach(function (li, j) { li.classList.toggle('is-on', j === hk); });
+        howDots.forEach(function (d, j) { d.classList.toggle('is-on', j === hk); });
+        lastHow = hk;
       }
     }
 
@@ -82,7 +300,7 @@
     }
 
     // The request pill steps aside once the form itself is on screen.
-    var atForm = book.getBoundingClientRect().top < innerHeight * 0.55;
+    var atForm = form.getBoundingClientRect().top < innerHeight * 0.55;
     if (atForm !== lastForm) { docEl.classList.toggle('at-form', atForm); lastForm = atForm; }
     requestAnimationFrame(frame);
   }
@@ -92,7 +310,7 @@
   // Plays on a loop, muted, only while it is on screen; never under reduced
   // motion, where its poster stays.
   var loops = Array.prototype.slice.call(document.querySelectorAll('video.loop'));
-  var phoneMq = matchMedia('(max-width: 760px)');
+  var phoneMq = matchMedia('(max-width: 760px), (max-height: 500px) and (orientation: landscape)');
   if (!reduce && 'IntersectionObserver' in window) {
     var lio = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -124,7 +342,8 @@
   // line (vertical page scroll stays free on touch); a hidden range input
   // carries keyboard and screen-reader control and stays in sync.
   var compares = Array.prototype.slice.call(document.querySelectorAll('[data-compare]'));
-  var touched = false;
+  var lastTouch = -1e9;   // when the reader last moved a line
+  function poke() { lastTouch = performance.now(); }
   function setPos(el, pct) {
     pct = Math.max(0, Math.min(100, pct));
     el.style.setProperty('--pos', pct.toFixed(2) + '%');
@@ -136,46 +355,49 @@
     function fromEvent(e) { var b = el.getBoundingClientRect(); setPos(el, (e.clientX - b.left) / b.width * 100); }
     el.addEventListener('pointerdown', function (e) {
       if (e.button !== undefined && e.button !== 0) return;
-      dragging = true; touched = true; el.classList.add('is-dragging');
+      dragging = true; poke(); el.classList.add('is-dragging');
       try { el.setPointerCapture(e.pointerId); } catch (err) {}
       fromEvent(e);
     });
-    el.addEventListener('pointermove', function (e) { if (dragging) fromEvent(e); });
+    el.addEventListener('pointermove', function (e) { if (dragging) { poke(); fromEvent(e); } });
     function stop() { dragging = false; el.classList.remove('is-dragging'); }
     el.addEventListener('pointerup', stop);
     el.addEventListener('pointercancel', stop);
     el.addEventListener('lostpointercapture', stop);
-    range.addEventListener('input', function () { touched = true; setPos(el, +range.value); });
+    range.addEventListener('input', function () { poke(); setPos(el, +range.value); });
   });
 
-  // Show once that the line moves: a small sweep when the frame first comes
-  // into view, unless the reader already moved it or prefers less motion.
-  if (!reduce && 'IntersectionObserver' in window && compares[0]) {
-    var nudge = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        nudge.disconnect();
-        if (touched) return;
-        var el = en.target, t0 = null, keys = [[0, 50], [0.35, 30], [0.75, 66], [1, 50]];
-        function step(ts) {
-          if (touched) return;
-          if (t0 === null) t0 = ts;
-          var k = Math.min(1, (ts - t0) / 1600), i = 1;
-          while (i < keys.length - 1 && k > keys[i][0]) i++;
-          var a = keys[i - 1], b = keys[i], u = (k - a[0]) / (b[0] - a[0]);
-          u = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
-          setPos(el, a[1] + (b[1] - a[1]) * u);
-          if (k < 1) requestAnimationFrame(step);
+  // The line glides from side to side on its own while the frame is on
+  // screen. A drag or a key hands it to the reader; it starts again from
+  // where it was left after a few idle seconds. Never under reduced motion.
+  var AUTO_MIN = 22, AUTO_MAX = 78, AUTO_PERIOD = 5200, AUTO_IDLE = 6000;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var mid = (AUTO_MIN + AUTO_MAX) / 2, amp = (AUTO_MAX - AUTO_MIN) / 2;
+    compares.forEach(function (el) {
+      var raf = 0, phase = 0, last = 0, running = false;
+      function frame(ts) {
+        raf = requestAnimationFrame(frame);
+        if (ts - lastTouch < AUTO_IDLE || el.classList.contains('is-dragging')) { running = false; return; }
+        if (!running) {   // (re)start from where the line is now
+          var cur = parseFloat(el.style.getPropertyValue('--pos'));
+          if (isNaN(cur)) cur = 50;
+          phase = Math.asin(Math.max(-1, Math.min(1, (cur - mid) / amp)));
+          running = true; last = ts; return;
         }
-        setTimeout(function () { requestAnimationFrame(step); }, 350);
-      });
-    }, { threshold: 0.6 });
-    nudge.observe(compares[0]);
+        phase += (ts - last) / AUTO_PERIOD * 2 * Math.PI; last = ts;
+        setPos(el, mid + amp * Math.sin(phase));
+      }
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting && !raf) { running = false; raf = requestAnimationFrame(frame); }
+          else if (!en.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+        });
+      }, { threshold: 0.3 }).observe(el);
+    });
   }
 
-  // Tabs switch the transformation; the caption follows.
+  // Tabs switch the transformation.
   var baTabs = Array.prototype.slice.call(document.querySelectorAll('.ba__tabs [role="tab"]'));
-  var baCaption = document.querySelector('[data-ba-caption]');
   function showView(tab, focus) {
     baTabs.forEach(function (t) {
       var on = t === tab;
@@ -185,7 +407,6 @@
       panel.hidden = !on;
       if (on) { var c = panel.querySelector('[data-compare]'); if (c) setPos(c, 50); }
     });
-    if (baCaption && tab.getAttribute('data-caption')) baCaption.textContent = tab.getAttribute('data-caption');
     if (focus) tab.focus();
   }
   baTabs.forEach(function (t, i) {
@@ -197,9 +418,113 @@
     });
   });
 
+  // ------------------------------------- services window from the form --
+  // "Modifier" in the form opens a window with every service, so the visitor
+  // changes her choice without leaving the form. Services with options open
+  // their options window on top. The page does not move.
+  var svcsDlg = document.querySelector('[data-svcs]'), svcsList = svcsDlg && svcsDlg.querySelector('[data-svcs-list]');
+  function renderSvcs() {
+    if (!svcsList) return;
+    svcsList.textContent = '';
+    Object.keys(SERVICES).forEach(function (id) {
+      var on = picks.indexOf(id) > -1, li = document.createElement('li'), bt = document.createElement('button');
+      bt.type = 'button'; bt.className = 'svcs__item'; bt.setAttribute('data-id', id); bt.setAttribute('aria-pressed', String(on));
+      var im = document.createElement('img'); im.src = SERVICES[id].img; im.alt = '';
+      var tx = document.createElement('span'), b = document.createElement('b'), sm = document.createElement('small');
+      b.textContent = SERVICES[id].name;
+      sm.textContent = on ? (OPTIONS[id] && optNames(id).length ? optNames(id).join(', ') : 'Choisi') : (OPTIONS[id] ? 'Voir les options' : 'Ajouter');
+      tx.appendChild(b); tx.appendChild(sm); bt.appendChild(im); bt.appendChild(tx); li.appendChild(bt); svcsList.appendChild(li);
+    });
+  }
+  if (svcsDlg) {
+    svcsList.addEventListener('click', function (e) {
+      var bt = e.target.closest('.svcs__item'); if (!bt) return;
+      var id = bt.getAttribute('data-id');
+      if (OPTIONS[id]) { openOpts(id, null, bt); return; }
+      if (picks.indexOf(id) > -1) remove(id); else add(id, null);
+    });
+    function closeSvcs() { if (typeof svcsDlg.close === 'function') svcsDlg.close(); else svcsDlg.removeAttribute('open'); }
+    svcsDlg.querySelectorAll('[data-svcs-done], [data-svcs-close]').forEach(function (b) { b.addEventListener('click', closeSvcs); });
+    svcsDlg.addEventListener('click', function (e) { if (e.target === svcsDlg) closeSvcs(); });
+    // Keep the summary exactly where it was: the browser's scroll anchoring
+    // would otherwise shift the page as the summary grows or shrinks.
+    var svcsY = 0;
+    svcsDlg.addEventListener('close', function () {
+      stayPut = false; scrollTo(0, svcsY);
+      var l = document.querySelector('[data-chosen] a'); if (l) l.focus({ preventScroll: true });
+    });
+    var chosenLine = document.querySelector('[data-chosen]');
+    if (chosenLine) chosenLine.addEventListener('click', function (e) {
+      if (!e.target.closest('a')) return;
+      e.preventDefault();
+      stayPut = true; svcsY = scrollY; renderSvcs();
+      if (typeof svcsDlg.showModal === 'function') svcsDlg.showModal(); else svcsDlg.setAttribute('open', '');
+      // Focus the title, not the first service: a focused service looked chosen.
+      var h = svcsDlg.querySelector('#svcs-h'); if (h) h.focus({ preventScroll: true });
+    });
+  }
+
+  // ------------------------------------------- products: rising cascade --
+  // Each product rises and fades in when it reaches the screen; the ones on
+  // the same row follow each other by a short delay. Nothing moves under
+  // reduced motion, and without this script the products simply show.
+  (function () {
+    var list = document.querySelector('.prods');
+    if (!list || reduce || !('IntersectionObserver' in window)) return;
+    var items = Array.prototype.slice.call(list.children);
+    list.classList.add('is-cascade');
+    var io = new IntersectionObserver(function (entries) {
+      var row = entries.filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left; });
+      row.forEach(function (e, i) {
+        e.target.style.setProperty('--d', (i * 140) + 'ms');
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (it) { io.observe(it); });
+  })();
+
+  // Touch screens have no hover: a finger on a product lifts and lights it,
+  // and it settles back a moment after the finger leaves.
+  Array.prototype.forEach.call(document.querySelectorAll('.prod'), function (p) {
+    var t = 0;
+    function on() { clearTimeout(t); document.querySelectorAll('.prod.is-lit').forEach(function (q) { if (q !== p) q.classList.remove('is-lit'); }); p.classList.add('is-lit'); }
+    function off() { clearTimeout(t); t = setTimeout(function () { p.classList.remove('is-lit'); }, 900); }
+    p.addEventListener('touchstart', on, { passive: true });
+    p.addEventListener('touchend', off, { passive: true });
+    p.addEventListener('touchcancel', off, { passive: true });
+  });
+
+  // ------------------------------------------- titles come into focus --
+  // Each section title starts blurred and sharpens when it comes up from the
+  // bottom of the screen (scrolling down). Scrolling back up toward the top
+  // keeps titles sharp; once a title drops back below the screen, it blurs
+  // again so the effect replays on the way down. Without the script, or under
+  // reduced motion, titles just show.
+  (function () {
+    var titles = Array.prototype.slice.call(document.querySelectorAll('main h2.disp'));
+    if (!titles.length || reduce || !('IntersectionObserver' in window)) return;
+    docEl.classList.add('title-focus');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { if (e.intersectionRatio >= 0.35) e.target.classList.add('is-sharp'); return; }
+        // Left through the bottom edge (the reader went back up): reset.
+        if (e.boundingClientRect.top > (e.rootBounds ? e.rootBounds.bottom : innerHeight) - 1) e.target.classList.remove('is-sharp');
+      });
+    }, { threshold: [0, 0.35], rootMargin: '0px 0px -10% 0px' });
+    titles.forEach(function (t) { io.observe(t); });
+  })();
+
   // ------------------------------------------------- choosing services --
   var picks = [];
   var boxes = Array.prototype.slice.call(form.querySelectorAll('input[name="services"]'));
+  var chosenOpts = {};   // service id -> ids of its chosen options
+  function optNames(id) {
+    return (chosenOpts[id] || []).map(function (o) {
+      return OPTIONS[id].filter(function (x) { return x.id === o; })[0].name;
+    });
+  }
 
   function render() {
     slip.textContent = picks.length ? 'Ma soumission · ' + picks.length : 'Ma soumission';
@@ -208,9 +533,34 @@
       var on = picks.indexOf(b.getAttribute('data-add')) > -1;
       b.setAttribute('aria-pressed', String(on));
       var st = b.querySelector('[data-state]');
-      if (st) st.textContent = on ? 'Choisi' : 'Choisir';
+      if (st) st.textContent = on ? 'Choisi' : (OPTIONS[b.getAttribute('data-add')] ? 'Voir les options' : 'Choisir');
     });
     boxes.forEach(function (bx) { if (SERVICES[bx.value]) bx.checked = picks.indexOf(bx.value) > -1; });
+    // The form's summary: a photo and a name for each chosen service (the
+    // chosen option's photo when it has one), then a link back to change it.
+    var line = document.querySelector('[data-chosen]');
+    if (line) {
+      line.textContent = '';
+      if (picks.length) {
+        var list = document.createElement('ul'); list.className = 'chosen__list';
+        picks.forEach(function (id) {
+          var opts = OPTIONS[id] ? (chosenOpts[id] || []) : [];
+          var o = opts.length ? OPTIONS[id].filter(function (x) { return x.id === opts[0]; })[0] : null;
+          var li = document.createElement('li'), im = document.createElement('img'), tx = document.createElement('span');
+          im.src = (o && o.img) || SERVICES[id].img; im.alt = ''; im.width = 120; im.height = 150;
+          var b = document.createElement('b'); b.textContent = SERVICES[id].name; tx.appendChild(b);
+          if (o) { var sm = document.createElement('small'); sm.textContent = o.name; tx.appendChild(sm); }
+          li.appendChild(im); li.appendChild(tx); list.appendChild(li);
+        });
+        line.appendChild(list);
+      } else line.append('Aucun service choisi. ');
+      var a = document.createElement('a'); a.href = '#services'; a.textContent = picks.length ? 'Modifier' : 'Choisir un service'; line.appendChild(a);
+    }
+    if (typeof renderSvcs === 'function') renderSvcs();
+    document.querySelectorAll('[data-opts-chosen]').forEach(function (n) {
+      var id = n.getAttribute('data-opts-chosen');
+      n.textContent = picks.indexOf(id) > -1 ? optNames(id).join(', ') : '';
+    });
   }
 
   // The chosen photo flies into the pill, so the visitor sees where it went.
@@ -244,6 +594,13 @@
     render();
     fly(fromEl, SERVICES[id].img, bump);
     announce.textContent = SERVICES[id].name + ' ajouté à ta soumission.';
+    goSteps();
+  }
+  // Once a service is chosen, take the visitor on to the steps.
+  var stayPut = false;   // true while the services are edited from the form
+  function goSteps() {
+    var steps = document.getElementById('comment'); if (!steps || stayPut) return;
+    setTimeout(function () { glideTo(topOf(steps)); }, reduce ? 0 : 750);
   }
   function remove(id) {
     var i = picks.indexOf(id); if (i < 0) return;
@@ -255,21 +612,99 @@
   document.querySelectorAll('[data-add]').forEach(function (b) {
     b.addEventListener('click', function () {
       var id = b.getAttribute('data-add');
+      if (OPTIONS[id] && openOpts(id, b.querySelector('img'), b)) return;
       if (picks.indexOf(id) > -1) remove(id); else add(id, b.querySelector('img'));
     });
   });
   boxes.forEach(function (bx) {
+    // In the form too, a service with options opens the window instead of ticking.
+    bx.addEventListener('click', function (e) {
+      if (!OPTIONS[bx.value]) return;
+      e.preventDefault();
+      openOpts(bx.value, null, bx);
+    });
     bx.addEventListener('change', function () {
       if (!SERVICES[bx.value]) return;
       if (bx.checked) add(bx.value, null); else remove(bx.value);
     });
   });
+  // ------------------------------------------------ the options window --
+  // Opened by a service that has OPTIONS, from its card or its form photo.
+  // Rows turn brown when chosen; the button adds, updates or removes the
+  // service in "Ma soumission". Esc, Annuler, × or a click outside close it
+  // without changing anything.
+  var dlg = document.querySelector('[data-opts]');
+  var dlgList = dlg && dlg.querySelector('[data-opts-list]');
+  var dlgOk = dlg && dlg.querySelector('[data-opts-ok]');
+  var dlgFor = null, dlgFrom = null, dlgBack = null;
+  function okLabel() {
+    var n = dlgList.querySelectorAll('input:checked').length, inPicks = picks.indexOf(dlgFor) > -1;
+    dlgOk.textContent = n ? (inPicks ? 'Mettre à jour ma soumission' : 'Rendez-vous')
+                          : (inPicks ? 'Retirer de ma soumission' : 'Rendez-vous');
+    dlgOk.disabled = !n && !inPicks;
+  }
+  // The large photo beside the list shows the option just chosen.
+  function showPhoto(optId) {
+    var o = OPTIONS[dlgFor].filter(function (x) { return x.id === optId; })[0]; if (!o) return;
+    var img = dlg.querySelector('[data-opts-img]'), fresh = img.cloneNode(false);
+    fresh.src = o.img || SERVICES[dlgFor].img;
+    img.replaceWith(fresh);   // a new node replays the fade-in
+    dlg.querySelector('[data-opts-cap]').textContent = o.name;
+  }
+  function openOpts(id, fromImg, backTo) {
+    if (!dlg || !OPTIONS[id]) return false;
+    dlgFor = id; dlgFrom = fromImg; dlgBack = backTo;
+    dlg.querySelector('[data-opts-service]').textContent = SERVICES[id].name;
+    dlgList.textContent = '';
+    OPTIONS[id].forEach(function (o) {
+      var li = document.createElement('li'), lab = document.createElement('label'), cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.value = o.id; cb.checked = (chosenOpts[id] || []).indexOf(o.id) > -1;
+      var nm = document.createElement('span'); nm.className = 'opts__name'; nm.textContent = o.name;
+      var pr = document.createElement('span'); pr.className = 'opts__price'; pr.textContent = o.price;
+      lab.appendChild(cb); lab.appendChild(nm); lab.appendChild(pr); li.appendChild(lab); dlgList.appendChild(li);
+    });
+    okLabel();
+    var firstOn = dlgList.querySelector('input:checked'); if (firstOn) showPhoto(firstOn.value);
+    if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
+    var first = dlgList.querySelector('input'); if (first) first.focus();
+    return true;
+  }
+  function closeOpts() {
+    if (typeof dlg.close === 'function') dlg.close(); else { dlg.removeAttribute('open'); dlg.dispatchEvent(new Event('close')); }
+  }
+  if (dlg) {
+    dlgList.addEventListener('change', function (e) {
+      // One option at a time: choosing one lets go of the others.
+      if (e.target.checked) dlgList.querySelectorAll('input:checked').forEach(function (c) { if (c !== e.target) c.checked = false; });
+      okLabel();
+      if (e.target.checked) showPhoto(e.target.value);
+      else { var on = dlgList.querySelector('input:checked'); if (on) showPhoto(on.value); }
+    });
+    dlg.querySelectorAll('[data-opts-cancel]').forEach(function (b) { b.addEventListener('click', closeOpts); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) closeOpts(); });   // the backdrop
+    dlg.addEventListener('close', function () { if (dlgBack) dlgBack.focus({ preventScroll: true }); dlgFor = null; });
+    dlgOk.addEventListener('click', function () {
+      var id = dlgFor, from = dlgFrom;
+      var ids = Array.prototype.map.call(dlgList.querySelectorAll('input:checked'), function (c) { return c.value; });
+      chosenOpts[id] = ids;
+      closeOpts();
+      if (ids.length && picks.indexOf(id) < 0) add(id, from);
+      else if (!ids.length && picks.indexOf(id) > -1) remove(id);
+      else { render(); announce.textContent = SERVICES[id].name + ' : ' + optNames(id).join(', ') + '.'; }
+    });
+  }
+
   render();
 
   // A keyboard user tabbing through the rail: scroll the page to where the
   // focused card sits in view, since the rail moves with the page scroll.
+  // Only for the keyboard: a mouse or finger press also focuses the card,
+  // and moving the rail then would pull the card from under the pointer, so
+  // the click would miss it.
+  var pointerAt = 0;
+  svc.addEventListener('pointerdown', function () { pointerAt = performance.now(); }, true);
   svc.addEventListener('focusin', function (e) {
-    if (reduce) return;
+    if (reduce || performance.now() - pointerAt < 800) return;
     var item = e.target.closest('.card, .rail__end'); if (!item) return;
     var travel = railEl.scrollWidth - innerWidth;
     if (travel <= 0) return;
@@ -337,7 +772,7 @@
 
   function renderSlots() {
     slotsEl.textContent = '';
-    if (!chosenDay) { slotsTitle.textContent = 'Choisis d\'abord un jour.'; return; }
+    if (!chosenDay) { slotsTitle.textContent = ''; return; }
     slotsTitle.innerHTML = '';
     slotsTitle.append('Heures du ');
     var em = document.createElement('em'); em.textContent = longDay(chosenDay); slotsTitle.appendChild(em);
@@ -420,7 +855,11 @@
     span.textContent = 'à ';
     var strong = document.createElement('strong'); strong.textContent = INTERAC_EMAIL; span.appendChild(strong);
     form.querySelector('[data-done-depot]').textContent =
-      'Pour confirmer ta place, envoie ensuite 20 $ par virement Interac à ' + INTERAC_EMAIL + ', avec ton nom et la date dans le message.';
+      'Pour réserver ta place, envoie 20 $ par Interac à ' + INTERAC_EMAIL + ' après notre confirmation.';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-interac-how]'), function (n) {
+      n.textContent = ' à ';
+      var b = document.createElement('strong'); b.textContent = INTERAC_EMAIL; n.appendChild(b);
+    });
   }
 
   var MESSAGES = {
@@ -494,7 +933,10 @@
     }
 
     // One clear table in the salon's inbox; "Reply" goes to the client.
-    var picked = boxes.filter(function (b) { return b.checked; }).map(function (b) { return SERVICES[b.value] ? SERVICES[b.value].name : b.value; });
+    var picked = boxes.filter(function (b) { return b.checked; }).map(function (b) {
+      var name = SERVICES[b.value] ? SERVICES[b.value].name : b.value, opts = OPTIONS[b.value] ? optNames(b.value) : [];
+      return opts.length ? name + ' (' + opts.join(', ') + ')' : name;
+    });
     var when = longDay(chosenDay) + ' à ' + label(mins(chosenTime));
     var payload = {
       'Services': picked.length ? picked.join(', ') : 'Aucun choisi',
