@@ -468,3 +468,9 @@ Not verified: a real phone, a real form endpoint.
   disponibles au salon Mechi » (assets/accueil-3.webp, 1920 × 1080).
 - Barre du menu (ordinateur) : les onglets se répartissent sur toute la
   largeur entre le logo et le bouton Rendez-vous (space-between).
+
+## Correctif : clic sur un service
+- Un clic sur une carte de service la faisait d'abord glisser vers la gauche
+  (le recentrage prévu pour le clavier se déclenchait aussi à la souris) : le
+  clic tombait à côté et le service n'était pas choisi. Le recentrage ne se
+  fait plus qu'au clavier ; souris et doigt choisissent du premier coup.

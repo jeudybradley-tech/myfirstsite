@@ -698,8 +698,13 @@
 
   // A keyboard user tabbing through the rail: scroll the page to where the
   // focused card sits in view, since the rail moves with the page scroll.
+  // Only for the keyboard: a mouse or finger press also focuses the card,
+  // and moving the rail then would pull the card from under the pointer, so
+  // the click would miss it.
+  var pointerAt = 0;
+  svc.addEventListener('pointerdown', function () { pointerAt = performance.now(); }, true);
   svc.addEventListener('focusin', function (e) {
-    if (reduce) return;
+    if (reduce || performance.now() - pointerAt < 800) return;
     var item = e.target.closest('.card, .rail__end'); if (!item) return;
     var travel = railEl.scrollWidth - innerWidth;
     if (travel <= 0) return;
