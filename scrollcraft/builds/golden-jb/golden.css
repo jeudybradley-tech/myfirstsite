@@ -576,3 +576,28 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
   .bar__cta { display: none; }   /* the bag already leads to the order */
 }
 
+/* No bar (client: « je ne veux pas de barre »): the name, the section links
+   and Commander sit directly on top of the home panel, like the ARCOVA
+   reference, with no band behind them. The header is placed over the panel
+   and scrolls away with it. */
+.bar {
+  position: absolute; top: var(--pill-x); left: var(--pill-x); right: var(--pill-x);
+  padding: 0 clamp(1.4rem, 4vw, 4.5rem); background: none; box-shadow: none;
+  border-radius: 28px 28px 0 0;
+}
+.bar__mark { color: #f6efe5; }
+.bar__group a { color: rgba(246, 239, 229, .92); }
+.bar__group a.is-here { color: var(--sc-accent); }
+.home { padding-top: var(--pill-x); }
+.home__panel { min-height: calc(100svh - var(--pill-x) * 2); }
+.home__copy { padding-top: calc(var(--pill-h) + clamp(2rem, 9vh, 5.5rem)); }
+main section[id] { scroll-margin-top: 1rem; }
+@media (max-width: 860px) {
+  .bar__group { display: none; }
+}
+@media (max-width: 700px) {
+  .bar { top: .6rem; left: .6rem; right: .6rem; padding: 0 .9rem; border-radius: 20px 20px 0 0; }
+  .home { padding-top: .6rem; }
+  .home__photo { margin-top: 0; }
+}
+
