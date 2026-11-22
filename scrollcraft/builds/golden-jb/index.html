@@ -76,21 +76,61 @@
   <!-- 0 · ACCUEIL (demande de la cliente, d'après sa référence) : la photo en
        plein écran, le titre à gauche, un bouton doré. Plans : photo (recule
        et se resserre un peu), voile sombre, texte (1x). -->
+  <!-- 0 · ACCUEIL, d'après la référence de la cliente (ADLN) : un grand
+       panneau aux coins arrondis, la photo dedans, le titre à gauche, un bouton
+       clair, et en bas une carte par bijou qui mène à sa section. -->
   <section id="accueil" class="home" data-sc-act="flow">
-    <div class="home__photo" data-sc-parallax="-1.4">
-      <picture>
-        <source media="(max-width: 700px)" srcset="assets/accueil-m.webp">
-        <img src="assets/accueil-xl.webp" width="1342" height="2000" fetchpriority="high"
-             alt="Une femme aux longues tresses, les bras croisés sur le dossier d'une chaise, un jonc en acier serti de petites pierres au poignet."
-             data-en-alt="A woman with long braids, arms folded on the back of a chair, a steel bangle set with small stones on her wrist.">
-      </picture>
-    </div>
-    <div class="home__veil" aria-hidden="true"></div>
-    <div class="home__copy" data-sc-in data-sc-stagger="120">
-      <p class="home__kicker" data-en="Stainless steel jewellery">Bijoux en acier inoxydable</p>
-      <h1 class="home__title"><span data-en="Luxury,">Le luxe,</span> <em class="t-it" data-en="every day.">au quotidien.</em></h1>
-      <p class="home__lede" data-en="Bracelets made to be worn every day, that keep their shine. 20 $ each.">Des bracelets faits pour être portés tous les jours, qui gardent leur éclat. 20 $ chacun.</p>
-      <a class="home__cta" href="#n1" data-en="See the collection">Voir la collection</a>
+    <div class="home__panel">
+      <div class="home__photo">
+        <picture>
+          <source media="(max-width: 700px)" srcset="assets/accueil-m.webp">
+          <img src="assets/accueil-xl.webp" width="1342" height="2000" fetchpriority="high"
+               alt="Une femme aux longues tresses, les bras croisés sur le dossier d'une chaise, un jonc en acier serti de petites pierres au poignet."
+               data-en-alt="A woman with long braids, arms folded on the back of a chair, a steel bangle set with small stones on her wrist.">
+        </picture>
+      </div>
+      <div class="home__copy" data-sc-in data-sc-stagger="120">
+        <h1 class="home__title"><span data-en="Luxury,">Le luxe,</span> <span class="home__title-2" data-en="every day">au quotidien</span></h1>
+        <p class="home__lede" data-en="Stainless steel bracelets that keep their shine. Made to be worn every day.">Des bracelets en acier inoxydable qui gardent leur éclat. Faits pour être portés tous les jours.</p>
+        <a class="home__cta" href="#n1" data-en="See the collection">Voir la collection</a>
+      </div>
+      <nav class="home__cards" aria-label="Les bijoux" data-en-aria="The pieces" data-sc-in data-sc-stagger="80">
+        <a class="home__card" href="#n1">
+          <img src="assets/mo-femme-1-m.webp" width="640" height="640" alt="" loading="lazy">
+          <span class="home__card-txt">
+            <span class="home__card-name" data-en="OVAL LINK">MAILLE OVALE</span>
+            <span class="home__card-sub"><span data-en="Silver">Argent</span><br>20 $</span>
+          </span>
+        </a>
+        <a class="home__card" href="#n2">
+          <img src="assets/tn-femme-1-m.webp" width="640" height="640" alt="" loading="lazy">
+          <span class="home__card-txt">
+            <span class="home__card-name" data-en="BLACK CLOVER">TRÈFLE NOIR</span>
+            <span class="home__card-sub"><span data-en="Silver and black">Argent et noir</span><br>20 $</span>
+          </span>
+        </a>
+        <a class="home__card" href="#n3">
+          <img src="assets/ja-1-m.webp" width="640" height="640" alt="" loading="lazy">
+          <span class="home__card-txt">
+            <span class="home__card-name" data-en="SET BANGLE">JONC SERTI</span>
+            <span class="home__card-sub"><span data-en="Silver or gold">Argent ou doré</span><br>20 $</span>
+          </span>
+        </a>
+        <a class="home__card" href="#n4">
+          <img src="assets/tb-femme-1-m.webp" width="640" height="640" alt="" loading="lazy">
+          <span class="home__card-txt">
+            <span class="home__card-name" data-en="WHITE CLOVER">TRÈFLE BLANC</span>
+            <span class="home__card-sub"><span data-en="Silver and white">Argent et blanc</span><br>20 $</span>
+          </span>
+        </a>
+        <a class="home__card" href="#n5">
+          <img src="assets/md-femme-1-m.webp" width="640" height="640" alt="" loading="lazy">
+          <span class="home__card-txt">
+            <span class="home__card-name" data-en="GOLD LINK">MAILLE DORÉE</span>
+            <span class="home__card-sub"><span data-en="Gold">Doré</span><br>20 $</span>
+          </span>
+        </a>
+      </nav>
     </div>
   </section>
 
