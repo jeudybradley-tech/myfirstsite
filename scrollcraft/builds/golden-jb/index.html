@@ -64,28 +64,31 @@
 
 <main id="top">
 
-  <!-- 0 · ACCUEIL (demande de la cliente, d'après sa référence) : la photo en
-       plein écran, le titre à gauche, un bouton doré. Plans : photo (recule
-       et se resserre un peu), voile sombre, texte (1x). -->
-  <!-- 0 · ACCUEIL, d'après la référence de la cliente (ADLN) : un grand
-       panneau aux coins arrondis, la photo dedans, le titre à gauche, un bouton
-       clair, et en bas une carte par bijou qui mène à sa section. -->
-  <section id="accueil" class="home" data-sc-act="flow">
-    <div class="home__panel">
-      <div class="home__photo">
-        <picture>
-          <source media="(max-width: 700px)" srcset="assets/accueil-m.webp">
-          <img src="assets/accueil-xl.webp" width="1342" height="2000" fetchpriority="high"
-               alt="Une femme aux longues tresses, les bras croisés sur le dossier d'une chaise, un jonc en acier serti de petites pierres au poignet."
-               data-en-alt="A woman with long braids, arms folded on the back of a chair, a steel bangle set with small stones on her wrist.">
-        </picture>
-      </div>
-      <div class="home__copy" data-sc-in data-sc-stagger="120">
-        <h1 class="home__title"><span data-en="Luxury,">Le luxe,</span> <span class="home__title-2" data-en="every day">au quotidien</span></h1>
-        <p class="home__lede" data-en="Stainless steel bracelets that keep their shine. Made to be worn every day.">Des bracelets en acier inoxydable qui gardent leur éclat. Faits pour être portés tous les jours.</p>
-        <a class="home__cta" href="#n1" data-en="See the collection">Voir la collection</a>
-      </div>
-      <nav class="home__cards" aria-label="Les bijoux" data-en-aria="The pieces" data-sc-in data-sc-stagger="80">
+  <!-- 0 · ACCUEIL, d'après la référence ARCOVA de la cliente : fond sombre
+       sous la barre, photo à droite fondue dans le noir, à gauche un sur-titre
+       doré, un grand titre en serif avec un mot en or, une phrase, un bouton
+       doré, et une fine ligne pointillée verticale. -->
+  <section id="accueil" class="hero2" data-sc-act="flow">
+    <div class="hero2__photo">
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/accueil-m.webp">
+        <img src="assets/accueil-xl.webp" width="1342" height="2000" fetchpriority="high"
+             alt="Une femme aux longues tresses, les bras croisés sur le dossier d'une chaise, un jonc en acier serti de petites pierres au poignet."
+             data-en-alt="A woman with long braids, arms folded on the back of a chair, a steel bangle set with small stones on her wrist.">
+      </picture>
+    </div>
+    <span class="hero2__rail" aria-hidden="true"></span>
+    <div class="hero2__copy" data-sc-in data-sc-stagger="120">
+      <p class="hero2__kicker" data-en="Stainless steel jewellery">Bijoux en acier inoxydable</p>
+      <h1 class="hero2__title"><span data-en="Bracelets">Des bracelets</span> <em data-en="Timeless">Intemporels</em> <span data-en="made for every day.">faits pour chaque jour.</span></h1>
+      <p class="hero2__lede" data-en="Stainless steel that keeps its shine, silver or gold, for women and men. 20 $ each.">De l’acier inoxydable qui garde son éclat, argent ou doré, pour femmes et hommes. 20 $ chacun.</p>
+      <a class="hero2__cta" href="#n1"><span data-en="See the collection">Voir la collection</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+    </div>
+  </section>
+
+  <!-- Les cinq bijoux en cartes, sous l'accueil : un clic mène au bijou. -->
+  <nav class="pieces" aria-label="Les bijoux" data-en-aria="The pieces">
+    <div class="home__cards" data-sc-in data-sc-stagger="80">
         <a class="home__card" href="#n1">
           <img src="assets/mo-femme-1-m.webp" width="640" height="640" alt="" loading="lazy">
           <span class="home__card-txt">
@@ -121,9 +124,8 @@
             <span class="home__card-sub"><span data-en="Gold">Doré</span><br>20 $</span>
           </span>
         </a>
-      </nav>
     </div>
-  </section>
+  </nav>
 
   <!-- Les quatre bijoux, tous sur le même modèle (demande de la cliente) :
        l'étiquette à gauche, la photo à droite dans un cadre qui s'ouvre par la
