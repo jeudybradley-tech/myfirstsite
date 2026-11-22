@@ -574,7 +574,7 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
   .bar__side { margin-left: 0; }
 }
 @media (max-width: 700px) {
-  .bar__cta { display: none; }   /* the bag already leads to the order */
+  .bar__cta { min-height: 38px; padding: 0 .9em; font-size: .66rem; letter-spacing: .1em; }
 }
 
 /* No bar (client: « je ne veux pas de barre »): the name, the section links
