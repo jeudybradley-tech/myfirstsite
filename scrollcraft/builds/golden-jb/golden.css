@@ -517,7 +517,7 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
   text-shadow: none; color: #ece7df;
 }
 .bar::before { display: none; }
-.bar__mark { position: static; translate: none; padding: .4rem 0; color: #f1ece4; display: inline-grid; grid-template-columns: auto auto; justify-content: start; align-items: baseline; line-height: 1.1; }
+.bar__mark { position: static; translate: none; padding: .4rem 0; color: #f1ece4; display: inline-grid; grid-template-columns: max-content 1fr; justify-content: start; align-items: baseline; line-height: 1.1; }
 .bar__sub { grid-column: 1 / -1; }
 .bar__mark span { color: var(--sc-accent); }
 .bar__sub {
@@ -559,5 +559,20 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
   .bar__sub { display: none; }
   .bar .bag { width: 40px; height: 40px; }
   .home { padding-top: calc(var(--index-h) + .5rem); }
+}
+
+/* No tabs (client: « je ne veux pas d'onglet »): only the name, Commander,
+   the bag and FR / EN. The nav keeps Commander inline at every width. */
+.bar__nav { justify-content: flex-end; }
+@media (max-width: 1200px) {
+  .bar__nav {
+    display: flex; position: static; flex-direction: row; align-items: center; margin: 0; padding: 0;
+    background: none; border: 0; box-shadow: none; max-height: none; overflow: visible;
+  }
+  .bar__cta { margin-top: 0; min-height: 44px; background: transparent; color: #f1ece4; }
+  .bar__side { margin-left: 0; }
+}
+@media (max-width: 700px) {
+  .bar__cta { display: none; }   /* the bag already leads to the order */
 }
 
