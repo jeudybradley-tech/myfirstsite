@@ -621,9 +621,22 @@ main section[id] { scroll-margin-top: 1rem; }
    text so the names stay on one or two lines. */
 @media (min-width: 701px) {
   .home__card { flex-direction: column; min-height: 0; }
-  .home__card img { width: 100%; height: clamp(3.4rem, 8vh, 5rem); }
+  .home__card img { width: 100%; height: clamp(4.4rem, 11vh, 6.4rem); }
   .home__card-txt { padding: .6rem .8rem .75rem; gap: .25rem; }
   .home__card-name { font-size: .68rem; letter-spacing: .1em; }
   .home__card-sub { font-size: .74rem; }
+}
+
+/* Card thumbnails zoom in on their bracelet (client: the products must be
+   visible in the frame). Each image carries its bracelet position as both
+   object-position and transform-origin. */
+.home__card-pic { display: block; overflow: hidden; flex: none; }
+.home__card-pic img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.75); }
+@media (min-width: 701px) {
+  .home__card-pic { width: 100%; height: clamp(4.4rem, 11vh, 6.4rem); }
+  .home__card-pic img { height: 100%; }
+}
+@media (max-width: 700px) {
+  .home__card-pic { width: 44%; }
 }
 
