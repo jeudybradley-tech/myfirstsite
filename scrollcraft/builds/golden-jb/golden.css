@@ -502,3 +502,62 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
   background: linear-gradient(to bottom, rgba(255, 255, 255, .10), rgba(255, 255, 255, 0) 42%);
 }
 
+/* ── Tab bar after the client's ARCOVA reference ──────────────────────────
+   A dark band across the full width: the name on the left with a small line
+   under it, the tabs centred (the current one in gold, underlined), an
+   outlined gold button and the bag in a ring on the right. Overrides the
+   pill above. */
+:root { --pill-top: 0px; --pill-h: 5.2rem; }
+.bar {
+  top: 0; left: 0; right: 0; border-radius: 0; padding: 0 clamp(1rem, 3vw, 3rem);
+  gap: clamp(1rem, 2.4vw, 2.6rem);
+  background: linear-gradient(100deg, #0f0f10 0%, #17171a 45%, #2c2d31 72%, #141416 100%);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .5);
+  text-shadow: none; color: #ece7df;
+}
+.bar::before { display: none; }
+.bar__mark { position: static; translate: none; padding: .4rem 0; color: #f1ece4; display: inline-grid; grid-template-columns: auto auto; justify-content: start; align-items: baseline; line-height: 1.1; }
+.bar__sub { grid-column: 1 / -1; }
+.bar__mark span { color: var(--sc-accent); }
+.bar__sub {
+  display: block; margin-top: .35rem; font-family: var(--sc-font-text); font-size: .52rem; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase; color: rgba(236, 231, 223, .6);
+}
+.bar__nav { justify-content: flex-end; }
+.bar__group { flex: 1; justify-content: center; gap: clamp(.2rem, 1.2vw, 1.4rem); }
+.bar__group a { color: #e6e1d8; font-weight: 600; font-size: .78rem; padding: 1.1em .4em; border-radius: 0; }
+.bar__group a::after { left: .4em; right: .4em; bottom: .15em; background: var(--sc-accent); }
+.bar__group a.is-here { color: var(--sc-accent); }
+@media (hover: hover) and (pointer: fine) { .bar__group a:hover { color: #fff; background: none; } }
+.bar .index__no { color: inherit; }
+.bar__cta {
+  background: transparent; color: #f1ece4; border: 1px solid var(--sc-accent); border-radius: 6px;
+  min-height: 46px; padding: 0 1.5em; font-weight: 600;
+}
+.bar__cta:hover { background: rgba(210, 174, 102, .14); }
+.bar .bag { width: 46px; height: 46px; border: 1px solid rgba(236, 231, 223, .45); border-radius: 50%; color: #ece7df; }
+.bar .bag:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
+.bar .bag__count { top: -3px; right: -3px; }
+.bar .lang { border-color: rgba(236, 231, 223, .3); }
+.bar .lang button { color: rgba(236, 231, 223, .75); }
+.bar .lang button[aria-pressed="true"] { color: var(--sc-accent-ink); }
+.bar__toggle { color: #ece7df; border-color: rgba(236, 231, 223, .45); }
+.bar a:focus-visible, .bar button:focus-visible { outline-color: var(--sc-accent); }
+.home { padding-top: calc(var(--index-h) + var(--pill-x)); }
+.home__panel { min-height: calc(100svh - var(--index-h) - var(--pill-x) * 2); }
+@media (max-width: 1200px) {
+  :root { --pill-h: 4.4rem; }
+  .bar { padding: 0 .8rem; }
+  .bar__nav { top: 100%; left: .6rem; right: .6rem; margin-top: .4rem; background: #141416; border-color: rgba(236, 231, 223, .12); }
+  .bar__group { justify-content: flex-start; }
+  .bar__group a { color: #e6e1d8; font-size: 1rem; padding: 1em 0; border-bottom-color: rgba(236, 231, 223, .1); }
+  .bar__group a::after { left: auto; right: 0; }
+  .bar__cta { background: var(--sc-accent); color: var(--sc-accent-ink); }
+}
+@media (max-width: 700px) {
+  .bar__sub { display: none; }
+  .bar .bag { width: 40px; height: 40px; }
+  .home { padding-top: calc(var(--index-h) + .5rem); }
+}
+
