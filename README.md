@@ -68,7 +68,7 @@ python3 -m http.server 8000
 
 ## GOLDEN JB : à compléter
 
-- **Commandes :** coller l'adresse qui recevra les commandes dans `ORDER_ENDPOINT`, en haut de `scrollcraft/builds/golden-jb/golden.js` (requête POST en JSON `{ items: [{ piece, qty }], total, name, email, phone, note, lang }`, `piece` valant `maille-ovale`, `trefle-noir`, `jonc-argent`, `jonc-dore`, `trefle-blanc` ou `maille-doree`). Tant que c'est vide, le formulaire dit « Les commandes ne sont pas encore branchées, donc rien n'a été envoyé. » et n'envoie rien. Aucun paiement sur la page.
+- **Commandes :** coller l'adresse qui recevra les commandes dans `ORDER_ENDPOINT`, en haut de `scrollcraft/builds/golden-jb/golden.js` (requête POST en JSON `{ items: [{ piece, qty }], total, name, email, phone, note, lang }`, `piece` valant `maille-ovale`, `trefle-noir`, `jonc-argent`, `jonc-dore`, `trefle-blanc`, `maille-doree` ou `trefle-bleu`). Tant que c'est vide, le formulaire dit « Les commandes ne sont pas encore branchées, donc rien n'a été envoyé. » et n'envoie rien. Aucun paiement sur la page.
 - **Réseaux :** coller le lien Instagram dans `INSTAGRAM` et le lien WhatsApp (`https://wa.me/1…`) dans `WHATSAPP`, au même endroit. Les boutons apparaissent seulement quand le lien est rempli (dans le menu et sous le formulaire).
 - **Prix :** `PRICE` (20) dans `golden.js` pour le total ; le texte « 20 $ » / « $20 » est aussi écrit dans `index.html`.
 - **Textes et traductions :** chaque texte français est dans `index.html`, sa version anglaise dans l'attribut `data-en` du même élément.
@@ -98,4 +98,5 @@ python3 -m http.server 8000
 - **Sans barre, liens intégrés :** à la demande, il n'y a plus de bande en haut. « GOLDEN JB », les liens des sections (Accueil, N° 1 à N° 5, l'actif en or souligné), « Commander », le sac et FR / EN sont posés directement en haut du panneau d'accueil, comme sur la référence ARCOVA, et défilent avec lui. Sur téléphone, les liens des sections sont cachés (place) ; les cartes de l'accueil y mènent à chaque bijou.
 - **Sans icône de sac :** à la demande (« enlever le bouton poubelle »), l'icône du sac est retirée du haut de page. « Commander » mène au bon de commande, aussi sur téléphone.
 - **Vidéo à l'accueil :** la vidéo envoyée (le jonc serti doré qui tourne au soleil) remplace la photo de la femme aux tresses dans le panneau d'accueil : en boucle, sans son, fondue dans le brun vers la gauche (`assets/accueil-jonc.mp4`, image d'attente `accueil-jonc-poster.webp`). Elle reste sur sa première image pour les visiteurs qui ont réduit les animations.
+- **N° 6 Trèfle bleu :** nouveau bracelet, 20 $, présenté comme les autres : carte de description, bouton **Femme / Homme** et glissière. Femme : pull crème / main à la peau foncée sur un livre ; Homme : chemise beige / costume. Photos : `assets/tbl-femme-1`, `tbl-femme-2`, `tbl-homme-1`, `tbl-homme-2`. Ajouté aussi aux liens du haut, aux cartes de l'accueil (six cartes) et au bon de commande.
 
