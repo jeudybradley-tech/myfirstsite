@@ -291,7 +291,7 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
 }
 .home__cta:hover { background: #fffaf2; }
 .home__cards {
-  position: relative; z-index: 2; display: grid; grid-template-columns: repeat(6, 1fr); gap: .7rem;
+  position: relative; z-index: 2; display: grid; grid-template-columns: repeat(7, 1fr); gap: .6rem;
   padding: 0 clamp(1rem, 2.6vw, 2.2rem) clamp(1rem, 2.6vw, 2.2rem);
 }
 .home__card {
@@ -615,5 +615,15 @@ main section[id] { scroll-margin-top: 1rem; }
 @media (max-width: 700px) {
   .home__photo { width: 100%; height: 44svh; }
   .home__video { object-position: 50% 50%; -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 30%); mask-image: linear-gradient(to top, transparent 0%, #000 30%); }
+}
+
+/* Seven pieces: on computers each home card stacks its thumbnail above the
+   text so the names stay on one or two lines. */
+@media (min-width: 701px) {
+  .home__card { flex-direction: column; min-height: 0; }
+  .home__card img { width: 100%; height: clamp(3.4rem, 8vh, 5rem); }
+  .home__card-txt { padding: .6rem .8rem .75rem; gap: .25rem; }
+  .home__card-name { font-size: .68rem; letter-spacing: .1em; }
+  .home__card-sub { font-size: .74rem; }
 }
 
