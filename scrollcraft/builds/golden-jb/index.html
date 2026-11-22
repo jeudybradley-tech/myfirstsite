@@ -77,12 +77,10 @@
   <section id="accueil" class="home" data-sc-act="flow">
     <div class="home__panel">
       <div class="home__photo">
-        <picture>
-          <source media="(max-width: 700px)" srcset="assets/accueil-m.webp">
-          <img src="assets/accueil-xl.webp" width="1342" height="2000" fetchpriority="high"
-               alt="Une femme aux longues tresses, les bras croisés sur le dossier d'une chaise, un jonc en acier serti de petites pierres au poignet."
-               data-en-alt="A woman with long braids, arms folded on the back of a chair, a steel bangle set with small stones on her wrist.">
-        </picture>
+        <video class="home__video" src="assets/accueil-jonc.mp4" poster="assets/accueil-jonc-poster.webp"
+               autoplay muted loop playsinline preload="auto" width="720" height="514"
+               aria-label="Le jonc serti doré qui tourne lentement au soleil, sur une table claire."
+               data-en-aria="The gold set bangle turning slowly in the sunlight, on a light table."></video>
       </div>
       <div class="home__copy" data-sc-in data-sc-stagger="120">
         <h1 class="home__title"><span data-en="Luxury,">Le luxe,</span> <span class="home__title-2" data-en="every day">au quotidien</span></h1>

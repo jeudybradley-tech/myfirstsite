@@ -38,6 +38,14 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
+  /* ------------------------------------------------------ home video --
+     Loops muted; held on its first frame when motion is reduced. */
+  var homeVideo = document.querySelector('.home__video');
+  if (homeVideo) {
+    if (reduce) { homeVideo.removeAttribute('autoplay'); homeVideo.pause(); }
+    else { var pr = homeVideo.play(); if (pr && pr.catch) pr.catch(function () {}); }
+  }
+
   /* ---------------------------------------------------------- language -- */
   var lang = 'fr';
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
