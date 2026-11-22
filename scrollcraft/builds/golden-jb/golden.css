@@ -262,7 +262,7 @@ main section[id] { scroll-margin-top: calc(var(--index-h) - 1rem); }
   box-shadow: 0 30px 70px -30px rgba(50, 32, 18, .55);
   color: #f6efe5;
 }
-.home__photo { position: absolute; top: 0; bottom: 0; right: 4%; width: min(50%, 92svh); }
+.home__photo { position: absolute; top: 0; bottom: 0; right: 6%; width: min(42%, 66svh); }   /* smaller, so the bangle sits above the cards */
 .home__photo picture { display: block; height: 100%; }
 .home__photo img {
   width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; max-width: none;
@@ -273,7 +273,7 @@ main section[id] { scroll-margin-top: calc(var(--index-h) - 1rem); }
 html.gjb-open .home__photo img { animation-play-state: paused; }
 .home__photo::after {   /* warm tone over the photo, like the reference */
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(to top, rgba(59, 42, 32, .55) 0%, rgba(59, 42, 32, 0) 38%), rgba(120, 82, 50, .12);
+  background: linear-gradient(to top, rgba(59, 42, 32, .5) 0%, rgba(59, 42, 32, 0) 16%), rgba(120, 82, 50, .08);
 }
 .home__copy { position: relative; z-index: 2; padding: clamp(3rem, 12vh, 7.5rem) clamp(1.6rem, 4.5vw, 4.5rem) 2rem; max-width: 40rem; }
 .home__title {
@@ -307,6 +307,11 @@ html.gjb-open .home__photo img { animation-play-state: paused; }
 .home__card-txt { display: flex; flex-direction: column; justify-content: center; gap: .4rem; padding: .9rem 1rem; }
 .home__card-name { font-size: .74rem; font-weight: 600; letter-spacing: .14em; }
 .home__card-sub { font-size: .8rem; line-height: 1.45; color: #5a4535; }
+@media (min-width: 701px) and (max-height: 780px) {
+  .home__card { min-height: 6.4rem; }
+  .home__photo { width: min(42%, 60svh); }
+  .home__copy { padding-top: 2.6rem; }
+}
 
 /* Each piece's name is underlined in gold as the reader scrolls down to it
    (client's request): the line grows with the section's own scroll progress
