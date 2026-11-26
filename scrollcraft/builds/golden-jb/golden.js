@@ -336,5 +336,5 @@
   });
 
   var saved = store('gjb-lang');
-  setLang(saved === 'en' ? 'en' : 'fr');   // French by default; the visitor's choice is remembered
+  setLang('fr');   // FR / EN switch removed at the client's request: always French
 })();

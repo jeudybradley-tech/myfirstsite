@@ -680,3 +680,12 @@ main section[id] { scroll-margin-top: 1rem; }
 @keyframes card-swap { 0%, 38% { opacity: 0; } 50%, 88% { opacity: 1; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .home__card-alt { animation: none; } }
 
+/* No FR / EN switch (client's request; the page stays in French). Commander
+   is a solid gold button so it reads over the bright home video. */
+.lang { display: none; }
+.bar .bar__cta, .bar .bar__cta:hover {
+  background: var(--sc-accent); color: #1c140d; border-color: var(--sc-accent);
+  box-shadow: 0 8px 22px -10px rgba(0, 0, 0, .55);
+}
+.bar .bar__cta:hover { background: #e2c07a; }
+
