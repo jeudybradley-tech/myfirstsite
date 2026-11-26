@@ -707,3 +707,20 @@ main section[id] { scroll-margin-top: 1rem; }
   .look__pic { aspect-ratio: 4 / 5; }
 }
 
+/* Worn photos spread through the page: each one a band between two pieces,
+   photo on one side and its text on the other, alternating sides. */
+.look--band .look__item {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); grid-template-rows: auto auto auto 1fr;
+  column-gap: clamp(2rem, 6vw, 6rem); align-items: start; max-width: 64rem; margin: 0 auto;
+}
+.look--band .look__pic { grid-row: 1 / 5; aspect-ratio: 4 / 5; max-height: 78svh; }
+.look--band .look__name { align-self: end; margin-top: clamp(2rem, 18svh, 10rem); font-size: clamp(2rem, 3.4vw, 3rem); }
+.look--band .look__text { font-size: 1.02rem; }
+.look--band .look__item--r .look__pic { grid-column: 2; }
+.look--band .look__item--r .look__name, .look--band .look__item--r .look__meta, .look--band .look__item--r .look__text { grid-column: 1; grid-row: auto; }
+.look--band .look__item--r .look__name { grid-row: 1; } .look--band .look__item--r .look__meta { grid-row: 2; } .look--band .look__item--r .look__text { grid-row: 3; }
+@media (max-width: 860px) {
+  .look--band .look__item, .look--band .look__item--r { display: block; }
+  .look--band .look__name { margin-top: 1.1rem; }
+}
+
