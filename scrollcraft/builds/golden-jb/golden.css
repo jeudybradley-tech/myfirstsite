@@ -640,3 +640,15 @@ main section[id] { scroll-margin-top: 1rem; }
   .home__card-pic { width: 44%; }
 }
 
+/* No numbers and no underline (client: « je ne veux pas que les mots soient
+   soulignés ainsi je ne veux pas que les chiffres apparaissent »). The top
+   links show the piece names instead of N° 1…7. */
+.bijou .t-it .u { background-image: none; padding-bottom: 0; }
+.bijou .label__no, .piece__no, .caption > span:first-child { display: none; }
+.bar .index__no { display: none; }
+.bar .index__name { display: inline; margin-left: 0; }
+.bar__group { gap: clamp(.1rem, .9vw, 1.1rem); }
+.bar__group a { font-size: .72rem; letter-spacing: .06em; padding-inline: .3em; }
+@media (max-width: 1500px) { .bar__sub { display: none; } }
+
+@media (max-width: 1360px) { .bar__group { display: none; } }
