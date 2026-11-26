@@ -652,3 +652,17 @@ main section[id] { scroll-margin-top: 1rem; }
 @media (max-width: 1500px) { .bar__sub { display: none; } }
 
 @media (max-width: 1360px) { .bar__group { display: none; } }
+
+/* Name reveal: the « Rideau » (client's choice, model 6). Each piece's name
+   unveils from left to right, once, when its label comes into view. The
+   label's stagger already adds .sc-in to the name; the curtain replaces the
+   rise. A little room on every side keeps italic overhangs uncut. */
+@media (prefers-reduced-motion: no-preference) {
+  .bijou .label__name {
+    opacity: 1; transform: none;
+    clip-path: inset(-15% 100% -15% -4%);
+    transition: clip-path 1.1s cubic-bezier(.65, 0, .25, 1);
+  }
+  .bijou .label__name.sc-in { clip-path: inset(-15% -4% -15% -4%); }
+}
+
