@@ -46,6 +46,25 @@
     else { var pr = homeVideo.play(); if (pr && pr.catch) pr.catch(function () {}); }
   }
 
+  /* --------------------------------------------- name curtain (replays) --
+     Each piece's name unveils when it comes into view and closes again once
+     it has left the screen, so the curtain plays every time the reader
+     scrolls back to it (client's request). */
+  if ('IntersectionObserver' in window) {
+    var curtain = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        // watch the label block: the name itself is clipped by its own curtain,
+        // which makes it read as invisible to the observer
+        var h = en.target.querySelector('.label__name'); if (!h) return;
+        if (en.isIntersecting && en.intersectionRatio > 0.35) h.classList.add('is-shown');
+        else if (!en.isIntersecting) h.classList.remove('is-shown');
+      });
+    }, { threshold: [0, 0.35] });
+    document.querySelectorAll('.bijou .bijou__label').forEach(function (l) { curtain.observe(l); });
+  } else {
+    document.querySelectorAll('.bijou .label__name').forEach(function (h) { h.classList.add('is-shown'); });
+  }
+
   /* ---------------------------------------------------------- language -- */
   var lang = 'fr';
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }

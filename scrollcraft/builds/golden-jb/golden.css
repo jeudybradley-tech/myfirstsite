@@ -663,6 +663,6 @@ main section[id] { scroll-margin-top: 1rem; }
     clip-path: inset(-15% 100% -15% -4%);
     transition: clip-path 1.1s cubic-bezier(.65, 0, .25, 1);
   }
-  .bijou .label__name.sc-in { clip-path: inset(-15% -4% -15% -4%); }
+  .bijou .label__name.is-shown { clip-path: inset(-15% -4% -15% -4%); }   /* toggled by golden.js, replays each time */
 }
 
