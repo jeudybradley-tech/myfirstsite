@@ -666,3 +666,17 @@ main section[id] { scroll-margin-top: 1rem; }
   .bijou .label__name.is-shown { clip-path: inset(-15% -4% -15% -4%); }   /* toggled by golden.js, replays each time */
 }
 
+/* Home cards alternate between a woman's and a man's wrist (client: men's
+   wrists should show too): the second photo fades in and out over the
+   first, each card a little later than the one before. */
+.home__card-pic { position: relative; }
+.home__card-alt { position: absolute; inset: 0; opacity: 0; animation: card-swap 8s ease-in-out infinite; }
+.home__card:nth-child(2) .home__card-alt { animation-delay: .5s; }
+.home__card:nth-child(3) .home__card-alt { animation-delay: 1s; }
+.home__card:nth-child(4) .home__card-alt { animation-delay: 1.5s; }
+.home__card:nth-child(5) .home__card-alt { animation-delay: 2s; }
+.home__card:nth-child(6) .home__card-alt { animation-delay: 2.5s; }
+.home__card:nth-child(7) .home__card-alt { animation-delay: 3s; }
+@keyframes card-swap { 0%, 38% { opacity: 0; } 50%, 88% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .home__card-alt { animation: none; } }
+
