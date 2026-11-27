@@ -108,4 +108,5 @@ python3 -m http.server 8000
 - **Photos portées réparties :** trois photos de bijoux portés, chacune avec son nom, sa teinte, son prix et une courte description : le jonc serti (femme sur une chaise en bois), le trèfle blanc (femme en chemise noire, en ville la nuit) et le trèfle noir (homme en polo crème). Un clic sur une photo ramène au bijou. Photos : `assets/look-jonc`, `look-trefle-blanc-2`, `look-trefle-noir-2`. Les descriptions se changent dans `index.html` (`look__text`).
 - **Photos portées réparties dans la page :** à la demande, les trois photos portées ne sont plus regroupées : trèfle noir après la maille ovale, jonc serti après le jonc, trèfle blanc après la maille dorée, chacune avec son texte, en alternant photo à droite / à gauche.
 - **Quatrième photo portée :** le jonc serti doré en gros plan (`assets/look-jonc-dore`), avec sa description, après le trèfle rouge, juste avant le bon de commande.
+- **Bouton Commander dans chaque bijou :** un bouton doré « Commander » sous la carte de prix (et sous Femme / Homme). Il mène au bon de commande avec ce bracelet déjà ajouté ; pour le jonc, il ajoute la teinte choisie (Argent ou Doré).
 
