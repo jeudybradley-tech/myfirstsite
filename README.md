@@ -109,4 +109,5 @@ python3 -m http.server 8000
 - **Photos portées réparties dans la page :** à la demande, les trois photos portées ne sont plus regroupées : trèfle noir après la maille ovale, jonc serti après le jonc, trèfle blanc après la maille dorée, chacune avec son texte, en alternant photo à droite / à gauche.
 - **Quatrième photo portée :** le jonc serti doré en gros plan (`assets/look-jonc-dore`), avec sa description, après le trèfle rouge, juste avant le bon de commande.
 - **Bouton Commander dans chaque bijou :** un bouton doré « Commander » sous la carte de prix (et sous Femme / Homme). Il mène au bon de commande avec ce bracelet déjà ajouté ; pour le jonc, il ajoute la teinte choisie (Argent ou Doré).
+- **Bon de commande caché tant que rien n'est choisi :** le bon de commande n'apparaît qu'après un clic sur « Commander » d'un bijou, et ne montre que les bracelets choisis (titre « Votre commande »). S'il retombe à zéro, il se cache de nouveau. Tant que rien n'est choisi, le « Commander » du haut mène au premier bijou.
 

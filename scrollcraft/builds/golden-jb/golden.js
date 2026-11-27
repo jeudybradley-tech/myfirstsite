@@ -275,6 +275,15 @@
     if (totalEl) totalEl.textContent = money(n * PRICE);
     var bag = document.getElementById('bag-count');
     if (bag) { bag.textContent = n; bag.hidden = n === 0; }
+    // The order plate only exists once a bracelet has been chosen, and only
+    // the chosen bracelets are listed (client's request). The top Commander
+    // leads to the first piece while nothing is chosen.
+    root.classList.toggle('has-order', n > 0);
+    document.querySelectorAll('.piece').forEach(function (row) {
+      row.hidden = !(qty[row.dataset.piece] > 0);
+    });
+    var top = document.querySelector('.bar__cta');
+    if (top) top.setAttribute('href', n > 0 ? '#commande' : '#n1');
   }
   document.querySelectorAll('.piece').forEach(function (row) {
     var key = row.dataset.piece, out = row.querySelector('output');

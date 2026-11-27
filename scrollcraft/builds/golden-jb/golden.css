@@ -739,3 +739,9 @@ main section[id] { scroll-margin-top: 1rem; }
 .bijou .finish + .bijou__order, .bijou .seg + .bijou__order { display: flex; }
 @media (max-width: 700px) { .bijou__order.label__ask { width: 100%; } }
 
+/* Order plate hidden until a bracelet is chosen (html.has-order, golden.js);
+   the footer stays. Only chosen rows show. */
+html:not(.has-order) .order__plate { display: none; }
+html:not(.has-order) .order { padding-top: var(--sc-section); }
+.piece[hidden] { display: none; }
+
